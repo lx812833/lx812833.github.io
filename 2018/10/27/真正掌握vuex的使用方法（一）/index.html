@@ -188,7 +188,7 @@
 					
 						<h3 id="真正掌握vuex的使用方法（一）"><a href="#真正掌握vuex的使用方法（一）" class="headerlink" title="真正掌握vuex的使用方法（一）"></a>真正掌握vuex的使用方法（一）</h3><p>@[vue|Vuex]<br>1、安装<strong>vuex</strong>   <strong>npm install vuex –save</strong><br>2、在src目录下创建vuex文件夹，然后在该文件夹下创建一个名字叫做store的js文件<br>3、在store.js中写入以下代码：</p>
 <hr>
-<h4 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h4><pre><code class="python">import Vue from &#39;vue&#39;;//引用vue
+<pre><code class="python">import Vue from &#39;vue&#39;;//引用vue
 import Vuex from &#39;vuex&#39;;//引用vuex
 Vue.use(Vuex);//使用vuex
 const state={
@@ -201,7 +201,7 @@ export default new Vuex.Store({ ////暴露Store对象
 </code></pre>
 <p>4、在main.js当中引入在store.js文件当中创建的store对象，并在Vue实例中添加</p>
 <hr>
-<h4 id="代码块-1"><a href="#代码块-1" class="headerlink" title="代码块"></a>代码块</h4><pre><code class="python">import Vue from &#39;vue&#39;
+<pre><code class="python">import Vue from &#39;vue&#39;
 import App from &#39;./App&#39;
 import router from &#39;./router&#39;
 import store from &#39;./vuex/store&#39;//导入store.js
@@ -217,7 +217,7 @@ enew Vue({
 </code></pre>
 <p>5、修改App.vue为：</p>
 <hr>
-<h4 id="代码块-2"><a href="#代码块-2" class="headerlink" title="代码块"></a>代码块</h4><pre><code class="python">&lt;template&gt;
+<pre><code class="python">&lt;template&gt;
     &lt;div id=&quot;app&quot;&gt;
         &lt;!--通过$store.state.nodeVoteCount获得nodeVoteCount的状态值
         通过$store.state.vueVoteCount获得vueVoteCount的状态值--&gt;
@@ -245,7 +245,7 @@ export default {
 <p><strong>import {mapState} from “vuex”;//通过ES6的对象解构赋值</strong></p>
 <p>当然也可以用<strong>…(扩展运算符）</strong>来合并对象</p>
 <hr>
-<h4 id="代码块-3"><a href="#代码块-3" class="headerlink" title="代码块"></a>代码块</h4><pre><code class="python">computed:{
+<pre><code class="python">computed:{
     ...mapState([&quot;vueVoteCount&quot;,&quot;nodeVoteCount&quot;]),
     ...{
         //自己的计算属性可以在这里面写哦
@@ -263,7 +263,7 @@ computed : {
 </code></pre>
 <p>再然后修改App.vue的template为：</p>
 <hr>
-<h4 id="代码块-4"><a href="#代码块-4" class="headerlink" title="代码块"></a>代码块</h4><pre><code class="python">&lt;div id=&quot;app&quot;&gt;
+<pre><code class="python">&lt;div id=&quot;app&quot;&gt;
     &lt;!--是不是很方便？直接写状态名称即可--&gt;
     &lt;div&gt;&lt;h2&gt;总票数：{{nodeVoteCount+vueVoteCount}}&lt;/h2&gt;&lt;/div&gt;
     &lt;div&gt;
@@ -288,12 +288,6 @@ computed : {
 		<ul class="am-pagination">
     
 	
-		<li class="am-pagination-next">
-		<a class="pull-right" href="/2018/10/27/hello-world/" title="Hello World">
-			下一篇 &raquo;
-		</a>
-		</li>
-	 
  </ul>
         
 
@@ -381,7 +375,7 @@ computed : {
 				
 				
 				<!--toc(post.content)-->
-				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#真正掌握vuex的使用方法（一）"><span class="post-toc-text">真正掌握vuex的使用方法（一）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#代码块"><span class="post-toc-text">代码块</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#代码块-1"><span class="post-toc-text">代码块</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#代码块-2"><span class="post-toc-text">代码块</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#代码块-3"><span class="post-toc-text">代码块</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#代码块-4"><span class="post-toc-text">代码块</span></a></li></ol></li></ol>
+				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#真正掌握vuex的使用方法（一）"><span class="post-toc-text">真正掌握vuex的使用方法（一）</span></a></li></ol>
 			</nav>
 			<div class="post-toc-bar"><div>
 		</div></div></aside>
