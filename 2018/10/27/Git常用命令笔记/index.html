@@ -10,7 +10,7 @@
 		
 
 <head><meta name="generator" content="Hexo 3.8.0">
-	<title>真正掌握vuex的使用方法（三）</title>
+	<title>Git常用命令笔记</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="apple-mobile-web-app-title" content="Amaze UI">
@@ -54,7 +54,7 @@
 		
 		
 			
-			<p class="page-name">当前文章&nbsp;:&nbsp;《真正掌握vuex的使用方法（三）》</p>
+			<p class="page-name">当前文章&nbsp;:&nbsp;《Git常用命令笔记》</p>
 			
 		
 	
@@ -154,8 +154,8 @@
 					
 					
 	
-		<a href="/2018/10/27/真正掌握vuex的使用方法（三）/" itemprop="url">		
-			真正掌握vuex的使用方法（三）		
+		<a href="/2018/10/27/Git常用命令笔记/" itemprop="url">		
+			Git常用命令笔记		
 		</a>
 	
 
@@ -164,8 +164,8 @@
 				<p class="am-article-meta blog-text-center">
 					<span>
 						<i class="fa fa-clock-o"></i> 
-						<a href="/2018/10/27/真正掌握vuex的使用方法（三）/" itemprop="url">
-	<time datetime="2018-10-27T08:20:52.000Z" itemprop="datePublished">
+						<a href="/2018/10/27/Git常用命令笔记/" itemprop="url">
+	<time datetime="2018-10-27T13:05:04.000Z" itemprop="datePublished">
   		2018-10-27
   </time>
 </a>    
@@ -176,7 +176,7 @@
 						
 							<i class="fa fa-tags"></i>
 							
-								<a href="#Vuex" title="Vuex" rel="3">Vuex</a>&nbsp;
+								<a href="#Git" title="Git" rel="1">Git</a>&nbsp;
 													 											
 						
 					</span>
@@ -186,121 +186,81 @@
 			<div class="am-article-bd">
 				<div class="content" id="post-content">
 					
-						<h3 id="真正掌握vuex的使用方法（三）"><a href="#真正掌握vuex的使用方法（三）" class="headerlink" title="真正掌握vuex的使用方法（三）"></a>真正掌握vuex的使用方法（三）</h3><p>@(Vuex)[vue, Vuex] </p>
-<p> 接下来看一下template当中计算总票数的表达式：</p>
-<pre><code class="python">&lt;div&gt;&lt;h2&gt;总票数：{{nodeVoteCount+vueVoteCount}}&lt;/h2&gt;&lt;/div&gt;
+						<h3 id="Git常用命令笔记"><a href="#Git常用命令笔记" class="headerlink" title="Git常用命令笔记"></a>Git常用命令笔记</h3><p>@[git] </p>
+<h4 id="Git设置"><a href="#Git设置" class="headerlink" title="Git设置"></a>Git设置</h4><p>初次安装完成后需要进行名字和Email地址设置：</p>
+<pre><code class="python">$ git config --global user.name &quot;Your Name&quot;
+
+$ git config --global user.email &quot;email@example.com&quot;
 </code></pre>
-<p>是不是很长？是不是看着它很蓝瘦？ 正常的第一反应就是将其写入到计算属性内，方便调用！所以咱们可以将computed调整如下：</p>
-<pre><code class="python">computed:{
-    ...mapState([&quot;nodeVoteCount&quot;,&quot;vueVoteCount&quot;]),
-    ...{
-        sumCount(){//计算属性，求两个票数之和
-             return this.nodeVoteCount+this.vueVoteCount;
-       }
-}}
+<h4 id="版本库创建"><a href="#版本库创建" class="headerlink" title="版本库创建"></a>版本库创建</h4><pre><code class="python">$ git init //把当前目录变成Git可以管理的仓库
 </code></pre>
-<p>然后再将template的总票数表达式修改为：</p>
-<pre><code class="python">&lt;div&gt;&lt;h2&gt;总票数：{{sumCount}}&lt;/h2&gt;&lt;/div&gt;
+<h4 id="添加文件"><a href="#添加文件" class="headerlink" title="添加文件"></a>添加文件</h4><pre><code class="python">
+$ git add &lt;file&gt; //添加文件到暂存区
+
+$ git add . //添加所有新文件和编辑过的文件，但不包括删除的文件
+
+$ git add -u //添加编辑或删除的文件，不包括新添加文件
+
+$ git add -A . //添加所有改变的文件
+
+$ git add -A //添加所有内容
+
+$ git commit -m &quot;describe&quot; //提交文件到仓库
 </code></pre>
-<p>是不是有种整个世界都很清静的感脚？哈，还没完，继续！ 在咱们的vuex当中，有一个和vue中的computed类似，都是用来计算state然后生成新的状态（数据）的，请记住它的名字叫做——<strong>getters</strong>。 打开store.js为其添加一常量getters:</p>
-<pre><code class="python">//getters为vuex当中的计算属性
-const getters={
-//求总票数之和
-    sumCount(state){//state即是存储状态的对象
-       return state.nodeVoteCount+state.vueVoteCount
-    }
-}
+<h4 id="版本管理"><a href="#版本管理" class="headerlink" title="版本管理"></a>版本管理</h4><pre><code class="python">$ git status //查看仓库当前状态
+
+$ git diff &lt;file&gt; //查看文件修改内容
 </code></pre>
-<p>然后将这个常量放入到Store当中，最终的store.js为：</p>
-<pre><code class="python">import Vue from &#39;vue&#39;;//引用vue
-import Vuex from &#39;vuex&#39;;//引用vuex
-Vue.use(Vuex);//使用vuex
+<h4 id="版本退回"><a href="#版本退回" class="headerlink" title="版本退回"></a>版本退回</h4><pre><code class="python">
+$ git reset --hard HEAD //返回当前版本
 
+$ git reset --hard HEAD^ //返回上个版本
 
-const state = {
-    nodeVoteCount:1, //node的初始票数
-    vueVoteCount:2, //vue的初始票数
-};
+$ git reset --hard HEAD~100 //返回上100个版本
 
+$ git reset --hard commit_id //返回对应commit_id版本
 
-//生明一个常量mutations，将所有的mutation放入其中
-const mutations = {
-    //为nodeVoteCount加1,voteNum为增加的值，默认加1
-    ADDNODEVOTE(state,voteNum=1) {//这里的state即是上面定义的state常量
-        state.nodeVoteCount+=voteNum;
-    },
-    //为vueVoteCount加1,voteNum为增加的值，默认加1
-    ADDVUEVOTE(state,voteNum=1){ //这里的state即是上面定义的state常量
-        state.vueVoteCount+=voteNum;;
-    }
-}
+$ git log //查看提交历史，以便确定要回退到哪个版本
 
-//getters为vuex当中的计算属性
-const getters = {
-    sumCount(state) { //state即是存储状态的对象
-        return state.nodeVoteCount+state.vueVoteCount
-    }
-}
-
-
-export default new Vuex.Store({ //暴露Store对象
-    state,
-    mutations, //将mutations进行暴露
-    getters //将getters常量放入到Store当中
-})
+$ git reflog //关闭终端后，查看提交历史，以便确定要回退到哪个版本
 </code></pre>
-<p>最后一步，在App.vue当中通过sumCount即可，调用方法：调用getter也有简写的形式，比如我要将上面代码改写成：</p>
-<pre><code class="python">&lt;div&gt;&lt;h2&gt;总票数：{{sumCount}}&lt;/h2&gt;&lt;/div&gt;
-</code></pre>
-<p>那么就需要在计算属性内进行一些设置 首先在引入vuex时，添加<strong>mapGetters</strong>：<br><strong>import {mapState,mapMutations,mapGetters} from “vuex”;</strong><br>然后将mapGetters添加到computed中:</p>
-<pre><code class="python">computed:{
-    ...mapState([&quot;nodeVoteCount&quot;,&quot;vueVoteCount&quot;]),
-    ...mapGetters([&quot;sumCount&quot;]), //需要的getter为sumCount
-}
-</code></pre>
-<p>修改后的完整App.vue:</p>
-<pre><code class="python">&lt;template&gt;
-    &lt;div id=&quot;app&quot;&gt;
-        &lt;div&gt;&lt;h2&gt;总票数：{{sumCount}}&lt;/h2&gt;&lt;/div&gt;
-        &lt;div&gt;
-            &lt;img src=&quot;./assets/node.png&quot;&gt;
-            &lt;h3&gt;如何通过node.js对数据进行MD5加密&lt;/h3&gt;
-            &lt;!--直接调用ADDNODEVOTE--&gt;
-            &lt;input type=&quot;button&quot; value=&quot;投票&quot; @click=&quot;ADDNODEVOTE()&quot;&gt;
-            &lt;!--直接调用ADDNODEVOTE--&gt;
-            &lt;input type=&quot;button&quot; value=&quot;加2&quot; @click=&quot;ADDNODEVOTE(2)&quot;&gt;票数:{{nodeVoteCount}}
-        &lt;/div&gt;
-        &lt;hr/&gt;
-        &lt;div&gt;
-            &lt;img src=&quot;./assets/vuex.png&quot;&gt;
-            &lt;h3&gt;真正掌握vuex的使用方法（一）&lt;/h3&gt;
-            &lt;!--直接调用ADDVUEVOTE--&gt;
-            &lt;input type=&quot;button&quot; value=&quot;投票&quot; @click=&quot;ADDVUEVOTE()&quot;&gt;
-            &lt;!--直接调用ADDVUEVOTE--&gt;
-            &lt;input type=&quot;button&quot; value=&quot;加2&quot; @click=&quot;ADDVUEVOTE(2)&quot;&gt;票数：{{vueVoteCount}}
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/template&gt;
+<h4 id="撤销修改"><a href="#撤销修改" class="headerlink" title="撤销修改"></a>撤销修改</h4><pre><code class="python">$ git checkout -- file //撤销工作区的修改
 
-
-&lt;script&gt;
-import {mapState,mapMutations,mapGetters} from &quot;vuex&quot;;
-export default {
-    name: &#39;App&#39;,
-    methods:{
-        ...mapMutations([&quot;ADDNODEVOTE&quot;,&quot;ADDVUEVOTE&quot;]),
-        ...{
-            //写自己定义的方法
-        }
-    },
-    computed:{
-        ...mapState([&quot;nodeVoteCount&quot;,&quot;vueVoteCount&quot;]),
-        ...mapGetters([&quot;sumCount&quot;])
-    }
-}
-&lt;/script&gt;
+$ git reset HEAD file //撤销暂存区的修改,后用上面命令丢弃修改
 </code></pre>
-<p>注意 : getter当中的值是不能直接修改的 , 它是根据指定的state的变化而变化的！</p>
+<h4 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h4><pre><code class="python">$ git rm &lt;file&gt; //删除一个文件，误删情况下可用 git checkout --file 恢复文件
+</code></pre>
+<h4 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h4><h4 id="添加远程库"><a href="#添加远程库" class="headerlink" title="添加远程库"></a>添加远程库</h4><pre><code class="python">$ git remote add origin git@server-name:path/repo-name.git //关联远程库
+
+$ git push -u origin master //第一次推送master分支的所有内容
+
+$ git push origin master //之后推送master分支的最新修改
+
+$ git remote //查看远程库信息，添加 -v 显示详细信息
+</code></pre>
+<h4 id="从远程库克隆"><a href="#从远程库克隆" class="headerlink" title="从远程库克隆"></a>从远程库克隆</h4><pre><code class="python">$ git clone https://github.com/yourname/repo-name.git //克隆远程库
+</code></pre>
+<h4 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h4><h4 id="创建与合并"><a href="#创建与合并" class="headerlink" title="创建与合并"></a>创建与合并</h4><pre><code class="python">
+$ git branch //查看分支
+
+$ git branch &lt;name&gt; //创建分支
+
+$ git checkout &lt;name&gt; //切换分支
+
+$ git checkout -b &lt;name&gt; //创建并切换分支
+
+$ git merge &lt;name&gt; //合并某分支到当前分支
+
+$ git log --graph //查看分支合并图
+
+$ git branch -d &lt;name&gt; //删除分支
+
+$ git branch -D &lt;name&gt; //强行删除
+
+$ git merge --on-ff -m &quot;describe&quot; &lt;name&gt; //普通模式合并，合并后历史有分支，可以使用 git log 命令查看
+
+</code></pre>
+<p><a href="https://www.wangyiting.win/2017/10/15/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0.html" target="_blank" rel="noopener">查看文章来源点此处</a></p>
 
 					
 				</div>
@@ -309,15 +269,9 @@ export default {
 
 		<ul class="am-pagination">
     
-    	<li class="am-pagination-prev">
-   		<a class="pull-left" href="/2018/10/27/Git常用命令笔记/" title="Git常用命令笔记">
-      		&laquo; 上一篇
-		</a>
-		</li>
-	
 	
 		<li class="am-pagination-next">
-		<a class="pull-right" href="/2018/10/27/真正掌握vuex的使用方法（二）/" title="真正掌握vuex的使用方法（二）">
+		<a class="pull-right" href="/2018/10/27/真正掌握vuex的使用方法（三）/" title="真正掌握vuex的使用方法（三）">
 			下一篇 &raquo;
 		</a>
 		</li>
@@ -409,7 +363,7 @@ export default {
 				
 				
 				<!--toc(post.content)-->
-				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#真正掌握vuex的使用方法（三）"><span class="post-toc-text">真正掌握vuex的使用方法（三）</span></a></li></ol>
+				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Git常用命令笔记"><span class="post-toc-text">Git常用命令笔记</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Git设置"><span class="post-toc-text">Git设置</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#版本库创建"><span class="post-toc-text">版本库创建</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#添加文件"><span class="post-toc-text">添加文件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#版本管理"><span class="post-toc-text">版本管理</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#版本退回"><span class="post-toc-text">版本退回</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#撤销修改"><span class="post-toc-text">撤销修改</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#删除文件"><span class="post-toc-text">删除文件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#远程仓库"><span class="post-toc-text">远程仓库</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#添加远程库"><span class="post-toc-text">添加远程库</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#从远程库克隆"><span class="post-toc-text">从远程库克隆</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#分支管理"><span class="post-toc-text">分支管理</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#创建与合并"><span class="post-toc-text">创建与合并</span></a></li></ol></li></ol>
 			</nav>
 			<div class="post-toc-bar"><div>
 		</div></div></aside>
