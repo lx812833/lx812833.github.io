@@ -10,7 +10,7 @@
 		
 
 <head><meta name="generator" content="Hexo 3.8.0">
-	<title>lx</title>
+	<title>真正掌握Vuex的使用方法（一）</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="apple-mobile-web-app-title" content="Amaze UI">
@@ -54,7 +54,7 @@
 		
 		
 			
-			<p class="page-name">主页</p>	
+			<p class="page-name">当前文章&nbsp;:&nbsp;《真正掌握Vuex的使用方法（一）》</p>
 			
 		
 	
@@ -140,99 +140,255 @@
 		<!--main-->
 		<main> 
 		<div class="page-container">
-		
-	<!-- content srart -->
-<div class="am-g am-g-fixed blog-fixed">
-    <div class="am-u-md-8 am-u-sm-12">
-		<div class="pure">
-			<li>
+		<!-- content srart -->
+<div class="am-g am-g-fixed blog-fixed blog-content">
+	<div class="am-u-md-8 am-u-sm-12">
+
+		<article class="am-article blog-article-p">
+
+			<div class="am-article-hd">
 				
-						
-					<div class="pure-text">
-						<h2>
-							
+
+
+				<h1 class="am-article-title blog-text-center">
+					
+					
 	
 		<a href="/2018/10/27/真正掌握vuex的使用方法（一）/" itemprop="url">		
 			真正掌握Vuex的使用方法（一）		
 		</a>
 	
 
-						</h2>
-						
-						
-							<p>
-								
-									真正掌握vuex的使用方法（一）@[vue|Vuex]1、安装vuex   npm install vuex –save2、在src目录下创建vuex文件夹，然后在该文件夹下创建一个名字叫做store的js文件3、在store.js中写入以下代码：
+				</h1>
 
-代码块import Vue from &#39;vue&#39;;//引用vue
-import Vuex from &#39;vuex&#39;;/	
-								  
-							</p>
+				<p class="am-article-meta blog-text-center">
+					<span>
+						<i class="fa fa-clock-o"></i> 
+						<a href="/2018/10/27/真正掌握vuex的使用方法（一）/" itemprop="url">
+	<time datetime="2018-10-27T06:11:21.000Z" itemprop="datePublished">
+  		2018-10-27
+  </time>
+</a>    
+&nbsp;
+					</span>
+					
+					<span>						
 						
-
-						<span>
-							<i class="fa fa-clock-o"></i>&nbsp2018-10-27
-						</span>
-						<span class="continue-read">       	
-							<a href="/2018/10/27/真正掌握vuex的使用方法（一）/" class="pull-right">
-								展开全文
-							</a>		
-						<span>
-						
-					</span></span></div>       
-			
-				
-						
-					<div class="pure-text">
-						<h2>
+							<i class="fa fa-tags"></i>
 							
+								<a href="#Vuex" title="Vuex" rel="1">Vuex</a>&nbsp;
+													 											
+						
+					</span>
+				</p>
+			</div>
+
+			<div class="am-article-bd">
+				<div class="content" id="post-content">
+					
+						<h3 id="真正掌握vuex的使用方法（一）"><a href="#真正掌握vuex的使用方法（一）" class="headerlink" title="真正掌握vuex的使用方法（一）"></a>真正掌握vuex的使用方法（一）</h3><p>@[vue|Vuex]<br>1、安装<strong>vuex</strong>   <strong>npm install vuex –save</strong><br>2、在src目录下创建vuex文件夹，然后在该文件夹下创建一个名字叫做store的js文件<br>3、在store.js中写入以下代码：</p>
+<hr>
+<h4 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h4><pre><code class="python">import Vue from &#39;vue&#39;;//引用vue
+import Vuex from &#39;vuex&#39;;//引用vuex
+Vue.use(Vuex);//使用vuex
+const state={
+    nodeVoteCount:0,//node的初始票数
+    vueVoteCount:0,//vue的初始票数
+}
+export default new Vuex.Store({ ////暴露Store对象
+    state
+})
+</code></pre>
+<p>4、在main.js当中引入在store.js文件当中创建的store对象，并在Vue实例中添加</p>
+<hr>
+<h4 id="代码块-1"><a href="#代码块-1" class="headerlink" title="代码块"></a>代码块</h4><pre><code class="python">import Vue from &#39;vue&#39;
+import App from &#39;./App&#39;
+import router from &#39;./router&#39;
+import store from &#39;./vuex/store&#39;//导入store.js
+Vue.config.productionTip = fals
+
+enew Vue({
+    el: &#39;#app&#39;,
+    router,
+    store,//添加store
+    components: { App },
+    template: &#39;&lt;App/&gt;&#39;}
+)
+</code></pre>
+<p>5、修改App.vue为：</p>
+<hr>
+<h4 id="代码块-2"><a href="#代码块-2" class="headerlink" title="代码块"></a>代码块</h4><pre><code class="python">&lt;template&gt;
+    &lt;div id=&quot;app&quot;&gt;
+        &lt;!--通过$store.state.nodeVoteCount获得nodeVoteCount的状态值
+        通过$store.state.vueVoteCount获得vueVoteCount的状态值--&gt;
+        &lt;div&gt;&lt;h2&gt;总票数：{{$store.state.nodeVoteCount+$store.state.vueVoteCount}}&lt;/h2&gt;&lt;/div&gt;
+        &lt;div&gt;
+            &lt;img src=&quot;./assets/node.png&quot;&gt;
+            &lt;h3&gt;如何通过node.js对数据进行MD5加密&lt;/h3&gt;
+            &lt;input type=&quot;button&quot; value=&quot;投票&quot;&gt;票数:{{$store.state.nodeVoteCount}}
+        &lt;/div&gt;
+        &lt;hr/&gt;
+        &lt;div&gt;
+            &lt;img src=&quot;./assets/vuex.png&quot;&gt;
+            &lt;h3&gt;真正掌握vuex的使用方法（一）&lt;/h3&gt;
+            &lt;input type=&quot;button&quot; value=&quot;投票&quot;&gt;票数：{{$store.state.vueVoteCount}}
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+export default {
+    name: &#39;App&#39;
+}
+&lt;/script&gt;
+</code></pre>
+<p>6、通过ES6的知识再将上面的JS部分进行一番优化。 首先将引入的vuex那部分修改为：</p>
+<p><strong>import {mapState} from “vuex”;//通过ES6的对象解构赋值</strong></p>
+<p>当然也可以用<strong>…(扩展运算符）</strong>来合并对象</p>
+<hr>
+<h4 id="代码块-3"><a href="#代码块-3" class="headerlink" title="代码块"></a>代码块</h4><pre><code class="python">computed:{
+    ...mapState([&quot;vueVoteCount&quot;,&quot;nodeVoteCount&quot;]),
+    ...{
+        //自己的计算属性可以在这里面写哦
+    }
+} //或
+computed : {
+    ...mapState({
+    vueVoteCount:state=&gt;state.vueVoteCount,
+    nodeVoteCount:(state)=&gt;state.nodeVoteCount
+    }),
+    ...{
+    //自己的计算属性可以在这里面写哦
+    }
+}
+</code></pre>
+<p>再然后修改App.vue的template为：</p>
+<hr>
+<h4 id="代码块-4"><a href="#代码块-4" class="headerlink" title="代码块"></a>代码块</h4><pre><code class="python">&lt;div id=&quot;app&quot;&gt;
+    &lt;!--是不是很方便？直接写状态名称即可--&gt;
+    &lt;div&gt;&lt;h2&gt;总票数：{{nodeVoteCount+vueVoteCount}}&lt;/h2&gt;&lt;/div&gt;
+    &lt;div&gt;
+        &lt;img src=&quot;./assets/node.png&quot;&gt;
+        &lt;h3&gt;如何通过node.js对数据进行MD5加密&lt;/h3&gt;
+        &lt;input type=&quot;button&quot; value=&quot;投票&quot;&gt;票数:{{nodeVoteCount}}
+    &lt;/div&gt;
+    &lt;hr/&gt;
+    &lt;div&gt;
+        &lt;img src=&quot;./assets/vuex.png&quot;&gt;
+        &lt;h3&gt;真正掌握vuex的使用方法（一）&lt;/h3&gt;
+        &lt;input type=&quot;button&quot; value=&quot;投票&quot;&gt;票数：{{vueVoteCount}}
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+					
+				</div>
+			</div>
+		</article>
+
+		<ul class="am-pagination">
+    
 	
-		<a href="/2018/10/27/hello-world/" itemprop="url">		
-			Hello World		
+		<li class="am-pagination-next">
+		<a class="pull-right" href="/2018/10/27/hello-world/" title="Hello World">
+			下一篇 &raquo;
 		</a>
-	
+		</li>
+	 
+ </ul>
+        
 
-						</h2>
-						
-						
-							<p>
-								
-									Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick	
-								  
-							</p>
-						
-
-						<span>
-							<i class="fa fa-clock-o"></i>&nbsp2018-10-27
-						</span>
-						<span class="continue-read">       	
-							<a href="/2018/10/27/hello-world/" class="pull-right">
-								展开全文
-							</a>		
-						<span>
-						
-					</span></span></div>       
-			
-				     
-			</li>
-
-			    	
-		</div>
-    </div>
+		<div class="theme-annie-comment-button-container">
+	<button id="annie-comment-button" class="theme-annie-comment-button" onclick="Annie_Comment()">
+		加载评论
+		<!--加载评论-->
+	</button>
 </div>
-<!-- content end -->
+
+<div id="annie-comment-container" class="theme-annie-comment-main-container">
 
 	
+		
+			<!-- comment valine -->
+			<!-- show valine comment -->
+<div id="valineComment" class="comment"></div>
+
+<!-- valine`s js & css -->
+<script>
+	window.jQuery || document.write('<script src="/js/jquery-2.1.1.min.js"><\/script>')
+</script>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/js/valine.min.js"></script>
+<link rel="stylesheet" href="/css/comment.css">
+
+<script>
+	var checkExistComment = setInterval(function() {
+		if( $('#valineComment').length ) {
+			new Valine({
+				// AV 对象来自上面引入av-min.js(老司机们不要开车➳♡゛扎心了老铁)
+				av: AV,
+				//使用id寻找div元素（使用class可能找不到）
+				el: '#valineComment',
+				emoticon_url: 'https://cloud.panjunwen.com/alu',
+				emoticon_list: ["吐.png", "期待.png", "高兴.png", "吐血倒地.png", "哭泣.png", "欢呼.png"],
+				app_id: "3333....", //获取APP ID
+				app_key: "3333......", //获取APP KEY
+				placeholder: "no any!", //评论框占位提示文字        			
+			});
+			clearInterval(checkExistComment);
+		}
+	}, 100);
+</script>
+		
 	
 
+</div>
+
+<script type="text/javascript">
+	/* Show Comment */
+	var Annie_Comment = function() {
+		function Show_Hidden(obj) {
+			obj.style.display = 'block';
+		}
+		
+		//var obutton = $('#annie-comment-button');
+		//var obutton = $('#annie-comment-container');
+		var obutton = document.getElementById("annie-comment-button" || "0");
+		var odiv = document.getElementById("annie-comment-container");
+		if( 'obutton' ) {
+			obutton.onclick = function() {
+				Show_Hidden(odiv);
+				$("#annie-comment-button").css("display", 'none');
+				return false;
+			}
+		}
+	};
+
+	(function Annie_Init() {
+		Annie_Comment();
+	})();
+</script>
+		
+		<!--
+	时间：2018-09-24
+	描述：The TOC module refers to 'https://github.com/codefine/hexo-theme-mellow', include toc.ejs、toc.js、toc.css. All rights reserved by codefine. 
+-->
 
 	
+		<aside class="post-widget">
+			<nav class="post-toc-wrap" id="post-toc">
+				
+					<strong>文章目录</strong>
+				
+				
+				<!--toc(post.content)-->
+				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#真正掌握vuex的使用方法（一）"><span class="post-toc-text">真正掌握vuex的使用方法（一）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#代码块"><span class="post-toc-text">代码块</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#代码块-1"><span class="post-toc-text">代码块</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#代码块-2"><span class="post-toc-text">代码块</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#代码块-3"><span class="post-toc-text">代码块</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#代码块-4"><span class="post-toc-text">代码块</span></a></li></ol></li></ol>
+			</nav>
+			<div class="post-toc-bar"><div>
+		</div></div></aside>
 	
 
-
-	<!--纯净风格-->
-
+	</div>
+</div>
 		</div>
 		</main>
 		
@@ -648,6 +804,8 @@ Quick
 
 
 
+
+	<script type="text/javascript" src="/js/toc.js"></script>
 
 
 <script type="text/javascript" src="/js/main.js"></script>
