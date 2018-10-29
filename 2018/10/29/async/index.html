@@ -196,7 +196,7 @@
 <li>async函数内部抛出错误会导致返回的promise对象变为reject状态。抛出的错误对象会被<strong>catch方法的回调函数</strong>接收到<br>将第一个await放在try … catch结构里面，即使第一个异步操作失败，也不会中断后面的异步操作，不管这个异步操作是否成功，第二个await都会执行<pre><code class="ruby">async function f() {    
  try {        
      await Promise.reject(&#39;出错了&#39;)       
-         /如果有多个await命令，则可以统一放在tyr ... catch结构中         
+         //如果有多个await命令，则可以统一放在tyr ... catch结构中         
          let val1 = await firstStep()        
          let val2 = await secondStep()    
      } catch (error) {         
@@ -224,8 +224,8 @@ obj.foo（）.then（...）
 </code></pre>
 </li>
 </ul>
-<h4 id="async运用实例（1）"><a href="#async运用实例（1）" class="headerlink" title="async运用实例（1）"></a>async运用实例（1）</h4><h5 id="Node导入文件"><a href="#Node导入文件" class="headerlink" title="Node导入文件"></a>Node导入文件</h5><pre><code class="ruby">const fs = require(&#39;fs&#39;) / 导入文件模块（fs)
-/依次读取两个文件
+<h4 id="async运用实例（1）"><a href="#async运用实例（1）" class="headerlink" title="async运用实例（1）"></a>async运用实例（1）</h4><h5 id="Node导入文件"><a href="#Node导入文件" class="headerlink" title="Node导入文件"></a>Node导入文件</h5><pre><code class="ruby">const fs = require(&#39;fs&#39;) // 导入文件模块（fs)
+//依次读取两个文件
 function readFile(fileName) {
     return new Promise((resolve, reject) =&gt; {
         fs.readFile(fileName, (err, data) =&gt; {
@@ -236,7 +236,7 @@ function readFile(fileName) {
     })
 }
 </code></pre>
-<h4 id="Promise-读取文件"><a href="#Promise-读取文件" class="headerlink" title="Promise 读取文件"></a>Promise 读取文件</h4><pre><code class="ruby">readFile(&#39;data/a.txt&#39;)
+<h5 id="Promise-读取文件"><a href="#Promise-读取文件" class="headerlink" title="Promise 读取文件"></a>Promise 读取文件</h5><pre><code class="ruby">readFile(&#39;data/a.txt&#39;)
    .then(res =&gt; {
      console.log(res.toString());
      return readFile(&#39;data/b.txt&#39;)
@@ -245,7 +245,7 @@ function readFile(fileName) {
        console.log(res.toString());
    })
 </code></pre>
-<h4 id="Generator-读取文件"><a href="#Generator-读取文件" class="headerlink" title="Generator 读取文件"></a>Generator 读取文件</h4><pre><code class="ruby">function* gen() {
+<h5 id="Generator-读取文件"><a href="#Generator-读取文件" class="headerlink" title="Generator 读取文件"></a>Generator 读取文件</h5><pre><code class="ruby">function* gen() {
     yield readFile(&#39;data/a.txt&#39;)
     yield readFile(&#39;data/b.txt&#39;)
 }
@@ -257,7 +257,7 @@ g1.next().value.then(res =&gt; {
     console.log(&#39;generator&#39;, res.toString());
 })
 </code></pre>
-<h4 id="Async读取文件"><a href="#Async读取文件" class="headerlink" title="Async读取文件"></a>Async读取文件</h4><pre><code class="ruby">async function fn() {
+<h5 id="Async读取文件"><a href="#Async读取文件" class="headerlink" title="Async读取文件"></a>Async读取文件</h5><pre><code class="ruby">async function fn() {
     let [a, b] = await Promise.all([
         readFile(&#39;data/a.txt&#39;),
         readFile(&#39;data/b.txt&#39;)
@@ -381,7 +381,7 @@ fn()
 				
 				
 				<!--toc(post.content)-->
-				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#async"><span class="post-toc-text">async</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#async函数"><span class="post-toc-text">async函数</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#async函数多种使用形式"><span class="post-toc-text">async函数多种使用形式</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#async运用实例（1）"><span class="post-toc-text">async运用实例（1）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Node导入文件"><span class="post-toc-text">Node导入文件</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Promise-读取文件"><span class="post-toc-text">Promise 读取文件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Generator-读取文件"><span class="post-toc-text">Generator 读取文件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Async读取文件"><span class="post-toc-text">Async读取文件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#async运用实例（2）"><span class="post-toc-text">async运用实例（2）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#指定多少毫秒后输出一个值"><span class="post-toc-text">指定多少毫秒后输出一个值</span></a></li></ol></li></ol></li></ol>
+				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#async"><span class="post-toc-text">async</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#async函数"><span class="post-toc-text">async函数</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#async函数多种使用形式"><span class="post-toc-text">async函数多种使用形式</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#async运用实例（1）"><span class="post-toc-text">async运用实例（1）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Node导入文件"><span class="post-toc-text">Node导入文件</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Promise-读取文件"><span class="post-toc-text">Promise 读取文件</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Generator-读取文件"><span class="post-toc-text">Generator 读取文件</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Async读取文件"><span class="post-toc-text">Async读取文件</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#async运用实例（2）"><span class="post-toc-text">async运用实例（2）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#指定多少毫秒后输出一个值"><span class="post-toc-text">指定多少毫秒后输出一个值</span></a></li></ol></li></ol></li></ol>
 			</nav>
 			<div class="post-toc-bar"><div>
 		</div></div></aside>
