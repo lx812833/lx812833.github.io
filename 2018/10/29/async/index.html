@@ -10,7 +10,7 @@
 		
 
 <head><meta name="generator" content="Hexo 3.8.0">
-	<title>tags</title>
+	<title>async</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="apple-mobile-web-app-title" content="Amaze UI">
@@ -54,7 +54,7 @@
 		
 		
 			
-			<p class="page-name">标签</p>
+			<p class="page-name">当前文章&nbsp;:&nbsp;《async》</p>
 			
 		
 	
@@ -140,33 +140,255 @@
 		<!--main-->
 		<main> 
 		<div class="page-container">
-		<!--content start-->
+		<!-- content srart -->
 <div class="am-g am-g-fixed blog-fixed blog-content">
-    <div class="am-u-md-8 am-u-sm-12">
-        <article class="am-article blog-article-p">
+	<div class="am-u-md-8 am-u-sm-12">
 
-            <div class="page-header">
-	<div class="blog-text-center">
-		
-			
-			<i class="fa fa-pencil-square-o">总计4个标签</i>
-			
-		  	 		
-	</div>    	 		
-</div>  	 		
+		<article class="am-article blog-article-p">
 
-            
+			<div class="am-article-hd">
+				
 
-                <div class="tags">
-                    <a href="/tags/Git/" style="font-size: 16px; color: #000">Git</a> <a href="/tags/Vuex/" style="font-size: 35px; color: #f00">Vuex</a> <a href="/tags/async/" style="font-size: 16px; color: #000">async</a> <a href="/tags/扩展运算符/" style="font-size: 16px; color: #000">扩展运算符</a>
-                </div>
 
-            
-        </article>
-    </div>
+				<h1 class="am-article-title blog-text-center">
+					
+					
+	
+		<a href="/2018/10/29/async/" itemprop="url">		
+			async		
+		</a>
+	
+
+				</h1>
+
+				<p class="am-article-meta blog-text-center">
+					<span>
+						<i class="fa fa-clock-o"></i> 
+						<a href="/2018/10/29/async/" itemprop="url">
+	<time datetime="2018-10-29T12:06:15.000Z" itemprop="datePublished">
+  		2018-10-29
+  </time>
+</a>    
+&nbsp;
+					</span>
+					
+					<span>						
+						
+							<i class="fa fa-tags"></i>
+							
+								<a href="#async" title="async" rel="1">async</a>&nbsp;
+													 											
+						
+					</span>
+				</p>
+			</div>
+
+			<div class="am-article-bd">
+				<div class="content" id="post-content">
+					
+						<h3 id="async"><a href="#async" class="headerlink" title="async"></a>async</h3><p>@(Es6)</p>
+<h4 id="async函数"><a href="#async函数" class="headerlink" title="async函数"></a>async函数</h4><p>ES2017标准引入的<strong>async函数</strong>，使得<strong>异步操作</strong>变得更加方便。async函数就是Generator函数的语法糖</p>
+<ol>
+<li><p>async函数语义更为清楚，<strong>async</strong>表示函数里有异步操作，<strong>await</strong>表示紧跟在后面的表达式需要等待结果</p>
+</li>
+<li><p>async返回值是<strong>promise对象</strong>。<strong>async函数完全可以看做由多个异步操作包装成的一个promise对象</strong>，而await命令就是内部then命令的语法糖</p>
+</li>
+<li>async函数内部抛出错误会导致返回的promise对象变为reject状态。抛出的错误对象会被<strong>catch方法的回调函数</strong>接收到<br>将第一个await放在try … catch结构里面，即使第一个异步操作失败，也不会中断后面的异步操作，不管这个异步操作是否成功，第二个await都会执行<pre><code class="ruby">async function f() {    
+ try {        
+     await Promise.reject(&#39;出错了&#39;)       
+         /如果有多个await命令，则可以统一放在tyr ... catch结构中         
+         let val1 = await firstStep()        
+         let val2 = await secondStep()    
+     } catch (error) {         
+         console.log(error);    // 会执行 
+ }      
+ return await Promise.resolve(&#39;hello world&#39;)  /也会执行}
+ f().then(res =&gt; console.log(res))
+</code></pre>
+</li>
+</ol>
+<h4 id="async函数多种使用形式"><a href="#async函数多种使用形式" class="headerlink" title="async函数多种使用形式"></a>async函数多种使用形式</h4><ul>
+<li>函数声明<pre><code class="ruby">async function foo （）{}
+</code></pre>
+</li>
+<li>函数表达式<pre><code class="ruby">const foo =  async function （）{} 
+</code></pre>
+</li>
+<li>对象的方法<pre><code class="ruby">let obj = {
+ async foo （）{}
+}
+obj.foo（）.then（...） 
+</code></pre>
+</li>
+<li>箭头函数（推荐）<pre><code class="ruby">const foo = async （）=&gt; {}
+</code></pre>
+</li>
+</ul>
+<h4 id="async运用实例（1）"><a href="#async运用实例（1）" class="headerlink" title="async运用实例（1）"></a>async运用实例（1）</h4><h5 id="Node导入文件"><a href="#Node导入文件" class="headerlink" title="Node导入文件"></a>Node导入文件</h5><pre><code class="ruby">const fs = require(&#39;fs&#39;) / 导入文件模块（fs)
+/依次读取两个文件
+function readFile(fileName) {
+    return new Promise((resolve, reject) =&gt; {
+        fs.readFile(fileName, (err, data) =&gt; {
+            if (err)
+                return reject(err)
+            resolve(data)
+        })
+    })
+}
+</code></pre>
+<h4 id="Promise-读取文件"><a href="#Promise-读取文件" class="headerlink" title="Promise 读取文件"></a>Promise 读取文件</h4><pre><code class="ruby">readFile(&#39;data/a.txt&#39;)
+   .then(res =&gt; {
+     console.log(res.toString());
+     return readFile(&#39;data/b.txt&#39;)
+   })
+   .then(res =&gt; {
+       console.log(res.toString());
+   })
+</code></pre>
+<h4 id="Generator-读取文件"><a href="#Generator-读取文件" class="headerlink" title="Generator 读取文件"></a>Generator 读取文件</h4><pre><code class="ruby">function* gen() {
+    yield readFile(&#39;data/a.txt&#39;)
+    yield readFile(&#39;data/b.txt&#39;)
+}
+let g1 = gen()
+g1.next().value.then(res =&gt; {
+    console.log(&#39;generator&#39;, res);
+    return g1.next().value
+}).then(res =&gt; {
+    console.log(&#39;generator&#39;, res.toString());
+})
+</code></pre>
+<h4 id="Async读取文件"><a href="#Async读取文件" class="headerlink" title="Async读取文件"></a>Async读取文件</h4><pre><code class="ruby">async function fn() {
+    let [a, b] = await Promise.all([
+        readFile(&#39;data/a.txt&#39;),
+        readFile(&#39;data/b.txt&#39;)
+])
+    console.log(&#39;async&#39;, a.toString());
+    console.log(&#39;async&#39;, b.toString());
+}
+fn()
+</code></pre>
+<hr>
+<h4 id="async运用实例（2）"><a href="#async运用实例（2）" class="headerlink" title="async运用实例（2）"></a>async运用实例（2）</h4><h5 id="指定多少毫秒后输出一个值"><a href="#指定多少毫秒后输出一个值" class="headerlink" title="指定多少毫秒后输出一个值"></a>指定多少毫秒后输出一个值</h5><pre><code class="ruby">   async function timeout(ms) {
+       await new Promise((resolve) =&gt; {
+           setTimeout(resolve, ms)
+       })
+   }
+   async function asyncPrint(value, ms) {
+       await timeout(ms)
+       console.log(value);
+   }
+   asyncPrint(&#39;hello world&#39;, 500)
+</code></pre>
+
+					
+				</div>
+			</div>
+		</article>
+
+		<ul class="am-pagination">
+    
+	
+		<li class="am-pagination-next">
+		<a class="pull-right" href="/2018/10/29/扩展运算符/" title="扩展运算符">
+			下一篇 &raquo;
+		</a>
+		</li>
+	 
+ </ul>
+        
+
+		<div class="theme-annie-comment-button-container">
+	<button id="annie-comment-button" class="theme-annie-comment-button" onclick="Annie_Comment()">
+		加载评论
+		<!--加载评论-->
+	</button>
 </div>
 
+<div id="annie-comment-container" class="theme-annie-comment-main-container">
 
+	
+		
+			<!-- comment valine -->
+			<!-- show valine comment -->
+<div id="valineComment" class="comment"></div>
+
+<!-- valine`s js & css -->
+<script>
+	window.jQuery || document.write('<script src="/js/jquery-2.1.1.min.js"><\/script>')
+</script>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/js/valine.min.js"></script>
+<link rel="stylesheet" href="/css/comment.css">
+
+<script>
+	var checkExistComment = setInterval(function() {
+		if( $('#valineComment').length ) {
+			new Valine({
+				// AV 对象来自上面引入av-min.js(老司机们不要开车➳♡゛扎心了老铁)
+				av: AV,
+				//使用id寻找div元素（使用class可能找不到）
+				el: '#valineComment',
+				emoticon_url: 'https://cloud.panjunwen.com/alu',
+				emoticon_list: ["吐.png", "期待.png", "高兴.png", "吐血倒地.png", "哭泣.png", "欢呼.png"],
+				app_id: "3333....", //获取APP ID
+				app_key: "3333......", //获取APP KEY
+				placeholder: "no any!", //评论框占位提示文字        			
+			});
+			clearInterval(checkExistComment);
+		}
+	}, 100);
+</script>
+		
+	
+
+</div>
+
+<script type="text/javascript">
+	/* Show Comment */
+	var Annie_Comment = function() {
+		function Show_Hidden(obj) {
+			obj.style.display = 'block';
+		}
+		
+		//var obutton = $('#annie-comment-button');
+		//var obutton = $('#annie-comment-container');
+		var obutton = document.getElementById("annie-comment-button" || "0");
+		var odiv = document.getElementById("annie-comment-container");
+		if( 'obutton' ) {
+			obutton.onclick = function() {
+				Show_Hidden(odiv);
+				$("#annie-comment-button").css("display", 'none');
+				return false;
+			}
+		}
+	};
+
+	(function Annie_Init() {
+		Annie_Comment();
+	})();
+</script>
+		
+		<!--
+	时间：2018-09-24
+	描述：The TOC module refers to 'https://github.com/codefine/hexo-theme-mellow', include toc.ejs、toc.js、toc.css. All rights reserved by codefine. 
+-->
+
+	
+		<aside class="post-widget">
+			<nav class="post-toc-wrap" id="post-toc">
+				
+					<strong>文章目录</strong>
+				
+				
+				<!--toc(post.content)-->
+				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#async"><span class="post-toc-text">async</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#async函数"><span class="post-toc-text">async函数</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#async函数多种使用形式"><span class="post-toc-text">async函数多种使用形式</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#async运用实例（1）"><span class="post-toc-text">async运用实例（1）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Node导入文件"><span class="post-toc-text">Node导入文件</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Promise-读取文件"><span class="post-toc-text">Promise 读取文件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Generator-读取文件"><span class="post-toc-text">Generator 读取文件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Async读取文件"><span class="post-toc-text">Async读取文件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#async运用实例（2）"><span class="post-toc-text">async运用实例（2）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#指定多少毫秒后输出一个值"><span class="post-toc-text">指定多少毫秒后输出一个值</span></a></li></ol></li></ol></li></ol>
+			</nav>
+			<div class="post-toc-bar"><div>
+		</div></div></aside>
+	
+
+	</div>
+</div>
 		</div>
 		</main>
 		
@@ -236,6 +458,11 @@
 	}
 </style>
 
+
+	<script src="/js/motto.js"></script>
+	<script type="text/javascript">
+		$(".motto").html(getMingYanContent());
+	</script>	
 
 
 
@@ -577,6 +804,8 @@
 
 
 
+
+	<script type="text/javascript" src="/js/toc.js"></script>
 
 
 <script type="text/javascript" src="/js/main.js"></script>
