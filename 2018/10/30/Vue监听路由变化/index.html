@@ -10,7 +10,7 @@
 		
 
 <head><meta name="generator" content="Hexo 3.8.0">
-	<title>文章归档: 2018/10</title>
+	<title>Vue监听路由变化</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="apple-mobile-web-app-title" content="Amaze UI">
@@ -54,9 +54,8 @@
 		
 		
 			
-			<!-- && is_current('archives/index.html') -->
-			<p class="page-name">文章归档</p>
-		
+			<p class="page-name">当前文章&nbsp;:&nbsp;《Vue监听路由变化》</p>
+			
 		
 	
 	
@@ -144,125 +143,170 @@
 		<!-- content srart -->
 <div class="am-g am-g-fixed blog-fixed blog-content">
 	<div class="am-u-md-8 am-u-sm-12">
-		<div class="archive">
 
-			<div class="blog-text-center">
-				
-					<i class="fa fa-book">总计6篇文章</i>
-				
-			</div>  
+		<article class="am-article blog-article-p">
 
-			
+			<div class="am-article-hd">
+				
 
-							
-				
-				
-				
+
+				<h1 class="am-article-title blog-text-center">
 					
+					
+	
+		<a href="/2018/10/30/Vue监听路由变化/" itemprop="url">		
+			Vue监听路由变化		
+		</a>
+	
+
+				</h1>
+
+				<p class="am-article-meta blog-text-center">
+					<span>
+						<i class="fa fa-clock-o"></i> 
+						<a href="/2018/10/30/Vue监听路由变化/" itemprop="url">
+	<time datetime="2018-10-30T13:50:48.000Z" itemprop="datePublished">
+  		2018-10-30
+  </time>
+</a>    
+&nbsp;
+					</span>
+					
+					<span>						
+						
+							<i class="fa fa-tags"></i>
+							
+								<a href="#Vue" title="Vue" rel="1">Vue</a>&nbsp;
+													 											
+						
+					</span>
+				</p>
+			</div>
+
+			<div class="am-article-bd">
+				<div class="content" id="post-content">
+					
+						<h3 id="Vue监听路由变化"><a href="#Vue监听路由变化" class="headerlink" title="Vue监听路由变化"></a>Vue监听路由变化</h3><p>@(Vue)</p>
+<p>当Vue监听路由变化，数据无法更新时，Vue-router官网，有这么一句话：提醒一下，<strong>当使用路由参数时，例如从 /user/foo 导航到 user/bar，原来的组件实例会被复用。因为两个路由都渲染同个组件，比起销毁再创建，复用则显得更加高效。</strong>不过，这也意味着组件的生命周期钩子不会再被调用。 意思很明显了：虽然路由参数发生了变化，但组件还是那个组件，Vue生命周期也还没结束，此时并不会刷新数据。<br>官网也提出了相应的解决方案：<strong>复用组件时，想对路由参数的变化作出响应的话，你可以简单地 watch（监测变化） $route 对象</strong></p>
+<p>用<strong>:key</strong>管理可复用的元素<br>：key是用来阻止“复用”的。  Vue 提供了一种方式来声明“这两个元素是完全独立的——不要复用它们”。<strong>只需添加一个具有唯一值的 key 属性即可(Vue文档原话)</strong></p>
+<pre><code class="ruby">&lt;router-view :key=&quot;key&quot;&gt;&lt;/router-view&gt;
+
+computed: {
+    key() {
+     return this.$route.name !== undefined? this.$route.name +new Date(): this.$route +new Date()
+    }
+}
+</code></pre>
 
 					
-					<!--<a href="/archives/2018" class="archive-year">2018</a>-->
-				
-								
-				
-					  
-					<div class="archive-year">
-						<a href="/archives/2018/10">
-							2018-10
-						</a>
-					</div>				
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/10/30/Vue监听路由变化/" itemprop="url">Vue监听路由变化</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/10/30/Vue监听路由变化/" itemprop="url">10-30</a>
-					</div>
-				</div>		        							
-							
-				
-				
-				
-								
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/10/29/async/" itemprop="url">async</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/10/29/async/" itemprop="url">10-29</a>
-					</div>
-				</div>		        							
-							
-				
-				
-				
-								
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/10/29/扩展运算符/" itemprop="url">扩展运算符</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/10/29/扩展运算符/" itemprop="url">10-29</a>
-					</div>
-				</div>		        							
-							
-				
-				
-				
-								
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/10/27/真正掌握vuex的使用方法（三）/" itemprop="url">真正掌握vuex的使用方法（三）</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/10/27/真正掌握vuex的使用方法（三）/" itemprop="url">10-27</a>
-					</div>
-				</div>		        							
-							
-				
-				
-				
-								
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/10/27/真正掌握vuex的使用方法（二）/" itemprop="url">真正掌握vuex的使用方法（二）</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/10/27/真正掌握vuex的使用方法（二）/" itemprop="url">10-27</a>
-					</div>
-				</div>		        							
-							
-				
-				
-				
-								
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/10/27/真正掌握vuex的使用方法（一）/" itemprop="url">真正掌握Vuex的使用方法（一）</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/10/27/真正掌握vuex的使用方法（一）/" itemprop="url">10-27</a>
-					</div>
-				</div>		        							
-			
-				
-			    
-		</div>
-	</div>
+				</div>
+			</div>
+		</article>
+
+		<ul class="am-pagination">
+    
+	
+		<li class="am-pagination-next">
+		<a class="pull-right" href="/2018/10/29/async/" title="async">
+			下一篇 &raquo;
+		</a>
+		</li>
+	 
+ </ul>
+        
+
+		<div class="theme-annie-comment-button-container">
+	<button id="annie-comment-button" class="theme-annie-comment-button" onclick="Annie_Comment()">
+		加载评论
+		<!--加载评论-->
+	</button>
 </div>
 
+<div id="annie-comment-container" class="theme-annie-comment-main-container">
+
+	
+		
+			<!-- comment valine -->
+			<!-- show valine comment -->
+<div id="valineComment" class="comment"></div>
+
+<!-- valine`s js & css -->
+<script>
+	window.jQuery || document.write('<script src="/js/jquery-2.1.1.min.js"><\/script>')
+</script>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/js/valine.min.js"></script>
+<link rel="stylesheet" href="/css/comment.css">
+
+<script>
+	var checkExistComment = setInterval(function() {
+		if( $('#valineComment').length ) {
+			new Valine({
+				// AV 对象来自上面引入av-min.js(老司机们不要开车➳♡゛扎心了老铁)
+				av: AV,
+				//使用id寻找div元素（使用class可能找不到）
+				el: '#valineComment',
+				emoticon_url: 'https://cloud.panjunwen.com/alu',
+				emoticon_list: ["吐.png", "期待.png", "高兴.png", "吐血倒地.png", "哭泣.png", "欢呼.png"],
+				app_id: "3333....", //获取APP ID
+				app_key: "3333......", //获取APP KEY
+				placeholder: "no any!", //评论框占位提示文字        			
+			});
+			clearInterval(checkExistComment);
+		}
+	}, 100);
+</script>
+		
+	
+
+</div>
+
+<script type="text/javascript">
+	/* Show Comment */
+	var Annie_Comment = function() {
+		function Show_Hidden(obj) {
+			obj.style.display = 'block';
+		}
+		
+		//var obutton = $('#annie-comment-button');
+		//var obutton = $('#annie-comment-container');
+		var obutton = document.getElementById("annie-comment-button" || "0");
+		var odiv = document.getElementById("annie-comment-container");
+		if( 'obutton' ) {
+			obutton.onclick = function() {
+				Show_Hidden(odiv);
+				$("#annie-comment-button").css("display", 'none');
+				return false;
+			}
+		}
+	};
+
+	(function Annie_Init() {
+		Annie_Comment();
+	})();
+</script>
+		
+		<!--
+	时间：2018-09-24
+	描述：The TOC module refers to 'https://github.com/codefine/hexo-theme-mellow', include toc.ejs、toc.js、toc.css. All rights reserved by codefine. 
+-->
+
+	
+		<aside class="post-widget">
+			<nav class="post-toc-wrap" id="post-toc">
+				
+					<strong>文章目录</strong>
+				
+				
+				<!--toc(post.content)-->
+				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Vue监听路由变化"><span class="post-toc-text">Vue监听路由变化</span></a></li></ol>
+			</nav>
+			<div class="post-toc-bar"><div>
+		</div></div></aside>
+	
+
+	</div>
+</div>
 		</div>
 		</main>
 		
@@ -332,6 +376,11 @@
 	}
 </style>
 
+
+	<script src="/js/motto.js"></script>
+	<script type="text/javascript">
+		$(".motto").html(getMingYanContent());
+	</script>	
 
 
 
@@ -673,6 +722,8 @@
 
 
 
+
+	<script type="text/javascript" src="/js/toc.js"></script>
 
 
 <script type="text/javascript" src="/js/main.js"></script>
