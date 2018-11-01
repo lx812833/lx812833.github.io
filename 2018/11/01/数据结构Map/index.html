@@ -10,7 +10,7 @@
 		
 
 <head><meta name="generator" content="Hexo 3.8.0">
-	<title>文章归档: 2018/10</title>
+	<title>数据结构Map</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="apple-mobile-web-app-title" content="Amaze UI">
@@ -54,9 +54,8 @@
 		
 		
 			
-			<!-- && is_current('archives/index.html') -->
-			<p class="page-name">文章归档</p>
-		
+			<p class="page-name">当前文章&nbsp;:&nbsp;《数据结构Map》</p>
+			
 		
 	
 	
@@ -144,125 +143,197 @@
 		<!-- content srart -->
 <div class="am-g am-g-fixed blog-fixed blog-content">
 	<div class="am-u-md-8 am-u-sm-12">
-		<div class="archive">
 
-			<div class="blog-text-center">
-				
-					<i class="fa fa-book">总计9篇文章</i>
-				
-			</div>  
+		<article class="am-article blog-article-p">
 
-			
+			<div class="am-article-hd">
+				
 
-							
-				
-				
-				
+
+				<h1 class="am-article-title blog-text-center">
 					
+					
+	
+		<a href="/2018/11/01/数据结构Map/" itemprop="url">		
+			数据结构Map		
+		</a>
+	
+
+				</h1>
+
+				<p class="am-article-meta blog-text-center">
+					<span>
+						<i class="fa fa-clock-o"></i> 
+						<a href="/2018/11/01/数据结构Map/" itemprop="url">
+	<time datetime="2018-11-01T14:18:42.000Z" itemprop="datePublished">
+  		2018-11-01
+  </time>
+</a>    
+&nbsp;
+					</span>
+					
+					<span>						
+						
+							<i class="fa fa-tags"></i>
+							
+								<a href="#Map" title="Map" rel="1">Map</a>&nbsp;
+													 											
+						
+					</span>
+				</p>
+			</div>
+
+			<div class="am-article-bd">
+				<div class="content" id="post-content">
+					
+						<h3 id="数据结构Map"><a href="#数据结构Map" class="headerlink" title="数据结构Map"></a>数据结构Map</h3><p>@(Es6)</p>
+<p><strong>字典类型数据结构</strong> </p>
+<p><strong>字典</strong>：用来<strong>存储不重复key和value的Hash结构</strong>，不同于集合Set的是，字典使用的是[键,值]的形式来存储数据的<br>JavaScript的对象Object只能用字符串当做变量。这给它的使用带来了很大的限制</p>
+<p>为了解决这个问题，ES6提供了Map数据结构。它<strong>类似于对象</strong>，也是<strong>键值对的集合</strong>，但是<strong>“键”</strong>的范围不限于字符串，各种类型的值（包括对象）都可以当做键，也就是说，Object结构提供了”字符串–值”对应，Map结构提供了”值–值”的对应，是一种更为完善的Hash结构实现。Map比 Object更合适”键值对”的数据结构</p>
+<h4 id="如何创建一个Map"><a href="#如何创建一个Map" class="headerlink" title="如何创建一个Map"></a>如何创建一个Map</h4><pre><code class="ruby"> const map = new Map([
+   [&#39;a&#39;, 1],
+    [&#39;b&#39;, 2]
+])
+console.log(map) // {&quot;a&quot; =&gt; 1, &quot;b&quot; =&gt; 2}
+</code></pre>
+<h4 id="Map属性"><a href="#Map属性" class="headerlink" title="Map属性"></a>Map属性</h4><pre><code class="ruby"> console.log(map.size) // 3
+</code></pre>
+<h4 id="Map类的方法"><a href="#Map类的方法" class="headerlink" title="Map类的方法"></a>Map类的方法</h4><ol>
+<li>map.set(‘key1’, ‘value1’) 返回map本身，可链式添加<pre><code class="ruby">map.set(&#39;key1&#39;, &#39;value1&#39;).set(&#39;key2&#39;, &#39;value2&#39;)
+</code></pre>
+</li>
+<li>map.delete(value) delete方法删除某个值，返回布尔值</li>
+<li>map.has(key) 返回一个布尔值，表示该键是否在当前Map对象中</li>
+<li>map.get(key) get方法读取key对应的值，如果找不到key，则返回undefined</li>
+<li>map.clear() 清除所有数据，没有返回值<pre><code class="ruby">map.clear()
+console.log(map)
+</code></pre>
+</li>
+<li>map.keys() 返回键名的遍历器</li>
+<li>map.keys() 返回键值的遍历器</li>
+<li>map.entries() 返回键值对的遍历器</li>
+<li>map.forEach() 使用回调函数遍历每个成员<pre><code class="ruby">map.forEach((key, value, map) =&gt; {
+console.log(key + &quot;:&quot; + value )
+})
+</code></pre>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4>key 是与内存地址绑定的，键不一样，则认为不不同的键<pre><code class="ruby">map.set(NaN, 10).set(NaN, 100)
+console.log(map) // { NaN =&gt; 100}
+map.set({}, &#39;x&#39;).set({}, &#39;y&#39;)
+console.log(map) // {Object =&gt; &quot;x&quot;,Object =&gt; &quot;y&quot;}
+console.log({} === {}) // true
+</code></pre>
+</li>
+</ol>
 
 					
-					<!--<a href="/archives/2018" class="archive-year">2018</a>-->
-				
-								
-				
-					  
-					<div class="archive-year">
-						<a href="/archives/2018/10">
-							2018-10
-						</a>
-					</div>				
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/10/30/Vue监听路由变化/" itemprop="url">Vue监听路由变化</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/10/30/Vue监听路由变化/" itemprop="url">10-30</a>
-					</div>
-				</div>		        							
-							
-				
-				
-				
-								
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/10/29/async/" itemprop="url">async</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/10/29/async/" itemprop="url">10-29</a>
-					</div>
-				</div>		        							
-							
-				
-				
-				
-								
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/10/29/扩展运算符/" itemprop="url">扩展运算符</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/10/29/扩展运算符/" itemprop="url">10-29</a>
-					</div>
-				</div>		        							
-							
-				
-				
-				
-								
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/10/27/真正掌握vuex的使用方法（三）/" itemprop="url">真正掌握vuex的使用方法（三）</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/10/27/真正掌握vuex的使用方法（三）/" itemprop="url">10-27</a>
-					</div>
-				</div>		        							
-							
-				
-				
-				
-								
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/10/27/真正掌握vuex的使用方法（二）/" itemprop="url">真正掌握vuex的使用方法（二）</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/10/27/真正掌握vuex的使用方法（二）/" itemprop="url">10-27</a>
-					</div>
-				</div>		        							
-							
-				
-				
-				
-								
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/10/27/真正掌握vuex的使用方法（一）/" itemprop="url">真正掌握Vuex的使用方法（一）</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/10/27/真正掌握vuex的使用方法（一）/" itemprop="url">10-27</a>
-					</div>
-				</div>		        							
-			
-				
-			    
-		</div>
-	</div>
+				</div>
+			</div>
+		</article>
+
+		<ul class="am-pagination">
+    
+	
+		<li class="am-pagination-next">
+		<a class="pull-right" href="/2018/11/01/数据结构Set/" title="数据结构Set">
+			下一篇 &raquo;
+		</a>
+		</li>
+	 
+ </ul>
+        
+
+		<div class="theme-annie-comment-button-container">
+	<button id="annie-comment-button" class="theme-annie-comment-button" onclick="Annie_Comment()">
+		加载评论
+		<!--加载评论-->
+	</button>
 </div>
 
+<div id="annie-comment-container" class="theme-annie-comment-main-container">
+
+	
+		
+			<!-- comment valine -->
+			<!-- show valine comment -->
+<div id="valineComment" class="comment"></div>
+
+<!-- valine`s js & css -->
+<script>
+	window.jQuery || document.write('<script src="/js/jquery-2.1.1.min.js"><\/script>')
+</script>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/js/valine.min.js"></script>
+<link rel="stylesheet" href="/css/comment.css">
+
+<script>
+	var checkExistComment = setInterval(function() {
+		if( $('#valineComment').length ) {
+			new Valine({
+				// AV 对象来自上面引入av-min.js(老司机们不要开车➳♡゛扎心了老铁)
+				av: AV,
+				//使用id寻找div元素（使用class可能找不到）
+				el: '#valineComment',
+				emoticon_url: 'https://cloud.panjunwen.com/alu',
+				emoticon_list: ["吐.png", "期待.png", "高兴.png", "吐血倒地.png", "哭泣.png", "欢呼.png"],
+				app_id: "3333....", //获取APP ID
+				app_key: "3333......", //获取APP KEY
+				placeholder: "no any!", //评论框占位提示文字        			
+			});
+			clearInterval(checkExistComment);
+		}
+	}, 100);
+</script>
+		
+	
+
+</div>
+
+<script type="text/javascript">
+	/* Show Comment */
+	var Annie_Comment = function() {
+		function Show_Hidden(obj) {
+			obj.style.display = 'block';
+		}
+		
+		//var obutton = $('#annie-comment-button');
+		//var obutton = $('#annie-comment-container');
+		var obutton = document.getElementById("annie-comment-button" || "0");
+		var odiv = document.getElementById("annie-comment-container");
+		if( 'obutton' ) {
+			obutton.onclick = function() {
+				Show_Hidden(odiv);
+				$("#annie-comment-button").css("display", 'none');
+				return false;
+			}
+		}
+	};
+
+	(function Annie_Init() {
+		Annie_Comment();
+	})();
+</script>
+		
+		<!--
+	时间：2018-09-24
+	描述：The TOC module refers to 'https://github.com/codefine/hexo-theme-mellow', include toc.ejs、toc.js、toc.css. All rights reserved by codefine. 
+-->
+
+	
+		<aside class="post-widget">
+			<nav class="post-toc-wrap" id="post-toc">
+				
+					<strong>文章目录</strong>
+				
+				
+				<!--toc(post.content)-->
+				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#数据结构Map"><span class="post-toc-text">数据结构Map</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#如何创建一个Map"><span class="post-toc-text">如何创建一个Map</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Map属性"><span class="post-toc-text">Map属性</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Map类的方法"><span class="post-toc-text">Map类的方法</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#注意"><span class="post-toc-text">注意</span></a></li></ol></li></ol>
+			</nav>
+			<div class="post-toc-bar"><div>
+		</div></div></aside>
+	
+
+	</div>
+</div>
 		</div>
 		</main>
 		
@@ -332,6 +403,11 @@
 	}
 </style>
 
+
+	<script src="/js/motto.js"></script>
+	<script type="text/javascript">
+		$(".motto").html(getMingYanContent());
+	</script>	
 
 
 
@@ -673,6 +749,8 @@
 
 
 
+
+	<script type="text/javascript" src="/js/toc.js"></script>
 
 
 <script type="text/javascript" src="/js/main.js"></script>
