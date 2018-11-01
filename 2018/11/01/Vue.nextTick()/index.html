@@ -10,7 +10,7 @@
 		
 
 <head><meta name="generator" content="Hexo 3.8.0">
-	<title>文章归档</title>
+	<title>Vue.nextTick()</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="apple-mobile-web-app-title" content="Amaze UI">
@@ -54,9 +54,8 @@
 		
 		
 			
-			<!-- && is_current('archives/index.html') -->
-			<p class="page-name">文章归档</p>
-		
+			<p class="page-name">当前文章&nbsp;:&nbsp;《Vue.nextTick()》</p>
+			
 		
 	
 	
@@ -144,147 +143,188 @@
 		<!-- content srart -->
 <div class="am-g am-g-fixed blog-fixed blog-content">
 	<div class="am-u-md-8 am-u-sm-12">
-		<div class="archive">
 
-			<div class="blog-text-center">
-				
-					<i class="fa fa-book">总计7篇文章</i>
-				
-			</div>  
+		<article class="am-article blog-article-p">
 
-			
+			<div class="am-article-hd">
+				
 
-							
-				
-				
-				
+
+				<h1 class="am-article-title blog-text-center">
 					
+					
+	
+		<a href="/2018/11/01/Vue.nextTick()/" itemprop="url">		
+			Vue.nextTick()		
+		</a>
+	
+
+				</h1>
+
+				<p class="am-article-meta blog-text-center">
+					<span>
+						<i class="fa fa-clock-o"></i> 
+						<a href="/2018/11/01/Vue.nextTick()/" itemprop="url">
+	<time datetime="2018-11-01T13:08:17.000Z" itemprop="datePublished">
+  		2018-11-01
+  </time>
+</a>    
+&nbsp;
+					</span>
+					
+					<span>						
+						
+							<i class="fa fa-tags"></i>
+							
+								<a href="#Vue" title="Vue" rel="2">Vue</a>&nbsp;
+													 											
+						
+					</span>
+				</p>
+			</div>
+
+			<div class="am-article-bd">
+				<div class="content" id="post-content">
+					
+						<p>@(Vue)</p>
+<h4 id="Vue-nextTick"><a href="#Vue-nextTick" class="headerlink" title="Vue.nextTick()"></a>Vue.nextTick()</h4><p>在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。<br>什么时候需要用的Vue.nextTick()？</p>
+<ol>
+<li>在Vue生命周期的<strong>created()钩子函数</strong>进行的DOM操作一定要放在<strong>Vue.nextTick()的回调函数</strong>中。原因是什么呢，原因是在created()钩子函数执行的时候DOM 其实并未进行任何渲染，而此时进行DOM操作无异于徒劳，所以此处一定要将DOM操作的js代码放进Vue.nextTick()的回调函数中。与之对应的就是mounted钩子函数，因为该钩子函数执行时所有的DOM挂载和渲染都已完成，此时在该钩子函数中进行任何DOM操作都不会有问题 。</li>
+<li>在数据变化后要执行的某个操作，而这个操作需要<strong>使用随数据改变而改变的DOM结构</strong>的时候，这个操作都应该放进Vue.nextTick()的回调函数中。</li>
+<li>如果没有提供回调且在支持 Promise 的环境中，则返回一个 Promise<pre><code class="ruby">export default {
+ data() {
+     return {
+         msg: &quot;没有更新之前&quot;
+     };
+ },
+methods: {
+ updateMsg() {
+     this.msg = &quot;更新完成&quot;;
+     console.log(&quot;aaa&quot;, this.$el.textContent); // 没有更新之前
+     setTimeout(() =&gt; {
+         this.$nextTick(() =&gt; {
+             console.log(&quot;bb&quot;, this.$el.textContent); // 更新完成
+         });
+     }, 2000);
+ }
+},
+ mounted() {
+     this.updateMsg();
+ }
+};
+</code></pre>
+</li>
+</ol>
 
 					
-					<!--<a href="/archives/2018" class="archive-year">2018</a>-->
-				
-								
-				
-					  
-					<div class="archive-year">
-						<a href="/archives/2018/11">
-							2018-11
-						</a>
-					</div>				
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/11/01/Vue.nextTick()/" itemprop="url">Vue.nextTick()</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/11/01/Vue.nextTick()/" itemprop="url">11-01</a>
-					</div>
-				</div>		        							
-							
-				
-				
-				
-								
-				
-					  
-					<div class="archive-year">
-						<a href="/archives/2018/10">
-							2018-10
-						</a>
-					</div>				
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/10/30/Vue监听路由变化/" itemprop="url">Vue监听路由变化</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/10/30/Vue监听路由变化/" itemprop="url">10-30</a>
-					</div>
-				</div>		        							
-							
-				
-				
-				
-								
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/10/29/async/" itemprop="url">async</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/10/29/async/" itemprop="url">10-29</a>
-					</div>
-				</div>		        							
-							
-				
-				
-				
-								
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/10/29/扩展运算符/" itemprop="url">扩展运算符</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/10/29/扩展运算符/" itemprop="url">10-29</a>
-					</div>
-				</div>		        							
-							
-				
-				
-				
-								
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/10/27/真正掌握vuex的使用方法（三）/" itemprop="url">真正掌握vuex的使用方法（三）</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/10/27/真正掌握vuex的使用方法（三）/" itemprop="url">10-27</a>
-					</div>
-				</div>		        							
-							
-				
-				
-				
-								
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/10/27/真正掌握vuex的使用方法（二）/" itemprop="url">真正掌握vuex的使用方法（二）</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/10/27/真正掌握vuex的使用方法（二）/" itemprop="url">10-27</a>
-					</div>
-				</div>		        							
-							
-				
-				
-				
-								
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/10/27/真正掌握vuex的使用方法（一）/" itemprop="url">真正掌握Vuex的使用方法（一）</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/10/27/真正掌握vuex的使用方法（一）/" itemprop="url">10-27</a>
-					</div>
-				</div>		        							
-			
-				
-			    
-		</div>
-	</div>
+				</div>
+			</div>
+		</article>
+
+		<ul class="am-pagination">
+    
+	
+		<li class="am-pagination-next">
+		<a class="pull-right" href="/2018/10/30/Vue监听路由变化/" title="Vue监听路由变化">
+			下一篇 &raquo;
+		</a>
+		</li>
+	 
+ </ul>
+        
+
+		<div class="theme-annie-comment-button-container">
+	<button id="annie-comment-button" class="theme-annie-comment-button" onclick="Annie_Comment()">
+		加载评论
+		<!--加载评论-->
+	</button>
 </div>
 
+<div id="annie-comment-container" class="theme-annie-comment-main-container">
+
+	
+		
+			<!-- comment valine -->
+			<!-- show valine comment -->
+<div id="valineComment" class="comment"></div>
+
+<!-- valine`s js & css -->
+<script>
+	window.jQuery || document.write('<script src="/js/jquery-2.1.1.min.js"><\/script>')
+</script>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/js/valine.min.js"></script>
+<link rel="stylesheet" href="/css/comment.css">
+
+<script>
+	var checkExistComment = setInterval(function() {
+		if( $('#valineComment').length ) {
+			new Valine({
+				// AV 对象来自上面引入av-min.js(老司机们不要开车➳♡゛扎心了老铁)
+				av: AV,
+				//使用id寻找div元素（使用class可能找不到）
+				el: '#valineComment',
+				emoticon_url: 'https://cloud.panjunwen.com/alu',
+				emoticon_list: ["吐.png", "期待.png", "高兴.png", "吐血倒地.png", "哭泣.png", "欢呼.png"],
+				app_id: "3333....", //获取APP ID
+				app_key: "3333......", //获取APP KEY
+				placeholder: "no any!", //评论框占位提示文字        			
+			});
+			clearInterval(checkExistComment);
+		}
+	}, 100);
+</script>
+		
+	
+
+</div>
+
+<script type="text/javascript">
+	/* Show Comment */
+	var Annie_Comment = function() {
+		function Show_Hidden(obj) {
+			obj.style.display = 'block';
+		}
+		
+		//var obutton = $('#annie-comment-button');
+		//var obutton = $('#annie-comment-container');
+		var obutton = document.getElementById("annie-comment-button" || "0");
+		var odiv = document.getElementById("annie-comment-container");
+		if( 'obutton' ) {
+			obutton.onclick = function() {
+				Show_Hidden(odiv);
+				$("#annie-comment-button").css("display", 'none');
+				return false;
+			}
+		}
+	};
+
+	(function Annie_Init() {
+		Annie_Comment();
+	})();
+</script>
+		
+		<!--
+	时间：2018-09-24
+	描述：The TOC module refers to 'https://github.com/codefine/hexo-theme-mellow', include toc.ejs、toc.js、toc.css. All rights reserved by codefine. 
+-->
+
+	
+		<aside class="post-widget">
+			<nav class="post-toc-wrap" id="post-toc">
+				
+					<strong>文章目录</strong>
+				
+				
+				<!--toc(post.content)-->
+				<ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Vue-nextTick"><span class="post-toc-text">Vue.nextTick()</span></a></li></ol>
+			</nav>
+			<div class="post-toc-bar"><div>
+		</div></div></aside>
+	
+
+	</div>
+</div>
 		</div>
 		</main>
 		
@@ -354,6 +394,11 @@
 	}
 </style>
 
+
+	<script src="/js/motto.js"></script>
+	<script type="text/javascript">
+		$(".motto").html(getMingYanContent());
+	</script>	
 
 
 
@@ -695,6 +740,8 @@
 
 
 
+
+	<script type="text/javascript" src="/js/toc.js"></script>
 
 
 <script type="text/javascript" src="/js/main.js"></script>
