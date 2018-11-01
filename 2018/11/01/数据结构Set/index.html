@@ -10,7 +10,7 @@
 		
 
 <head><meta name="generator" content="Hexo 3.8.0">
-	<title>category: Es6</title>
+	<title>数据结构Set</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="apple-mobile-web-app-title" content="Amaze UI">
@@ -54,8 +54,8 @@
 		
 		
 			
-			<p class="page-name">分类</p>
-		
+			<p class="page-name">当前文章&nbsp;:&nbsp;《数据结构Set》</p>
+			
 		
 	
 	
@@ -143,87 +143,191 @@
 		<!-- content srart -->
 <div class="am-g am-g-fixed blog-fixed blog-content">
 	<div class="am-u-md-8 am-u-sm-12">
-		<div class="archive">
 
-			<div class="blog-text-center">
-				
-					<i class="fa fa-book">Es6</i>
-				
-			</div>  
+		<article class="am-article blog-article-p">
 
-			
+			<div class="am-article-hd">
+				
 
-							
-				
-				
-				
+
+				<h1 class="am-article-title blog-text-center">
 					
+					
+	
+		<a href="/2018/11/01/数据结构Set/" itemprop="url">		
+			数据结构Set		
+		</a>
+	
+
+				</h1>
+
+				<p class="am-article-meta blog-text-center">
+					<span>
+						<i class="fa fa-clock-o"></i> 
+						<a href="/2018/11/01/数据结构Set/" itemprop="url">
+	<time datetime="2018-11-01T13:27:29.000Z" itemprop="datePublished">
+  		2018-11-01
+  </time>
+</a>    
+&nbsp;
+					</span>
+					
+					<span>						
+						
+							<i class="fa fa-tags"></i>
+							
+								<a href="#扩展运算符" title="扩展运算符" rel="2">扩展运算符</a>&nbsp;
+													 											
+						
+					</span>
+				</p>
+			</div>
+
+			<div class="am-article-bd">
+				<div class="content" id="post-content">
+					
+						<h3 id="数据结构Set"><a href="#数据结构Set" class="headerlink" title="数据结构Set"></a>数据结构Set</h3><p>@(Es6)</p>
+<p><strong>集合的基本概论</strong>： 集合是由一组无序且唯一（既不能重复）的项组成。这个数据结构使用了与有限集合相同的数学概论，应用在计算机的数据结构中。特点：<strong>key和value相同，没有重复的value</strong></p>
+<p>ES6提供了数据结构set，类似于数组，但是<strong>成员的值都是唯一的</strong>，没有重复的值</p>
+<h4 id="如何创建一个Set"><a href="#如何创建一个Set" class="headerlink" title="如何创建一个Set"></a>如何创建一个Set</h4><pre><code class="ruby"> let s = new Set()
+ let s = new Set([1, 2, 3]) // Set(3) {1, 2, 3}
+ console.log(s)
+</code></pre>
+<h4 id="Set属性"><a href="#Set属性" class="headerlink" title="Set属性"></a>Set属性</h4><pre><code class="ruby"> console.log(s.size) // 3
+</code></pre>
+<h4 id="Set类的方法"><a href="#Set类的方法" class="headerlink" title="Set类的方法"></a>Set类的方法</h4><ol>
+<li>set.add(value) 添加一个数据，返回set结构本身<pre><code class="ruby">s.add(&#39;a&#39;).add(&#39;b&#39;).add(&#39;c&#39;)
+console.log(s) // Set(6) {1, 2, 3, &quot;a&quot;, &quot;b&quot;, &quot;c&quot;}
+</code></pre>
+</li>
+<li>set.delete(value) 删除一个数据，返回一个布尔值，表示删除成功与否<pre><code class="ruby">s.delete(&#39;a&#39;)
+console.log(s)
+</code></pre>
+</li>
+<li>set.has(value) 判断该值是否为Set的成员，返回一个布尔值</li>
+<li>set.clear() 清除所有数据，没有返回值<pre><code class="ruby">s.clear()
+console.log(s) // Set(0) {}
+</code></pre>
+</li>
+<li>set.keys() 返回键名的遍历器</li>
+<li>set.keys() 返回键值的遍历器</li>
+<li>set.entries() 返回键值对的遍历器</li>
+<li>set.forEach() 使用回调函数遍历每个成员<pre><code class="ruby">s.forEach((value, key, set) =&gt; {
+console.log(value + &#39;lx&#39;)
+})
+</code></pre>
+</li>
+</ol>
 
 					
-					<!--<a href="/archives/2018" class="archive-year">2018</a>-->
-				
-								
-				
-					  
-					<div class="archive-year">
-						<a href="/archives/2018/11">
-							2018-11
-						</a>
-					</div>				
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/11/01/数据结构Set/" itemprop="url">数据结构Set</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/11/01/数据结构Set/" itemprop="url">11-01</a>
-					</div>
-				</div>		        							
-							
-				
-				
-				
-								
-				
-					  
-					<div class="archive-year">
-						<a href="/archives/2018/10">
-							2018-10
-						</a>
-					</div>				
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/10/29/async/" itemprop="url">async</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/10/29/async/" itemprop="url">10-29</a>
-					</div>
-				</div>		        							
-							
-				
-				
-				
-								
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/10/29/扩展运算符/" itemprop="url">扩展运算符</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/10/29/扩展运算符/" itemprop="url">10-29</a>
-					</div>
-				</div>		        							
-			
-				
-			    
-		</div>
-	</div>
+				</div>
+			</div>
+		</article>
+
+		<ul class="am-pagination">
+    
+	
+		<li class="am-pagination-next">
+		<a class="pull-right" href="/2018/11/01/Vue.nextTick()/" title="Vue.nextTick()">
+			下一篇 &raquo;
+		</a>
+		</li>
+	 
+ </ul>
+        
+
+		<div class="theme-annie-comment-button-container">
+	<button id="annie-comment-button" class="theme-annie-comment-button" onclick="Annie_Comment()">
+		加载评论
+		<!--加载评论-->
+	</button>
 </div>
 
+<div id="annie-comment-container" class="theme-annie-comment-main-container">
+
+	
+		
+			<!-- comment valine -->
+			<!-- show valine comment -->
+<div id="valineComment" class="comment"></div>
+
+<!-- valine`s js & css -->
+<script>
+	window.jQuery || document.write('<script src="/js/jquery-2.1.1.min.js"><\/script>')
+</script>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/js/valine.min.js"></script>
+<link rel="stylesheet" href="/css/comment.css">
+
+<script>
+	var checkExistComment = setInterval(function() {
+		if( $('#valineComment').length ) {
+			new Valine({
+				// AV 对象来自上面引入av-min.js(老司机们不要开车➳♡゛扎心了老铁)
+				av: AV,
+				//使用id寻找div元素（使用class可能找不到）
+				el: '#valineComment',
+				emoticon_url: 'https://cloud.panjunwen.com/alu',
+				emoticon_list: ["吐.png", "期待.png", "高兴.png", "吐血倒地.png", "哭泣.png", "欢呼.png"],
+				app_id: "3333....", //获取APP ID
+				app_key: "3333......", //获取APP KEY
+				placeholder: "no any!", //评论框占位提示文字        			
+			});
+			clearInterval(checkExistComment);
+		}
+	}, 100);
+</script>
+		
+	
+
+</div>
+
+<script type="text/javascript">
+	/* Show Comment */
+	var Annie_Comment = function() {
+		function Show_Hidden(obj) {
+			obj.style.display = 'block';
+		}
+		
+		//var obutton = $('#annie-comment-button');
+		//var obutton = $('#annie-comment-container');
+		var obutton = document.getElementById("annie-comment-button" || "0");
+		var odiv = document.getElementById("annie-comment-container");
+		if( 'obutton' ) {
+			obutton.onclick = function() {
+				Show_Hidden(odiv);
+				$("#annie-comment-button").css("display", 'none');
+				return false;
+			}
+		}
+	};
+
+	(function Annie_Init() {
+		Annie_Comment();
+	})();
+</script>
+		
+		<!--
+	时间：2018-09-24
+	描述：The TOC module refers to 'https://github.com/codefine/hexo-theme-mellow', include toc.ejs、toc.js、toc.css. All rights reserved by codefine. 
+-->
+
+	
+		<aside class="post-widget">
+			<nav class="post-toc-wrap" id="post-toc">
+				
+					<strong>文章目录</strong>
+				
+				
+				<!--toc(post.content)-->
+				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#数据结构Set"><span class="post-toc-text">数据结构Set</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#如何创建一个Set"><span class="post-toc-text">如何创建一个Set</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Set属性"><span class="post-toc-text">Set属性</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Set类的方法"><span class="post-toc-text">Set类的方法</span></a></li></ol></li></ol>
+			</nav>
+			<div class="post-toc-bar"><div>
+		</div></div></aside>
+	
+
+	</div>
+</div>
 		</div>
 		</main>
 		
@@ -293,6 +397,11 @@
 	}
 </style>
 
+
+	<script src="/js/motto.js"></script>
+	<script type="text/javascript">
+		$(".motto").html(getMingYanContent());
+	</script>	
 
 
 
@@ -634,6 +743,8 @@
 
 
 
+
+	<script type="text/javascript" src="/js/toc.js"></script>
 
 
 <script type="text/javascript" src="/js/main.js"></script>
