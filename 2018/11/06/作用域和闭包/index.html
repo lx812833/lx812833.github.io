@@ -10,7 +10,7 @@
 		
 
 <head><meta name="generator" content="Hexo 3.8.0">
-	<title>真正掌握vuex的使用方法（二）</title>
+	<title>作用域和闭包</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="apple-mobile-web-app-title" content="Amaze UI">
@@ -54,7 +54,7 @@
 		
 		
 			
-			<p class="page-name">当前文章&nbsp;:&nbsp;《真正掌握vuex的使用方法（二）》</p>
+			<p class="page-name">当前文章&nbsp;:&nbsp;《作用域和闭包》</p>
 			
 		
 	
@@ -154,8 +154,8 @@
 					
 					
 	
-		<a href="/2018/10/27/真正掌握vuex的使用方法（二）/" itemprop="url">		
-			真正掌握vuex的使用方法（二）		
+		<a href="/2018/11/06/作用域和闭包/" itemprop="url">		
+			作用域和闭包		
 		</a>
 	
 
@@ -164,9 +164,9 @@
 				<p class="am-article-meta blog-text-center">
 					<span>
 						<i class="fa fa-clock-o"></i> 
-						<a href="/2018/10/27/真正掌握vuex的使用方法（二）/" itemprop="url">
-	<time datetime="2018-10-27T08:05:42.000Z" itemprop="datePublished">
-  		2018-10-27
+						<a href="/2018/11/06/作用域和闭包/" itemprop="url">
+	<time datetime="2018-11-06T13:50:03.000Z" itemprop="datePublished">
+  		2018-11-06
   </time>
 </a>    
 &nbsp;
@@ -176,7 +176,7 @@
 						
 							<i class="fa fa-tags"></i>
 							
-								<a href="#Vuex" title="Vuex" rel="3">Vuex</a>&nbsp;
+								<a href="#Es6" title="Es6" rel="1">Es6</a>&nbsp;
 													 											
 						
 					</span>
@@ -186,192 +186,115 @@
 			<div class="am-article-bd">
 				<div class="content" id="post-content">
 					
-						<h3 id="真正掌握vuex的使用方法（二）"><a href="#真正掌握vuex的使用方法（二）" class="headerlink" title="真正掌握vuex的使用方法（二）"></a>真正掌握vuex的使用方法（二）</h3><p>@(Vuex)[vue, Vuex]<br>       目前当前的票数已经可以在页面中渲染出来了！接下来要做的事就是让按钮起到应有的责任：点击对应的按钮让数字加1, 总票数也要加1。很简单，只要给按钮增加一个事件，直接改变其状态即可，代码如下：</p>
-<hr>
-<pre><code class="python">&lt;div id=&quot;app&quot;&gt;
-    &lt;div&gt;&lt;h2&gt;总票数：{{nodeVoteCount+vueVoteCount}}&lt;/h2&gt;&lt;/div&gt;
-    &lt;div&gt;
-        &lt;img src=&quot;./assets/node.png&quot;&gt;
-        &lt;h3&gt;如何通过node.js对数据进行MD5加密&lt;/h3&gt;
-        &lt;!--为该按钮增加一个事件，让nodeVoteCount的状态加1--&gt;
-        &lt;input type=&quot;button&quot; value=&quot;投票&quot; @click=&quot;$store.state.nodeVoteCount++&quot;&gt;票数:{{nodeVoteCount}}
-    &lt;/div&gt;
-    &lt;hr/&gt;
-    &lt;div&gt;
-        &lt;img src=&quot;./assets/vuex.png&quot;&gt;
-        &lt;h3&gt;真正掌握vuex的使用方法（一）&lt;/h3&gt;
-        &lt;!--为该按钮增加一个事件，让vueVoteCount的状态加1--&gt;
-        &lt;input type=&quot;button&quot; value=&quot;投票&quot; @click=&quot;$store.state.vueVoteCount++&quot;&gt;票数：{{vueVoteCount}}
-    &lt;/div&gt;
-&lt;/div&gt;
+						<h3 id="作用域和闭包"><a href="#作用域和闭包" class="headerlink" title="作用域和闭包"></a>作用域和闭包</h3><p>@[ES6]</p>
+<h4 id="变量作用域"><a href="#变量作用域" class="headerlink" title="变量作用域"></a>变量作用域</h4><h5 id="全局变量"><a href="#全局变量" class="headerlink" title="全局变量"></a>全局变量</h5><p>拥有<strong>全局作用域</strong>，在Javascript代码中的任何地方都是有定义的</p>
+<h5 id="局部变量"><a href="#局部变量" class="headerlink" title="局部变量"></a>局部变量</h5><p>在函数内声明的变量只在函数体内有定义。作用域是有<strong>局部性</strong>的。函数参数也是局部变量，它们只在函数体内有定义。</p>
+<p> 函数体内，<strong>局部变量的优先级高于同名的全局变量</strong>。如果在函数内声明的一个局部变量或者函数参数中带有的变量和全局变量重名，那么全局变量就被局部变量所覆盖。</p>
+<pre><code class="ruby">var scope = &quot;global&quot;; //声明一个全局变量
+function fn() {
+    var scope = &quot;local&quot;; //声明一个同名的局部变量
+    return scope; //返回局部变量的值
+}
+fn(); // &quot;local&quot;   //局部变量覆盖全局变量
 </code></pre>
-<p>在使用了vuex的情况下，在页面中不能直接更改状态值。在这个时候咱们就需要用到vuex当中的 <strong>mutation</strong>了。<br>咱们知道vue的视图都是由数据驱动的，也就是说状态(state)里面的数据是动态变化的，而要改变状态内数据的唯一的方法就是通过<strong>mutation</strong><br>也就是说mutation内可以存放一些改变状态的逻辑方法！这也是Vuex设计的一个特点，处理数据的逻辑和视图进行分离！</p>
-<p>接下来咱们要修改一下store.js当中的代码了，将其修改为：<br>Vuex 建议我们mutation需要用大写常量来表示，目的是与action进行区分！所以我们需要将代码修改一下下：</p>
-<hr>
-<pre><code class="python">import Vue from &#39;vue&#39;;//引用vue
-import Vuex from &#39;vuex&#39;;//引用vuex
-Vue.use(Vuex);//使用vuex
-
-
-const state={
-    nodeVoteCount:1,//node的初始票数
-    vueVoteCount:2,//vue的初始票数
-};
-//生明一个常量mutations，将所有的mutation放入其中
-const mutations={
-//为nodeVoteCount加1
-    ADDNODEVOTE(state){    / /这里的state即是上面定义的state常量
-        state.nodeVoteCount++;
-    },
-//为vueVoteCount加1
-    ADDVUEVOTE(state){             //这里的state即是上面定义的state常量
-        state.vueVoteCount++;
+<h4 id="函数作用域"><a href="#函数作用域" class="headerlink" title="函数作用域"></a>函数作用域</h4><p>变量在声明它们的函数体 以及这个函数体嵌套的任意函数体内都是有定义的。函数定义是可以嵌套的。由于每个函数都有它自己的作用域，因此会出现几个局部作用域嵌套的情况</p>
+<h5 id="作用域链"><a href="#作用域链" class="headerlink" title="作用域链"></a>作用域链</h5><p>（理解）根据在<strong>内部函数可以访问外部函数</strong>的这种机制，用<strong>链式查找</strong>决定访问的能被内部函数访问的数据。找不到<strong>逐级向上找</strong></p>
+<pre><code class="ruby">var name = &quot;one&quot;;
+function test() {
+    var name = &quot;two&quot;;
+    function test1() {
+        var name = &quot;three&quot;;
+       console.log(name);      //three
     }
-}
-export default new Vuex.Store({ //暴露Store对象
-     state,
-     mutation s//将mutations进行暴露
-})
-</code></pre>
-<p>5、修改App.vue为：</p>
-<hr>
-<pre><code class="python">&lt;template&gt;
-    &lt;div id=&quot;app&quot;&gt;
-        &lt;!--通过$store.state.nodeVoteCount获得nodeVoteCount的状态值
-        通过$store.state.vueVoteCount获得vueVoteCount的状态值--&gt;
-        &lt;div&gt;&lt;h2&gt;总票数：{{$store.state.nodeVoteCount+$store.state.vueVoteCount}}&lt;/h2&gt;&lt;/div&gt;
-        &lt;div&gt;
-            &lt;img src=&quot;./assets/node.png&quot;&gt;
-            &lt;h3&gt;如何通过node.js对数据进行MD5加密&lt;/h3&gt;
-            &lt;input type=&quot;button&quot; value=&quot;投票&quot;&gt;票数:{{$store.state.nodeVoteCount}}
-        &lt;/div&gt;
-        &lt;hr/&gt;
-        &lt;div&gt;
-            &lt;img src=&quot;./assets/vuex.png&quot;&gt;
-            &lt;h3&gt;真正掌握vuex的使用方法（一）&lt;/h3&gt;
-            &lt;input type=&quot;button&quot; value=&quot;投票&quot;&gt;票数：{{$store.state.vueVoteCount}}
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/template&gt;
-&lt;script&gt;
-export default {
-    name: &#39;App&#39;
-}
-&lt;/script&gt;
-</code></pre>
-<p>到目前为止已经将mutation方法配置好了，那么接下来要做的事就是让按钮来触发mutation即可。触发的时候需要用到<strong>$store.commit</strong>方法，修改App.vue：</p>
-<hr>
-<pre><code class="python">&lt;div id=&quot;app&quot;&gt;
-    &lt;div&gt;&lt;h2&gt;总票数：{{nodeVoteCount+vueVoteCount}}&lt;/h2&gt;&lt;/div&gt;
-    &lt;div&gt;
-        &lt;img src=&quot;./assets/node.png&quot;&gt;
-        &lt;h3&gt;如何通过node.js对数据进行MD5加密&lt;/h3&gt;
-        &lt;!--通过store.commit来调用mutations的addNodeVote方法--&gt;
-        &lt;input type=&quot;button&quot; value=&quot;投票&quot; @click=&quot;$store.commit(&#39;ADDNODEVOTE&#39;)&quot;&gt;票数:{{nodeVoteCount}}
-    &lt;/div&gt;
-    &lt;hr/&gt;
-    &lt;div&gt;
-        &lt;img src=&quot;./assets/vuex.png&quot;&gt;
-        &lt;h3&gt;真正掌握vuex的使用方法（一）&lt;/h3&gt;
-        &lt;!--通过store.commit来调用mutations的addVueVoteCount方法--&gt;
-        &lt;input type=&quot;button&quot; value=&quot;投票&quot; @click=&quot;$store.commit(&#39;ADDVUEVOTE&#39;)&quot;&gt;票数：{{vueVoteCount}}
-    &lt;/div&gt;
-&lt;/div&gt;
-</code></pre>
-<p>你会发现点击按钮的效果达到了你的预期，一切都在朝着好的方向发展！那这个mutation方法可以接收值吗？当然可以！咱们现在在原来的基础之上再给加一个按钮，点击该按钮让票数加2，修改App.vue:</p>
-<hr>
-<pre><code class="python">&lt;div id=&quot;app&quot;&gt;
-    &lt;div&gt;&lt;h2&gt;总票数：{{nodeVoteCount+vueVoteCount}}&lt;/h2&gt;&lt;/div&gt;
-    &lt;div&gt;
-        &lt;img src=&quot;./assets/node.png&quot;&gt;
-        &lt;h3&gt;如何通过node.js对数据进行MD5加密&lt;/h3&gt;
-        &lt;!--通过store.commit来调用mutations的addNodeVote方法--&gt;
-        &lt;input type=&quot;button&quot; value=&quot;投票&quot; @click=&quot;$store.commit(&#39;ADDNODEVOTE&#39;)&quot;&gt;
-        &lt;!--commit方法的第二个参数即为要传入的值--&gt;
-        &lt;input type=&quot;button&quot; value=&quot;加2&quot; @click=&quot;$store.commit(&#39;ADDNODEVOTE&#39;,2)&quot;&gt;票数:{{nodeVoteCount}}
-    &lt;/div&gt;
-    &lt;hr/&gt;
-    &lt;div&gt;
-        &lt;img src=&quot;./assets/vuex.png&quot;&gt;
-        &lt;h3&gt;真正掌握vuex的使用方法（一）&lt;/h3&gt;
-        &lt;!--通过store.commit来调用mutations的addVueVoteCount方法--&gt;
-        &lt;input type=&quot;button&quot; value=&quot;投票&quot; @click=&quot;$store.commit(&#39;ADDVUEVOTE&#39;)&quot;&gt;
-        &lt;!--commit方法的第二个参数即为要传入的值--&gt;
-        &lt;input type=&quot;button&quot; value=&quot;加2&quot; @click=&quot;$store.commit(&#39;ADDVUEVOTE&#39;,2)&quot;&gt;票数：{{vueVoteCount}}
-    &lt;/div&gt;
-&lt;/div&gt;
-</code></pre>
-<p>然后再对store.js进行下调整：</p>
-<hr>
-<pre><code class="python">import Vue from &#39;vue&#39;; //引用vue
-import Vuex from &#39;vuex&#39;; //引用vuex
-Vue.use(Vuex); //使用vuex
-
-const state={
-    nodeVoteCount:1, //node的初始票数
-    vueVoteCount:2, //vue的初始票数
-};
-
-//生明一个常量mutations，将所有的mutation放入其中
-const mutations={
-//为nodeVoteCount加1,voteNum为增加的值，默认加1
-    ADDNODEVOTE(state,voteNum=1){ //这里的state即是上面定义的state常量
-        state.nodeVoteCount+=voteNum;
-},
-//为vueVoteCount加1,voteNum为增加的值，默认加1
-    ADDVUEVOTE(state,voteNum=1) {//这里的state即是上面定义的state常量
-        state.vueVoteCount+=voteNum;;
+    function test2() {
+        console.log(name);    // two     
     }
+    test1();
+    test2();
 }
-
-export default new Vuex.Store({ //暴露Store对象
-    state,
-    mutations //将mutations进行暴露
-})
+test();
 </code></pre>
-<p>到此再cnpm run dev。现在的你可以想加1加1，想加2加2了！是不是很爽？ 做到目前这一步，肯定有人在想：在view调用mutation方法的时候有没有简写的方式？有！不过这个要写到methods里，最终App.vue：</p>
-<hr>
-<pre><code class="python">&lt;template&gt;
-    &lt;div id=&quot;app&quot;&gt;
-    &lt;div&gt;&lt;h2&gt;总票数：{{nodeVoteCount+vueVoteCount}}&lt;/h2&gt;&lt;/div&gt;
-    &lt;div&gt;
-        &lt;img src=&quot;./assets/node.png&quot;&gt;
-        &lt;h3&gt;如何通过node.js对数据进行MD5加密&lt;/h3&gt;
-        &lt;!--直接调用ADDNODEVOTE--&gt;
-        &lt;input type=&quot;button&quot; value=&quot;投票&quot; @click=&quot;ADDNODEVOTE()&quot;&gt;
-        &lt;!--直接调用ADDNODEVOTE--&gt;
-        &lt;input type=&quot;button&quot; value=&quot;加2&quot; @click=&quot;ADDNODEVOTE(2)&quot;&gt;票数:{{nodeVoteCount}}
-    &lt;/div&gt;
-    &lt;hr/&gt;
-    &lt;div&gt;
-        &lt;img src=&quot;./assets/vuex.png&quot;&gt;
-        &lt;h3&gt;真正掌握vuex的使用方法（一）&lt;/h3&gt;
-        &lt;!--直接调用ADDVUEVOTE--&gt;
-        &lt;input type=&quot;button&quot; value=&quot;投票&quot; @click=&quot;ADDVUEVOTE()&quot;&gt;
-        &lt;!--直接调用ADDVUEVOTE--&gt;
-        &lt;input type=&quot;button&quot; value=&quot;加2&quot; @click=&quot;ADDVUEVOTE(2)&quot;&gt;票数：{{vueVoteCount}}
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/template&gt;
-
-&lt;script&gt;
-import {mapState,mapMutations} from &quot;vuex&quot;;
-export default {
-    name: &#39;App&#39;,
-    methods:{
-        ..mapMutations([&quot;ADDNODEVOTE&quot;,&quot;ADDVUEVOTE&quot;]),
-        ...{
-            //写自己定义的方法
+<p>上边是个嵌套函数，相应的应该是作用域链上有三个对象,那么在调用的时候，需要查找name的值，就在作用域链上查找<br>当成功调用test1()的时候，顺序为 test1()-&gt;test()-&gt;全局对象window, 因为在test1()上就找到了name的值three，所以完成搜索返回<br>当成功调用test2()的时候，顺序为 test2()-&gt;test()-&gt;全局对象window ,因为在test2()上没找到name的值，所以找test()中的，找到了name的值two,就完成搜索返回</p>
+<h5 id="声明提前"><a href="#声明提前" class="headerlink" title="声明提前"></a>声明提前</h5><p>js中的<strong>函数作用域</strong>是<strong>指在函数内声明的所有变量在函数体内始终是可见的</strong>。并且，变量在声明之前就可以使用了，这种情况就叫做声明提前（hoisting)</p>
+<pre><code class="ruby">var name = &quot;one&quot;;
+function test() {
+    console.log(name);    //undefined
+    var name = &quot;two&quot;;
+    console.log(name);    //two
+}
+test();
+</code></pre>
+<p>实际编译为：</p>
+<pre><code class="ruby">var name = &quot;one&quot;;
+function test() {
+    var name;
+    console.log(name);//undefined
+    name = &quot;two&quot;;
+    console.log(name);//two
+}
+test();
+</code></pre>
+<h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><p><strong>闭包是指有权访问另一个函数作用域中的变量的函数</strong></p>
+<pre><code class="ruby">function A() {
+  let a = 1
+   function B() {
+       console.log(a)
+   }
+   return B
+}
+</code></pre>
+<p>闭包的定义很简单：函数 A 返回了一个函数 B，并且函数 B 中使用了函数 A 的变量，函数 B 就被称为<strong>闭包</strong>。</p>
+<h4 id="闭包使用场景"><a href="#闭包使用场景" class="headerlink" title="闭包使用场景"></a>闭包使用场景</h4><h5 id="函数作为返回值"><a href="#函数作为返回值" class="headerlink" title="函数作为返回值"></a>函数作为返回值</h5><pre><code class="ruby">for (var i = 0; i &lt; items.length; i++) {
+    items[i].onclick = (function (num) {
+        return function () {   //闭包
+            console.log(num);
         }
-    },
-    computed:{
-    ...mapState([&quot;nodeVoteCount&quot;,&quot;vueVoteCount&quot;]),
-        ...{
-    //自己的属性可以在这里面写哦
-    }
+    })(i);
+}
+</code></pre>
+<p>这个return回去的匿名函数，正是我们所创建的<strong>闭包</strong>，它可以访问它的上一层作用域中的变量num,而因为函数传参是按值传参的，所以针对每一个i,在匿名函数执行时，i都会形成一个相应的副本，而因为<strong>闭包内保持着对外部变量num的引用</strong>，所以虽然闭包的外部函数（即匿名立即执行函数）已经执行完毕，但是其作用域链仍然在引用该立即执行函数的活动对象，尽管此时它的执行环境已经被销毁。<br>所以<strong>闭包的一个重要作用就是，让某些变量的值始终保持在内存中，即模仿块级作用域</strong><br><strong>闭包的另一个作用就是使得外部作用域可以访问内部作用域的变量</strong></p>
+<pre><code class="ruby">for (let i = 1;  i &lt;= 5;  i++) {
+    ( function(j)  {
+        setTimeout( function timer ()  {
+            console.log(j);
+        }, j * 1000 );
+    })(i);
+}
+// 输出 1~5
+</code></pre>
+<h5 id="函数作为参数传递"><a href="#函数作为参数传递" class="headerlink" title="函数作为参数传递"></a>函数作为参数传递</h5><p>创建100个div节点</p>
+<pre><code class="ruby">let appendDiv = function (callback) {
+   for (let i = 0; i &lt; 100; i++) {
+      let div = document.createElement(&#39;div&#39;)
+       div.innerHTML = i
+       document.body.appendChild(div)
+       if (typeof callback === &#39;function&#39;) { // array 就不会执行
+         callback(div)
+          console.log(callback)
+       }
     }
 }
-&lt;/script&gt;
+
+appendDiv(function (node) {
+  node.style.display = &#39;block&#39;
+})
+</code></pre>
+<h5 id="封装变量、收敛权限"><a href="#封装变量、收敛权限" class="headerlink" title="封装变量、收敛权限"></a>封装变量、收敛权限</h5><p>判断是否是第一次加载</p>
+<pre><code class="ruby">function isFirst() {
+  let _list = []
+   return function(id) {
+     if (_list.indexOf(id) &gt;= 0) {
+         return false
+      } else {
+        _list.push(id)
+         return true
+      }
+   }
+}
+let first = isFirst()
+console.log(first(10)); //true
+console.log(first(10)); //false
+console.log(first(20)); //true
 </code></pre>
 
 					
@@ -382,14 +305,14 @@ export default {
 		<ul class="am-pagination">
     
     	<li class="am-pagination-prev">
-   		<a class="pull-left" href="/2018/10/27/真正掌握vuex的使用方法（三）/" title="真正掌握vuex的使用方法（三）">
+   		<a class="pull-left" href="/2018/11/06/原型和原型链/" title="原型和原型链">
       		&laquo; 上一篇
 		</a>
 		</li>
 	
 	
 		<li class="am-pagination-next">
-		<a class="pull-right" href="/2018/10/27/真正掌握vuex的使用方法（一）/" title="真正掌握Vuex的使用方法（一）">
+		<a class="pull-right" href="/2018/11/03/Iterator接口/" title="Iterator接口">
 			下一篇 &raquo;
 		</a>
 		</li>
@@ -481,7 +404,7 @@ export default {
 				
 				
 				<!--toc(post.content)-->
-				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#真正掌握vuex的使用方法（二）"><span class="post-toc-text">真正掌握vuex的使用方法（二）</span></a></li></ol>
+				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#作用域和闭包"><span class="post-toc-text">作用域和闭包</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#变量作用域"><span class="post-toc-text">变量作用域</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#全局变量"><span class="post-toc-text">全局变量</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#局部变量"><span class="post-toc-text">局部变量</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#函数作用域"><span class="post-toc-text">函数作用域</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#作用域链"><span class="post-toc-text">作用域链</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#声明提前"><span class="post-toc-text">声明提前</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#闭包"><span class="post-toc-text">闭包</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#闭包使用场景"><span class="post-toc-text">闭包使用场景</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#函数作为返回值"><span class="post-toc-text">函数作为返回值</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#函数作为参数传递"><span class="post-toc-text">函数作为参数传递</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#封装变量、收敛权限"><span class="post-toc-text">封装变量、收敛权限</span></a></li></ol></li></ol></li></ol>
 			</nav>
 			<div class="post-toc-bar"><div>
 		</div></div></aside>

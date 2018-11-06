@@ -10,7 +10,7 @@
 		
 
 <head><meta name="generator" content="Hexo 3.8.0">
-	<title>真正掌握vuex的使用方法（二）</title>
+	<title>tag: Es6</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="apple-mobile-web-app-title" content="Amaze UI">
@@ -54,7 +54,7 @@
 		
 		
 			
-			<p class="page-name">当前文章&nbsp;:&nbsp;《真正掌握vuex的使用方法（二）》</p>
+			<p class="page-name">标签</p>
 			
 		
 	
@@ -143,352 +143,50 @@
 		<!-- content srart -->
 <div class="am-g am-g-fixed blog-fixed blog-content">
 	<div class="am-u-md-8 am-u-sm-12">
+		<div class="archive">
 
-		<article class="am-article blog-article-p">
-
-			<div class="am-article-hd">
+			<div class="blog-text-center">
 				
+					<i class="fa fa-book">Es6</i>
+				
+			</div>  
 
+			
 
-				<h1 class="am-article-title blog-text-center">
-					
-					
-	
-		<a href="/2018/10/27/真正掌握vuex的使用方法（二）/" itemprop="url">		
-			真正掌握vuex的使用方法（二）		
-		</a>
-	
-
-				</h1>
-
-				<p class="am-article-meta blog-text-center">
-					<span>
-						<i class="fa fa-clock-o"></i> 
-						<a href="/2018/10/27/真正掌握vuex的使用方法（二）/" itemprop="url">
-	<time datetime="2018-10-27T08:05:42.000Z" itemprop="datePublished">
-  		2018-10-27
-  </time>
-</a>    
-&nbsp;
-					</span>
-					
-					<span>						
-						
-							<i class="fa fa-tags"></i>
 							
-								<a href="#Vuex" title="Vuex" rel="3">Vuex</a>&nbsp;
-													 											
-						
-					</span>
-				</p>
-			</div>
-
-			<div class="am-article-bd">
-				<div class="content" id="post-content">
+				
+				
+				
 					
-						<h3 id="真正掌握vuex的使用方法（二）"><a href="#真正掌握vuex的使用方法（二）" class="headerlink" title="真正掌握vuex的使用方法（二）"></a>真正掌握vuex的使用方法（二）</h3><p>@(Vuex)[vue, Vuex]<br>       目前当前的票数已经可以在页面中渲染出来了！接下来要做的事就是让按钮起到应有的责任：点击对应的按钮让数字加1, 总票数也要加1。很简单，只要给按钮增加一个事件，直接改变其状态即可，代码如下：</p>
-<hr>
-<pre><code class="python">&lt;div id=&quot;app&quot;&gt;
-    &lt;div&gt;&lt;h2&gt;总票数：{{nodeVoteCount+vueVoteCount}}&lt;/h2&gt;&lt;/div&gt;
-    &lt;div&gt;
-        &lt;img src=&quot;./assets/node.png&quot;&gt;
-        &lt;h3&gt;如何通过node.js对数据进行MD5加密&lt;/h3&gt;
-        &lt;!--为该按钮增加一个事件，让nodeVoteCount的状态加1--&gt;
-        &lt;input type=&quot;button&quot; value=&quot;投票&quot; @click=&quot;$store.state.nodeVoteCount++&quot;&gt;票数:{{nodeVoteCount}}
-    &lt;/div&gt;
-    &lt;hr/&gt;
-    &lt;div&gt;
-        &lt;img src=&quot;./assets/vuex.png&quot;&gt;
-        &lt;h3&gt;真正掌握vuex的使用方法（一）&lt;/h3&gt;
-        &lt;!--为该按钮增加一个事件，让vueVoteCount的状态加1--&gt;
-        &lt;input type=&quot;button&quot; value=&quot;投票&quot; @click=&quot;$store.state.vueVoteCount++&quot;&gt;票数：{{vueVoteCount}}
-    &lt;/div&gt;
-&lt;/div&gt;
-</code></pre>
-<p>在使用了vuex的情况下，在页面中不能直接更改状态值。在这个时候咱们就需要用到vuex当中的 <strong>mutation</strong>了。<br>咱们知道vue的视图都是由数据驱动的，也就是说状态(state)里面的数据是动态变化的，而要改变状态内数据的唯一的方法就是通过<strong>mutation</strong><br>也就是说mutation内可以存放一些改变状态的逻辑方法！这也是Vuex设计的一个特点，处理数据的逻辑和视图进行分离！</p>
-<p>接下来咱们要修改一下store.js当中的代码了，将其修改为：<br>Vuex 建议我们mutation需要用大写常量来表示，目的是与action进行区分！所以我们需要将代码修改一下下：</p>
-<hr>
-<pre><code class="python">import Vue from &#39;vue&#39;;//引用vue
-import Vuex from &#39;vuex&#39;;//引用vuex
-Vue.use(Vuex);//使用vuex
-
-
-const state={
-    nodeVoteCount:1,//node的初始票数
-    vueVoteCount:2,//vue的初始票数
-};
-//生明一个常量mutations，将所有的mutation放入其中
-const mutations={
-//为nodeVoteCount加1
-    ADDNODEVOTE(state){    / /这里的state即是上面定义的state常量
-        state.nodeVoteCount++;
-    },
-//为vueVoteCount加1
-    ADDVUEVOTE(state){             //这里的state即是上面定义的state常量
-        state.vueVoteCount++;
-    }
-}
-export default new Vuex.Store({ //暴露Store对象
-     state,
-     mutation s//将mutations进行暴露
-})
-</code></pre>
-<p>5、修改App.vue为：</p>
-<hr>
-<pre><code class="python">&lt;template&gt;
-    &lt;div id=&quot;app&quot;&gt;
-        &lt;!--通过$store.state.nodeVoteCount获得nodeVoteCount的状态值
-        通过$store.state.vueVoteCount获得vueVoteCount的状态值--&gt;
-        &lt;div&gt;&lt;h2&gt;总票数：{{$store.state.nodeVoteCount+$store.state.vueVoteCount}}&lt;/h2&gt;&lt;/div&gt;
-        &lt;div&gt;
-            &lt;img src=&quot;./assets/node.png&quot;&gt;
-            &lt;h3&gt;如何通过node.js对数据进行MD5加密&lt;/h3&gt;
-            &lt;input type=&quot;button&quot; value=&quot;投票&quot;&gt;票数:{{$store.state.nodeVoteCount}}
-        &lt;/div&gt;
-        &lt;hr/&gt;
-        &lt;div&gt;
-            &lt;img src=&quot;./assets/vuex.png&quot;&gt;
-            &lt;h3&gt;真正掌握vuex的使用方法（一）&lt;/h3&gt;
-            &lt;input type=&quot;button&quot; value=&quot;投票&quot;&gt;票数：{{$store.state.vueVoteCount}}
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/template&gt;
-&lt;script&gt;
-export default {
-    name: &#39;App&#39;
-}
-&lt;/script&gt;
-</code></pre>
-<p>到目前为止已经将mutation方法配置好了，那么接下来要做的事就是让按钮来触发mutation即可。触发的时候需要用到<strong>$store.commit</strong>方法，修改App.vue：</p>
-<hr>
-<pre><code class="python">&lt;div id=&quot;app&quot;&gt;
-    &lt;div&gt;&lt;h2&gt;总票数：{{nodeVoteCount+vueVoteCount}}&lt;/h2&gt;&lt;/div&gt;
-    &lt;div&gt;
-        &lt;img src=&quot;./assets/node.png&quot;&gt;
-        &lt;h3&gt;如何通过node.js对数据进行MD5加密&lt;/h3&gt;
-        &lt;!--通过store.commit来调用mutations的addNodeVote方法--&gt;
-        &lt;input type=&quot;button&quot; value=&quot;投票&quot; @click=&quot;$store.commit(&#39;ADDNODEVOTE&#39;)&quot;&gt;票数:{{nodeVoteCount}}
-    &lt;/div&gt;
-    &lt;hr/&gt;
-    &lt;div&gt;
-        &lt;img src=&quot;./assets/vuex.png&quot;&gt;
-        &lt;h3&gt;真正掌握vuex的使用方法（一）&lt;/h3&gt;
-        &lt;!--通过store.commit来调用mutations的addVueVoteCount方法--&gt;
-        &lt;input type=&quot;button&quot; value=&quot;投票&quot; @click=&quot;$store.commit(&#39;ADDVUEVOTE&#39;)&quot;&gt;票数：{{vueVoteCount}}
-    &lt;/div&gt;
-&lt;/div&gt;
-</code></pre>
-<p>你会发现点击按钮的效果达到了你的预期，一切都在朝着好的方向发展！那这个mutation方法可以接收值吗？当然可以！咱们现在在原来的基础之上再给加一个按钮，点击该按钮让票数加2，修改App.vue:</p>
-<hr>
-<pre><code class="python">&lt;div id=&quot;app&quot;&gt;
-    &lt;div&gt;&lt;h2&gt;总票数：{{nodeVoteCount+vueVoteCount}}&lt;/h2&gt;&lt;/div&gt;
-    &lt;div&gt;
-        &lt;img src=&quot;./assets/node.png&quot;&gt;
-        &lt;h3&gt;如何通过node.js对数据进行MD5加密&lt;/h3&gt;
-        &lt;!--通过store.commit来调用mutations的addNodeVote方法--&gt;
-        &lt;input type=&quot;button&quot; value=&quot;投票&quot; @click=&quot;$store.commit(&#39;ADDNODEVOTE&#39;)&quot;&gt;
-        &lt;!--commit方法的第二个参数即为要传入的值--&gt;
-        &lt;input type=&quot;button&quot; value=&quot;加2&quot; @click=&quot;$store.commit(&#39;ADDNODEVOTE&#39;,2)&quot;&gt;票数:{{nodeVoteCount}}
-    &lt;/div&gt;
-    &lt;hr/&gt;
-    &lt;div&gt;
-        &lt;img src=&quot;./assets/vuex.png&quot;&gt;
-        &lt;h3&gt;真正掌握vuex的使用方法（一）&lt;/h3&gt;
-        &lt;!--通过store.commit来调用mutations的addVueVoteCount方法--&gt;
-        &lt;input type=&quot;button&quot; value=&quot;投票&quot; @click=&quot;$store.commit(&#39;ADDVUEVOTE&#39;)&quot;&gt;
-        &lt;!--commit方法的第二个参数即为要传入的值--&gt;
-        &lt;input type=&quot;button&quot; value=&quot;加2&quot; @click=&quot;$store.commit(&#39;ADDVUEVOTE&#39;,2)&quot;&gt;票数：{{vueVoteCount}}
-    &lt;/div&gt;
-&lt;/div&gt;
-</code></pre>
-<p>然后再对store.js进行下调整：</p>
-<hr>
-<pre><code class="python">import Vue from &#39;vue&#39;; //引用vue
-import Vuex from &#39;vuex&#39;; //引用vuex
-Vue.use(Vuex); //使用vuex
-
-const state={
-    nodeVoteCount:1, //node的初始票数
-    vueVoteCount:2, //vue的初始票数
-};
-
-//生明一个常量mutations，将所有的mutation放入其中
-const mutations={
-//为nodeVoteCount加1,voteNum为增加的值，默认加1
-    ADDNODEVOTE(state,voteNum=1){ //这里的state即是上面定义的state常量
-        state.nodeVoteCount+=voteNum;
-},
-//为vueVoteCount加1,voteNum为增加的值，默认加1
-    ADDVUEVOTE(state,voteNum=1) {//这里的state即是上面定义的state常量
-        state.vueVoteCount+=voteNum;;
-    }
-}
-
-export default new Vuex.Store({ //暴露Store对象
-    state,
-    mutations //将mutations进行暴露
-})
-</code></pre>
-<p>到此再cnpm run dev。现在的你可以想加1加1，想加2加2了！是不是很爽？ 做到目前这一步，肯定有人在想：在view调用mutation方法的时候有没有简写的方式？有！不过这个要写到methods里，最终App.vue：</p>
-<hr>
-<pre><code class="python">&lt;template&gt;
-    &lt;div id=&quot;app&quot;&gt;
-    &lt;div&gt;&lt;h2&gt;总票数：{{nodeVoteCount+vueVoteCount}}&lt;/h2&gt;&lt;/div&gt;
-    &lt;div&gt;
-        &lt;img src=&quot;./assets/node.png&quot;&gt;
-        &lt;h3&gt;如何通过node.js对数据进行MD5加密&lt;/h3&gt;
-        &lt;!--直接调用ADDNODEVOTE--&gt;
-        &lt;input type=&quot;button&quot; value=&quot;投票&quot; @click=&quot;ADDNODEVOTE()&quot;&gt;
-        &lt;!--直接调用ADDNODEVOTE--&gt;
-        &lt;input type=&quot;button&quot; value=&quot;加2&quot; @click=&quot;ADDNODEVOTE(2)&quot;&gt;票数:{{nodeVoteCount}}
-    &lt;/div&gt;
-    &lt;hr/&gt;
-    &lt;div&gt;
-        &lt;img src=&quot;./assets/vuex.png&quot;&gt;
-        &lt;h3&gt;真正掌握vuex的使用方法（一）&lt;/h3&gt;
-        &lt;!--直接调用ADDVUEVOTE--&gt;
-        &lt;input type=&quot;button&quot; value=&quot;投票&quot; @click=&quot;ADDVUEVOTE()&quot;&gt;
-        &lt;!--直接调用ADDVUEVOTE--&gt;
-        &lt;input type=&quot;button&quot; value=&quot;加2&quot; @click=&quot;ADDVUEVOTE(2)&quot;&gt;票数：{{vueVoteCount}}
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/template&gt;
-
-&lt;script&gt;
-import {mapState,mapMutations} from &quot;vuex&quot;;
-export default {
-    name: &#39;App&#39;,
-    methods:{
-        ..mapMutations([&quot;ADDNODEVOTE&quot;,&quot;ADDVUEVOTE&quot;]),
-        ...{
-            //写自己定义的方法
-        }
-    },
-    computed:{
-    ...mapState([&quot;nodeVoteCount&quot;,&quot;vueVoteCount&quot;]),
-        ...{
-    //自己的属性可以在这里面写哦
-    }
-    }
-}
-&lt;/script&gt;
-</code></pre>
 
 					
-				</div>
-			</div>
-		</article>
-
-		<ul class="am-pagination">
-    
-    	<li class="am-pagination-prev">
-   		<a class="pull-left" href="/2018/10/27/真正掌握vuex的使用方法（三）/" title="真正掌握vuex的使用方法（三）">
-      		&laquo; 上一篇
-		</a>
-		</li>
-	
-	
-		<li class="am-pagination-next">
-		<a class="pull-right" href="/2018/10/27/真正掌握vuex的使用方法（一）/" title="真正掌握Vuex的使用方法（一）">
-			下一篇 &raquo;
-		</a>
-		</li>
-	 
- </ul>
-        
-
-		<div class="theme-annie-comment-button-container">
-	<button id="annie-comment-button" class="theme-annie-comment-button" onclick="Annie_Comment()">
-		加载评论
-		<!--加载评论-->
-	</button>
-</div>
-
-<div id="annie-comment-container" class="theme-annie-comment-main-container">
-
-	
-		
-			<!-- comment valine -->
-			<!-- show valine comment -->
-<div id="valineComment" class="comment"></div>
-
-<!-- valine`s js & css -->
-<script>
-	window.jQuery || document.write('<script src="/js/jquery-2.1.1.min.js"><\/script>')
-</script>
-<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script src="/js/valine.min.js"></script>
-<link rel="stylesheet" href="/css/comment.css">
-
-<script>
-	var checkExistComment = setInterval(function() {
-		if( $('#valineComment').length ) {
-			new Valine({
-				// AV 对象来自上面引入av-min.js(老司机们不要开车➳♡゛扎心了老铁)
-				av: AV,
-				//使用id寻找div元素（使用class可能找不到）
-				el: '#valineComment',
-				emoticon_url: 'https://cloud.panjunwen.com/alu',
-				emoticon_list: ["吐.png", "期待.png", "高兴.png", "吐血倒地.png", "哭泣.png", "欢呼.png"],
-				app_id: "3333....", //获取APP ID
-				app_key: "3333......", //获取APP KEY
-				placeholder: "no any!", //评论框占位提示文字        			
-			});
-			clearInterval(checkExistComment);
-		}
-	}, 100);
-</script>
-		
-	
-
-</div>
-
-<script type="text/javascript">
-	/* Show Comment */
-	var Annie_Comment = function() {
-		function Show_Hidden(obj) {
-			obj.style.display = 'block';
-		}
-		
-		//var obutton = $('#annie-comment-button');
-		//var obutton = $('#annie-comment-container');
-		var obutton = document.getElementById("annie-comment-button" || "0");
-		var odiv = document.getElementById("annie-comment-container");
-		if( 'obutton' ) {
-			obutton.onclick = function() {
-				Show_Hidden(odiv);
-				$("#annie-comment-button").css("display", 'none');
-				return false;
-			}
-		}
-	};
-
-	(function Annie_Init() {
-		Annie_Comment();
-	})();
-</script>
-		
-		<!--
-	时间：2018-09-24
-	描述：The TOC module refers to 'https://github.com/codefine/hexo-theme-mellow', include toc.ejs、toc.js、toc.css. All rights reserved by codefine. 
--->
-
-	
-		<aside class="post-widget">
-			<nav class="post-toc-wrap" id="post-toc">
+					<!--<a href="/archives/2018" class="archive-year">2018</a>-->
 				
-					<strong>文章目录</strong>
+								
 				
+					  
+					<div class="archive-year">
+						<a href="/archives/2018/11">
+							2018-11
+						</a>
+					</div>				
+				  
 				
-				<!--toc(post.content)-->
-				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#真正掌握vuex的使用方法（二）"><span class="post-toc-text">真正掌握vuex的使用方法（二）</span></a></li></ol>
-			</nav>
-			<div class="post-toc-bar"><div>
-		</div></div></aside>
-	
-
+				<div class="archive-item">
+					<div class="archive-post-title">									
+						<a href="/2018/11/06/作用域和闭包/" itemprop="url">作用域和闭包</a>
+					</div>
+					<div class="archive-post-time">
+						<a href="/2018/11/06/作用域和闭包/" itemprop="url">11-06</a>
+					</div>
+				</div>		        							
+			
+				
+			    
+		</div>
 	</div>
 </div>
+
 		</div>
 		</main>
 		
@@ -558,11 +256,6 @@ export default {
 	}
 </style>
 
-
-	<script src="/js/motto.js"></script>
-	<script type="text/javascript">
-		$(".motto").html(getMingYanContent());
-	</script>	
 
 
 
@@ -904,8 +597,6 @@ export default {
 
 
 
-
-	<script type="text/javascript" src="/js/toc.js"></script>
 
 
 <script type="text/javascript" src="/js/main.js"></script>
