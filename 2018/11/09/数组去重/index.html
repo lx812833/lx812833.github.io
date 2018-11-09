@@ -10,7 +10,7 @@
 		
 
 <head><meta name="generator" content="Hexo 3.8.0">
-	<title>文章归档: 2018</title>
+	<title>数组去重</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="apple-mobile-web-app-title" content="Amaze UI">
@@ -54,9 +54,8 @@
 		
 		
 			
-			<!-- && is_current('archives/index.html') -->
-			<p class="page-name">文章归档</p>
-		
+			<p class="page-name">当前文章&nbsp;:&nbsp;《数组去重》</p>
+			
 		
 	
 	
@@ -144,202 +143,168 @@
 		<!-- content srart -->
 <div class="am-g am-g-fixed blog-fixed blog-content">
 	<div class="am-u-md-8 am-u-sm-12">
-		<div class="archive">
 
-			<div class="blog-text-center">
-				
-					<i class="fa fa-book">总计13篇文章</i>
-				
-			</div>  
+		<article class="am-article blog-article-p">
 
-			
+			<div class="am-article-hd">
+				
 
-							
-				
-				
-				
+
+				<h1 class="am-article-title blog-text-center">
 					
+					
+	
+		<a href="/2018/11/09/数组去重/" itemprop="url">		
+			数组去重		
+		</a>
+	
+
+				</h1>
+
+				<p class="am-article-meta blog-text-center">
+					<span>
+						<i class="fa fa-clock-o"></i> 
+						<a href="/2018/11/09/数组去重/" itemprop="url">
+	<time datetime="2018-11-09T14:01:53.000Z" itemprop="datePublished">
+  		2018-11-09
+  </time>
+</a>    
+&nbsp;
+					</span>
+					
+					<span>						
+						
+							<i class="fa fa-tags"></i>
+							
+								<a href="#JavaScript" title="JavaScript" rel="2">JavaScript</a>&nbsp;
+													 											
+						
+					</span>
+				</p>
+			</div>
+
+			<div class="am-article-bd">
+				<div class="content" id="post-content">
+					
+						<h3 id="数组去重"><a href="#数组去重" class="headerlink" title="数组去重"></a>数组去重</h3><p>@[JS]</p>
+<p><strong>Set</strong>：是ES6中一种新的数据结构，它可以接收一个数组或者是类数组对象，自动去重其中的重复项目。</p>
+<pre><code class="ruby">let array = [1, 1, 4, 5, 1, 2, 3, 4, 5, 4, 3, 6, &#39;1&#39;]
+console.log(new Set(array));
+</code></pre>
+<p><strong>Array.from</strong>：把类数组对象、可迭代对象转化为数组。</p>
+<pre><code class="ruby">let array1 = Array.from(new Set([1, 1, 4, 1, 2, 3, 2]));
+console.log(array1);
+</code></pre>
 
 					
-					<!--<a href="/archives/2018" class="archive-year">2018</a>-->
-				
-								
-				
-					  
-					<div class="archive-year">
-						<a href="/archives/2018/11">
-							2018-11
-						</a>
-					</div>				
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/11/09/数组去重/" itemprop="url">数组去重</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/11/09/数组去重/" itemprop="url">11-09</a>
-					</div>
-				</div>		        							
-							
-				
-				
-				
-								
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/11/06/原型和原型链/" itemprop="url">原型和原型链</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/11/06/原型和原型链/" itemprop="url">11-06</a>
-					</div>
-				</div>		        							
-							
-				
-				
-				
-								
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/11/06/作用域和闭包/" itemprop="url">作用域和闭包</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/11/06/作用域和闭包/" itemprop="url">11-06</a>
-					</div>
-				</div>		        							
-							
-				
-				
-				
-								
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/11/03/Iterator接口/" itemprop="url">Iterator接口</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/11/03/Iterator接口/" itemprop="url">11-03</a>
-					</div>
-				</div>		        							
-							
-				
-				
-				
-								
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/11/01/数据结构Map/" itemprop="url">数据结构Map</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/11/01/数据结构Map/" itemprop="url">11-01</a>
-					</div>
-				</div>		        							
-							
-				
-				
-				
-								
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/11/01/数据结构Set/" itemprop="url">数据结构Set</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/11/01/数据结构Set/" itemprop="url">11-01</a>
-					</div>
-				</div>		        							
-							
-				
-				
-				
-								
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/11/01/Vue.nextTick()/" itemprop="url">Vue.nextTick()</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/11/01/Vue.nextTick()/" itemprop="url">11-01</a>
-					</div>
-				</div>		        							
-							
-				
-				
-				
-								
-				
-					  
-					<div class="archive-year">
-						<a href="/archives/2018/10">
-							2018-10
-						</a>
-					</div>				
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/10/30/Vue监听路由变化/" itemprop="url">Vue监听路由变化</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/10/30/Vue监听路由变化/" itemprop="url">10-30</a>
-					</div>
-				</div>		        							
-							
-				
-				
-				
-								
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/10/29/async/" itemprop="url">async</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/10/29/async/" itemprop="url">10-29</a>
-					</div>
-				</div>		        							
-							
-				
-				
-				
-								
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/10/29/扩展运算符/" itemprop="url">扩展运算符</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/10/29/扩展运算符/" itemprop="url">10-29</a>
-					</div>
-				</div>		        							
-			
-				
-			
-	<ul class="am-pagination">
-		
-		
-		
-			<li class="am-pagination-next">
-				<a href="/archives/2018/page/2/"> 下一页 &raquo; </a>
-			</li>
-		
-	</ul>
+				</div>
+			</div>
+		</article>
+
+		<ul class="am-pagination">
     
-		</div>
-	</div>
+	
+		<li class="am-pagination-next">
+		<a class="pull-right" href="/2018/11/06/原型和原型链/" title="原型和原型链">
+			下一篇 &raquo;
+		</a>
+		</li>
+	 
+ </ul>
+        
+
+		<div class="theme-annie-comment-button-container">
+	<button id="annie-comment-button" class="theme-annie-comment-button" onclick="Annie_Comment()">
+		加载评论
+		<!--加载评论-->
+	</button>
 </div>
 
+<div id="annie-comment-container" class="theme-annie-comment-main-container">
+
+	
+		
+			<!-- comment valine -->
+			<!-- show valine comment -->
+<div id="valineComment" class="comment"></div>
+
+<!-- valine`s js & css -->
+<script>
+	window.jQuery || document.write('<script src="/js/jquery-2.1.1.min.js"><\/script>')
+</script>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/js/valine.min.js"></script>
+<link rel="stylesheet" href="/css/comment.css">
+
+<script>
+	var checkExistComment = setInterval(function() {
+		if( $('#valineComment').length ) {
+			new Valine({
+				// AV 对象来自上面引入av-min.js(老司机们不要开车➳♡゛扎心了老铁)
+				av: AV,
+				//使用id寻找div元素（使用class可能找不到）
+				el: '#valineComment',
+				emoticon_url: 'https://cloud.panjunwen.com/alu',
+				emoticon_list: ["吐.png", "期待.png", "高兴.png", "吐血倒地.png", "哭泣.png", "欢呼.png"],
+				app_id: "3333....", //获取APP ID
+				app_key: "3333......", //获取APP KEY
+				placeholder: "no any!", //评论框占位提示文字        			
+			});
+			clearInterval(checkExistComment);
+		}
+	}, 100);
+</script>
+		
+	
+
+</div>
+
+<script type="text/javascript">
+	/* Show Comment */
+	var Annie_Comment = function() {
+		function Show_Hidden(obj) {
+			obj.style.display = 'block';
+		}
+		
+		//var obutton = $('#annie-comment-button');
+		//var obutton = $('#annie-comment-container');
+		var obutton = document.getElementById("annie-comment-button" || "0");
+		var odiv = document.getElementById("annie-comment-container");
+		if( 'obutton' ) {
+			obutton.onclick = function() {
+				Show_Hidden(odiv);
+				$("#annie-comment-button").css("display", 'none');
+				return false;
+			}
+		}
+	};
+
+	(function Annie_Init() {
+		Annie_Comment();
+	})();
+</script>
+		
+		<!--
+	时间：2018-09-24
+	描述：The TOC module refers to 'https://github.com/codefine/hexo-theme-mellow', include toc.ejs、toc.js、toc.css. All rights reserved by codefine. 
+-->
+
+	
+		<aside class="post-widget">
+			<nav class="post-toc-wrap" id="post-toc">
+				
+					<strong>文章目录</strong>
+				
+				
+				<!--toc(post.content)-->
+				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#数组去重"><span class="post-toc-text">数组去重</span></a></li></ol>
+			</nav>
+			<div class="post-toc-bar"><div>
+		</div></div></aside>
+	
+
+	</div>
+</div>
 		</div>
 		</main>
 		
@@ -409,6 +374,11 @@
 	}
 </style>
 
+
+	<script src="/js/motto.js"></script>
+	<script type="text/javascript">
+		$(".motto").html(getMingYanContent());
+	</script>	
 
 
 
@@ -750,6 +720,8 @@
 
 
 
+
+	<script type="text/javascript" src="/js/toc.js"></script>
 
 
 <script type="text/javascript" src="/js/main.js"></script>
