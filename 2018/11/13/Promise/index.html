@@ -10,7 +10,7 @@
 		
 
 <head><meta name="generator" content="Hexo 3.8.0">
-	<title>Vue.nextTick()</title>
+	<title>Promise</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="apple-mobile-web-app-title" content="Amaze UI">
@@ -54,7 +54,7 @@
 		
 		
 			
-			<p class="page-name">当前文章&nbsp;:&nbsp;《Vue.nextTick()》</p>
+			<p class="page-name">当前文章&nbsp;:&nbsp;《Promise》</p>
 			
 		
 	
@@ -154,8 +154,8 @@
 					
 					
 	
-		<a href="/2018/11/01/Vue.nextTick()/" itemprop="url">		
-			Vue.nextTick()		
+		<a href="/2018/11/13/Promise/" itemprop="url">		
+			Promise		
 		</a>
 	
 
@@ -164,9 +164,9 @@
 				<p class="am-article-meta blog-text-center">
 					<span>
 						<i class="fa fa-clock-o"></i> 
-						<a href="/2018/11/01/Vue.nextTick()/" itemprop="url">
-	<time datetime="2018-11-01T13:08:17.000Z" itemprop="datePublished">
-  		2018-11-01
+						<a href="/2018/11/13/Promise/" itemprop="url">
+	<time datetime="2018-11-13T13:44:53.000Z" itemprop="datePublished">
+  		2018-11-13
   </time>
 </a>    
 &nbsp;
@@ -176,7 +176,7 @@
 						
 							<i class="fa fa-tags"></i>
 							
-								<a href="#Vue" title="Vue" rel="2">Vue</a>&nbsp;
+								<a href="#Promise" title="Promise" rel="1">Promise</a>&nbsp;
 													 											
 						
 					</span>
@@ -186,35 +186,105 @@
 			<div class="am-article-bd">
 				<div class="content" id="post-content">
 					
-						<p>@(Vue)</p>
-<h4 id="Vue-nextTick"><a href="#Vue-nextTick" class="headerlink" title="Vue.nextTick()"></a>Vue.nextTick()</h4><p>在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。<br>什么时候需要用的Vue.nextTick()？</p>
-<ol>
-<li>在Vue生命周期的<strong>created()钩子函数</strong>进行的DOM操作一定要放在<strong>Vue.nextTick()的回调函数</strong>中。原因是什么呢，原因是在created()钩子函数执行的时候DOM 其实并未进行任何渲染，而此时进行DOM操作无异于徒劳，所以此处一定要将DOM操作的js代码放进Vue.nextTick()的回调函数中。与之对应的就是mounted钩子函数，因为该钩子函数执行时所有的DOM挂载和渲染都已完成，此时在该钩子函数中进行任何DOM操作都不会有问题 。</li>
-<li>在数据变化后要执行的某个操作，而这个操作需要<strong>使用随数据改变而改变的DOM结构</strong>的时候，这个操作都应该放进Vue.nextTick()的回调函数中。</li>
-<li>如果没有提供回调且在支持 Promise 的环境中，则返回一个 Promise<pre><code class="ruby">export default {
- data() {
-     return {
-         msg: &quot;没有更新之前&quot;
-     };
- },
-methods: {
- updateMsg() {
-     this.msg = &quot;更新完成&quot;;
-     console.log(&quot;aaa&quot;, this.$el.textContent); // 没有更新之前
-     setTimeout(() =&gt; {
-         this.$nextTick(() =&gt; {
-             console.log(&quot;bb&quot;, this.$el.textContent); // 更新完成
-         });
-     }, 2000);
- }
-},
- mounted() {
-     this.updateMsg();
- }
-};
-</code></pre>
+						<h3 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h3><h4 id="Promise的含义"><a href="#Promise的含义" class="headerlink" title="Promise的含义"></a>Promise的含义</h4><p><strong>promise</strong>是<strong>异步编程的一种解决方法</strong>,比传统的回调函数和事件更合理更强大。它由社区最早提出和实现，ES6将其写进语言标准，统一了用法，原生提供了promise对象。所谓promise，简单说是一个容器，里面保存着某个未来才会结束的事件（通常是一个异步操作）的结果，从语法上说，promise是一个对象，从它可以获取异步操作的消息，promise提供了统一的API，各种异步操作都可以用同样的方法进行处理。</p>
+<h4 id="Promise对象的特点"><a href="#Promise对象的特点" class="headerlink" title="Promise对象的特点"></a>Promise对象的特点</h4><ol>
+<li><p>对象的状态不受外界影响，<strong>promise对象代表一个异步操作</strong>，有三种状态，<strong>pending（进行中）</strong>、<strong>fulfilled（已成功）</strong>、<strong>rejected（已失败）</strong>。只有异步操作的结果，可以决定当前是哪一种状态，任何其他操作都无法改变这个状态，这也是promise这个名字的由来“承若”；</p>
+</li>
+<li><p><strong>一旦状态改变就不会再变，任何时候都可以得到这个结果</strong>，promise对象的状态改变，只有两种可能：从pending变为fulfilled，从pending变为rejected。这时就称为<strong>resolved（已定型）</strong>。如果改变已经发生了，你再对promise对象添加回调函数，也会立即得到这个结果，这与事件（event）完全不同，事件的特点是：如果你错过了它，再去监听是得不到结果的。<br>有了Promise对象，就可以将异步操作以同步操作的流程表达出来，避免了层层嵌套的回调函数。此外，Promise对象提供统一的接口，使得控制异步操作更加容易。</p>
+</li>
+<li><p>Promise也有一些缺点。首先，无法取消Promise，一旦新建它就会立即执行，无法中途取消。其次，如果不设置回调函数，Promise内部抛出的错误，不会反应到外部。第三，当处于pending状态时，无法得知目前进展到哪一个阶段（刚刚开始还是即将完成）。</p>
 </li>
 </ol>
+<h4 id="Promise-用法"><a href="#Promise-用法" class="headerlink" title="Promise 用法"></a>Promise 用法</h4><p>ES6 规定，Promise对象是一个构造函数，用来生成Promise实例。</p>
+<pre><code class="ruby">const promise = new promise((resolve, reject) =&gt; {
+  if ( /*异步操作成功*/ ) {
+    resolve(value)
+  } else {
+    reject(erro)
+  }
+})
+</code></pre>
+<p>Promise实例生成以后，可以用<strong>then方法</strong>分别指定resolved状态和rejected状态的回调函数。</p>
+<pre><code class="ruby">promise.then(function (value) {
+  // success
+}, function (error) {
+  // failure
+});
+</code></pre>
+<p>then方法可以接受两个<strong>回调函数</strong>作为参数。第一个回调函数是Promise对象的状态变为resolved时调用，第二个回调函数是Promise对象的状态变为rejected时调用。其中，第二个函数是可选的，不一定要提供。这两个函数都接受Promise对象传出的值作为参数。</p>
+<p>当Promise的状态变为fulfilled的时候，传递给.then的函数将会被调用。如果Promise的状态变为rejected，传递给.catch的函数将会被调用。这就意味着，在创建Promise的时候，要通过.then将希望异步请求成功时调用的函数传递进来，通过.catch将希望异步请求失败时调用的函数传递进来。</p>
+<h4 id="Promise-all"><a href="#Promise-all" class="headerlink" title="Promise.all()"></a>Promise.all()</h4><p>Promise.all方法用于将多个 Promise 实例，包装成一个新的 Promise 实例。</p>
+<pre><code class="ruby">const p = Promise.all([p1, p2, p3]);
+</code></pre>
+<p>上面代码中，<strong>Promise.all</strong>方法接受一个数组作为参数，p1、p2、p3都是 Promise 实例，如果不是，就会先调用下面讲到的Promise.resolve方法，将参数转为 Promise 实例，再进一步处理。（Promise.all方法的参数可以不是数组，但必须具有 Iterator 接口，<strong>且返回的每个成员都是 Promise 实例</strong>。）</p>
+<p>p的状态由p1、p2、p3决定，分成两种情况。</p>
+<p>（1）只有p1、p2、p3的状态都变成fulfilled，p的状态才会变成fulfilled，此时p1、p2、p3的返回值组成一个数组，传递给p的回调函数。</p>
+<p>（2）只要p1、p2、p3之中有一个被rejected，p的状态就变成rejected，此时第一个被reject的实例的返回值，会传递给p的回调函数。</p>
+<h4 id="Promise-race"><a href="#Promise-race" class="headerlink" title="Promise.race()"></a>Promise.race()</h4><p>Promise.race方法同样是将多个 Promise 实例，包装成一个新的 Promise 实例。</p>
+<pre><code class="ruby">const p = Promise.all([p1, p2, p3]);
+</code></pre>
+<p>上面代码中，只要p1、p2、p3之中有一个实例率先改变状态，p的状态就跟着改变。那个率先改变的 Promise 实例的返回值，就传递给p的回调函数。</p>
+<p>Promise.race方法的参数与Promise.all方法一样，如果不是 Promise 实例，就会先调用下面讲到的Promise.resolve方法，将参数转为 Promise 实例，再进一步处理。</p>
+<h4 id="Promise-resolve"><a href="#Promise-resolve" class="headerlink" title="Promise.resolve()"></a>Promise.resolve()</h4><p>有时需要将现有对象转为 Promise 对象，Promise.resolve方法就起到这个作用。</p>
+<pre><code class="ruby">const jsPromise = Promise.resolve($.ajax(&#39;/whatever.json&#39;));
+</code></pre>
+<p>上面代码将 jQuery 生成的deferred对象，转为一个新的 Promise 对象。</p>
+<h4 id="运用示例"><a href="#运用示例" class="headerlink" title="运用示例"></a>运用示例</h4><pre><code class="ruby">// 所有图片加载完成后再渲染到页面
+function loadImg(src) {
+  return new Promise((resove, reject) =&gt; {
+    img = document.createElement(&#39;img&#39;)
+    img.src = src
+    //  onload 事件会在页面或图像加载完成后立即发生。
+    img.onload = (() =&gt; {
+      resove(img)
+    })
+    img.onerror = (() =&gt; {
+      reject(err)
+    })
+  })
+};
+
+function showImg(imgs) {
+  imgs.forEach((img) =&gt; {
+    document.body.appendChild(img)
+  });
+}
+Promise.all([
+  loadImg(&#39;http://pic26.photophoto.cn/20130323/0005018467298586_b.jpg&#39;),
+  loadImg(&#39;http://pic35.photophoto.cn/20150409/0005018337384017_b.jpg&#39;),
+  loadImg(&#39;http://pic34.photophoto.cn/20150202/0005018384491898_b.jpg&#39;)
+]).then(showImg)
+</code></pre>
+<pre><code class="ruby">模拟用户登录、获取用户信息
+let status = 1
+let userLogin = (resolve, reject) =&gt; {
+    setTimeout(() =&gt; {
+        if (status === 1) {
+            resolve({ data: &#39;skdafhksf&#39;, token: &#39;asdadad&#39;, msg: &#39;用户登录成功&#39; })
+        } else {
+            reject(&#39;用户登录失败&#39;)
+        }
+    }, 2000);
+}
+let getUserInfo = (resolve, reject) =&gt; {
+    setTimeout(() =&gt; {
+        if (status === 1) {
+            resolve({ data: &#39;adadada&#39;, msg: &#39;获取用户信息成功&#39; })
+        } else {
+            reject(&#39;获取用户信息失败&#39;)
+        }
+    }, 1000);
+}
+new Promise(userLogin).then(res =&gt; {
+        console.log(&quot;用户登录成功&quot;);
+        return new Promise(getUserInfo)
+    }).then(res =&gt; {
+        console.log(res);
+    }).catch(err =&gt; {
+        console.log(err);
+})
+</code></pre>
+<p><a href="http://es6.ruanyifeng.com/#docs/promise" target="_blank" rel="noopener">阮一峰ECMAScript 6 入门</a></p>
 
 					
 				</div>
@@ -224,14 +294,14 @@ methods: {
 		<ul class="am-pagination">
     
     	<li class="am-pagination-prev">
-   		<a class="pull-left" href="/2018/11/01/数据结构Set/" title="数据结构Set">
+   		<a class="pull-left" href="/2018/11/13/JavaScript常用表单验证功能/" title="JavaScript常用表单验证功能">
       		&laquo; 上一篇
 		</a>
 		</li>
 	
 	
 		<li class="am-pagination-next">
-		<a class="pull-right" href="/2018/10/30/Vue监听路由变化/" title="Vue监听路由变化">
+		<a class="pull-right" href="/2018/11/09/数组去重/" title="数组去重">
 			下一篇 &raquo;
 		</a>
 		</li>
@@ -323,7 +393,7 @@ methods: {
 				
 				
 				<!--toc(post.content)-->
-				<ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Vue-nextTick"><span class="post-toc-text">Vue.nextTick()</span></a></li></ol>
+				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Promise"><span class="post-toc-text">Promise</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Promise的含义"><span class="post-toc-text">Promise的含义</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Promise对象的特点"><span class="post-toc-text">Promise对象的特点</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Promise-用法"><span class="post-toc-text">Promise 用法</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Promise-all"><span class="post-toc-text">Promise.all()</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Promise-race"><span class="post-toc-text">Promise.race()</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Promise-resolve"><span class="post-toc-text">Promise.resolve()</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#运用示例"><span class="post-toc-text">运用示例</span></a></li></ol></li></ol>
 			</nav>
 			<div class="post-toc-bar"><div>
 		</div></div></aside>

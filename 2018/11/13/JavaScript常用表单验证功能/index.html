@@ -10,7 +10,7 @@
 		
 
 <head><meta name="generator" content="Hexo 3.8.0">
-	<title>Vue.nextTick()</title>
+	<title>JavaScript常用表单验证功能</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="apple-mobile-web-app-title" content="Amaze UI">
@@ -54,7 +54,7 @@
 		
 		
 			
-			<p class="page-name">当前文章&nbsp;:&nbsp;《Vue.nextTick()》</p>
+			<p class="page-name">当前文章&nbsp;:&nbsp;《JavaScript常用表单验证功能》</p>
 			
 		
 	
@@ -154,8 +154,8 @@
 					
 					
 	
-		<a href="/2018/11/01/Vue.nextTick()/" itemprop="url">		
-			Vue.nextTick()		
+		<a href="/2018/11/13/JavaScript常用表单验证功能/" itemprop="url">		
+			JavaScript常用表单验证功能		
 		</a>
 	
 
@@ -164,20 +164,15 @@
 				<p class="am-article-meta blog-text-center">
 					<span>
 						<i class="fa fa-clock-o"></i> 
-						<a href="/2018/11/01/Vue.nextTick()/" itemprop="url">
-	<time datetime="2018-11-01T13:08:17.000Z" itemprop="datePublished">
-  		2018-11-01
+						<a href="/2018/11/13/JavaScript常用表单验证功能/" itemprop="url">
+	<time datetime="2018-11-13T13:51:02.000Z" itemprop="datePublished">
+  		2018-11-13
   </time>
 </a>    
 &nbsp;
 					</span>
 					
 					<span>						
-						
-							<i class="fa fa-tags"></i>
-							
-								<a href="#Vue" title="Vue" rel="2">Vue</a>&nbsp;
-													 											
 						
 					</span>
 				</p>
@@ -186,35 +181,89 @@
 			<div class="am-article-bd">
 				<div class="content" id="post-content">
 					
-						<p>@(Vue)</p>
-<h4 id="Vue-nextTick"><a href="#Vue-nextTick" class="headerlink" title="Vue.nextTick()"></a>Vue.nextTick()</h4><p>在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。<br>什么时候需要用的Vue.nextTick()？</p>
-<ol>
-<li>在Vue生命周期的<strong>created()钩子函数</strong>进行的DOM操作一定要放在<strong>Vue.nextTick()的回调函数</strong>中。原因是什么呢，原因是在created()钩子函数执行的时候DOM 其实并未进行任何渲染，而此时进行DOM操作无异于徒劳，所以此处一定要将DOM操作的js代码放进Vue.nextTick()的回调函数中。与之对应的就是mounted钩子函数，因为该钩子函数执行时所有的DOM挂载和渲染都已完成，此时在该钩子函数中进行任何DOM操作都不会有问题 。</li>
-<li>在数据变化后要执行的某个操作，而这个操作需要<strong>使用随数据改变而改变的DOM结构</strong>的时候，这个操作都应该放进Vue.nextTick()的回调函数中。</li>
-<li>如果没有提供回调且在支持 Promise 的环境中，则返回一个 Promise<pre><code class="ruby">export default {
- data() {
-     return {
-         msg: &quot;没有更新之前&quot;
-     };
- },
-methods: {
- updateMsg() {
-     this.msg = &quot;更新完成&quot;;
-     console.log(&quot;aaa&quot;, this.$el.textContent); // 没有更新之前
-     setTimeout(() =&gt; {
-         this.$nextTick(() =&gt; {
-             console.log(&quot;bb&quot;, this.$el.textContent); // 更新完成
-         });
-     }, 2000);
- }
-},
- mounted() {
-     this.updateMsg();
- }
-};
+						<h3 id="原生JavaScript常用表单验证功能"><a href="#原生JavaScript常用表单验证功能" class="headerlink" title="原生JavaScript常用表单验证功能"></a>原生JavaScript常用表单验证功能</h3><h4 id="原生JavaScript判断是否为邮箱"><a href="#原生JavaScript判断是否为邮箱" class="headerlink" title="原生JavaScript判断是否为邮箱"></a>原生JavaScript判断是否为邮箱</h4><pre><code class="ruby">function isEmail(str) {
+  var re = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+  if (re.test(str) != true) {
+    return false;
+  } else {
+    return true;
+  }
+}
 </code></pre>
-</li>
-</ol>
+<h4 id="原生JavaScript判断是否有列表中的危险字符"><a href="#原生JavaScript判断是否有列表中的危险字符" class="headerlink" title="原生JavaScript判断是否有列表中的危险字符"></a>原生JavaScript判断是否有列表中的危险字符</h4><pre><code class="ruby">function isValidReg(chars) {
+  var re = /&lt;|&gt;| || | \{ | \} | 『 | 』 | ※ | ○ | ● | ◎ | § | △ | ▲ | ☆ | ★ | ◇ | ◆ | □ | ▼ | ㊣ | ﹋ | ⊕ | ⊙ | 〒 | ㄅ | ㄆ | ㄇ | ㄈ | ㄉ | ㄊ | ㄋ | ㄌ | ㄍ | ㄎ | ㄏ | ㄐ | ㄑ | ㄒ | ㄓ | ㄔ | ㄕ | ㄖ | ㄗ | ㄘ | ㄙ | ㄚ | ㄛ | ㄜ | ㄝ | ㄞ | ㄟ | ㄢ | ㄣ | ㄤ | ㄥ | ㄦ | ㄧ | ㄨ | ㄩ | ■ | ▄ | ▆ | \ * | @ | # | \ ^ | \\/; 
+  if (re.test(chars) == true) {
+    return false;
+  } else {
+    return true;
+  }
+}
+</code></pre>
+<h4 id="原生JavaScript判断字符串是否大于规定的长度"><a href="#原生JavaScript判断字符串是否大于规定的长度" class="headerlink" title="原生JavaScript判断字符串是否大于规定的长度"></a>原生JavaScript判断字符串是否大于规定的长度</h4><pre><code class="ruby">function isValidLength(chars, len) {
+  if (chars.length &lt; len) {
+    return false;
+  }
+  return true;
+}
+</code></pre>
+<h4 id="原生JavaScript判断字符串是为网址不区分大小写"><a href="#原生JavaScript判断字符串是为网址不区分大小写" class="headerlink" title="原生JavaScript判断字符串是为网址不区分大小写"></a>原生JavaScript判断字符串是为网址不区分大小写</h4><pre><code class="ruby">function isValidURL(chars) {
+  var re = /^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)(\S+\.\S+)$/;
+  if (!isNULL(chars)) {
+    chars = jsTrim(chars);
+    if (chars.match(re) == null)
+      return false;
+    else
+      return true;
+  }
+  return false;
+}
+</code></pre>
+<h4 id="原生JavaScript常用的正则表达式大收集"><a href="#原生JavaScript常用的正则表达式大收集" class="headerlink" title="原生JavaScript常用的正则表达式大收集"></a>原生JavaScript常用的正则表达式大收集</h4><pre><code class="ruby">1. 匹配中文字符的正则表达式： [\u4e00-\u9fa5]   
+2. 匹配双字节字符（包括汉字在内）：[^\x00-\xff]   
+3. 匹配空行的正则表达式：\n[\s| ]*\r   
+4. 匹配 HTML 标记的正则表达式：&lt;(.*)&gt;.*&lt;\/\1&gt;|&lt;(.*) \/&gt;  
+5. 匹配首尾空格的正则表达式：(^\s*)|(\s*$)   
+6. 匹配 IP 地址的正则表达式：/(\d+)\.(\d+)\.(\d+)\.(\d+)/g  
+7. 匹配 Email 地址的正则表达式：\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*  
+8. 匹配网址 URL 的正则表达式：http://(/[\w-]+\.)+[\w-]+(/[\w- ./?%&amp;=]*)?  
+9. sql 语句：^(select|drop|delete|create|update|insert).*$   
+10. 非负整数：^\d+$   
+11. 正整数：^[0-9]*[1-9][0-9]*$   
+12. 非正整数：^((-\d+)|(0+))$   
+13. 负整数：^-[0-9]*[1-9][0-9]*$   
+14. 整数：^-?\d+$   
+15. 非负浮点数：^\d+(\.\d+)?$   
+16. 正浮点数：^((0-9)+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$   
+17. 非正浮点数：^((-\d+\.\d+)?)|(0+(\.0+)?))$   
+18. 英文字符串：^[A-Za-z]+$   
+19. 英文大写串：^[A-Z]+$   
+20. 英文小写串：^[a-z]+$   
+21. 英文字符数字串：^[A-Za-z0-9]+$   
+22. 英数字加下划线串：^\w+$   
+23. E-mail地址：^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$ 
+24. 邮政编码：^[1-9]\d{5}$   
+25. 电话号码：^((\d2,3\d2,3)|(\d{3}\-))?(0\d2,30\d2,3|0\d{2,3}-)?[1-9]\d{6,7}(\-\d{1,4})?$  
+26. 手机号码：^((\d2,3\d2,3)|(\d{3}\-))?13\d{9}$   
+27. 双字节字符（包括汉字在内）：^\x00-\xff   
+28. 匹配首尾空格：(^\s*)|(\s*$)  
+29. 匹配 HTML 标记：&lt;(.*)&gt;.*&lt;\/\1&gt;|&lt;(.*) \/&gt;   
+30. 匹配空行：\n[\s| ]*\r   
+31. 提取信息中的网络链接：(h|H)(r|R)(e|E)(f|F) *= *(&#39;|&quot;)?(\w|\\|\/|\.)+(&#39;|&quot;| *|&gt;)?   
+32. 提取信息中的邮件地址：\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*   
+33. 提取信息中的图片链接：(s|S)(r|R)(c|C) *= *(&#39;|&quot;)?(\w|\\|\/|\.)+(&#39;|&quot;| *|&gt;)?   
+34. 提取信息中的 IP 地址：(\d+)\.(\d+)\.(\d+)\.(\d+)   
+35. 提取信息中的中国手机号码：(86)*0*13\d{9}   
+36. 提取信息中的中国固定电话号码：(\d3,4\d3,4|\d{3,4}-|\s)?\d{8}   
+37. 提取信息中的中国电话号码（包括移动和固定电话）：(\d3,4\d3,4|\d{3,4}-|\s)?\d{7,14}   
+38. 提取信息中的中国邮政编码：[1-9]{1}(\d+){5}   
+39. 提取信息中的浮点数（即小数）：(-?\d*)\.?\d+   
+40. 提取信息中的任何数字 ：(-?\d*)(\.\d+)?   
+41. IP：(\d+)\.(\d+)\.(\d+)\.(\d+)   
+42. 电话区号：^0\d{2,3}$  
+43. 腾讯 QQ 号：^[1-9]*[1-9][0-9]*$   
+44. 帐号（字母开头，允许 5-16 字节，允许字母数字下划线）：^[a-zA-Z][a-zA-Z0-9_]{4,15}$   
+45. 中文、英文、数字及下划线：^[\u4e00-\u9fa5_a-zA-Z0-9]+$  
+</code></pre>
 
 					
 				</div>
@@ -223,15 +272,9 @@ methods: {
 
 		<ul class="am-pagination">
     
-    	<li class="am-pagination-prev">
-   		<a class="pull-left" href="/2018/11/01/数据结构Set/" title="数据结构Set">
-      		&laquo; 上一篇
-		</a>
-		</li>
-	
 	
 		<li class="am-pagination-next">
-		<a class="pull-right" href="/2018/10/30/Vue监听路由变化/" title="Vue监听路由变化">
+		<a class="pull-right" href="/2018/11/13/Promise/" title="Promise">
 			下一篇 &raquo;
 		</a>
 		</li>
@@ -323,7 +366,7 @@ methods: {
 				
 				
 				<!--toc(post.content)-->
-				<ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Vue-nextTick"><span class="post-toc-text">Vue.nextTick()</span></a></li></ol>
+				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#原生JavaScript常用表单验证功能"><span class="post-toc-text">原生JavaScript常用表单验证功能</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#原生JavaScript判断是否为邮箱"><span class="post-toc-text">原生JavaScript判断是否为邮箱</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#原生JavaScript判断是否有列表中的危险字符"><span class="post-toc-text">原生JavaScript判断是否有列表中的危险字符</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#原生JavaScript判断字符串是否大于规定的长度"><span class="post-toc-text">原生JavaScript判断字符串是否大于规定的长度</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#原生JavaScript判断字符串是为网址不区分大小写"><span class="post-toc-text">原生JavaScript判断字符串是为网址不区分大小写</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#原生JavaScript常用的正则表达式大收集"><span class="post-toc-text">原生JavaScript常用的正则表达式大收集</span></a></li></ol></li></ol>
 			</nav>
 			<div class="post-toc-bar"><div>
 		</div></div></aside>
