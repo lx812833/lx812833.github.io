@@ -10,7 +10,7 @@
 		
 
 <head><meta name="generator" content="Hexo 3.8.0">
-	<title>真正掌握Vuex的使用方法（一）</title>
+	<title>小程序图片上传至七牛云</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="apple-mobile-web-app-title" content="Amaze UI">
@@ -54,7 +54,7 @@
 		
 		
 			
-			<p class="page-name">当前文章&nbsp;:&nbsp;《真正掌握Vuex的使用方法（一）》</p>
+			<p class="page-name">当前文章&nbsp;:&nbsp;《小程序图片上传至七牛云》</p>
 			
 		
 	
@@ -154,8 +154,8 @@
 					
 					
 	
-		<a href="/2018/10/27/真正掌握vuex的使用方法（一）/" itemprop="url">		
-			真正掌握Vuex的使用方法（一）		
+		<a href="/2018/12/06/小程序图片上传至七牛云/" itemprop="url">		
+			小程序图片上传至七牛云		
 		</a>
 	
 
@@ -164,9 +164,9 @@
 				<p class="am-article-meta blog-text-center">
 					<span>
 						<i class="fa fa-clock-o"></i> 
-						<a href="/2018/10/27/真正掌握vuex的使用方法（一）/" itemprop="url">
-	<time datetime="2018-10-27T06:11:21.000Z" itemprop="datePublished">
-  		2018-10-27
+						<a href="/2018/12/06/小程序图片上传至七牛云/" itemprop="url">
+	<time datetime="2018-12-06T12:00:24.000Z" itemprop="datePublished">
+  		2018-12-06
   </time>
 </a>    
 &nbsp;
@@ -176,7 +176,7 @@
 						
 							<i class="fa fa-tags"></i>
 							
-								<a href="#Vuex" title="Vuex" rel="3">Vuex</a>&nbsp;
+								<a href="#小程序" title="小程序" rel="1">小程序</a>&nbsp;
 													 											
 						
 					</span>
@@ -186,98 +186,73 @@
 			<div class="am-article-bd">
 				<div class="content" id="post-content">
 					
-						<h3 id="真正掌握vuex的使用方法（一）"><a href="#真正掌握vuex的使用方法（一）" class="headerlink" title="真正掌握vuex的使用方法（一）"></a>真正掌握vuex的使用方法（一）</h3><p>@[vue|Vuex]<br>1、安装<strong>vuex</strong>   <strong>npm install vuex –save</strong><br>2、在src目录下创建vuex文件夹，然后在该文件夹下创建一个名字叫做store的js文件<br>3、在store.js中写入以下代码：</p>
-<hr>
-<pre><code class="python">import Vue from &#39;vue&#39;;//引用vue
-import Vuex from &#39;vuex&#39;;//引用vuex
-Vue.use(Vuex);//使用vuex
-const state={
-    nodeVoteCount:0,//node的初始票数
-    vueVoteCount:0,//vue的初始票数
+						<h3 id="小程序图片上传至七牛云"><a href="#小程序图片上传至七牛云" class="headerlink" title="小程序图片上传至七牛云"></a>小程序图片上传至七牛云</h3><p>小程序图片上传至七牛云这些好处什么的就不哔哩哔哩的说了…..<br>具体步骤如下：</p>
+<h4 id="导入qiniuUploader-js"><a href="#导入qiniuUploader-js" class="headerlink" title="导入qiniuUploader.js"></a>导入qiniuUploader.js</h4><p>首先下载七牛云qiniuUploader.js 在需要上传图片的js中文件中引入</p>
+<pre><code class="ruby">const qiniuUploader = require(&quot;../../../utils/qiniuUploader.js&quot;)
+</code></pre>
+<h4 id="与后台对接获取token"><a href="#与后台对接获取token" class="headerlink" title="与后台对接获取token"></a>与后台对接获取token</h4><p>在onload函数中写请求，跟后端的接口对接，获取token</p>
+<pre><code class="ruby">// 获取七牛云token
+getToken() {
+  let cookie = &quot;jeesite.session.id=&quot; + wx.getStorageSync(&quot;cookieKey&quot;);
+  wx.request({
+    url: config.basicUrl + &quot;fault/oaFault/upToken&quot;,
+    header: {
+      Cookie: cookie
+    },
+    method: &quot;POST&quot;,
+    success: res =&gt; {
+       this.setData({
+          uploadToken: res.data
+       })
+     }
+ })
+},
+</code></pre>
+<h4 id="图片选择途径"><a href="#图片选择途径" class="headerlink" title="图片选择途径"></a>图片选择途径</h4><pre><code class="ruby">//图片选择
+onChoise(event) {
+  wx.showActionSheet({
+    itemList: [&quot;从相册中选择&quot;, &quot;拍照&quot;, &quot;取消&quot;],
+    success: res =&gt; {
+      if (!res.cancel || res.tapIndex == 2) {
+          if (res.tapIndex == 0) {
+             this.chooseWxImage(&quot;album&quot;);
+          } else if (res.tapIndex == 1) {
+             this.chooseWxImage(&quot;camera&quot;);
+          }
+      }
+   }
+ });
 }
-export default new Vuex.Store({ ////暴露Store对象
-    state
-})
 </code></pre>
-<p>4、在main.js当中引入在store.js文件当中创建的store对象，并在Vue实例中添加</p>
-<hr>
-<pre><code class="python">import Vue from &#39;vue&#39;
-import App from &#39;./App&#39;
-import router from &#39;./router&#39;
-import store from &#39;./vuex/store&#39;//导入store.js
-Vue.config.productionTip = fals
-
-enew Vue({
-    el: &#39;#app&#39;,
-    router,
-    store,//添加store
-    components: { App },
-    template: &#39;&lt;App/&gt;&#39;}
-)
-</code></pre>
-<p>5、修改App.vue为：</p>
-<hr>
-<pre><code class="python">&lt;template&gt;
-    &lt;div id=&quot;app&quot;&gt;
-        &lt;!--通过$store.state.nodeVoteCount获得nodeVoteCount的状态值
-        通过$store.state.vueVoteCount获得vueVoteCount的状态值--&gt;
-        &lt;div&gt;&lt;h2&gt;总票数：{{$store.state.nodeVoteCount+$store.state.vueVoteCount}}&lt;/h2&gt;&lt;/div&gt;
-        &lt;div&gt;
-            &lt;img src=&quot;./assets/node.png&quot;&gt;
-            &lt;h3&gt;如何通过node.js对数据进行MD5加密&lt;/h3&gt;
-            &lt;input type=&quot;button&quot; value=&quot;投票&quot;&gt;票数:{{$store.state.nodeVoteCount}}
-        &lt;/div&gt;
-        &lt;hr/&gt;
-        &lt;div&gt;
-            &lt;img src=&quot;./assets/vuex.png&quot;&gt;
-            &lt;h3&gt;真正掌握vuex的使用方法（一）&lt;/h3&gt;
-            &lt;input type=&quot;button&quot; value=&quot;投票&quot;&gt;票数：{{$store.state.vueVoteCount}}
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/template&gt;
-&lt;script&gt;
-export default {
-    name: &#39;App&#39;
-}
-&lt;/script&gt;
-</code></pre>
-<p>6、通过ES6的知识再将上面的JS部分进行一番优化。 首先将引入的vuex那部分修改为：</p>
-<p><strong>import {mapState} from “vuex”;//通过ES6的对象解构赋值</strong></p>
-<p>当然也可以用<strong>…(扩展运算符）</strong>来合并对象</p>
-<hr>
-<pre><code class="python">computed:{
-    ...mapState([&quot;vueVoteCount&quot;,&quot;nodeVoteCount&quot;]),
-    ...{
-        //自己的计算属性可以在这里面写哦
+<h4 id="选择图片并上传到七牛云"><a href="#选择图片并上传到七牛云" class="headerlink" title="选择图片并上传到七牛云"></a>选择图片并上传到七牛云</h4><pre><code class="ruby">//图片选择途径并上传到七牛云
+chooseWxImage(type) {
+  wx.chooseImage({
+    count: 1,
+    sizeType: [&quot;original&quot;, &quot;compressed&quot;],
+    sourceType: [type],
+    success: res =&gt; {
+    const filepath = res.tempFilePaths[0]
+    console.log(&#39;filepath&#39;, filepath)
+    // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+    qiniuUploader.upload(filepath, res =&gt; {  // 七牛云提供的api
+    console.log(&#39;qiniuUploader.upload&#39;, res)
+    this.setData({
+    //注意这中间有个&quot;/&quot;
+        tempFilePaths: &#39;http://pih3875s4.bkt.clouddn.com&#39; + &quot;/&quot; + res.key
+    })
+        console.log(&#39;tempFilePaths&#39;, this.data.tempFilePaths)
+    }, (error) =&gt; {
+        console.log(&#39;error&#39; + error)
+    }, {
+        region: &#39;ECN&#39;,                         // 华东区
+        uploadURL: &#39;https://up-z1.qbox.me/&#39;,   // 所在大区的地址
+        domain: &#39;pih3875s4.bkt.clouddn.com&#39;,   // 外链默认域名
+        uptoken: this.data.uploadToken         // 后端返回来的uptoken
+       })
     }
-} //或
-computed : {
-    ...mapState({
-    vueVoteCount:state=&gt;state.vueVoteCount,
-    nodeVoteCount:(state)=&gt;state.nodeVoteCount
-    }),
-    ...{
-    //自己的计算属性可以在这里面写哦
-    }
+ });
+},
 }
-</code></pre>
-<p>再然后修改App.vue的template为：</p>
-<hr>
-<pre><code class="python">&lt;div id=&quot;app&quot;&gt;
-    &lt;!--是不是很方便？直接写状态名称即可--&gt;
-    &lt;div&gt;&lt;h2&gt;总票数：{{nodeVoteCount+vueVoteCount}}&lt;/h2&gt;&lt;/div&gt;
-    &lt;div&gt;
-        &lt;img src=&quot;./assets/node.png&quot;&gt;
-        &lt;h3&gt;如何通过node.js对数据进行MD5加密&lt;/h3&gt;
-        &lt;input type=&quot;button&quot; value=&quot;投票&quot;&gt;票数:{{nodeVoteCount}}
-    &lt;/div&gt;
-    &lt;hr/&gt;
-    &lt;div&gt;
-        &lt;img src=&quot;./assets/vuex.png&quot;&gt;
-        &lt;h3&gt;真正掌握vuex的使用方法（一）&lt;/h3&gt;
-        &lt;input type=&quot;button&quot; value=&quot;投票&quot;&gt;票数：{{vueVoteCount}}
-    &lt;/div&gt;
-&lt;/div&gt;
 </code></pre>
 
 					
@@ -287,13 +262,13 @@ computed : {
 
 		<ul class="am-pagination">
     
-    	<li class="am-pagination-prev">
-   		<a class="pull-left" href="/2018/10/27/真正掌握vuex的使用方法（二）/" title="真正掌握vuex的使用方法（二）">
-      		&laquo; 上一篇
+	
+		<li class="am-pagination-next">
+		<a class="pull-right" href="/2018/11/13/JavaScript常用表单验证功能/" title="JavaScript常用表单验证功能">
+			下一篇 &raquo;
 		</a>
 		</li>
-	
-	
+	 
  </ul>
         
 
@@ -381,7 +356,7 @@ computed : {
 				
 				
 				<!--toc(post.content)-->
-				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#真正掌握vuex的使用方法（一）"><span class="post-toc-text">真正掌握vuex的使用方法（一）</span></a></li></ol>
+				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#小程序图片上传至七牛云"><span class="post-toc-text">小程序图片上传至七牛云</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#导入qiniuUploader-js"><span class="post-toc-text">导入qiniuUploader.js</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#与后台对接获取token"><span class="post-toc-text">与后台对接获取token</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#图片选择途径"><span class="post-toc-text">图片选择途径</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#选择图片并上传到七牛云"><span class="post-toc-text">选择图片并上传到七牛云</span></a></li></ol></li></ol>
 			</nav>
 			<div class="post-toc-bar"><div>
 		</div></div></aside>
