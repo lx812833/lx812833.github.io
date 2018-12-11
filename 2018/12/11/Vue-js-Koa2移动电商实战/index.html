@@ -10,7 +10,7 @@
 		
 
 <head><meta name="generator" content="Hexo 3.8.0">
-	<title>tag: Vuex</title>
+	<title>Vue-js-Koa2移动电商实战</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="apple-mobile-web-app-title" content="Amaze UI">
@@ -54,7 +54,7 @@
 		
 		
 			
-			<p class="page-name">标签</p>
+			<p class="page-name">当前文章&nbsp;:&nbsp;《Vue-js-Koa2移动电商实战》</p>
 			
 		
 	
@@ -143,80 +143,220 @@
 		<!-- content srart -->
 <div class="am-g am-g-fixed blog-fixed blog-content">
 	<div class="am-u-md-8 am-u-sm-12">
-		<div class="archive">
 
-			<div class="blog-text-center">
-				
-					<i class="fa fa-book">Vuex</i>
-				
-			</div>  
+		<article class="am-article blog-article-p">
 
-			
+			<div class="am-article-hd">
+				
 
-							
-				
-				
-				
+
+				<h1 class="am-article-title blog-text-center">
 					
+					
+	
+		<a href="/2018/12/11/Vue-js-Koa2移动电商实战/" itemprop="url">		
+			Vue-js-Koa2移动电商实战		
+		</a>
+	
+
+				</h1>
+
+				<p class="am-article-meta blog-text-center">
+					<span>
+						<i class="fa fa-clock-o"></i> 
+						<a href="/2018/12/11/Vue-js-Koa2移动电商实战/" itemprop="url">
+	<time datetime="2018-12-11T13:30:23.000Z" itemprop="datePublished">
+  		2018-12-11
+  </time>
+</a>    
+&nbsp;
+					</span>
+					
+					<span>						
+						
+							<i class="fa fa-tags"></i>
+							
+								<a href="#项目" title="项目" rel="1">项目</a>&nbsp;
+													 											
+						
+					</span>
+				</p>
+			</div>
+
+			<div class="am-article-bd">
+				<div class="content" id="post-content">
+					
+						<h3 id="Vue-js-Koa2移动电商实战"><a href="#Vue-js-Koa2移动电商实战" class="headerlink" title="Vue.js+Koa2移动电商实战"></a>Vue.js+Koa2移动电商实战</h3><p>该移动电商实战将从零开始搭建一个移动电商系统，包括首页展示，类别展示，购物功能，注册登录，积分系统，查找页面，后台接口设置。<br>涉及的技术栈包括：<strong>Vue+Vue-Cli3+Router+Vant+Node+Koa2+Mongoose+MongoDB</strong></p>
+<h4 id="1、初始化项目"><a href="#1、初始化项目" class="headerlink" title="1、初始化项目"></a>1、初始化项目</h4><h4 id="1-1、使用vue-cli3-0搭建环境"><a href="#1-1、使用vue-cli3-0搭建环境" class="headerlink" title="1.1、使用vue-cli3.0搭建环境"></a>1.1、使用vue-cli3.0搭建环境</h4><p>先全局安装vue-cli3.0 :</p>
+<pre><code class="ruby">npm install -g @vue/cli
+#OR
+yarn global add @vue/cli
+</code></pre>
+<p>检测安装：</p>
+<pre><code class="ruby">vue -V
+</code></pre>
+<p>如果vue-cli还是2.0版本，那么就得必须把原有vue-cli2删除在重新安装vue-cli3.0</p>
+<p>创建项目:</p>
+<pre><code class="ruby">vue create my-project
+</code></pre>
+<p>此处有两个选择：<br><strong>default (babel, eslint)：</strong> 默认套餐，提供babel和eslint支持<br><strong>Manually select features：</strong>自己去选择需要的功能，提供更多的特性选择。比如如果想要支持 TypeScript ，就应该选择这一项。可以使用上下方向键来切换选项。如果只需要 babel 和 eslint 支持，那么选择第一项，就完事了，静静等待 vue 初始化项目。<br>vue-cli 内置支持了8个功能特性，可以多选：使用方向键在特性选项之间切换，使用空格键选中当前特性，使用 a 键切换选择所有，使用 i 键翻转选项。</p>
+<p>初始完之后，进入到项目根目录：</p>
+<pre><code class="ruby">cd my-project
+</code></pre>
+<p>启动项目：</p>
+<pre><code class="ruby">npm run serve
+</code></pre>
+<h4 id="1-2-优雅引入Vant组件库"><a href="#1-2-优雅引入Vant组件库" class="headerlink" title="1.2 优雅引入Vant组件库"></a>1.2 优雅引入Vant组件库</h4><p>安装Vant</p>
+<pre><code class="ruby">npm install vant --save
+</code></pre>
+<p>优雅的引入Vant<br>vant是支持<strong>babel-plugin-import</strong>引入的，它可以让我们按需引入组件模块，并且不用管理我们的样式，现在Vue项目组件库的主流引入方法。<br>安装babel-plugin-import</p>
+<pre><code class="ruby"># 安装 babel-plugin-import 插件
+npm i babel-plugin-import -D
+</code></pre>
+<p> babel.config.js 中配置</p>
+<pre><code class="ruby">  module.exports = {
+  plugins: [
+    [&#39;import&#39;, {
+      libraryName: &#39;vant&#39;,
+      libraryDirectory: &#39;es&#39;,
+      style: true
+    }, &#39;vant&#39;]
+  ]
+};
+</code></pre>
+<p>在代码中直接引入 Vant 组件，插件会自动将代码转化为按需引入形式</p>
+<pre><code class="ruby">import { Button, Cell } from &#39;vant&#39;;
+</code></pre>
+<h4 id="1-3移动端屏幕适配基础"><a href="#1-3移动端屏幕适配基础" class="headerlink" title="1.3移动端屏幕适配基础"></a>1.3移动端屏幕适配基础</h4><p>本项目主要采用<strong>flex + rem</strong>的方式进行布局和完成移动端的适配<br><strong>rem单位介绍</strong><br>rem（font size of the root element）是相对长度单位。相对于根元素（即html元素）font-size计算值的倍数。<br>适配原理：将px替换成rem，动态修改html的font-size适配。它可以很好的根据根元素的字体大小来进行变化，从而达到各种屏幕基本一直的效果体验。</p>
+<pre><code class="ruby"># 在index.html页面meta标签里添加，使屏幕最小/大 1.0  且不可滑动改变页面大小
+minimum-scale=1.0,maximum-scale=1.0,user-scalable=no&quot;
+
+// 得到手机屏幕的宽度
+ let htmlWidth = document.documentElement.clientWidth || document.body.clientWidth;
+// 解决页面字体过大的问题
+ if(htmlWidth&gt;750){htmlWidth=750}
+// 得到html的Dom元素
+ let html = document.getElementsByTagName(&#39;html&#39;)[0];
+// 设置根元素字体大小
+ html.style.fontSize= htmlWidth/20 + &#39;px&#39;;
+</code></pre>
+<h3 id="2、首页布局"><a href="#2、首页布局" class="headerlink" title="2、首页布局"></a>2、首页布局</h3><p>未完待续…..</p>
 
 					
-					<!--<a href="/archives/2018" class="archive-year">2018</a>-->
-				
-								
-				
-					  
-					<div class="archive-year">
-						<a href="/archives/2018/10">
-							2018-10
-						</a>
-					</div>				
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/10/27/真正掌握vuex的使用方法（三）/" itemprop="url">真正掌握vuex的使用方法（三）</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/10/27/真正掌握vuex的使用方法（三）/" itemprop="url">10-27</a>
-					</div>
-				</div>		        							
-							
-				
-				
-				
-								
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/10/27/真正掌握vuex的使用方法（二）/" itemprop="url">真正掌握vuex的使用方法（二）</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/10/27/真正掌握vuex的使用方法（二）/" itemprop="url">10-27</a>
-					</div>
-				</div>		        							
-							
-				
-				
-				
-								
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/10/27/真正掌握vuex的使用方法（一）/" itemprop="url">真正掌握Vuex的使用方法（一）</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/10/27/真正掌握vuex的使用方法（一）/" itemprop="url">10-27</a>
-					</div>
-				</div>		        							
-			
-				
-			    
-		</div>
-	</div>
+				</div>
+			</div>
+		</article>
+
+		<ul class="am-pagination">
+    
+    	<li class="am-pagination-prev">
+   		<a class="pull-left" href="/2018/12/11/类与样式、template分组渲染/" title="类与样式、template分组渲染">
+      		&laquo; 上一篇
+		</a>
+		</li>
+	
+	
+		<li class="am-pagination-next">
+		<a class="pull-right" href="/2018/12/06/小程序图片上传至七牛云/" title="小程序图片上传至七牛云">
+			下一篇 &raquo;
+		</a>
+		</li>
+	 
+ </ul>
+        
+
+		<div class="theme-annie-comment-button-container">
+	<button id="annie-comment-button" class="theme-annie-comment-button" onclick="Annie_Comment()">
+		加载评论
+		<!--加载评论-->
+	</button>
 </div>
 
+<div id="annie-comment-container" class="theme-annie-comment-main-container">
+
+	
+		
+			<!-- comment valine -->
+			<!-- show valine comment -->
+<div id="valineComment" class="comment"></div>
+
+<!-- valine`s js & css -->
+<script>
+	window.jQuery || document.write('<script src="/js/jquery-2.1.1.min.js"><\/script>')
+</script>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/js/valine.min.js"></script>
+<link rel="stylesheet" href="/css/comment.css">
+
+<script>
+	var checkExistComment = setInterval(function() {
+		if( $('#valineComment').length ) {
+			new Valine({
+				// AV 对象来自上面引入av-min.js(老司机们不要开车➳♡゛扎心了老铁)
+				av: AV,
+				//使用id寻找div元素（使用class可能找不到）
+				el: '#valineComment',
+				emoticon_url: 'https://cloud.panjunwen.com/alu',
+				emoticon_list: ["吐.png", "期待.png", "高兴.png", "吐血倒地.png", "哭泣.png", "欢呼.png"],
+				app_id: "3333....", //获取APP ID
+				app_key: "3333......", //获取APP KEY
+				placeholder: "no any!", //评论框占位提示文字        			
+			});
+			clearInterval(checkExistComment);
+		}
+	}, 100);
+</script>
+		
+	
+
+</div>
+
+<script type="text/javascript">
+	/* Show Comment */
+	var Annie_Comment = function() {
+		function Show_Hidden(obj) {
+			obj.style.display = 'block';
+		}
+		
+		//var obutton = $('#annie-comment-button');
+		//var obutton = $('#annie-comment-container');
+		var obutton = document.getElementById("annie-comment-button" || "0");
+		var odiv = document.getElementById("annie-comment-container");
+		if( 'obutton' ) {
+			obutton.onclick = function() {
+				Show_Hidden(odiv);
+				$("#annie-comment-button").css("display", 'none');
+				return false;
+			}
+		}
+	};
+
+	(function Annie_Init() {
+		Annie_Comment();
+	})();
+</script>
+		
+		<!--
+	时间：2018-09-24
+	描述：The TOC module refers to 'https://github.com/codefine/hexo-theme-mellow', include toc.ejs、toc.js、toc.css. All rights reserved by codefine. 
+-->
+
+	
+		<aside class="post-widget">
+			<nav class="post-toc-wrap" id="post-toc">
+				
+					<strong>文章目录</strong>
+				
+				
+				<!--toc(post.content)-->
+				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Vue-js-Koa2移动电商实战"><span class="post-toc-text">Vue.js+Koa2移动电商实战</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1、初始化项目"><span class="post-toc-text">1、初始化项目</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-1、使用vue-cli3-0搭建环境"><span class="post-toc-text">1.1、使用vue-cli3.0搭建环境</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-2-优雅引入Vant组件库"><span class="post-toc-text">1.2 优雅引入Vant组件库</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-3移动端屏幕适配基础"><span class="post-toc-text">1.3移动端屏幕适配基础</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2、首页布局"><span class="post-toc-text">2、首页布局</span></a></li></ol>
+			</nav>
+			<div class="post-toc-bar"><div>
+		</div></div></aside>
+	
+
+	</div>
+</div>
 		</div>
 		</main>
 		
@@ -286,6 +426,11 @@
 	}
 </style>
 
+
+	<script src="/js/motto.js"></script>
+	<script type="text/javascript">
+		$(".motto").html(getMingYanContent());
+	</script>	
 
 
 
@@ -627,6 +772,8 @@
 
 
 
+
+	<script type="text/javascript" src="/js/toc.js"></script>
 
 
 <script type="text/javascript" src="/js/main.js"></script>

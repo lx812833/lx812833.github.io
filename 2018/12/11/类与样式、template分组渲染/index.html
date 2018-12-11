@@ -10,7 +10,7 @@
 		
 
 <head><meta name="generator" content="Hexo 3.8.0">
-	<title>tag: Vuex</title>
+	<title>类与样式、template分组渲染</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="apple-mobile-web-app-title" content="Amaze UI">
@@ -54,7 +54,7 @@
 		
 		
 			
-			<p class="page-name">标签</p>
+			<p class="page-name">当前文章&nbsp;:&nbsp;《类与样式、template分组渲染》</p>
 			
 		
 	
@@ -143,80 +143,189 @@
 		<!-- content srart -->
 <div class="am-g am-g-fixed blog-fixed blog-content">
 	<div class="am-u-md-8 am-u-sm-12">
-		<div class="archive">
 
-			<div class="blog-text-center">
-				
-					<i class="fa fa-book">Vuex</i>
-				
-			</div>  
+		<article class="am-article blog-article-p">
 
-			
+			<div class="am-article-hd">
+				
 
-							
-				
-				
-				
+
+				<h1 class="am-article-title blog-text-center">
 					
+					
+	
+		<a href="/2018/12/11/类与样式、template分组渲染/" itemprop="url">		
+			类与样式、template分组渲染		
+		</a>
+	
+
+				</h1>
+
+				<p class="am-article-meta blog-text-center">
+					<span>
+						<i class="fa fa-clock-o"></i> 
+						<a href="/2018/12/11/类与样式、template分组渲染/" itemprop="url">
+	<time datetime="2018-12-11T13:31:53.000Z" itemprop="datePublished">
+  		2018-12-11
+  </time>
+</a>    
+&nbsp;
+					</span>
+					
+					<span>						
+						
+					</span>
+				</p>
+			</div>
+
+			<div class="am-article-bd">
+				<div class="content" id="post-content">
+					
+						<h3 id="类与样式、template分组渲染"><a href="#类与样式、template分组渲染" class="headerlink" title="类与样式、template分组渲染"></a>类与样式、template分组渲染</h3><h4 id="对象语法"><a href="#对象语法" class="headerlink" title="对象语法"></a>对象语法</h4><p>适合较多的class名或者动态的class</p>
+<pre><code class="ruby">&lt;ul :class=&quot;{ &#39;test3&#39; : a3 }&quot;&gt; // 对象语法
+</code></pre>
+<h4 id="数组语法"><a href="#数组语法" class="headerlink" title="数组语法"></a>数组语法</h4><p>适合较少的class名</p>
+<pre><code class="ruby">&lt;ul :class=&quot;[a1,a2]&quot;&gt;  // 数组语法
+    &lt;template v-for=&quot;item in list&quot;&gt;   // template分组渲染
+        &lt;li :key=&quot;item+1&quot;&gt;template分组&lt;/li&gt;
+        &lt;li :key=&quot;item&quot;&gt;{{ item }}&lt;/li&gt;
+    &lt;/template&gt;
+&lt;/ul&gt;
+</code></pre>
+<h4 id="template分组渲染"><a href="#template分组渲染" class="headerlink" title="template分组渲染"></a>template分组渲染</h4><p>根据条件分别渲染不同条件的数据</p>
+<pre><code class="ruby">&lt;div v-for=&quot;people in arr&quot;&gt;
+      &lt;template v-if=&quot;people.name == &#39;张三&#39;&quot;&gt;
+            {{people.name}}的有{{people.length}}
+      &lt;/template&gt;
+      &lt;template v-if=&quot;people.name == &#39;李四&#39;&quot;&gt;
+            {{people.name}}有{{people.length}}
+      &lt;/template&gt;
+      &lt;template v-if=&quot;people.name == &#39;王五&#39;&quot;&gt;
+            {{people.name}}足有{{people.length}}
+      &lt;/template&gt;
+&lt;/div&gt;
+}
+</code></pre>
+<p>因为 v-if 是一个指令，所以必须将它添加到一个元素上。但是如果想切换多个元素呢？此时可以把一个 <template> 元素当做不可见的包裹元素，并在上面使用 v-if。最终的渲染结果将不包含 <template> 元素。</template></template></p>
+<pre><code class="ruby">data() {
+    return {
+        a1: &quot;test1&quot;,
+        a2: &quot;test2&quot;,
+        a3: true
+        list: [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;]
+    };
+}
+</code></pre>
 
 					
-					<!--<a href="/archives/2018" class="archive-year">2018</a>-->
-				
-								
-				
-					  
-					<div class="archive-year">
-						<a href="/archives/2018/10">
-							2018-10
-						</a>
-					</div>				
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/10/27/真正掌握vuex的使用方法（三）/" itemprop="url">真正掌握vuex的使用方法（三）</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/10/27/真正掌握vuex的使用方法（三）/" itemprop="url">10-27</a>
-					</div>
-				</div>		        							
-							
-				
-				
-				
-								
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/10/27/真正掌握vuex的使用方法（二）/" itemprop="url">真正掌握vuex的使用方法（二）</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/10/27/真正掌握vuex的使用方法（二）/" itemprop="url">10-27</a>
-					</div>
-				</div>		        							
-							
-				
-				
-				
-								
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/10/27/真正掌握vuex的使用方法（一）/" itemprop="url">真正掌握Vuex的使用方法（一）</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/10/27/真正掌握vuex的使用方法（一）/" itemprop="url">10-27</a>
-					</div>
-				</div>		        							
-			
-				
-			    
-		</div>
-	</div>
+				</div>
+			</div>
+		</article>
+
+		<ul class="am-pagination">
+    
+	
+		<li class="am-pagination-next">
+		<a class="pull-right" href="/2018/12/11/Vue-js-Koa2移动电商实战/" title="Vue-js-Koa2移动电商实战">
+			下一篇 &raquo;
+		</a>
+		</li>
+	 
+ </ul>
+        
+
+		<div class="theme-annie-comment-button-container">
+	<button id="annie-comment-button" class="theme-annie-comment-button" onclick="Annie_Comment()">
+		加载评论
+		<!--加载评论-->
+	</button>
 </div>
 
+<div id="annie-comment-container" class="theme-annie-comment-main-container">
+
+	
+		
+			<!-- comment valine -->
+			<!-- show valine comment -->
+<div id="valineComment" class="comment"></div>
+
+<!-- valine`s js & css -->
+<script>
+	window.jQuery || document.write('<script src="/js/jquery-2.1.1.min.js"><\/script>')
+</script>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/js/valine.min.js"></script>
+<link rel="stylesheet" href="/css/comment.css">
+
+<script>
+	var checkExistComment = setInterval(function() {
+		if( $('#valineComment').length ) {
+			new Valine({
+				// AV 对象来自上面引入av-min.js(老司机们不要开车➳♡゛扎心了老铁)
+				av: AV,
+				//使用id寻找div元素（使用class可能找不到）
+				el: '#valineComment',
+				emoticon_url: 'https://cloud.panjunwen.com/alu',
+				emoticon_list: ["吐.png", "期待.png", "高兴.png", "吐血倒地.png", "哭泣.png", "欢呼.png"],
+				app_id: "3333....", //获取APP ID
+				app_key: "3333......", //获取APP KEY
+				placeholder: "no any!", //评论框占位提示文字        			
+			});
+			clearInterval(checkExistComment);
+		}
+	}, 100);
+</script>
+		
+	
+
+</div>
+
+<script type="text/javascript">
+	/* Show Comment */
+	var Annie_Comment = function() {
+		function Show_Hidden(obj) {
+			obj.style.display = 'block';
+		}
+		
+		//var obutton = $('#annie-comment-button');
+		//var obutton = $('#annie-comment-container');
+		var obutton = document.getElementById("annie-comment-button" || "0");
+		var odiv = document.getElementById("annie-comment-container");
+		if( 'obutton' ) {
+			obutton.onclick = function() {
+				Show_Hidden(odiv);
+				$("#annie-comment-button").css("display", 'none');
+				return false;
+			}
+		}
+	};
+
+	(function Annie_Init() {
+		Annie_Comment();
+	})();
+</script>
+		
+		<!--
+	时间：2018-09-24
+	描述：The TOC module refers to 'https://github.com/codefine/hexo-theme-mellow', include toc.ejs、toc.js、toc.css. All rights reserved by codefine. 
+-->
+
+	
+		<aside class="post-widget">
+			<nav class="post-toc-wrap" id="post-toc">
+				
+					<strong>文章目录</strong>
+				
+				
+				<!--toc(post.content)-->
+				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#类与样式、template分组渲染"><span class="post-toc-text">类与样式、template分组渲染</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#对象语法"><span class="post-toc-text">对象语法</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#数组语法"><span class="post-toc-text">数组语法</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#template分组渲染"><span class="post-toc-text">template分组渲染</span></a></li></ol></li></ol>
+			</nav>
+			<div class="post-toc-bar"><div>
+		</div></div></aside>
+	
+
+	</div>
+</div>
 		</div>
 		</main>
 		
@@ -286,6 +395,11 @@
 	}
 </style>
 
+
+	<script src="/js/motto.js"></script>
+	<script type="text/javascript">
+		$(".motto").html(getMingYanContent());
+	</script>	
 
 
 
@@ -627,6 +741,8 @@
 
 
 
+
+	<script type="text/javascript" src="/js/toc.js"></script>
 
 
 <script type="text/javascript" src="/js/main.js"></script>
