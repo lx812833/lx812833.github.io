@@ -61,7 +61,7 @@
 	
 	<!-- others: such as change-bg, time... -->
 	<p class="page-name-other">
-		12/11/2018 
+		12/12/2018 
 		<style type="text/css">
 	header:after {
 		content: '';
@@ -226,6 +226,7 @@ npm i babel-plugin-import -D
 </code></pre>
 <p>在代码中直接引入 Vant 组件，插件会自动将代码转化为按需引入形式</p>
 <pre><code class="ruby">import { Button, Cell } from &#39;vant&#39;;
+Vue.use(Button).use(Cell)
 </code></pre>
 <h4 id="1-3移动端屏幕适配基础"><a href="#1-3移动端屏幕适配基础" class="headerlink" title="1.3移动端屏幕适配基础"></a>1.3移动端屏幕适配基础</h4><p>本项目主要采用<strong>flex + rem</strong>的方式进行布局和完成移动端的适配<br><strong>rem单位介绍</strong><br>rem（font size of the root element）是相对长度单位。相对于根元素（即html元素）font-size计算值的倍数。<br>适配原理：将px替换成rem，动态修改html的font-size适配。它可以很好的根据根元素的字体大小来进行变化，从而达到各种屏幕基本一直的效果体验。</p>
 <pre><code class="ruby"># 在index.html页面meta标签里添加，使屏幕最小/大 1.0  且不可滑动改变页面大小
@@ -240,7 +241,8 @@ minimum-scale=1.0,maximum-scale=1.0,user-scalable=no&quot;
 // 设置根元素字体大小
  html.style.fontSize= htmlWidth/20 + &#39;px&#39;;
 </code></pre>
-<h3 id="2、首页布局"><a href="#2、首页布局" class="headerlink" title="2、首页布局"></a>2、首页布局</h3><p>未完待续…..</p>
+<h3 id="2、首页布局"><a href="#2、首页布局" class="headerlink" title="2、首页布局"></a>2、首页布局</h3><h4 id="2-1、首页轮播图制作"><a href="#2-1、首页轮播图制作" class="headerlink" title="2.1、首页轮播图制作"></a>2.1、首页轮播图制作</h4><p>首页布局主要与flex布局、css样式有关，不多累赘。<br>首页轮播图的制作主要采用Vant Swipe,、SwipeItem组件，利用Vant实现图片轮播的<strong>懒加载</strong>，<strong>v-lazy=”banner.imageUrl”</strong>实现图片懒加载；<br>在加载图片到页面时，推荐使用<strong>require</strong>，如果用require引入图片，在不作任何配置的情况下就可以基本解决图片路径问题，在data中使用require导入图片<strong>locationIcon: require(‘../../assets/images/location.png’)</strong></p>
+<p>未完待续…</p>
 
 					
 				</div>
@@ -349,7 +351,7 @@ minimum-scale=1.0,maximum-scale=1.0,user-scalable=no&quot;
 				
 				
 				<!--toc(post.content)-->
-				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Vue-js-Koa2移动电商实战"><span class="post-toc-text">Vue.js+Koa2移动电商实战</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1、初始化项目"><span class="post-toc-text">1、初始化项目</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-1、使用vue-cli3-0搭建环境"><span class="post-toc-text">1.1、使用vue-cli3.0搭建环境</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-2-优雅引入Vant组件库"><span class="post-toc-text">1.2 优雅引入Vant组件库</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-3移动端屏幕适配基础"><span class="post-toc-text">1.3移动端屏幕适配基础</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2、首页布局"><span class="post-toc-text">2、首页布局</span></a></li></ol>
+				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Vue-js-Koa2移动电商实战"><span class="post-toc-text">Vue.js+Koa2移动电商实战</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1、初始化项目"><span class="post-toc-text">1、初始化项目</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-1、使用vue-cli3-0搭建环境"><span class="post-toc-text">1.1、使用vue-cli3.0搭建环境</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-2-优雅引入Vant组件库"><span class="post-toc-text">1.2 优雅引入Vant组件库</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-3移动端屏幕适配基础"><span class="post-toc-text">1.3移动端屏幕适配基础</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2、首页布局"><span class="post-toc-text">2、首页布局</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-1、首页轮播图制作"><span class="post-toc-text">2.1、首页轮播图制作</span></a></li></ol></li></ol>
 			</nav>
 			<div class="post-toc-bar"><div>
 		</div></div></aside>
