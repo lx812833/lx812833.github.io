@@ -61,7 +61,7 @@
 	
 	<!-- others: such as change-bg, time... -->
 	<p class="page-name-other">
-		12/13/2018 
+		12/18/2018 
 		<style type="text/css">
 	header:after {
 		content: '';
@@ -186,7 +186,8 @@
 			<div class="am-article-bd">
 				<div class="content" id="post-content">
 					
-						<h3 id="Vue-js-Koa2-移动电商实战"><a href="#Vue-js-Koa2-移动电商实战" class="headerlink" title="Vue.js+Koa2 移动电商实战"></a>Vue.js+Koa2 移动电商实战</h3><p>该移动电商实战将从零开始搭建一个移动电商系统，包括首页展示，类别展示，购物功能，注册登录，积分系统，查找页面，后台接口设置。<br>涉及的技术栈包括：<strong>Vue+Vue-Cli3+Router+Vant+Node+Koa2+Mongoose+MongoDB</strong></p>
+						<h3 id="Vue-js-Koa2-移动电商实战"><a href="#Vue-js-Koa2-移动电商实战" class="headerlink" title="Vue.js+Koa2 移动电商实战"></a>Vue.js+Koa2 移动电商实战</h3><p>@(项目)</p>
+<p>该移动电商实战将从零开始搭建一个移动电商系统，包括首页展示，类别展示，购物功能，注册登录，积分系统，查找页面，后台接口设置。<br>涉及的技术栈包括：<strong>Vue+Vue-Cli3+Router+Vant+Node+Koa2+Mongoose+MongoDB</strong></p>
 <h4 id="1、初始化项目"><a href="#1、初始化项目" class="headerlink" title="1、初始化项目"></a>1、初始化项目</h4><h4 id="1-1、使用-vue-cli3-0-搭建环境"><a href="#1-1、使用-vue-cli3-0-搭建环境" class="headerlink" title="1.1、使用 vue-cli3.0 搭建环境"></a>1.1、使用 vue-cli3.0 搭建环境</h4><p>先全局安装 vue-cli3.0 :</p>
 <pre><code class="python">npm install -g @vue/cli
 #OR
@@ -222,7 +223,7 @@ npm i babel-plugin-import -D
       style: true
     }, &#39;vant&#39;]
   ]
-};
+}
 </code></pre>
 <p>在代码中直接引入 Vant 组件，插件会自动将代码转化为按需引入形式</p>
 <pre><code class="python">import { Button, Cell } from &#39;vant&#39;
@@ -241,7 +242,7 @@ minimum-scale=1.0,maximum-scale=1.0,user-scalable=no&quot;
 // 设置根元素字体大小
  html.style.fontSize= htmlWidth/20 + &#39;px&#39;;
 </code></pre>
-<h3 id="2、首页布局"><a href="#2、首页布局" class="headerlink" title="2、首页布局"></a>2、首页布局</h3><h4 id="2-1、首页轮播图制作"><a href="#2-1、首页轮播图制作" class="headerlink" title="2.1、首页轮播图制作"></a>2.1、首页轮播图制作</h4><p>首页布局主要与 flex 布局、css 样式有关，不多累赘。<br>首页轮播图的制作主要采用 Vant Swipe,、SwipeItem 组件，利用 Vant 实现图片轮播的<strong>懒加载</strong>，<strong>v-lazy=”banner.imageUrl”</strong>实现图片懒加载；<br>在加载图片到页面时，推荐使用<strong>require</strong>，如果用 require 引入图片，在不作任何配置的情况下就可以基本解决图片路径问题，在 data 中使用 require 导入图片<strong>locationIcon: require(‘../../assets/images/location.png’)</strong></p>
+<h3 id="2、首页布局"><a href="#2、首页布局" class="headerlink" title="2、首页布局"></a>2、首页布局</h3><h4 id="2-1、首页轮播图制作"><a href="#2-1、首页轮播图制作" class="headerlink" title="2.1、首页轮播图制作"></a>2.1、首页轮播图制作</h4><p>首页布局主要与 flex 布局、css 样式有关，不多累赘。<br>首页轮播图的制作主要采用 Vant Swipe,、SwipeItem 组件，利用 Vant 实现图片轮播的<strong>懒加载</strong>，<br><strong>v-lazy=”banner.imageUrl”</strong>实现图片懒加载；<br>在加载图片到页面时，推荐使用<strong>require</strong>，如果用 require 引入图片，在不作任何配置的情况下就可以基本解决图片路径问题，在 data 中使用 require 导入图片<strong>locationIcon: require(‘../../assets/images/location.png’)</strong></p>
 <h4 id="2-2、easyMock-和-Axios-的使用"><a href="#2-2、easyMock-和-Axios-的使用" class="headerlink" title="2.2、easyMock 和 Axios 的使用"></a>2.2、easyMock 和 Axios 的使用</h4><h5 id="easyMock"><a href="#easyMock" class="headerlink" title="easyMock"></a>easyMock</h5><p><strong>Mock</strong>的使用作为前端非常重要，比如在项目开始重启，前后端一起开发，后端并无暇照顾前端接口。这时候我们可以使用 Mock 的方式，来模拟数据</p>
 <p>进入<a href="https://www.easy-mock.com" target="_blank" rel="noopener">easyMock 官网</a>，新建一个个人项目，反正就是挺简单的，重点是 Mock 数据如何建立，需要和后台沟通好、协同好，不然 Mock 数据就没有意义了。后期项目正式连接后台，需要把<strong>Base URL</strong>替换掉，换成正式的响应地址</p>
 <h5 id="Axios"><a href="#Axios" class="headerlink" title="Axios"></a>Axios</h5><p>引入 axios 后，在<strong>生命周期 created</strong>里请求数据</p>
@@ -258,6 +259,122 @@ minimum-scale=1.0,maximum-scale=1.0,user-scalable=no&quot;
 }
 </code></pre>
 <p>如果能取得数据后，说明已经 Mock 成功了</p>
+<h4 id="2-3、vue-awesome-swiper"><a href="#2-3、vue-awesome-swiper" class="headerlink" title="2.3、vue-awesome-swiper"></a>2.3、vue-awesome-swiper</h4><p><strong>Vue-Awesome-Swiper</strong>轮播图插件，可以同时支持 Vue.js（1.X ~ 2.X），兼顾 PC 和移动端，随着 vue 的广泛使用，其中插件 swiper 也算是使用的比较频繁的插件。</p>
+<ul>
+<li>安装 npm install vue-awesome-swiper –save</li>
+<li>以组件形式引入</li>
+</ul>
+<pre><code class="python">import &#39;swiper/dist/css/swiper.css&#39;
+import { swiper, swiperSlide } from &#39;vue-awesome-swiper&#39;
+export default {
+  components: {
+    swiper,
+    swiperSlide
+  }
+}
+</code></pre>
+<ul>
+<li>详细用法<br>详细用法参考官网<a href="https://3.swiper.com.cn/api/index.html" target="_blank" rel="noopener">swiper3</a>、<a href="https://segmentfault.com/a/1190000014609379" target="_blank" rel="noopener">vue-awesome-swiper 的使用以及 API 整理</a></li>
+</ul>
+<h4 id="2-4、watch-和-filter-的使用"><a href="#2-4、watch-和-filter-的使用" class="headerlink" title="2.4、watch 和 filter 的使用"></a>2.4、watch 和 filter 的使用</h4><h5 id="watch"><a href="#watch" class="headerlink" title="watch"></a>watch</h5><p>把楼层这部分单独封装成一个传递参数的组件，并使用<strong>watch</strong>来监听参数的变化，打到正确渲染的目的</p>
+<pre><code class="python"> // 子组件
+ export default {
+    props:[&#39;floorData&#39;],
+    created(){
+         //这里写得不到数据，应为数据是延迟返回的
+    },
+    watch:{
+      floorData:function(val) {  // 这个函数方法要和props里面一致
+         console.log(this.floorData) // 监听参数的变化
+        }
+    }
+ }
+</code></pre>
+<h5 id="filter"><a href="#filter" class="headerlink" title="filter"></a>filter</h5><p>过滤器都是需要在很多组建中进行使用的，所以要编写一个比较通用的方法。</p>
+<pre><code class="python">export function toMoney(money){
+    let newMoney = money;
+    if(newMoney){
+        newMoney = newMoney.toFixed(2)
+    }else{
+        newMoney = 0
+        newMoney = newMoney.toFixed(2)
+    }
+    return newMoney
+}
+</code></pre>
+<p>但是这个方法并不优雅，使用 ES6 函数默认参数，让代码变得优雅</p>
+<pre><code class="python">export function toMoney(money = 0) {
+    return money.toFixed(2)
+}
+</code></pre>
+<p>在 vue 里使用 Filter</p>
+<pre><code class="python">// 引入Filter 要注意此处打花括号
+import { toMoney } from &#39;@/filter/moneyFilter.js&#39;
+
+// 编写filter属性
+filters:{
+    moneyFilter(money){
+        return toMoney(money)
+    }
+}
+
+// 在template使用filter |
+{{item.price | moneyFilter}}
+</code></pre>
+<h3 id="3、后端服务-Koa2-与-MongoDB"><a href="#3、后端服务-Koa2-与-MongoDB" class="headerlink" title="3、后端服务 Koa2 与 MongoDB"></a>3、后端服务 Koa2 与 MongoDB</h3><h4 id="3-1、安装-Koa2-和-MongoDB"><a href="#3-1、安装-Koa2-和-MongoDB" class="headerlink" title="3.1、安装 Koa2 和 MongoDB"></a>3.1、安装 Koa2 和 MongoDB</h4><p>前端现在需要一些后端服务来获取数据，前后端服务可以分离，也可以直接在原有项目中新建一个<strong>Service</strong>文件夹。进入 Service 文件夹</p>
+<ul>
+<li>安装 Koa</li>
+</ul>
+<pre><code class="python">// 使用npm init -y 生成并初始化package.json文件
+    npm init -y
+// 安装koa
+    npm install --save koa
+</code></pre>
+<ul>
+<li>安装 MongoDB 数据库与图形操作界面 Robo3</li>
+</ul>
+<h4 id="3-2、-Koa-用-Mongoose-连接数据库"><a href="#3-2、-Koa-用-Mongoose-连接数据库" class="headerlink" title="3.2、 Koa 用 Mongoose 连接数据库"></a>3.2、 Koa 用 Mongoose 连接数据库</h4><p><strong>Mongoose</strong>是一个开源的封装好的实现 Node 和 MongoDB 数据通讯的数据建模库。<br>使用 npm 安装 Mongoose</p>
+<pre><code class="python">npm install mongoose --save
+</code></pre>
+<p>在项目的 service 文件夹下建立一个 database 文件夹，用来存放和数据库操作有关的文件。在 database 文件夹下，建立一个<strong>init.js</strong>文件，用来作数据库的连接和一些初始化的事情。</p>
+<p>使用<strong>Promise</strong>，确保成功连接数据库，需要对意外处理和逻辑处理，让程序增加健壮性</p>
+<pre><code class="python">const mongoose = require(&quot;mongoose&quot;);
+  const db = &quot;mongodb://localhost/smile-db&quot;;
+  exports.connect = () =&gt; {
+    //连接数据库
+    mongoose.connect(db);
+    let maxConnectTimes = 0;
+    return new Promise((resolve, reject) =&gt; {
+      //把所有连接放到这里
+      //增加数据库监听事件
+      mongoose.connection.on(&quot;disconnected&quot;, () =&gt; {
+        console.log(&quot;***********数据库断开***********&quot;);
+        if (maxConnectTimes &lt; 3) {
+          maxConnectTimes++;
+          mongoose.connect(db);
+        } else {
+          reject();
+          throw new Error(&quot;数据库出现问题，程序无法搞定，请人为修理......&quot;);
+        }
+      });
+      mongoose.connection.on(&quot;error&quot;, err =&gt; {
+        console.log(&quot;***********数据库错误***********&quot;);
+        if (maxConnectTimes &lt; 3) {
+          maxConnectTimes++;
+          mongoose.connect(db);
+        } else {
+          reject(err);
+          throw new Error(&quot;数据库出现问题，程序无法搞定，请人为修理......&quot;);
+        }
+      });
+      //链接打开的时
+      mongoose.connection.once(&quot;open&quot;, () =&gt; {
+        console.log(&quot;MongoDB connected successfully&quot;);
+        resolve();
+      });
+    });
+  }
+</code></pre>
 <p>未完待续…</p>
 
 					
@@ -367,7 +484,7 @@ minimum-scale=1.0,maximum-scale=1.0,user-scalable=no&quot;
 				
 				
 				<!--toc(post.content)-->
-				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Vue-js-Koa2-移动电商实战"><span class="post-toc-text">Vue.js+Koa2 移动电商实战</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1、初始化项目"><span class="post-toc-text">1、初始化项目</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-1、使用-vue-cli3-0-搭建环境"><span class="post-toc-text">1.1、使用 vue-cli3.0 搭建环境</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-2、优雅引入-Vant-组件库"><span class="post-toc-text">1.2、优雅引入 Vant 组件库</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-3、移动端屏幕适配基础"><span class="post-toc-text">1.3、移动端屏幕适配基础</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2、首页布局"><span class="post-toc-text">2、首页布局</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-1、首页轮播图制作"><span class="post-toc-text">2.1、首页轮播图制作</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-2、easyMock-和-Axios-的使用"><span class="post-toc-text">2.2、easyMock 和 Axios 的使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#easyMock"><span class="post-toc-text">easyMock</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Axios"><span class="post-toc-text">Axios</span></a></li></ol></li></ol></li></ol>
+				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Vue-js-Koa2-移动电商实战"><span class="post-toc-text">Vue.js+Koa2 移动电商实战</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1、初始化项目"><span class="post-toc-text">1、初始化项目</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-1、使用-vue-cli3-0-搭建环境"><span class="post-toc-text">1.1、使用 vue-cli3.0 搭建环境</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-2、优雅引入-Vant-组件库"><span class="post-toc-text">1.2、优雅引入 Vant 组件库</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-3、移动端屏幕适配基础"><span class="post-toc-text">1.3、移动端屏幕适配基础</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2、首页布局"><span class="post-toc-text">2、首页布局</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-1、首页轮播图制作"><span class="post-toc-text">2.1、首页轮播图制作</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-2、easyMock-和-Axios-的使用"><span class="post-toc-text">2.2、easyMock 和 Axios 的使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#easyMock"><span class="post-toc-text">easyMock</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Axios"><span class="post-toc-text">Axios</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-3、vue-awesome-swiper"><span class="post-toc-text">2.3、vue-awesome-swiper</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-4、watch-和-filter-的使用"><span class="post-toc-text">2.4、watch 和 filter 的使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#watch"><span class="post-toc-text">watch</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#filter"><span class="post-toc-text">filter</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3、后端服务-Koa2-与-MongoDB"><span class="post-toc-text">3、后端服务 Koa2 与 MongoDB</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-1、安装-Koa2-和-MongoDB"><span class="post-toc-text">3.1、安装 Koa2 和 MongoDB</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-2、-Koa-用-Mongoose-连接数据库"><span class="post-toc-text">3.2、 Koa 用 Mongoose 连接数据库</span></a></li></ol></li></ol>
 			</nav>
 			<div class="post-toc-bar"><div>
 		</div></div></aside>
