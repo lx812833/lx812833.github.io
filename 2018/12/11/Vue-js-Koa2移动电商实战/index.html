@@ -61,7 +61,7 @@
 	
 	<!-- others: such as change-bg, time... -->
 	<p class="page-name-other">
-		12/25/2018 
+		12/26/2018 
 		<style type="text/css">
 	header:after {
 		content: '';
@@ -525,6 +525,123 @@ app.use(bodyParser());
 <pre><code class="python">const cors = require(&#39;koa2-cors&#39;)
 app.use(cors())
 </code></pre>
+<h4 id="3-8、登陆的服务端业务逻辑"><a href="#3-8、登陆的服务端业务逻辑" class="headerlink" title="3.8、登陆的服务端业务逻辑"></a>3.8、登陆的服务端业务逻辑</h4><p>登录的业务逻辑还是很简单的，就是得到前端发来的用户名和密码，然后跟数据库进行比对，如果正确就显示登录成功，失败就显示登录失败。</p>
+<h5 id="Shema-中的比对实例方法"><a href="#Shema-中的比对实例方法" class="headerlink" title="Shema 中的比对实例方法"></a>Shema 中的比对实例方法</h5><p>需要在 Shema 中制作一个比对的实例方法，这个方法就是<strong>比对我们加盐加密后的密码</strong>的。在<strong>service/database/schema/User.js</strong>下增加下面的代码</p>
+<pre><code class="python">// 密码比对 实例方法
+userSchema.methods = {
+    //密码比对的方法  第一个： 客户端传递的； 数据库的
+    comparePassword: (_password, passWord) =&gt; {
+        return new Promise((resolve, reject) =&gt; {
+            bcrypt.compare(_password, passWord, (err, isMatch) =&gt; {
+                if (!err) resolve(isMatch)
+                else reject(err)
+            })
+        })
+    }
+}
+</code></pre>
+<p>上面的代码声明了一个实例方法，方法叫做<strong>comparePassword</strong>，然后传递两个参数，一个是客户端密码，一个是数据库取出来的密码。用<strong>bcrypt</strong>提供的<strong>compare 方法</strong>就可以比对，最后包装成<strong>Promise 返回</strong>就可以了</p>
+<h5 id="编写登录的-Api-接口"><a href="#编写登录的-Api-接口" class="headerlink" title="编写登录的 Api 接口"></a>编写登录的 Api 接口</h5><p>进入<strong>service/appApi/user.js</strong>，增加一个 login 路由，并在路由内写入业务逻辑代码。</p>
+<pre><code class="python">// 用户登录
+router.post(&#39;/login&#39;, async (ctx) =&gt; {
+    // 得到前端传递过来的数据
+    let loginUser = ctx.request.body
+    console.log(loginUser)
+    let userName = loginUser.userName
+    let passWord = loginUser.passWord
+    // 引入User的model
+    const User = mongoose.model(&#39;User&#39;)
+    // 查找用户名是否存在，如果存在开始比对密码
+    await User.findOne({
+            userName: userName
+        }).exec()
+        .then(async (result) =&gt; {
+            if (result) {
+                //当用户名存在时，开始比对密码
+                console.log(result)
+                let newUser = new User() //因为是实例方法，所以要new出对象，才能调用
+                await newUser.comparePassword(passWord, result.passWord)
+                    .then(isMatch =&gt; {
+                        //返回比对结果
+                        ctx.body = {
+                            code: 200,
+                            message: isMatch
+                        }
+                    })
+                    .catch(error =&gt; {
+                        //出现异常，返回异常
+                        // console.log(error)
+                        ctx.body = {
+                            code: 500,
+                            message: error
+                        }
+                    })
+            } else {
+                ctx.body = {
+                    code: 200,
+                    message: &#39;用户名不存在&#39;
+                }
+            }
+        }).catch(error =&gt; {
+            ctx.body = {
+                code: 500,
+                message: error
+            }
+        })
+})
+</code></pre>
+<h5 id="保存用户登录状态"><a href="#保存用户登录状态" class="headerlink" title="保存用户登录状态"></a>保存用户登录状态</h5><p>移动端的应用有一个特殊的地方，就是当用户登录一次后，下次就不用登录了。这时候登录的信息是存储到了<strong>本地的 LocalStorage</strong>里了。这个操作要等取得正确的登录状态以后再执行，也就是要在 axios 返回了登录成功结果以后执行</p>
+<pre><code class="python"> //axios用户登录
+    axiosLoginUser() {
+      //先把按钮进行loading状态，防止重复提交
+      this.openLoading = true;
+      axios({
+        url: url.login,
+        method: &quot;post&quot;,
+        data: {
+          userName: this.username,
+          passWord: this.password
+        }
+      })
+        .then(res =&gt; {
+          console.log(&quot;登录&quot;, res);
+          if (res.data.code === 200 &amp;&amp; res.data.message === true) {
+            new Promise((resolve, reject) =&gt; {
+              // 保存用户登录状态
+              localStorage.userInfo = {
+                userName: this.userName
+              };
+              setTimeout(() =&gt; {
+                resolve();
+              }, 500);
+            })
+              .then(() =&gt; {
+                Toast.success(&quot;登录成功&quot;);
+                this.$router.push(&quot;/&quot;);
+              })
+              .catch(err =&gt; {
+                Toast.fail(&quot;登录状态保存失败&quot;);
+                console.log(err);
+              });
+          } else {
+            Toast.fail(&quot;登录失败&quot;);
+            this.openLoading = false;
+          }
+        })
+        .catch(error =&gt; {
+          Toast.fail(&quot;登录失败&quot;);
+          this.openLoading = false;
+        });
+    },
+</code></pre>
+<p>保存了用户登录状态以后，就有了一个是否登录的依据，然后就不会重复登录了，在已进入登录页面的<strong>creadted</strong>生命周期里，就判断是否已经登录</p>
+<pre><code class="python">created(){
+    if(localStorage.userInfo){
+        Toast.success(&#39;您已经登录&#39;)
+        this.$router.push(&#39;/&#39;)
+    }
+},
+</code></pre>
 <p>未完待续…</p>
 
 					
@@ -634,7 +751,7 @@ app.use(cors())
 				
 				
 				<!--toc(post.content)-->
-				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Vue-js-Koa2-移动电商实战"><span class="post-toc-text">Vue.js+Koa2 移动电商实战</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1、初始化项目"><span class="post-toc-text">1、初始化项目</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-1、使用-vue-cli3-0-搭建环境"><span class="post-toc-text">1.1、使用 vue-cli3.0 搭建环境</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-2、优雅引入-Vant-组件库"><span class="post-toc-text">1.2、优雅引入 Vant 组件库</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-3、移动端屏幕适配基础"><span class="post-toc-text">1.3、移动端屏幕适配基础</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2、首页布局"><span class="post-toc-text">2、首页布局</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-1、首页轮播图制作"><span class="post-toc-text">2.1、首页轮播图制作</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-2、easyMock-和-Axios-的使用"><span class="post-toc-text">2.2、easyMock 和 Axios 的使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#easyMock"><span class="post-toc-text">easyMock</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Axios"><span class="post-toc-text">Axios</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-3、vue-awesome-swiper"><span class="post-toc-text">2.3、vue-awesome-swiper</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-4、watch-和-filter-的使用"><span class="post-toc-text">2.4、watch 和 filter 的使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#watch"><span class="post-toc-text">watch</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#filter"><span class="post-toc-text">filter</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3、后端服务-Koa2-与-MongoDB"><span class="post-toc-text">3、后端服务 Koa2 与 MongoDB</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-1、安装-Koa2-和-MongoDB"><span class="post-toc-text">3.1、安装 Koa2 和 MongoDB</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-2、-Koa-用-Mongoose-连接数据库"><span class="post-toc-text">3.2、 Koa 用 Mongoose 连接数据库</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-3、Mongoose-的-Schema-建模介绍"><span class="post-toc-text">3.3、Mongoose 的 Schema 建模介绍</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Schema-中的数据类型"><span class="post-toc-text">Schema 中的数据类型</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Mongoose-中的三个概念"><span class="post-toc-text">Mongoose 中的三个概念</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#初学定义一个用户-Schema"><span class="post-toc-text">初学定义一个用户 Schema</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#载入-Schema-和插入查出数据"><span class="post-toc-text">载入 Schema 和插入查出数据</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#载入所有-Schema"><span class="post-toc-text">载入所有 Schema</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#插入数据"><span class="post-toc-text">插入数据</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-4、打造安全的用户密码加密机制"><span class="post-toc-text">3.4、打造安全的用户密码加密机制</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#加密处理"><span class="post-toc-text">加密处理</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#加盐处理"><span class="post-toc-text">加盐处理</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#bcrypt-的使用"><span class="post-toc-text">bcrypt 的使用</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-5、-Koa2-的用户操作的路由模块化"><span class="post-toc-text">3.5、 Koa2 的用户操作的路由模块化</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-6、前端细节注意事项"><span class="post-toc-text">3.6、前端细节注意事项</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#注册的防重复提交"><span class="post-toc-text">注册的防重复提交</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#注册时的前端验证"><span class="post-toc-text">注册时的前端验证</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-7、打通注册用户的前后端通讯"><span class="post-toc-text">3.7、打通注册用户的前后端通讯</span></a></li></ol></li></ol>
+				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Vue-js-Koa2-移动电商实战"><span class="post-toc-text">Vue.js+Koa2 移动电商实战</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1、初始化项目"><span class="post-toc-text">1、初始化项目</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-1、使用-vue-cli3-0-搭建环境"><span class="post-toc-text">1.1、使用 vue-cli3.0 搭建环境</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-2、优雅引入-Vant-组件库"><span class="post-toc-text">1.2、优雅引入 Vant 组件库</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-3、移动端屏幕适配基础"><span class="post-toc-text">1.3、移动端屏幕适配基础</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2、首页布局"><span class="post-toc-text">2、首页布局</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-1、首页轮播图制作"><span class="post-toc-text">2.1、首页轮播图制作</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-2、easyMock-和-Axios-的使用"><span class="post-toc-text">2.2、easyMock 和 Axios 的使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#easyMock"><span class="post-toc-text">easyMock</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Axios"><span class="post-toc-text">Axios</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-3、vue-awesome-swiper"><span class="post-toc-text">2.3、vue-awesome-swiper</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-4、watch-和-filter-的使用"><span class="post-toc-text">2.4、watch 和 filter 的使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#watch"><span class="post-toc-text">watch</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#filter"><span class="post-toc-text">filter</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3、后端服务-Koa2-与-MongoDB"><span class="post-toc-text">3、后端服务 Koa2 与 MongoDB</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-1、安装-Koa2-和-MongoDB"><span class="post-toc-text">3.1、安装 Koa2 和 MongoDB</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-2、-Koa-用-Mongoose-连接数据库"><span class="post-toc-text">3.2、 Koa 用 Mongoose 连接数据库</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-3、Mongoose-的-Schema-建模介绍"><span class="post-toc-text">3.3、Mongoose 的 Schema 建模介绍</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Schema-中的数据类型"><span class="post-toc-text">Schema 中的数据类型</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Mongoose-中的三个概念"><span class="post-toc-text">Mongoose 中的三个概念</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#初学定义一个用户-Schema"><span class="post-toc-text">初学定义一个用户 Schema</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#载入-Schema-和插入查出数据"><span class="post-toc-text">载入 Schema 和插入查出数据</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#载入所有-Schema"><span class="post-toc-text">载入所有 Schema</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#插入数据"><span class="post-toc-text">插入数据</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-4、打造安全的用户密码加密机制"><span class="post-toc-text">3.4、打造安全的用户密码加密机制</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#加密处理"><span class="post-toc-text">加密处理</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#加盐处理"><span class="post-toc-text">加盐处理</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#bcrypt-的使用"><span class="post-toc-text">bcrypt 的使用</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-5、-Koa2-的用户操作的路由模块化"><span class="post-toc-text">3.5、 Koa2 的用户操作的路由模块化</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-6、前端细节注意事项"><span class="post-toc-text">3.6、前端细节注意事项</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#注册的防重复提交"><span class="post-toc-text">注册的防重复提交</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#注册时的前端验证"><span class="post-toc-text">注册时的前端验证</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-7、打通注册用户的前后端通讯"><span class="post-toc-text">3.7、打通注册用户的前后端通讯</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-8、登陆的服务端业务逻辑"><span class="post-toc-text">3.8、登陆的服务端业务逻辑</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Shema-中的比对实例方法"><span class="post-toc-text">Shema 中的比对实例方法</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#编写登录的-Api-接口"><span class="post-toc-text">编写登录的 Api 接口</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#保存用户登录状态"><span class="post-toc-text">保存用户登录状态</span></a></li></ol></li></ol></li></ol>
 			</nav>
 			<div class="post-toc-bar"><div>
 		</div></div></aside>
