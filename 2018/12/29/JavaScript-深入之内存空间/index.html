@@ -10,7 +10,7 @@
 		
 
 <head><meta name="generator" content="Hexo 3.8.0">
-	<title>tag: Map</title>
+	<title>JavaScript 深入之内存空间</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="apple-mobile-web-app-title" content="Amaze UI">
@@ -54,7 +54,7 @@
 		
 		
 			
-			<p class="page-name">标签</p>
+			<p class="page-name">当前文章&nbsp;:&nbsp;《JavaScript 深入之内存空间》</p>
 			
 		
 	
@@ -143,50 +143,211 @@
 		<!-- content srart -->
 <div class="am-g am-g-fixed blog-fixed blog-content">
 	<div class="am-u-md-8 am-u-sm-12">
-		<div class="archive">
 
-			<div class="blog-text-center">
-				
-					<i class="fa fa-book">Map</i>
-				
-			</div>  
+		<article class="am-article blog-article-p">
 
-			
+			<div class="am-article-hd">
+				
 
-							
-				
-				
-				
+
+				<h1 class="am-article-title blog-text-center">
 					
+					
+	
+		<a href="/2018/12/29/JavaScript-深入之内存空间/" itemprop="url">		
+			JavaScript 深入之内存空间		
+		</a>
+	
+
+				</h1>
+
+				<p class="am-article-meta blog-text-center">
+					<span>
+						<i class="fa fa-clock-o"></i> 
+						<a href="/2018/12/29/JavaScript-深入之内存空间/" itemprop="url">
+	<time datetime="2018-12-29T13:17:03.000Z" itemprop="datePublished">
+  		2018-12-29
+  </time>
+</a>    
+&nbsp;
+					</span>
+					
+					<span>						
+						
+					</span>
+				</p>
+			</div>
+
+			<div class="am-article-bd">
+				<div class="content" id="post-content">
+					
+						<h3 id="JavaScript-深入之内存空间"><a href="#JavaScript-深入之内存空间" class="headerlink" title="JavaScript 深入之内存空间"></a>JavaScript 深入之内存空间</h3><p>转载自<a href="https://mp.weixin.qq.com/s/x4ZOYysb9XdT1grJbBMVkg" target="_blank" rel="noopener">元光木易杨 高级前端进阶</a></p>
+<h4 id="栈数据结构"><a href="#栈数据结构" class="headerlink" title="栈数据结构"></a>栈数据结构</h4><p><strong>栈</strong>，又叫<strong>堆栈</strong>，是和列表类似的一种数据结构，但是却更高效，因为栈内的元素只能通过列表的一端访问，称为栈顶，数据只能在栈顶添加或删除，如同一个装有羽毛球的球桶只能通过上放装入球，遵循 <strong>先入后出</strong>(LIFO，last-in-first-out) 的原则，普遍运用于计算机的方方面面。</p>
+<p>对栈的操作主要有两种，一是将一个元素压入栈，<code>push</code>方法，另一个就是将栈顶元素出栈，<code>pop</code>方法。</p>
+<h4 id="堆数据结构"><a href="#堆数据结构" class="headerlink" title="堆数据结构"></a>堆数据结构</h4><p><strong>堆</strong>数据结构是一种树状结构。它的存取数据的方式与书架和书非常相似。我们只需要知道书的名字就可以直接取出书了，并不需要把上面的书取出来。JSON 格式的数据中，我们存储的<code>key-value</code>可以是无序的，因为顺序的不同并不影响我们的使用，我们只需要关心书的名字。</p>
+<h4 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h4><p><strong>队列</strong>是一种<strong>先进先出（FIFO）</strong>的数据结构，这是事件循环（Event Loop）的基础结构</p>
+<h4 id="变量的存放"><a href="#变量的存放" class="headerlink" title="变量的存放"></a>变量的存放</h4><p>首先应该知道内存中有栈和堆，那么变量应该存放在哪里呢，堆？栈？</p>
+<ul>
+<li><strong>基本类型:</strong> 保存在<strong>栈</strong>内存中，因为这些类型在内存中分别占有固定大小的空间，通过按值来访问。基本类型一共有 6 种：<code>Undefined</code>、<code>Null</code>、<code>Boolean</code>、<code>Number</code>、<code>String</code>和<code>Symbol</code></li>
+<li><strong>引用类型:</strong> 保存在<strong>堆</strong>内存中，因为这种值的大小不固定，因此不能把它们保存到栈内存中，但<strong>内存地址</strong>是的固定的，因此保存在堆内存中，在栈内存中存放的只是该对象的<strong>访问地址</strong>。当查询引用类型的变量时， <strong><code>先从栈中读取内存地址， 然后再通过地址找到堆中的值</code></strong>。对于这种，我们把它叫做按引用访问。</li>
+</ul>
+<p>在计算机的数据结构中，<strong>栈</strong>比<strong>堆</strong>的运算速度快，Object 是一个复杂的结构且可以扩展：<strong>数组</strong>可扩充，<strong>对象</strong>可添加属性，都可以增删改查。将他们放在堆中是为了不影响栈的效率。而是通过引用的方式查找到堆中的实际对象再进行操作。所以查找引用类型值的时候先去<strong><code>栈</code></strong>查找再去<strong><code>堆</code></strong>查找。</p>
+<h4 id="内存空间管理"><a href="#内存空间管理" class="headerlink" title="内存空间管理"></a>内存空间管理</h4><p>JavaScript 的内存生命周期是</p>
+<ul>
+<li>分配所需要的内存</li>
+<li>使用分配到的内存（读、写）</li>
+<li>不需要时将其释放、归还</li>
+</ul>
+<p>JavaScript 有自动垃圾收集机制，最常用的是通过标记清除的算法来找到哪些对象是不再继续使用的，使用 a = null 其实仅仅只是做了一个释放引用的操作，让 a 原本对应的值失去引用，脱离执行环境，这个值会在下一次垃圾收集器执行操作时被找到并释放。</p>
+<p>在局部作用域中，当函数执行完毕，局部变量也就没有存在的必要了，因此垃圾收集器很容易做出判断并回收。但是全局变量什么时候需要自动释放内存空间则很难判断，因此在开发中，需要尽量避免使用全局变量。</p>
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><p>问题 1：</p>
+<pre><code class="python">var a = 20;
+var b = a;
+b = 30;
+
+// 这时a的值是多少？  20
+</code></pre>
+<p>a、b 都是基本类型，它们的值是存储在栈中的，a、b 分别有各自独立的栈空间，所以修改了 b 的值以后，a 的值并不会发生变化</p>
+<p>问题 2：</p>
+<pre><code class="python">var a = { name: &#39;前端开发&#39; }
+var b = a;
+b.name = &#39;进阶&#39;;
+
+// 这时a.name的值是多少   进阶
+</code></pre>
+<p>a、b 都是引用类型，<code>栈内存中存放地址指向堆内存中的对象</code>，引用类型的复制会为新的变量自动分配一个新的值保存在变量对象中，但只是引用类型的一个<code>地址指针</code>而已，<code>实际指向的是同一个对象</code>，所以修改 b.name 的值后，相应的 a.name 也就发生了改变。</p>
+<p>问题 3：</p>
+<pre><code class="python">var a = { name: &#39;前端开发&#39; }
+var b = a;
+a = null;
+
+// 这时b的值是多少
+</code></pre>
+<p>首先要说明的是<code>null</code>是基本类型，<code>a = null</code>之后只是把 a 存储在<code>栈</code>内存中地址改变成了基本类型 null，并不会影响堆内存中的对象，所以 b 的值不受影响。</p>
+<p>问题 4：</p>
+<pre><code class="python">var a = {n: 1};
+var b = a;
+a.x = a = {n: 2};
+
+a.x     // undefined
+b.x     // {n: 2}
+</code></pre>
 
 					
-					<!--<a href="/archives/2018" class="archive-year">2018</a>-->
-				
-								
-				
-					  
-					<div class="archive-year">
-						<a href="/archives/2018/11">
-							2018-11
-						</a>
-					</div>				
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/11/01/数据结构Map/" itemprop="url">数据结构Map</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/11/01/数据结构Map/" itemprop="url">11-01</a>
-					</div>
-				</div>		        							
-			
-				
-			    
-		</div>
-	</div>
+				</div>
+			</div>
+		</article>
+
+		<ul class="am-pagination">
+    
+    	<li class="am-pagination-prev">
+   		<a class="pull-left" href="/2018/12/29/JavaScript知识点/" title="JavaScript知识点">
+      		&laquo; 上一篇
+		</a>
+		</li>
+	
+	
+		<li class="am-pagination-next">
+		<a class="pull-right" href="/2018/12/12/Javascript-执行上下文和执行栈/" title="Javascript 执行上下文和执行栈">
+			下一篇 &raquo;
+		</a>
+		</li>
+	 
+ </ul>
+        
+
+		<div class="theme-annie-comment-button-container">
+	<button id="annie-comment-button" class="theme-annie-comment-button" onclick="Annie_Comment()">
+		加载评论
+		<!--加载评论-->
+	</button>
 </div>
 
+<div id="annie-comment-container" class="theme-annie-comment-main-container">
+
+	
+		
+			<!-- comment valine -->
+			<!-- show valine comment -->
+<div id="valineComment" class="comment"></div>
+
+<!-- valine`s js & css -->
+<script>
+	window.jQuery || document.write('<script src="/js/jquery-2.1.1.min.js"><\/script>')
+</script>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/js/valine.min.js"></script>
+<link rel="stylesheet" href="/css/comment.css">
+
+<script>
+	var checkExistComment = setInterval(function() {
+		if( $('#valineComment').length ) {
+			new Valine({
+				// AV 对象来自上面引入av-min.js(老司机们不要开车➳♡゛扎心了老铁)
+				av: AV,
+				//使用id寻找div元素（使用class可能找不到）
+				el: '#valineComment',
+				emoticon_url: 'https://cloud.panjunwen.com/alu',
+				emoticon_list: ["吐.png", "期待.png", "高兴.png", "吐血倒地.png", "哭泣.png", "欢呼.png"],
+				app_id: "3333....", //获取APP ID
+				app_key: "3333......", //获取APP KEY
+				placeholder: "no any!", //评论框占位提示文字        			
+			});
+			clearInterval(checkExistComment);
+		}
+	}, 100);
+</script>
+		
+	
+
+</div>
+
+<script type="text/javascript">
+	/* Show Comment */
+	var Annie_Comment = function() {
+		function Show_Hidden(obj) {
+			obj.style.display = 'block';
+		}
+		
+		//var obutton = $('#annie-comment-button');
+		//var obutton = $('#annie-comment-container');
+		var obutton = document.getElementById("annie-comment-button" || "0");
+		var odiv = document.getElementById("annie-comment-container");
+		if( 'obutton' ) {
+			obutton.onclick = function() {
+				Show_Hidden(odiv);
+				$("#annie-comment-button").css("display", 'none');
+				return false;
+			}
+		}
+	};
+
+	(function Annie_Init() {
+		Annie_Comment();
+	})();
+</script>
+		
+		<!--
+	时间：2018-09-24
+	描述：The TOC module refers to 'https://github.com/codefine/hexo-theme-mellow', include toc.ejs、toc.js、toc.css. All rights reserved by codefine. 
+-->
+
+	
+		<aside class="post-widget">
+			<nav class="post-toc-wrap" id="post-toc">
+				
+					<strong>文章目录</strong>
+				
+				
+				<!--toc(post.content)-->
+				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#JavaScript-深入之内存空间"><span class="post-toc-text">JavaScript 深入之内存空间</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#栈数据结构"><span class="post-toc-text">栈数据结构</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#堆数据结构"><span class="post-toc-text">堆数据结构</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#队列"><span class="post-toc-text">队列</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#变量的存放"><span class="post-toc-text">变量的存放</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#内存空间管理"><span class="post-toc-text">内存空间管理</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#示例"><span class="post-toc-text">示例</span></a></li></ol></li></ol>
+			</nav>
+			<div class="post-toc-bar"><div>
+		</div></div></aside>
+	
+
+	</div>
+</div>
 		</div>
 		</main>
 		
@@ -256,6 +417,11 @@
 	}
 </style>
 
+
+	<script src="/js/motto.js"></script>
+	<script type="text/javascript">
+		$(".motto").html(getMingYanContent());
+	</script>	
 
 
 
@@ -597,6 +763,8 @@
 
 
 
+
+	<script type="text/javascript" src="/js/toc.js"></script>
 
 
 <script type="text/javascript" src="/js/main.js"></script>

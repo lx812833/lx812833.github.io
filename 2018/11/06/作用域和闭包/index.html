@@ -61,7 +61,7 @@
 	
 	<!-- others: such as change-bg, time... -->
 	<p class="page-name-other">
-		12/26/2018 
+		12/29/2018 
 		<style type="text/css">
 	header:after {
 		content: '';
@@ -199,6 +199,9 @@ fn(); // &quot;local&quot;   //局部变量覆盖全局变量
 </code></pre>
 <h4 id="函数作用域"><a href="#函数作用域" class="headerlink" title="函数作用域"></a>函数作用域</h4><p>变量在声明它们的函数体 以及这个函数体嵌套的任意函数体内都是有定义的。函数定义是可以嵌套的。由于每个函数都有它自己的作用域，因此会出现几个局部作用域嵌套的情况</p>
 <h5 id="作用域链"><a href="#作用域链" class="headerlink" title="作用域链"></a>作用域链</h5><p>（理解）根据在<strong>内部函数可以访问外部函数</strong>的这种机制，用<strong>链式查找</strong>决定访问的能被内部函数访问的数据。找不到<strong>逐级向上找</strong></p>
+<p>当访问一个变量时，解释器会首先在当前作用域查找标示符，如果没有找到，就去父作用域找，直到找到该变量的标示符或者不在父作用域中，这就是<strong>作用域链</strong>。</p>
+<p><strong>作用域链</strong>和<strong>原型继承</strong>查找时的区别：如果去查找一个普通对象的属性，但是在当前对象和其原型中都找不到时，会返回<code>undefined</code>；但查找的属性在作用域链中不存在的话就会<code>抛出ReferenceError</code>。</p>
+<p>作用域链的顶端是<strong>全局对象</strong>，在全局环境中定义的变量就会绑定到全局对象中。</p>
 <pre><code class="ruby">var name = &quot;one&quot;;
 function test() {
     var name = &quot;two&quot;;
