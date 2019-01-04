@@ -61,7 +61,7 @@
 	
 	<!-- others: such as change-bg, time... -->
 	<p class="page-name-other">
-		1/2/2019 
+		1/4/2019 
 		<style type="text/css">
 	header:after {
 		content: '';
@@ -881,7 +881,128 @@ clickCategory(index){
 </code></pre>
 </li>
 </ol>
-<p>未完待续…</p>
+<h4 id="4-6、Koa2分页服务制作"><a href="#4-6、Koa2分页服务制作" class="headerlink" title="4.6、Koa2分页服务制作"></a>4.6、Koa2分页服务制作</h4><p>制作<code>Koa2</code>中的数据读取服务了</p>
+<pre><code class="python">// 根据类别获取商品列表
+router.post(&#39;/getGoodsListByCategorySubID&#39;, async ctx =&gt; {
+    try {
+        let categorySubId = ctx.request.body.categorySubId // 子类ID号
+        let page = ctx.request.body.page // 当前页数
+        let num = 10 // 每页显示数量
+        let start = (page - 1) * num // 开始位置
+        const Goods = mongoose.model(&#39;Goods&#39;)
+        let result = await Goods.find({
+            SUB_ID: categorySubId
+        }).skip(start).limit(num).exec()
+        /**
+         * mongodb数据库查询分页信息
+         * 
+         * db.表名.find().skip((page-1)*pageSize).limit(pageSize)
+         * skip: 跳过当前已开始的
+         * limlt: 每页限制显示的数目
+         */
+        ctx.body = {
+            code: 200,
+            message: result
+        }
+    } catch (error) {
+        ctx.body = {
+            code: 500,
+            message: error
+        }
+    }
+})
+</code></pre>
+<p>在前端对应页面，增加<code>getGoodList</code>方法，这个方法里传递两个参数，第一个是<strong>商品的子分类</strong>，第二个是<strong>请求分类的页数</strong></p>
+<pre><code class="python">data: {
+  categorySubId: this.categorySubId,  // 商品子类别id
+  page: this.page
+}
+</code></pre>
+<p>在下拉实现刷新获取数据时，需要使用<strong><code>concat</code></strong>合并数据,并且在没有数据时，上拉加载应禁止</p>
+<pre><code class="python">if (res.data.code === 200 &amp;&amp; res.data.message.length) {
+ this.page++;
+  this.goodList = this.goodList.concat(res.data.message);
+} else {
+  // 没有数据 上拉加载禁止
+  this.finished = true;
+}
+</code></pre>
+<h5 id="Vue中图片失效替补图片的制作方法"><a href="#Vue中图片失效替补图片的制作方法" class="headerlink" title="Vue中图片失效替补图片的制作方法"></a>Vue中图片失效替补图片的制作方法</h5><p>在实际项目中，一些图片已经失效，但又不允许这样直接显示图片失效的，需要显示一个替补图片</p>
+<p>首先是在<code>data</code>中定义一个替补图片</p>
+<pre><code class="python">errorImg: &#39;this.src=&quot;&#39;+ require(&#39;@/assets/images/error.png&#39;)+&#39;&quot;&#39;
+</code></pre>
+<p>然后在图片位置加入<strong><code>onerror事件</code></strong>就ok了</p>
+<pre><code class="python">&lt;div class=&quot;list-item-img&quot;&gt;
+    &lt;img :src=&quot;item.IMAGE1&quot; width=&quot;100%&quot; :onerror=&quot;errorImg&quot;/&gt;
+&lt;/div&gt;
+</code></pre>
+<h4 id="4-7、购物车制作"><a href="#4-7、购物车制作" class="headerlink" title="4.7、购物车制作"></a>4.7、购物车制作</h4><p>购物车页面不合后台交互，并且还要保持用户数据的<strong>持久化</strong>，主要用于在<code>H5</code>新增<strong><code>localStorage本地存储</code></strong>里</p>
+<h5 id="获取购物车数据"><a href="#获取购物车数据" class="headerlink" title="获取购物车数据"></a>获取购物车数据</h5><p>进入页面要作的第一件事就是取得<code>localStorage</code>里的数据，先在<code>data</code>里注册两个属性<code>cartInfo</code>(购物车中商品的信息)和<code>isEmpty</code>（购物是否为空的标识，方便页面呈现）</p>
+<pre><code class="python">// 判断localStorage里是否有购物车数据
+getCartInfo() {
+  if (localStorage.cartInfo) {
+    this.cartInfo = JSON.parse(localStorage.cartInfo);
+  }
+  console.log(&quot;cartInfo:&quot;, JSON.stringify(this.cartInfo));
+  this.isEmpty = this.cartInfo.length &gt; 0 ? true : false;
+}
+</code></pre>
+<p><code>localStorage</code>里的数据本为字符串，需要使用<code>JSON.parse</code>转化为对象对其操作</p>
+<h5 id="向购物车中添加商品"><a href="#向购物车中添加商品" class="headerlink" title="向购物车中添加商品"></a>向购物车中添加商品</h5><p>购物车商品的添加，其实就是对<code>localStorage</code>的操作和<strong>数组查找</strong>的使用，也就是<code>array.find()</code>操作.。该方法写在<code>Goods.vue</code>页面里，也就是商品详情页面，这样作的好处是以后好扩展，并且不用传递参数，直接操作<code>localStoarge</code></p>
+<pre><code class="python">// 添加商品到购物车
+addGoodsToCart() {
+  // localStorage.removeItem(&#39;cartInfo&#39;)
+  // 取出本地购物车中的商品并查重
+  let cartInfo = localStorage.cartInfo ? JSON.parse(localStorage.cartInfo) :[]
+  let isHaveGoods = cartInfo.find(cart =&gt; cart.goodsId == this.goodsId)
+  console.log(&#39;isHaveGoods&#39;,isHaveGoods)
+  if(!isHaveGoods) {
+    // 购物车中所属的商品信息
+    let newGoods = {
+      goodsId: this.goodsInfo.ID,
+      name: this.goodsInfo.NAME,
+      price:this.goodsInfo.PRESENT_PRICE,
+      image:this.goodsInfo.IMAGE1,
+      count:1
+    }
+    cartInfo.push(newGoods)
+    localStorage.cartInfo = JSON.stringify(cartInfo)  // localStorage本为字符串，要对数据进行处理
+    Toast.success(&#39;添加成功&#39;)
+  } else {
+    Toast.success(&#39;已有此商品&#39;)
+  }
+
+  this.$router.push({name:&#39;Cart&#39;})  //进行跳转
+}
+</code></pre>
+<h5 id="清空购物车"><a href="#清空购物车" class="headerlink" title="清空购物车"></a>清空购物车</h5><pre><code class="python">//清空购物车的商品
+clearCart(){
+    localStorage.removeItem(&#39;cartInfo&#39;)
+    this.cartInfo=[]
+}
+</code></pre>
+<h5 id="商品单价与总价的计算"><a href="#商品单价与总价的计算" class="headerlink" title="商品单价与总价的计算"></a>商品单价与总价的计算</h5><p>商品单价，直接就是数量*单价</p>
+<pre><code class="python">&lt;div class=&quot;allPrice&quot;&gt;
+     ${{ item.price * item.count | moneyFilter }}
+&lt;/div&gt;
+</code></pre>
+<p>而总价，需要用到<strong><code>计算属性computed</code></strong></p>
+<pre><code class="python">&lt;!-- 计算总价 --&gt;
+&lt;div class=&quot;totalMoney&quot;&gt;商品总价: ${{ totalMoney | moneyFilter}}&lt;/div&gt;
+
+// 计算属性 计算总价
+computed: {
+  totalMoney() {
+    let allMoney = 0;
+    this.cartInfo.forEach((item, index) =&gt; {
+      allMoney += item.price * item.count;
+    });
+    // 当页面刷新时原有的数据会消失，保存之
+    localStorage.cartInfo = JSON.stringify(this.cartInfo);
+    return allMoney;
+  }
+} 
+</code></pre>
 
 					
 				</div>
@@ -990,7 +1111,7 @@ clickCategory(index){
 				
 				
 				<!--toc(post.content)-->
-				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Vue-js-Koa2-移动电商实战"><span class="post-toc-text">Vue.js+Koa2 移动电商实战</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1、初始化项目"><span class="post-toc-text">1、初始化项目</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-1、使用-vue-cli3-0-搭建环境"><span class="post-toc-text">1.1、使用 vue-cli3.0 搭建环境</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-2、优雅引入-Vant-组件库"><span class="post-toc-text">1.2、优雅引入 Vant 组件库</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-3、移动端屏幕适配基础"><span class="post-toc-text">1.3、移动端屏幕适配基础</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2、首页布局"><span class="post-toc-text">2、首页布局</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-1、首页轮播图制作"><span class="post-toc-text">2.1、首页轮播图制作</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-2、easyMock-和-Axios-的使用"><span class="post-toc-text">2.2、easyMock 和 Axios 的使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#easyMock"><span class="post-toc-text">easyMock</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Axios"><span class="post-toc-text">Axios</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-3、vue-awesome-swiper"><span class="post-toc-text">2.3、vue-awesome-swiper</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-4、watch-和-filter-的使用"><span class="post-toc-text">2.4、watch 和 filter 的使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#watch"><span class="post-toc-text">watch</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#filter"><span class="post-toc-text">filter</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3、后端服务-Koa2-与-MongoDB"><span class="post-toc-text">3、后端服务 Koa2 与 MongoDB</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-1、安装-Koa2-和-MongoDB"><span class="post-toc-text">3.1、安装 Koa2 和 MongoDB</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-2、-Koa-用-Mongoose-连接数据库"><span class="post-toc-text">3.2、 Koa 用 Mongoose 连接数据库</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-3、Mongoose-的-Schema-建模介绍"><span class="post-toc-text">3.3、Mongoose 的 Schema 建模介绍</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Schema-中的数据类型"><span class="post-toc-text">Schema 中的数据类型</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Mongoose-中的三个概念"><span class="post-toc-text">Mongoose 中的三个概念</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#初学定义一个用户-Schema"><span class="post-toc-text">初学定义一个用户 Schema</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#载入-Schema-和插入查出数据"><span class="post-toc-text">载入 Schema 和插入查出数据</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#载入所有-Schema"><span class="post-toc-text">载入所有 Schema</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#插入数据"><span class="post-toc-text">插入数据</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-4、打造安全的用户密码加密机制"><span class="post-toc-text">3.4、打造安全的用户密码加密机制</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#加密处理"><span class="post-toc-text">加密处理</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#加盐处理"><span class="post-toc-text">加盐处理</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#bcrypt-的使用"><span class="post-toc-text">bcrypt 的使用</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-5、-Koa2-的用户操作的路由模块化"><span class="post-toc-text">3.5、 Koa2 的用户操作的路由模块化</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-6、前端细节注意事项"><span class="post-toc-text">3.6、前端细节注意事项</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#注册的防重复提交"><span class="post-toc-text">注册的防重复提交</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#注册时的前端验证"><span class="post-toc-text">注册时的前端验证</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-7、打通注册用户的前后端通讯"><span class="post-toc-text">3.7、打通注册用户的前后端通讯</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-8、登陆的服务端业务逻辑"><span class="post-toc-text">3.8、登陆的服务端业务逻辑</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Shema-中的比对实例方法"><span class="post-toc-text">Shema 中的比对实例方法</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#编写登录的-Api-接口"><span class="post-toc-text">编写登录的 Api 接口</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#保存用户登录状态"><span class="post-toc-text">保存用户登录状态</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4、商品信息"><span class="post-toc-text">4、商品信息</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-1、编写后台数据接口"><span class="post-toc-text">4.1、编写后台数据接口</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-2、商品详情页路由参数的传递"><span class="post-toc-text">4.2、商品详情页路由参数的传递</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-3、商品详情页面"><span class="post-toc-text">4.3、商品详情页面</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-4、商品详细分类页面-API"><span class="post-toc-text">4.4、商品详细分类页面 API</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#读取大类别的-API"><span class="post-toc-text">读取大类别的 API</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#读取小类别的-API"><span class="post-toc-text">读取小类别的 API</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#根据类别获取商品列表"><span class="post-toc-text">根据类别获取商品列表</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-5、-商品列表页"><span class="post-toc-text">4.5、 商品列表页</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#滑动切换和吸顶效果"><span class="post-toc-text">滑动切换和吸顶效果</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#左侧大类切换交互效果"><span class="post-toc-text">左侧大类切换交互效果</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#一二级分类的联动效果制作"><span class="post-toc-text">一二级分类的联动效果制作</span></a></li></ol></li></ol></li></ol>
+				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Vue-js-Koa2-移动电商实战"><span class="post-toc-text">Vue.js+Koa2 移动电商实战</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1、初始化项目"><span class="post-toc-text">1、初始化项目</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-1、使用-vue-cli3-0-搭建环境"><span class="post-toc-text">1.1、使用 vue-cli3.0 搭建环境</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-2、优雅引入-Vant-组件库"><span class="post-toc-text">1.2、优雅引入 Vant 组件库</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-3、移动端屏幕适配基础"><span class="post-toc-text">1.3、移动端屏幕适配基础</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2、首页布局"><span class="post-toc-text">2、首页布局</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-1、首页轮播图制作"><span class="post-toc-text">2.1、首页轮播图制作</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-2、easyMock-和-Axios-的使用"><span class="post-toc-text">2.2、easyMock 和 Axios 的使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#easyMock"><span class="post-toc-text">easyMock</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Axios"><span class="post-toc-text">Axios</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-3、vue-awesome-swiper"><span class="post-toc-text">2.3、vue-awesome-swiper</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-4、watch-和-filter-的使用"><span class="post-toc-text">2.4、watch 和 filter 的使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#watch"><span class="post-toc-text">watch</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#filter"><span class="post-toc-text">filter</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3、后端服务-Koa2-与-MongoDB"><span class="post-toc-text">3、后端服务 Koa2 与 MongoDB</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-1、安装-Koa2-和-MongoDB"><span class="post-toc-text">3.1、安装 Koa2 和 MongoDB</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-2、-Koa-用-Mongoose-连接数据库"><span class="post-toc-text">3.2、 Koa 用 Mongoose 连接数据库</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-3、Mongoose-的-Schema-建模介绍"><span class="post-toc-text">3.3、Mongoose 的 Schema 建模介绍</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Schema-中的数据类型"><span class="post-toc-text">Schema 中的数据类型</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Mongoose-中的三个概念"><span class="post-toc-text">Mongoose 中的三个概念</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#初学定义一个用户-Schema"><span class="post-toc-text">初学定义一个用户 Schema</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#载入-Schema-和插入查出数据"><span class="post-toc-text">载入 Schema 和插入查出数据</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#载入所有-Schema"><span class="post-toc-text">载入所有 Schema</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#插入数据"><span class="post-toc-text">插入数据</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-4、打造安全的用户密码加密机制"><span class="post-toc-text">3.4、打造安全的用户密码加密机制</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#加密处理"><span class="post-toc-text">加密处理</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#加盐处理"><span class="post-toc-text">加盐处理</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#bcrypt-的使用"><span class="post-toc-text">bcrypt 的使用</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-5、-Koa2-的用户操作的路由模块化"><span class="post-toc-text">3.5、 Koa2 的用户操作的路由模块化</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-6、前端细节注意事项"><span class="post-toc-text">3.6、前端细节注意事项</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#注册的防重复提交"><span class="post-toc-text">注册的防重复提交</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#注册时的前端验证"><span class="post-toc-text">注册时的前端验证</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-7、打通注册用户的前后端通讯"><span class="post-toc-text">3.7、打通注册用户的前后端通讯</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-8、登陆的服务端业务逻辑"><span class="post-toc-text">3.8、登陆的服务端业务逻辑</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Shema-中的比对实例方法"><span class="post-toc-text">Shema 中的比对实例方法</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#编写登录的-Api-接口"><span class="post-toc-text">编写登录的 Api 接口</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#保存用户登录状态"><span class="post-toc-text">保存用户登录状态</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4、商品信息"><span class="post-toc-text">4、商品信息</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-1、编写后台数据接口"><span class="post-toc-text">4.1、编写后台数据接口</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-2、商品详情页路由参数的传递"><span class="post-toc-text">4.2、商品详情页路由参数的传递</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-3、商品详情页面"><span class="post-toc-text">4.3、商品详情页面</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-4、商品详细分类页面-API"><span class="post-toc-text">4.4、商品详细分类页面 API</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#读取大类别的-API"><span class="post-toc-text">读取大类别的 API</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#读取小类别的-API"><span class="post-toc-text">读取小类别的 API</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#根据类别获取商品列表"><span class="post-toc-text">根据类别获取商品列表</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-5、-商品列表页"><span class="post-toc-text">4.5、 商品列表页</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#滑动切换和吸顶效果"><span class="post-toc-text">滑动切换和吸顶效果</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#左侧大类切换交互效果"><span class="post-toc-text">左侧大类切换交互效果</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#一二级分类的联动效果制作"><span class="post-toc-text">一二级分类的联动效果制作</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-6、Koa2分页服务制作"><span class="post-toc-text">4.6、Koa2分页服务制作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Vue中图片失效替补图片的制作方法"><span class="post-toc-text">Vue中图片失效替补图片的制作方法</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-7、购物车制作"><span class="post-toc-text">4.7、购物车制作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#获取购物车数据"><span class="post-toc-text">获取购物车数据</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#向购物车中添加商品"><span class="post-toc-text">向购物车中添加商品</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#清空购物车"><span class="post-toc-text">清空购物车</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#商品单价与总价的计算"><span class="post-toc-text">商品单价与总价的计算</span></a></li></ol></li></ol></li></ol>
 			</nav>
 			<div class="post-toc-bar"><div>
 		</div></div></aside>
