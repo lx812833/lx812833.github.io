@@ -26,7 +26,8 @@
 	
 	<!-- font-awesome -->
 	<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 	<body>	
 		<!--Preloader-->
 <div id="preloader">
@@ -61,7 +62,7 @@
 	
 	<!-- others: such as change-bg, time... -->
 	<p class="page-name-other">
-		1/9/2019 
+		1/10/2019 
 		<style type="text/css">
 	header:after {
 		content: '';
@@ -186,19 +187,53 @@
 			<div class="am-article-bd">
 				<div class="content" id="post-content">
 					
-						<h3 id="Vue-web读书器"><a href="#Vue-web读书器" class="headerlink" title="Vue web读书器"></a>Vue web读书器</h3><p>@(项目)</p>
-<p>Vue web读书器是一款以<strong>Vue全家桶</strong>为主要的技术栈，媲美原生App的读书器。主要技术栈包括<strong>Vue全家桶、Vue-cli3.0、交互动画、LocalStorage+IndexedDB</strong>等</p>
+						<h3 id="Vue-web读书器"><a href="#Vue-web读书器" class="headerlink" title="Vue web读书器"></a>Vue web读书器</h3><p>Vue web读书器是一款以<strong>Vue全家桶</strong>为主要的技术栈，媲美原生App的读书器。主要技术栈包括<strong>Vue全家桶、Vue-cli3.0、交互动画、LocalStorage+IndexedDB</strong>等</p>
 <h3 id="1、初始化项目"><a href="#1、初始化项目" class="headerlink" title="1、初始化项目"></a>1、初始化项目</h3><h4 id="1-1、使用Vue-cli3-0搭建开发环境"><a href="#1-1、使用Vue-cli3-0搭建开发环境" class="headerlink" title="1.1、使用Vue-cli3.0搭建开发环境"></a>1.1、使用Vue-cli3.0搭建开发环境</h4><p>已安装好Vue-cli3.0后直接创建项目</p>
 <pre><code class="python"> vue create my-project
 </code></pre>
-<h4 id="1-2、导入-Iconfont-svg图标"><a href="#1-2、导入-Iconfont-svg图标" class="headerlink" title="1.2、导入 Iconfont svg图标"></a>1.2、导入 Iconfont svg图标</h4><p>首先先去<a href="https://www.iconfont.cn/" target="_blank" rel="noopener">Iconfont</a>选好矢量图标并下载，再去<a href="https://icomoon.io/app/#/select" target="_blank" rel="noopener">Icomoon</a>将字体图标设置为svg格式并下载到本地。<br>具体步骤为： <code>New Empty Set</code> –&gt; <code>Import to Set</code> –&gt;<code>选择已下载的图标</code> –&gt;<code>Generate Font</code> –&gt; <code>Download</code>–&gt; 解压后将<code>style.css</code>和<code>fonts</code> 复制至assets/styles </p>
+<h4 id="1-2、导入-Iconfont-svg图标"><a href="#1-2、导入-Iconfont-svg图标" class="headerlink" title="1.2、导入 Iconfont svg图标"></a>1.2、导入 Iconfont svg图标</h4><p>首先先去<a href="https://www.iconfont.cn/" target="_blank" rel="noopener">Iconfont</a>选好矢量图标并下载，再去<a href="https://icomoon.io/app/#/select" target="_blank" rel="noopener">Icomoon</a>将字体图标设置为svg格式并下载到本地。<br>具体步骤为： <code>New Empty Set</code> –&gt; <code>Import to Set</code> –&gt;<code>选择已下载的图标</code> –&gt;<code>Generate Font</code> –&gt; <code>Download</code>–&gt; 解压后将<code>style.css</code>和<code>fonts</code> 复制至<code>assets/styles</code> </p>
 <p>最后在<code>main.js</code>中引入图标</p>
 <pre><code class="python">// 引入字体图标
 import &#39;./assets/styles/icon.css&#39;
 </code></pre>
-<h4 id="1-3、安装epub"><a href="#1-3、安装epub" class="headerlink" title="1.3、安装epub"></a>1.3、安装epub</h4><p><code>ePub</code> 是一种电子书的标准格式，该项目主要使用 <code>Vue</code> 和 <code>epub.js</code> 制作电子书阅读器</p>
+<h4 id="1-3、引入字体"><a href="#1-3、引入字体" class="headerlink" title="1.3、引入字体"></a>1.3、引入字体</h4><p>将提前准备好的字体引入<code>src/assets/fonts</code><br>例如：</p>
+<pre><code class="python">// daysOne.css
+
+@font-face {
+    font-family: &#39;Days One&#39;;
+    font-style: normal;
+    font-weight: 400;
+    src: url(&#39;daysOne.woff2&#39;) format(&#39;woff2&#39;);
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</code></pre>
+<p>引入字体的方式有几种：</p>
+<ul>
+<li>在<code>public/index.html</code>中引入<pre><code class="python">  &lt;link rel=&quot;stylesheet&quot; href=&quot;&lt;%= BASE_URL %&gt;fonts/daysOne.css&quot;&gt;
+</code></pre>
+</li>
+<li>在<code>src/main.js</code>中引入<pre><code class="python">  import &#39;./assets/fonts/daysOne.css&#39;
+</code></pre>
+使用时则需注明<code>font-family</code><pre><code class="python">.text {
+  font-family: &quot;Days One&quot;;
+  color: orange;
+}
+</code></pre>
+这里的<code>font-family</code>需和引入字体的<code>font-family</code>一致</li>
+</ul>
+<h4 id="1-4、设置响应式rem"><a href="#1-4、设置响应式rem" class="headerlink" title="1.4、设置响应式rem"></a>1.4、设置响应式rem</h4><p><strong><code>rem</code></strong> 是指根元素（root element，html）的字体大小，在移动端中需要根据屏幕大小自动适应根源素大小从而响应其他<code>fong-size</code><br>在<code>src/App.vue</code>页面下进行<code>rem</code>设置</p>
+<pre><code class="python">export default {};  
+// 设置rem
+document.addEventListener(&quot;DOMContentLoaded&quot;, () =&gt; {
+    const html = document.querySelector(&quot;html&quot;);
+    let fontSize = window.innerWidth / 10;
+    fontSize = fontSize &gt; 50 ? 50 : fontSize;
+    html.style.fontSize = fontSize + &quot;px&quot;;
+});
+</code></pre>
+<h4 id="1-5、安装epub"><a href="#1-5、安装epub" class="headerlink" title="1.5、安装epub"></a>1.5、安装epub</h4><p><code>ePub</code> 是一种电子书的标准格式，该项目主要使用 <code>Vue</code> 和 <code>epub.js</code> 制作电子书阅读器</p>
 <pre><code class="python">// 安装epubjs
-npm i --save epubjs 
+npm i --save epubjs
 </code></pre>
 
 					
@@ -302,7 +337,7 @@ npm i --save epubjs
 				
 				
 				<!--toc(post.content)-->
-				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Vue-web读书器"><span class="post-toc-text">Vue web读书器</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1、初始化项目"><span class="post-toc-text">1、初始化项目</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-1、使用Vue-cli3-0搭建开发环境"><span class="post-toc-text">1.1、使用Vue-cli3.0搭建开发环境</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-2、导入-Iconfont-svg图标"><span class="post-toc-text">1.2、导入 Iconfont svg图标</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-3、安装epub"><span class="post-toc-text">1.3、安装epub</span></a></li></ol></li></ol>
+				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Vue-web读书器"><span class="post-toc-text">Vue web读书器</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1、初始化项目"><span class="post-toc-text">1、初始化项目</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-1、使用Vue-cli3-0搭建开发环境"><span class="post-toc-text">1.1、使用Vue-cli3.0搭建开发环境</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-2、导入-Iconfont-svg图标"><span class="post-toc-text">1.2、导入 Iconfont svg图标</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-3、引入字体"><span class="post-toc-text">1.3、引入字体</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-4、设置响应式rem"><span class="post-toc-text">1.4、设置响应式rem</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-5、安装epub"><span class="post-toc-text">1.5、安装epub</span></a></li></ol></li></ol>
 			</nav>
 			<div class="post-toc-bar"><div>
 		</div></div></aside>
