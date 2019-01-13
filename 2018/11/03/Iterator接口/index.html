@@ -62,7 +62,7 @@
 	
 	<!-- others: such as change-bg, time... -->
 	<p class="page-name-other">
-		1/10/2019 
+		1/13/2019 
 		<style type="text/css">
 	header:after {
 		content: '';
@@ -195,58 +195,58 @@
 <li>使得数据结构的成员能够按某种次序排列。</li>
 <li>ES6新增了遍历命令for…of循环,<strong>Iterator接口主要供for… of消费</strong>。</li>
 </ol>
-<h4 id="iterator接口"><a href="#iterator接口" class="headerlink" title="iterator接口"></a>iterator接口</h4><pre><code class="ruby">const arr = [1, 2, 3]
-function iterator(arr) {
-    let index = 0
-    return { // 返回对象矩阵
-        next: function () {
-            return index &lt; arr.length ? {
-                value: arr[index++],
-                done: false  // done表示是否遍历结束
-            } : {
-                value: undefined,
-                done: true
-            }
-        }
-    }
-}
-const it = iterator(arr)
-console.log(it.next())
-console.log(it.next())
-console.log(it.next())
-console.log(it.next()) // undefined true 遍历结束
-</code></pre>
+<h4 id="iterator接口"><a href="#iterator接口" class="headerlink" title="iterator接口"></a>iterator接口</h4><pre class="line-numbers language-ruby"><code class="language-ruby">const arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span>
+function <span class="token function">iterator</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    let index <span class="token operator">=</span> <span class="token number">0</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span> <span class="token operator">/</span><span class="token operator">/</span> 返回对象矩阵
+        <span class="token keyword">next</span><span class="token punctuation">:</span> <span class="token function">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> index <span class="token operator">&lt;</span> arr<span class="token punctuation">.</span>length <span class="token operator">?</span> <span class="token punctuation">{</span>
+                value<span class="token punctuation">:</span> arr<span class="token punctuation">[</span>index<span class="token operator">++</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                done<span class="token punctuation">:</span> <span class="token keyword">false</span>  <span class="token operator">/</span><span class="token operator">/</span> done表示是否遍历结束
+            <span class="token punctuation">}</span> <span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                value<span class="token punctuation">:</span> undefined<span class="token punctuation">,</span>
+                done<span class="token punctuation">:</span> <span class="token keyword">true</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+const it <span class="token operator">=</span> <span class="token function">iterator</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>it<span class="token punctuation">.</span><span class="token keyword">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>it<span class="token punctuation">.</span><span class="token keyword">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>it<span class="token punctuation">.</span><span class="token keyword">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>it<span class="token punctuation">.</span><span class="token keyword">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">/</span><span class="token operator">/</span> undefined <span class="token keyword">true</span> 遍历结束
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h4 id="Iterator的遍历过程"><a href="#Iterator的遍历过程" class="headerlink" title="Iterator的遍历过程:"></a>Iterator的遍历过程:</h4><p>创建一个指针对象，指向当前数据结构的起始位置。也就是说，遍历器对象本质上，就是一个<strong>指针对象</strong>。</p>
 <p>第一次调用指针对象的next方法，可以将指针指向数据结构的第一个成员<br>第二次调用指针对象的next方法，指针就指向数据结构的第二个成员。<br>不断调用指针对象的next方法，直到它指向数据结构的结束位置</p>
 <p>每一次调用next方法，都会返回数据结构的当前成员的信息。具体来说，就是返回一个包含value和done两个属性的对象。其中，value 属性是当前成员的值，done 属性是一个布尔值，表示遍历是否结束.</p>
 <h4 id="Iterator接口性质"><a href="#Iterator接口性质" class="headerlink" title="Iterator接口性质"></a>Iterator接口性质</h4><p>凡是具有<strong>Symbol.iterator属性</strong>的数据结构都具有Iterator接口        </p>
-<pre><code class="ruby"> const arr = [1,2,3]
- const set = new Set([&#39;a&#39;,&#39;b&#39;,&#39;c&#39;])
- const map = new Map([[&#39;a&#39;,1],[&#39;b&#39;,2]])
+<pre class="line-numbers language-ruby"><code class="language-ruby"> const arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span>
+ const set <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Set</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'a'</span><span class="token punctuation">,</span><span class="token string">'b'</span><span class="token punctuation">,</span><span class="token string">'c'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+ const map <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Map</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token string">'a'</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token string">'b'</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
 
- const itArr = arr[Symbol.iterator]()
- const itSet = set[Symbol.iterator]()
- const itMap = map[Symbol.iterator]()
+ const itArr <span class="token operator">=</span> arr<span class="token punctuation">[</span><span class="token builtin">Symbol</span><span class="token punctuation">.</span>iterator<span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+ const itSet <span class="token operator">=</span> set<span class="token punctuation">[</span><span class="token builtin">Symbol</span><span class="token punctuation">.</span>iterator<span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+ const itMap <span class="token operator">=</span> map<span class="token punctuation">[</span><span class="token builtin">Symbol</span><span class="token punctuation">.</span>iterator<span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 
- console.log(itArr) // Array Iterator {}
- console.log(itSet) // SetIterator {&quot;a&quot;, &quot;b&quot;, &quot;c&quot;}
- console.log(itMap) // MapIterator {&quot;a&quot; =&gt; 1, &quot;b&quot; =&gt; 2}
+ console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>itArr<span class="token punctuation">)</span> <span class="token operator">/</span><span class="token operator">/</span> <span class="token builtin">Array</span> <span class="token constant">Iterator</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+ console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>itSet<span class="token punctuation">)</span> <span class="token operator">/</span><span class="token operator">/</span> <span class="token constant">SetIterator</span> <span class="token punctuation">{</span><span class="token string">"a"</span><span class="token punctuation">,</span> <span class="token string">"b"</span><span class="token punctuation">,</span> <span class="token string">"c"</span><span class="token punctuation">}</span>
+ console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>itMap<span class="token punctuation">)</span> <span class="token operator">/</span><span class="token operator">/</span> <span class="token constant">MapIterator</span> <span class="token punctuation">{</span><span class="token string">"a"</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"b"</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token number">2</span><span class="token punctuation">}</span>
 
- const obj = {} // 对象不具有Symbol属性
- console.log(obj[Symbol.iterator]) // undefined
-</code></pre>
+ const obj <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">/</span> 对象不具有<span class="token builtin">Symbol</span>属性
+ console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>obj<span class="token punctuation">[</span><span class="token builtin">Symbol</span><span class="token punctuation">.</span>iterator<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">/</span><span class="token operator">/</span> undefined
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h4 id="Iterator接口常用作用"><a href="#Iterator接口常用作用" class="headerlink" title="Iterator接口常用作用"></a>Iterator接口常用作用</h4><p>具备iterator接口的数据结构都可以进行<strong>结构赋值</strong>、<strong>扩展运算符</strong></p>
 <p><strong>Set数组去重</strong></p>
-<pre><code class="ruby"> const arr = [{},1,&#39;1&#39;,&#39;a&#39;,&#39;a&#39;,[]]
- console.log([...new Set(arr)]) // [{…}, 1, &quot;1&quot;, &quot;a&quot;, Array(0)]
-</code></pre>
+<pre class="line-numbers language-ruby"><code class="language-ruby"> const arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token string">'1'</span><span class="token punctuation">,</span><span class="token string">'a'</span><span class="token punctuation">,</span><span class="token string">'a'</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+ console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token keyword">new</span> <span class="token class-name">Set</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">/</span><span class="token operator">/</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>…<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"1"</span><span class="token punctuation">,</span> <span class="token string">"a"</span><span class="token punctuation">,</span> <span class="token function">Array</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p><strong>for … of 循环</strong></p>
-<pre><code class="ruby"> const map = new Map()
- map.set(1,&#39;a&#39;).set(2,&#39;b&#39;).set(3,&#39;c&#39;)
- for(let [key, value] of map) {
-     console.log(key + &quot;:&quot; + value)
- }
-</code></pre>
+<pre class="line-numbers language-ruby"><code class="language-ruby"> const map <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Map</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+ map<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token string">'a'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token string">'b'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token string">'c'</span><span class="token punctuation">)</span>
+ <span class="token keyword">for</span><span class="token punctuation">(</span>let <span class="token punctuation">[</span>key<span class="token punctuation">,</span> value<span class="token punctuation">]</span> of map<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>key <span class="token operator">+</span> <span class="token string">":"</span> <span class="token operator">+</span> value<span class="token punctuation">)</span>
+ <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 					
 				</div>

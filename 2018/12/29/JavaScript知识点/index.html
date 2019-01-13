@@ -62,7 +62,7 @@
 	
 	<!-- others: such as change-bg, time... -->
 	<p class="page-name-other">
-		1/10/2019 
+		1/13/2019 
 		<style type="text/css">
 	header:after {
 		content: '';
@@ -205,43 +205,43 @@
 <p>typeof 是否能正确判断类型？instanceof 能正确判断对象的原理是什么？</p>
 </blockquote>
 <p><code>typeof</code> 对于<strong>原始类型</strong>来说，除了 <code>null</code> 都可以显示正确的类型</p>
-<pre><code class="python">typeof 1 // &#39;number&#39;
-typeof &#39;1&#39; // &#39;string&#39;
-typeof undefined // &#39;undefined&#39;
-typeof true // &#39;boolean&#39;
-typeof Symbol() // &#39;symbol&#39;
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python">typeof <span class="token number">1</span> <span class="token operator">//</span> <span class="token string">'number'</span>
+typeof <span class="token string">'1'</span> <span class="token operator">//</span> <span class="token string">'string'</span>
+typeof undefined <span class="token operator">//</span> <span class="token string">'undefined'</span>
+typeof true <span class="token operator">//</span> <span class="token string">'boolean'</span>
+typeof Symbol<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">//</span> <span class="token string">'symbol'</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><code>typeof</code> 对于<strong>对象</strong>来说，除了函数都会显示 <code>object</code>，所以说 <code>typeof</code>并不能准确判断变量到底是什么类型</p>
-<pre><code class="python">typeof [] // &#39;object&#39;
-typeof {} // &#39;object&#39;
-typeof console.log // &#39;function&#39;
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python">typeof <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">//</span> <span class="token string">'object'</span>
+typeof <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token operator">//</span> <span class="token string">'object'</span>
+typeof console<span class="token punctuation">.</span>log <span class="token operator">//</span> <span class="token string">'function'</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>如果想判断一个对象的正确类型，这时候可以考虑使用 <code>instanceof</code>，因为内部机制是通过<strong>原型链</strong>来判断的</p>
 <p><code>instanceof操作符</code><strong>用来判断要检测对象的原型链上是否存在某个构造函数的 prototype 属性。</strong><br>语法：<code>A instanceof B</code>，意思是<strong>对象 A 的原型是否是 B.prototype</strong>。如果是，返回 true，如果不是，返回 false。</p>
-<pre><code class="python">var a={};
-var b=[];
-console.log(a instanceof Object); //true
-console.log(b instanceof Array); //true
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python">var a<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+var b<span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>a instanceof Object<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">//</span>true
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>b instanceof Array<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">//</span>true
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>对于原始类型来说，想直接通过 instanceof 来判断类型是不行的，当然还是有办法让 <code>instanceof</code>判断原始类型的</p>
-<pre><code class="python">function textInstanceof(left, right) {
-    // 获得类型的原型
-    let prototype = right.prototype
-    // 获得对象的原型
-    left = left.__proto__
-    // 判断对象的类型是否等于类型的原型
-    while (true) {
-      if (left === null)
-        return false
-      if (prototype === left)
-        return true
-      left = left.__proto__
-    }
-  }
-  console.log(textInstanceof(123, String)); // false
-  console.log(textInstanceof(&#39;123&#39;, String)); // true
-  console.log(textInstanceof(123, Number)); // true
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python">function textInstanceof<span class="token punctuation">(</span>left<span class="token punctuation">,</span> right<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token operator">//</span> 获得类型的原型
+    let prototype <span class="token operator">=</span> right<span class="token punctuation">.</span>prototype
+    <span class="token operator">//</span> 获得对象的原型
+    left <span class="token operator">=</span> left<span class="token punctuation">.</span>__proto__
+    <span class="token operator">//</span> 判断对象的类型是否等于类型的原型
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>true<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>left <span class="token operator">==</span><span class="token operator">=</span> null<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> false
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>prototype <span class="token operator">==</span><span class="token operator">=</span> left<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> true
+      left <span class="token operator">=</span> left<span class="token punctuation">.</span>__proto__
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+  console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>textInstanceof<span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">,</span> String<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">//</span> false
+  console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>textInstanceof<span class="token punctuation">(</span><span class="token string">'123'</span><span class="token punctuation">,</span> String<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">//</span> true
+  console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>textInstanceof<span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">,</span> Number<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">//</span> true
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h4 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h4><p>在 JS 中类型转换只有三种情况，分别是：</p>
 <ul>
 <li>转换为布尔值</li>
@@ -261,93 +261,93 @@ console.log(b instanceof Array); //true
 <li>运算中其中一方为字符串，那么就会把另一方也转换为字符串</li>
 <li>如果一方不是字符串或者数字，那么会将它转换为数字或者字符串</li>
 </ul>
-<pre><code class="python">1 + &#39;1&#39; // &#39;11&#39;
-true + true // 2
-4 + [1,2,3] // &quot;41,2,3&quot;
-&#39;a&#39; + + &#39;b&#39; // &quot;aNaN&quot;
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token number">1</span> <span class="token operator">+</span> <span class="token string">'1'</span> <span class="token operator">//</span> <span class="token string">'11'</span>
+true <span class="token operator">+</span> true <span class="token operator">//</span> <span class="token number">2</span>
+<span class="token number">4</span> <span class="token operator">+</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">//</span> <span class="token string">"41,2,3"</span>
+<span class="token string">'a'</span> <span class="token operator">+</span> <span class="token operator">+</span> <span class="token string">'b'</span> <span class="token operator">//</span> <span class="token string">"aNaN"</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>因为<code>+ &#39;b&#39;</code>等于 <code>NaN</code>，所以结果为 <code>&quot;aNaN&quot;</code>，你可能也会在一些代码中看到过 + ‘1’ 的形式来快速获取 number 类型。</p>
 <h4 id="this"><a href="#this" class="headerlink" title="this"></a>this</h4><blockquote>
 <p>如何正确判断 this？箭头函数的 this 是什么？</p>
 </blockquote>
 <p>先来看几个函数调用的场景</p>
-<pre><code class="python">function foo() {
-  console.log(this.a)
-}
-var a = 1
-foo()
+<pre class="line-numbers language-python"><code class="language-python">function foo<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>this<span class="token punctuation">.</span>a<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+var a <span class="token operator">=</span> <span class="token number">1</span>
+foo<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-const obj = {
-  a: 2,
-  foo: foo
-}
-obj.foo()
+const obj <span class="token operator">=</span> <span class="token punctuation">{</span>
+  a<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+  foo<span class="token punctuation">:</span> foo
+<span class="token punctuation">}</span>
+obj<span class="token punctuation">.</span>foo<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-const c = new foo()
-</code></pre>
+const c <span class="token operator">=</span> new foo<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>对于直接调用<code>foo</code>来说，不管<code>foo</code> 函数被放在了什么地方，<code>this</code>一定是 <code>window</code></li>
 <li>对于 obj.foo() 来说，我们只需要记住，<strong><code>谁调用了函数，谁就是 this</code></strong>，所以在这个场景下 foo 函数中的 this 就是 obj 对象</li>
 <li>对于 <code>new</code>的方式来说，<code>this</code> 被永远绑定在了 <code>c</code>上面，不会被任何方式改变 this</li>
 </ul>
 <p><strong><code>箭头函数</code></strong>其实是没有 <code>this</code> 的，箭头函数中的 <code>this</code>只取决包裹箭头函数的第一个普通函数的<code>this</code></p>
-<pre><code class="python">function a() {
-  return () =&gt; {
-    return () =&gt; {
-      console.log(this)
-    }
-  }
-}
-console.log(a()()())
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python">function a<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+      console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>this<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>a<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>在这个例子中，因为包裹箭头函数的第一个普通函数是<code>a</code>，所以此时的 <code>this</code>是<code>window</code>。另外对箭头函数使用 <code>bind</code> 这类函数是无效的。</p>
 <h4 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h4><blockquote>
 <p>什么是闭包</p>
 </blockquote>
 <p><a href="https://lx812833.github.io/2018/11/06/%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E9%97%AD%E5%8C%85/">闭包</a>，请支持正版</p>
 <p>闭包的定义其实很简单：<strong>·函数 A 内部有一个函数 B，函数 B 可以访问到函数 A 中的变量，那么函数 B 就是闭包。·</strong></p>
-<pre><code class="python">function A() {
-  let a = 1
-  window.B = function () {
-      console.log(a)
-  }
-}
-A()
-B() // 1
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python">function A<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  let a <span class="token operator">=</span> <span class="token number">1</span>
+  window<span class="token punctuation">.</span>B <span class="token operator">=</span> function <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+A<span class="token punctuation">(</span><span class="token punctuation">)</span>
+B<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">//</span> <span class="token number">1</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><code>在 JS 中，闭包存在的意义就是让我们可以间接访问函数内部的变量。</code></p>
 <blockquote>
 <p>循环中使用闭包解决 <code>var</code> 定义函数的问题</p>
 </blockquote>
-<pre><code class="python">for (var i = 1; i &lt;= 5; i++) {
-  setTimeout(function timer() {
-    console.log(i)
-  }, i * 1000)
-}
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">for</span> <span class="token punctuation">(</span>var i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> <span class="token number">5</span><span class="token punctuation">;</span> i<span class="token operator">+</span><span class="token operator">+</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  setTimeout<span class="token punctuation">(</span>function timer<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>i<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> i <span class="token operator">*</span> <span class="token number">1000</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>首先因为 <code>setTimeout</code> 是个异步函数，<strong>所以会先把循环全部执行完毕，这时候 i 就是 6 了</strong>，所以会输出一堆 6。</p>
 <p>主流解决办法有两种</p>
 <ul>
 <li>使用闭包</li>
 </ul>
-<pre><code class="python">for (var i = 1; i &lt;= 5; i++) {
-  ;(function(j) {
-    setTimeout(function timer() {
-      console.log(j)
-    }, j * 1000)
-  })(i)
-}
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">for</span> <span class="token punctuation">(</span>var i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> <span class="token number">5</span><span class="token punctuation">;</span> i<span class="token operator">+</span><span class="token operator">+</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token punctuation">;</span><span class="token punctuation">(</span>function<span class="token punctuation">(</span>j<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    setTimeout<span class="token punctuation">(</span>function timer<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>j<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span> j <span class="token operator">*</span> <span class="token number">1000</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>在上述代码中，我们首先使用了<strong>立即执行函数</strong>将 <code>i</code>传入函数内部，这个时候值就被固定在了参数 j 上面不会改变，当下次执行 <code>timer</code>这个<code>闭包</code>的时候，就可以使用外部函数的变量 j，从而达到目的。</p>
 <ul>
 <li>使用 <code>let</code></li>
 </ul>
-<pre><code class="python">for (let i = 1; i &lt;= 5; i++) {
-  setTimeout(function timer() {
-    console.log(i)
-  }, i * 1000)
-}
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">for</span> <span class="token punctuation">(</span>let i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> <span class="token number">5</span><span class="token punctuation">;</span> i<span class="token operator">+</span><span class="token operator">+</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  setTimeout<span class="token punctuation">(</span>function timer<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>i<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> i <span class="token operator">*</span> <span class="token number">1000</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="深浅拷贝"><a href="#深浅拷贝" class="headerlink" title="深浅拷贝"></a>深浅拷贝</h3><blockquote>
 <p>什么是浅拷贝？如何实现浅拷贝？什么是深拷贝？如何实现深拷贝？ </p>
 </blockquote>
@@ -363,38 +363,38 @@ B() // 1
 <h3 id="var、let-及-const-区别"><a href="#var、let-及-const-区别" class="headerlink" title="var、let 及 const 区别"></a>var、let 及 const 区别</h3><blockquote>
 <p>什么是提升？什么是暂时性死区？var、let 及 const 区别？</p>
 </blockquote>
-<pre><code class="python">console.log(a) // undefined 
-var a = 1
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python">console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>a<span class="token punctuation">)</span> <span class="token operator">//</span> undefined 
+var a <span class="token operator">=</span> <span class="token number">1</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>从上述代码中我们可以发现，虽然<code>变量还没有被声明，但是我们却可以使用这个未被声明的变量</code>，这种情况就叫做<strong>提升</strong>，并且提升的是声明。即<code>声明提前</code></p>
 <p>上述代码可等同于</p>
-<pre><code class="python">var a
-console.log(a)  // undefind
-a = 1
+<pre class="line-numbers language-python"><code class="language-python">var a
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>a<span class="token punctuation">)</span>  <span class="token operator">//</span> undefind
+a <span class="token operator">=</span> <span class="token number">1</span>
 
-var a = 10
+var a <span class="token operator">=</span> <span class="token number">10</span>
 var a
-console.log(a)  // 10
-</code></pre>
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>a<span class="token punctuation">)</span>  <span class="token operator">//</span> <span class="token number">10</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>又例如</p>
-<pre><code class="python">console.log(a) // ƒ a() {} 
-function a() {} 
-var a = 1
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python">console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>a<span class="token punctuation">)</span> <span class="token operator">//</span> ƒ a<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> 
+function a<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> 
+var a <span class="token operator">=</span> <span class="token number">1</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p><code>var</code> 声明的变量会被提升到作用域的顶部</p>
-<pre><code class="python">
-var a = 1
-let b = 1 
-const c = 1 
-console.log(window.b) // undefined 
-console.log(window. c) // undefined 
+<pre class="line-numbers language-python"><code class="language-python">
+var a <span class="token operator">=</span> <span class="token number">1</span>
+let b <span class="token operator">=</span> <span class="token number">1</span> 
+const c <span class="token operator">=</span> <span class="token number">1</span> 
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>window<span class="token punctuation">.</span>b<span class="token punctuation">)</span> <span class="token operator">//</span> undefined 
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>window<span class="token punctuation">.</span> c<span class="token punctuation">)</span> <span class="token operator">//</span> undefined 
 
-function test(){ 
-    console.log(a)  // 报错 暂时性死区
+function test<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span> 
+    console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>a<span class="token punctuation">)</span>  <span class="token operator">//</span> 报错 暂时性死区
     let a 
-} 
-test()
-</code></pre>
+<span class="token punctuation">}</span> 
+test<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>首先在全局作用域下使用<code>let</code> 和<code>const</code>声明变量，变量并不会被挂载到 <code>window</code>上，这一点就和 <code>var</code>声明有了区别。</p>
 <p>报错的原因是因为存在<code>暂时性死区</code>，不能在声明前就使用变量，因为<code>函数提升优先于变量提升.</code></p>
 <p>总结</p>
@@ -408,46 +408,46 @@ test()
 <p>原型如何实现继承？Class 如何实现继承？Class 本质是什么？</p>
 </blockquote>
 <p>在 <code>JS</code> 中并不存在<code>类</code>，<code>class</code> 只是语法糖，本质还是<code>函数</code>。</p>
-<pre><code class="python">class Person{}
-console.log(Person instanceof Function) // true
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Person</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>Person instanceof Function<span class="token punctuation">)</span> <span class="token operator">//</span> true
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <h4 id="组合继承"><a href="#组合继承" class="headerlink" title="组合继承"></a>组合继承</h4><p>组合继承是常用的继承方式</p>
-<pre><code class="python">function Parent(value) {
-    this.val = value
-}
-Parent.prototype.getValue = function () {
-    console.log(&#39;显示原型&#39;, this.val) // 1
-}
-function Child(value) {
-    Parent.call(this, value)  // 继承父类的属性 
-}
-Child.prototype = new Parent()
-const child = new Child(1)
-child.getValue() // 1
-console.log(child instanceof Parent) // true
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python">function Parent<span class="token punctuation">(</span>value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    this<span class="token punctuation">.</span>val <span class="token operator">=</span> value
+<span class="token punctuation">}</span>
+Parent<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>getValue <span class="token operator">=</span> function <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token string">'显示原型'</span><span class="token punctuation">,</span> this<span class="token punctuation">.</span>val<span class="token punctuation">)</span> <span class="token operator">//</span> <span class="token number">1</span>
+<span class="token punctuation">}</span>
+function Child<span class="token punctuation">(</span>value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Parent<span class="token punctuation">.</span>call<span class="token punctuation">(</span>this<span class="token punctuation">,</span> value<span class="token punctuation">)</span>  <span class="token operator">//</span> 继承父类的属性 
+<span class="token punctuation">}</span>
+Child<span class="token punctuation">.</span>prototype <span class="token operator">=</span> new Parent<span class="token punctuation">(</span><span class="token punctuation">)</span>
+const child <span class="token operator">=</span> new Child<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+child<span class="token punctuation">.</span>getValue<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">//</span> <span class="token number">1</span>
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>child instanceof Parent<span class="token punctuation">)</span> <span class="token operator">//</span> true
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>以上继承的方式核心是在<strong>子类的构造函数</strong>中通过 <code>Parent.call(this)</code>继承父类的属性，<code>然后改变子类的原型为 new Parent() 来继承父类的函数</code>。这种继承方式优点在于构造函数可以传参，不会与父类引用属性共享，可以复用父类的函数，但是也存在一个缺点就是在继承父类函数的时候调用了父类构造函数，导致子类的原型上多了不需要的父类属性，存在内存上的浪费。</p>
 <p>ES6中使用<code>Class</code>实现继承</p>
-<pre><code class="python">class Parent {
-    constructor(value) {
-        this.val = value
-    }
-    getValue() {
-        console.log(this.val)
-    }
-}
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Parent</span> <span class="token punctuation">{</span>
+    constructor<span class="token punctuation">(</span>value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        this<span class="token punctuation">.</span>val <span class="token operator">=</span> value
+    <span class="token punctuation">}</span>
+    getValue<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>this<span class="token punctuation">.</span>val<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-class Child extends Parent {
-    constructor(value) {
-        super(value)
-        this.val = value
-    }
-}
+<span class="token keyword">class</span> <span class="token class-name">Child</span> extends Parent <span class="token punctuation">{</span>
+    constructor<span class="token punctuation">(</span>value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        super<span class="token punctuation">(</span>value<span class="token punctuation">)</span>
+        this<span class="token punctuation">.</span>val <span class="token operator">=</span> value
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-let child = new Child(1)
-child.getValue() // 1
-console.log(child instanceof Parent) // true
-</code></pre>
+let child <span class="token operator">=</span> new Child<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+child<span class="token punctuation">.</span>getValue<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">//</span> <span class="token number">1</span>
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>child instanceof Parent<span class="token punctuation">)</span> <span class="token operator">//</span> true
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><code>class</code>实现继承的核心在于使用<code>extends</code> 表明继承自哪个父类，并且在子类构造函数中必须调用<code>super</code>，因为这段代码可以看成 <code>Parent.call(this, value)</code>。当然了，之前也说了在 JS 中并不存在类，class 的本质就是函数。</p>
 
 					

@@ -62,7 +62,7 @@
 	
 	<!-- others: such as change-bg, time... -->
 	<p class="page-name-other">
-		1/10/2019 
+		1/13/2019 
 		<style type="text/css">
 	header:after {
 		content: '';
@@ -194,14 +194,14 @@
 <h5 id="原型的五条规则"><a href="#原型的五条规则" class="headerlink" title="原型的五条规则"></a>原型的五条规则</h5><ol>
 <li><strong>所有的引用类型（Object对象、Array数组、Function函数）</strong>都具有自由扩展属性，既可以自定义添加属性<strong>prototype</strong></li>
 </ol>
-<pre><code class="ruby">  let obj = {}
-  obj.a = 100
-</code></pre>
+<pre class="line-numbers language-ruby"><code class="language-ruby">  let obj <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+  obj<span class="token punctuation">.</span>a <span class="token operator">=</span> <span class="token number">100</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <ol start="2">
 <li><strong>所有的引用类型都有自己的隐式原型( <strong>proto</strong> ）</strong>,属性值是一个普通的对象 ， <strong>指向了创建该对象的构造函数的原型</strong>。其实这个属性指向了 [[prototype]]，但是 [[prototype]] 是内部属性，我们并不能访问到，所以使用 <strong><strong>proto</strong></strong> 来访问。</li>
 </ol>
-<pre><code class="ruby">console.log（obj._proto_）
-</code></pre>
+<pre class="line-numbers language-ruby"><code class="language-ruby">console<span class="token punctuation">.</span>log（obj<span class="token punctuation">.</span>_proto_）
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <ol start="3">
 <li><strong>所有的函数都有自己的显式原型（prototype）</strong>，属性值也是一个对象</li>
 <li>所有的引用类型的隐式原型<strong>（<strong>proto</strong>）</strong>都指向对应构造函数的<strong>显式原型（prototype）</strong></li>

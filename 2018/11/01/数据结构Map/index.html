@@ -62,7 +62,7 @@
 	
 	<!-- others: such as change-bg, time... -->
 	<p class="page-name-other">
-		1/10/2019 
+		1/13/2019 
 		<style type="text/css">
 	header:after {
 		content: '';
@@ -191,38 +191,38 @@
 <p><strong>字典类型数据结构</strong> </p>
 <p><strong>字典</strong>：用来<strong>存储不重复key和value的Hash结构</strong>，不同于集合Set的是，字典使用的是[键,值]的形式来存储数据的<br>JavaScript的对象Object只能用字符串当做变量。这给它的使用带来了很大的限制</p>
 <p>为了解决这个问题，ES6提供了Map数据结构。它<strong>类似于对象</strong>，也是<strong>键值对的集合</strong>，但是<strong>“键”</strong>的范围不限于字符串，各种类型的值（包括对象）都可以当做键，也就是说，Object结构提供了”字符串–值”对应，Map结构提供了”值–值”的对应，是一种更为完善的Hash结构实现。Map比 Object更合适”键值对”的数据结构</p>
-<h4 id="如何创建一个Map"><a href="#如何创建一个Map" class="headerlink" title="如何创建一个Map"></a>如何创建一个Map</h4><pre><code class="ruby"> const map = new Map([
-   [&#39;a&#39;, 1],
-    [&#39;b&#39;, 2]
-])
-console.log(map) // {&quot;a&quot; =&gt; 1, &quot;b&quot; =&gt; 2}
-</code></pre>
-<h4 id="Map属性"><a href="#Map属性" class="headerlink" title="Map属性"></a>Map属性</h4><pre><code class="ruby"> console.log(map.size) // 3
-</code></pre>
+<h4 id="如何创建一个Map"><a href="#如何创建一个Map" class="headerlink" title="如何创建一个Map"></a>如何创建一个Map</h4><pre class="line-numbers language-ruby"><code class="language-ruby"> const map <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Map</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
+   <span class="token punctuation">[</span><span class="token string">'a'</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">[</span><span class="token string">'b'</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span>
+<span class="token punctuation">]</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>map<span class="token punctuation">)</span> <span class="token operator">/</span><span class="token operator">/</span> <span class="token punctuation">{</span><span class="token string">"a"</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"b"</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token number">2</span><span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="Map属性"><a href="#Map属性" class="headerlink" title="Map属性"></a>Map属性</h4><pre class="line-numbers language-ruby"><code class="language-ruby"> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>map<span class="token punctuation">.</span>size<span class="token punctuation">)</span> <span class="token operator">/</span><span class="token operator">/</span> <span class="token number">3</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h4 id="Map类的方法"><a href="#Map类的方法" class="headerlink" title="Map类的方法"></a>Map类的方法</h4><ol>
-<li>map.set(‘key1’, ‘value1’) 返回map本身，可链式添加<pre><code class="ruby">map.set(&#39;key1&#39;, &#39;value1&#39;).set(&#39;key2&#39;, &#39;value2&#39;)
-</code></pre>
+<li>map.set(‘key1’, ‘value1’) 返回map本身，可链式添加<pre class="line-numbers language-ruby"><code class="language-ruby">map<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span><span class="token string">'key1'</span><span class="token punctuation">,</span> <span class="token string">'value1'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span><span class="token string">'key2'</span><span class="token punctuation">,</span> <span class="token string">'value2'</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
 <li>map.delete(value) delete方法删除某个值，返回布尔值</li>
 <li>map.has(key) 返回一个布尔值，表示该键是否在当前Map对象中</li>
 <li>map.get(key) get方法读取key对应的值，如果找不到key，则返回undefined</li>
-<li>map.clear() 清除所有数据，没有返回值<pre><code class="ruby">map.clear()
-console.log(map)
-</code></pre>
+<li>map.clear() 清除所有数据，没有返回值<pre class="line-numbers language-ruby"><code class="language-ruby">map<span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>map<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 </li>
 <li>map.keys() 返回键名的遍历器</li>
 <li>map.keys() 返回键值的遍历器</li>
 <li>map.entries() 返回键值对的遍历器</li>
-<li>map.forEach() 使用回调函数遍历每个成员<pre><code class="ruby">map.forEach((key, value, map) =&gt; {
-console.log(key + &quot;:&quot; + value )
-})
-</code></pre>
-<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4>key 是与内存地址绑定的，键不一样，则认为不不同的键<pre><code class="ruby">map.set(NaN, 10).set(NaN, 100)
-console.log(map) // { NaN =&gt; 100}
-map.set({}, &#39;x&#39;).set({}, &#39;y&#39;)
-console.log(map) // {Object =&gt; &quot;x&quot;,Object =&gt; &quot;y&quot;}
-console.log({} === {}) // true
-</code></pre>
+<li>map.forEach() 使用回调函数遍历每个成员<pre class="line-numbers language-ruby"><code class="language-ruby">map<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span>key<span class="token punctuation">,</span> value<span class="token punctuation">,</span> map<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>key <span class="token operator">+</span> <span class="token string">":"</span> <span class="token operator">+</span> value <span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4>key 是与内存地址绑定的，键不一样，则认为不不同的键<pre class="line-numbers language-ruby"><code class="language-ruby">map<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span><span class="token constant">NaN</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span><span class="token constant">NaN</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>map<span class="token punctuation">)</span> <span class="token operator">/</span><span class="token operator">/</span> <span class="token punctuation">{</span> <span class="token constant">NaN</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token number">100</span><span class="token punctuation">}</span>
+map<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token string">'x'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token string">'y'</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>map<span class="token punctuation">)</span> <span class="token operator">/</span><span class="token operator">/</span> <span class="token punctuation">{</span><span class="token builtin">Object</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token string">"x"</span><span class="token punctuation">,</span><span class="token builtin">Object</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token string">"y"</span><span class="token punctuation">}</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token operator">===</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">/</span><span class="token operator">/</span> <span class="token keyword">true</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 </ol>
 

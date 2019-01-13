@@ -62,7 +62,7 @@
 	
 	<!-- others: such as change-bg, time... -->
 	<p class="page-name-other">
-		1/10/2019 
+		1/13/2019 
 		<style type="text/css">
 	header:after {
 		content: '';
@@ -190,190 +190,190 @@
 						<h3 id="Vue-js-Koa2-移动电商实战"><a href="#Vue-js-Koa2-移动电商实战" class="headerlink" title="Vue.js+Koa2 移动电商实战"></a>Vue.js+Koa2 移动电商实战</h3><p>@(项目)</p>
 <p>该移动电商实战将从零开始搭建一个移动电商系统，包括首页展示，类别展示，购物功能，注册登录，积分系统，查找页面，后台接口设置。<br>涉及的技术栈包括：<code>Vue+Vue-Cli3+Router+Vant+Node+Koa2+Mongoose+MongoDB</code></p>
 <h3 id="1、初始化项目"><a href="#1、初始化项目" class="headerlink" title="1、初始化项目"></a>1、初始化项目</h3><h4 id="1-1、使用-vue-cli3-0-搭建环境"><a href="#1-1、使用-vue-cli3-0-搭建环境" class="headerlink" title="1.1、使用 vue-cli3.0 搭建环境"></a>1.1、使用 vue-cli3.0 搭建环境</h4><p>先全局安装 vue-cli3.0 :</p>
-<pre><code class="python">npm install -g @vue/cli
-#OR
-yarn global add @vue/cli
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python">npm install <span class="token operator">-</span>g @vue<span class="token operator">/</span>cli
+<span class="token comment" spellcheck="true">#OR</span>
+yarn <span class="token keyword">global</span> add @vue<span class="token operator">/</span>cli
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>检测安装：</p>
-<pre><code class="python">vue -V
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python">vue <span class="token operator">-</span>V
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>如果 vue-cli 还是 2.0 版本，那么就得必须把原有 vue-cli2 删除在重新安装 vue-cli3.0</p>
 <p>创建项目:</p>
-<pre><code class="python">vue create my-project
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python">vue create my<span class="token operator">-</span>project
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>此处有两个选择：<br><code>default (babel, eslint)：</code> 默认套餐，提供 babel 和 eslint 支持<br><code>Manually select features：</code>自己去选择需要的功能，提供更多的特性选择。比如如果想要支持 TypeScript ，就应该选择这一项。可以使用上下方向键来切换选项。如果只需要 babel 和 eslint 支持，那么选择第一项，就完事了，静静等待 vue 初始化项目。<br>vue-cli 内置支持了 8 个功能特性，可以多选：使用方向键在特性选项之间切换，使用空格键选中当前特性，使用 a 键切换选择所有，使用 i 键翻转选项。</p>
 <p>初始完之后，进入到项目根目录：</p>
-<pre><code class="python">cd my-project
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python">cd my<span class="token operator">-</span>project
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>启动项目：</p>
-<pre><code class="python">npm run serve
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python">npm run serve
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h4 id="1-2、优雅引入-Vant-组件库"><a href="#1-2、优雅引入-Vant-组件库" class="headerlink" title="1.2、优雅引入 Vant 组件库"></a>1.2、优雅引入 Vant 组件库</h4><p>安装 Vant</p>
-<pre><code class="python">npm install vant --save
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python">npm install vant <span class="token operator">-</span><span class="token operator">-</span>save
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>优雅的引入 Vant<br>vant 是支持<code>babel-plugin-import</code>引入的，它可以让我们按需引入组件模块，并且不用管理我们的样式，现在 Vue 项目组件库的主流引入方法。<br>安装 babel-plugin-import</p>
-<pre><code class="python"># 安装 babel-plugin-import 插件
-npm i babel-plugin-import -D
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 安装 babel-plugin-import 插件</span>
+npm i babel<span class="token operator">-</span>plugin<span class="token operator">-</span><span class="token keyword">import</span> <span class="token operator">-</span>D
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>babel.config.js 中配置</p>
-<pre><code class="python">module.exports = {
-  plugins: [
-    [&#39;import&#39;, {
-      libraryName: &#39;vant&#39;,
-      libraryDirectory: &#39;es&#39;,
-      style: true
-    }, &#39;vant&#39;]
-  ]
-}
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">[</span><span class="token string">'import'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+      libraryName<span class="token punctuation">:</span> <span class="token string">'vant'</span><span class="token punctuation">,</span>
+      libraryDirectory<span class="token punctuation">:</span> <span class="token string">'es'</span><span class="token punctuation">,</span>
+      style<span class="token punctuation">:</span> true
+    <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token string">'vant'</span><span class="token punctuation">]</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>在代码中直接引入 Vant 组件，插件会自动将代码转化为按需引入形式</p>
-<pre><code class="python">import { Button, Cell } from &#39;vant&#39;
-Vue.use(Button).use(Cell)
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> <span class="token punctuation">{</span> Button<span class="token punctuation">,</span> Cell <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vant'</span>
+Vue<span class="token punctuation">.</span>use<span class="token punctuation">(</span>Button<span class="token punctuation">)</span><span class="token punctuation">.</span>use<span class="token punctuation">(</span>Cell<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <h4 id="1-3、移动端屏幕适配基础"><a href="#1-3、移动端屏幕适配基础" class="headerlink" title="1.3、移动端屏幕适配基础"></a>1.3、移动端屏幕适配基础</h4><p>本项目主要采用<code>flex + rem</code>的方式进行布局和完成移动端的适配<br><code>rem 单位介绍</code><br>rem（font size of the root element）是相对长度单位。相对于根元素（即 html 元素）font-size 计算值的倍数。<br>适配原理：将 px 替换成 rem，动态修改 html 的 font-size 适配。它可以很好的根据根元素的字体大小来进行变化，从而达到各种屏幕基本一直的效果体验。</p>
-<pre><code class="python"># 在index.html页面meta标签里添加，使屏幕最小/大 1.0  且不可滑动改变页面大小
-minimum-scale=1.0,maximum-scale=1.0,user-scalable=no&quot;
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 在index.html页面meta标签里添加，使屏幕最小/大 1.0  且不可滑动改变页面大小</span>
+minimum<span class="token operator">-</span>scale<span class="token operator">=</span><span class="token number">1.0</span><span class="token punctuation">,</span>maximum<span class="token operator">-</span>scale<span class="token operator">=</span><span class="token number">1.0</span><span class="token punctuation">,</span>user<span class="token operator">-</span>scalable<span class="token operator">=</span>no"
 
-// 得到手机屏幕的宽度
- let htmlWidth = document.documentElement.clientWidth || document.body.clientWidth;
-// 解决页面字体过大的问题
- if(htmlWidth&gt;750){htmlWidth=750}
-// 得到html的Dom元素
- let html = document.getElementsByTagName(&#39;html&#39;)[0];
-// 设置根元素字体大小
- html.style.fontSize= htmlWidth/20 + &#39;px&#39;;
-</code></pre>
+<span class="token operator">//</span> 得到手机屏幕的宽度
+ let htmlWidth <span class="token operator">=</span> document<span class="token punctuation">.</span>documentElement<span class="token punctuation">.</span>clientWidth <span class="token operator">|</span><span class="token operator">|</span> document<span class="token punctuation">.</span>body<span class="token punctuation">.</span>clientWidth<span class="token punctuation">;</span>
+<span class="token operator">//</span> 解决页面字体过大的问题
+ <span class="token keyword">if</span><span class="token punctuation">(</span>htmlWidth<span class="token operator">></span><span class="token number">750</span><span class="token punctuation">)</span><span class="token punctuation">{</span>htmlWidth<span class="token operator">=</span><span class="token number">750</span><span class="token punctuation">}</span>
+<span class="token operator">//</span> 得到html的Dom元素
+ let html <span class="token operator">=</span> document<span class="token punctuation">.</span>getElementsByTagName<span class="token punctuation">(</span><span class="token string">'html'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token operator">//</span> 设置根元素字体大小
+ html<span class="token punctuation">.</span>style<span class="token punctuation">.</span>fontSize<span class="token operator">=</span> htmlWidth<span class="token operator">/</span><span class="token number">20</span> <span class="token operator">+</span> <span class="token string">'px'</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="2、首页布局"><a href="#2、首页布局" class="headerlink" title="2、首页布局"></a>2、首页布局</h3><h4 id="2-1、首页轮播图制作"><a href="#2-1、首页轮播图制作" class="headerlink" title="2.1、首页轮播图制作"></a>2.1、首页轮播图制作</h4><p>首页布局主要与 flex 布局、css 样式有关，不多累赘。<br>首页轮播图的制作主要采用 Vant Swipe,、SwipeItem 组件，利用 Vant 实现图片轮播的<code>懒加载</code>，<br><code>v-lazy=&quot;banner.imageUrl&quot;</code>实现图片懒加载；<br>在加载图片到页面时，推荐使用<code>require</code>，如果用 require 引入图片，在不作任何配置的情况下就可以基本解决图片路径问题，在 data 中使用 require 导入图片<code>locationIcon: require(&#39;../../assets/images/location.png&#39;)</code></p>
 <h4 id="2-2、easyMock-和-Axios-的使用"><a href="#2-2、easyMock-和-Axios-的使用" class="headerlink" title="2.2、easyMock 和 Axios 的使用"></a>2.2、easyMock 和 Axios 的使用</h4><h5 id="easyMock"><a href="#easyMock" class="headerlink" title="easyMock"></a>easyMock</h5><p><code>Mock</code>的使用作为前端非常重要，比如在项目开始重启，前后端一起开发，后端并无暇照顾前端接口。这时候我们可以使用 Mock 的方式，来模拟数据</p>
 <p>进入<a href="https://www.easy-mock.com" target="_blank" rel="noopener">easyMock 官网</a>，新建一个个人项目，反正就是挺简单的，重点是 Mock 数据如何建立，需要和后台沟通好、协同好，不然 Mock 数据就没有意义了。后期项目正式连接后台，需要把<code>Base URL</code>替换掉，换成正式的响应地址</p>
 <h5 id="Axios"><a href="#Axios" class="headerlink" title="Axios"></a>Axios</h5><p>引入 axios 后，在<code>生命周期 created</code>里请求数据</p>
-<pre><code class="python">created(){
-  axios({
-      url: &#39;https://www.easy-mock.com/mock/5ae2427800247c2aa1efe442/SmileVue/index&#39;,
-      method: &#39;get&#39;,
-  })
-  .then(response =&gt; {
-      console.log(response)
-  })
-  .catch((error) =&gt; {
-  })
-}
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python">created<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  axios<span class="token punctuation">(</span><span class="token punctuation">{</span>
+      url<span class="token punctuation">:</span> <span class="token string">'https://www.easy-mock.com/mock/5ae2427800247c2aa1efe442/SmileVue/index'</span><span class="token punctuation">,</span>
+      method<span class="token punctuation">:</span> <span class="token string">'get'</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span>then<span class="token punctuation">(</span>response <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+      console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>response<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span>catch<span class="token punctuation">(</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>如果能取得数据后，说明已经 Mock 成功了</p>
 <h4 id="2-3、vue-awesome-swiper"><a href="#2-3、vue-awesome-swiper" class="headerlink" title="2.3、vue-awesome-swiper"></a>2.3、vue-awesome-swiper</h4><p><code>Vue-Awesome-Swiper</code>轮播图插件，可以同时支持 Vue.js（1.X ~ 2.X），兼顾 PC 和移动端，随着 vue 的广泛使用，其中插件 swiper 也算是使用的比较频繁的插件。</p>
 <ul>
 <li>安装 npm install vue-awesome-swiper –save</li>
 <li>以组件形式引入</li>
 </ul>
-<pre><code class="python">import &#39;swiper/dist/css/swiper.css&#39;
-import { swiper, swiperSlide } from &#39;vue-awesome-swiper&#39;
-export default {
-  components: {
-    swiper,
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> <span class="token string">'swiper/dist/css/swiper.css'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> swiper<span class="token punctuation">,</span> swiperSlide <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue-awesome-swiper'</span>
+export default <span class="token punctuation">{</span>
+  components<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    swiper<span class="token punctuation">,</span>
     swiperSlide
-  }
-}
-</code></pre>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>详细用法<br>详细用法参考官网<a href="https://3.swiper.com.cn/api/index.html" target="_blank" rel="noopener">swiper3</a>、<a href="https://segmentfault.com/a/1190000014609379" target="_blank" rel="noopener">vue-awesome-swiper 的使用以及 API 整理</a></li>
 </ul>
 <h4 id="2-4、watch-和-filter-的使用"><a href="#2-4、watch-和-filter-的使用" class="headerlink" title="2.4、watch 和 filter 的使用"></a>2.4、watch 和 filter 的使用</h4><h5 id="watch"><a href="#watch" class="headerlink" title="watch"></a>watch</h5><p>把楼层这部分单独封装成一个传递参数的组件，并使用<code>watch</code>来监听参数的变化，打到正确渲染的目的</p>
-<pre><code class="python"> // 子组件
- export default {
-    props:[&#39;floorData&#39;],
-    created(){
-         //这里写得不到数据，应为数据是延迟返回的
-    },
-    watch:{
-      floorData:function(val) {  // 这个函数方法要和props里面一致
-         console.log(this.floorData) // 监听参数的变化
-        }
-    }
- }
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"> <span class="token operator">//</span> 子组件
+ export default <span class="token punctuation">{</span>
+    props<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'floorData'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    created<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+         <span class="token operator">//</span>这里写得不到数据，应为数据是延迟返回的
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    watch<span class="token punctuation">:</span><span class="token punctuation">{</span>
+      floorData<span class="token punctuation">:</span>function<span class="token punctuation">(</span>val<span class="token punctuation">)</span> <span class="token punctuation">{</span>  <span class="token operator">//</span> 这个函数方法要和props里面一致
+         console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>this<span class="token punctuation">.</span>floorData<span class="token punctuation">)</span> <span class="token operator">//</span> 监听参数的变化
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+ <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h5 id="filter"><a href="#filter" class="headerlink" title="filter"></a>filter</h5><p>过滤器都是需要在很多组建中进行使用的，所以要编写一个比较通用的方法。</p>
-<pre><code class="python">export function toMoney(money){
-  let newMoney = money;
-  if(newMoney){
-      newMoney = newMoney.toFixed(2)
-  }else{
-      newMoney = 0
-      newMoney = newMoney.toFixed(2)
-  }
-  return newMoney
-}
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python">export function toMoney<span class="token punctuation">(</span>money<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  let newMoney <span class="token operator">=</span> money<span class="token punctuation">;</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span>newMoney<span class="token punctuation">)</span><span class="token punctuation">{</span>
+      newMoney <span class="token operator">=</span> newMoney<span class="token punctuation">.</span>toFixed<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+      newMoney <span class="token operator">=</span> <span class="token number">0</span>
+      newMoney <span class="token operator">=</span> newMoney<span class="token punctuation">.</span>toFixed<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">return</span> newMoney
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>但是这个方法并不优雅，使用 ES6 函数默认参数，让代码变得优雅</p>
-<pre><code class="python">export function toMoney(money = 0) {
-    return money.toFixed(2)
-}
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python">export function toMoney<span class="token punctuation">(</span>money <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> money<span class="token punctuation">.</span>toFixed<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>在 vue 里使用 Filter</p>
-<pre><code class="python">// 引入Filter 要注意此处打花括号
-import { toMoney } from &#39;@/filter/moneyFilter.js&#39;
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">//</span> 引入Filter 要注意此处打花括号
+<span class="token keyword">import</span> <span class="token punctuation">{</span> toMoney <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/filter/moneyFilter.js'</span>
 
-// 编写filter属性
-filters:{
-  moneyFilter(money){
-      return toMoney(money)
-  }
-}
+<span class="token operator">//</span> 编写filter属性
+filters<span class="token punctuation">:</span><span class="token punctuation">{</span>
+  moneyFilter<span class="token punctuation">(</span>money<span class="token punctuation">)</span><span class="token punctuation">{</span>
+      <span class="token keyword">return</span> toMoney<span class="token punctuation">(</span>money<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-// 在template使用filter |
-{{item.price | moneyFilter}}
-</code></pre>
+<span class="token operator">//</span> 在template使用filter <span class="token operator">|</span>
+<span class="token punctuation">{</span><span class="token punctuation">{</span>item<span class="token punctuation">.</span>price <span class="token operator">|</span> moneyFilter<span class="token punctuation">}</span><span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="3、后端服务-Koa2-与-MongoDB"><a href="#3、后端服务-Koa2-与-MongoDB" class="headerlink" title="3、后端服务 Koa2 与 MongoDB"></a>3、后端服务 Koa2 与 MongoDB</h3><h4 id="3-1、安装-Koa2-和-MongoDB"><a href="#3-1、安装-Koa2-和-MongoDB" class="headerlink" title="3.1、安装 Koa2 和 MongoDB"></a>3.1、安装 Koa2 和 MongoDB</h4><p>前端现在需要一些后端服务来获取数据，前后端服务可以分离，也可以直接在原有项目中新建一个<code>Service</code>文件夹。进入 Service 文件夹</p>
 <ul>
 <li>安装 Koa</li>
 </ul>
-<pre><code class="python">// 使用npm init -y 生成并初始化package.json文件
-    npm init -y
-// 安装koa
-    npm install --save koa
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">//</span> 使用npm init <span class="token operator">-</span>y 生成并初始化package<span class="token punctuation">.</span>json文件
+    npm init <span class="token operator">-</span>y
+<span class="token operator">//</span> 安装koa
+    npm install <span class="token operator">-</span><span class="token operator">-</span>save koa
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>安装 MongoDB 数据库与图形操作界面 Robo3</li>
 </ul>
 <h4 id="3-2、-Koa-用-Mongoose-连接数据库"><a href="#3-2、-Koa-用-Mongoose-连接数据库" class="headerlink" title="3.2、 Koa 用 Mongoose 连接数据库"></a>3.2、 Koa 用 Mongoose 连接数据库</h4><p><code>Mongoose</code>是一个开源的封装好的实现 Node 和 MongoDB 数据通讯的数据建模库。<br>使用 npm 安装 Mongoose</p>
-<pre><code class="python">npm install mongoose --save
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python">npm install mongoose <span class="token operator">-</span><span class="token operator">-</span>save
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>在项目的 service 文件夹下建立一个 database 文件夹，用来存放和数据库操作有关的文件。在 database 文件夹下，建立一个<code>service/init.js</code>文件，用来作数据库的连接和一些初始化的事情。</p>
 <p>使用<code>Promise</code>，确保成功连接数据库，需要对意外处理和逻辑处理，让程序增加健壮性</p>
-<pre><code class="python">exports.connect = () =&gt; {
-  // 连接数据库
-  mongoose.connect(db)
-  let maxConnectTimes = 0  // 自动连接次数
-  return new Promise((resolve, reject) =&gt; {
-    // 数据库连接事件监听
-    mongoose.connection.on(&#39;disconnected&#39;, err =&gt; {
-        console.log(&#39;`````*数据库断开`````*&#39;)
-        if (maxConnectTimes &lt; 3) {
-            maxConnectTimes++
-            mongoose.connect(db)
-        } else {
-            reject(err)
-            throw new Error(&#39;数据库断开&#39;)
-        }
-    })
-    // 数据库出现错误时
-    mongoose.connection.on(&#39;error&#39;, err =&gt; {
-        console.log(&#39;`````*数据库错误`````*&#39;)
-        if (maxConnectTimes &lt; 3) {
-            maxConnectTimes++
-            mongoose.connect(db)
-        } else {
-            reject(err)
-            throw new Error(&#39;数据库错误&#39;)
-        }
-    })
-    // 数据库链接打开时 只需要连接一次once
-    mongoose.connection.once(&#39;open&#39;, () =&gt; {
-        console.log(&#39;MongoDB Connected successfully!&#39;)
-        resolve()
-    })
-  })
-}
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python">exports<span class="token punctuation">.</span>connect <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+  <span class="token operator">//</span> 连接数据库
+  mongoose<span class="token punctuation">.</span>connect<span class="token punctuation">(</span>db<span class="token punctuation">)</span>
+  let maxConnectTimes <span class="token operator">=</span> <span class="token number">0</span>  <span class="token operator">//</span> 自动连接次数
+  <span class="token keyword">return</span> new Promise<span class="token punctuation">(</span><span class="token punctuation">(</span>resolve<span class="token punctuation">,</span> reject<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token operator">//</span> 数据库连接事件监听
+    mongoose<span class="token punctuation">.</span>connection<span class="token punctuation">.</span>on<span class="token punctuation">(</span><span class="token string">'disconnected'</span><span class="token punctuation">,</span> err <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token string">'`````*数据库断开`````*'</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>maxConnectTimes <span class="token operator">&lt;</span> <span class="token number">3</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            maxConnectTimes<span class="token operator">+</span><span class="token operator">+</span>
+            mongoose<span class="token punctuation">.</span>connect<span class="token punctuation">(</span>db<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            reject<span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+            throw new Error<span class="token punctuation">(</span><span class="token string">'数据库断开'</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token operator">//</span> 数据库出现错误时
+    mongoose<span class="token punctuation">.</span>connection<span class="token punctuation">.</span>on<span class="token punctuation">(</span><span class="token string">'error'</span><span class="token punctuation">,</span> err <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token string">'`````*数据库错误`````*'</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>maxConnectTimes <span class="token operator">&lt;</span> <span class="token number">3</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            maxConnectTimes<span class="token operator">+</span><span class="token operator">+</span>
+            mongoose<span class="token punctuation">.</span>connect<span class="token punctuation">(</span>db<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            reject<span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+            throw new Error<span class="token punctuation">(</span><span class="token string">'数据库错误'</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token operator">//</span> 数据库链接打开时 只需要连接一次once
+    mongoose<span class="token punctuation">.</span>connection<span class="token punctuation">.</span>once<span class="token punctuation">(</span><span class="token string">'open'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token string">'MongoDB Connected successfully!'</span><span class="token punctuation">)</span>
+        resolve<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h4 id="3-3、Mongoose-的-Schema-建模介绍"><a href="#3-3、Mongoose-的-Schema-建模介绍" class="headerlink" title="3.3、Mongoose 的 Schema 建模介绍"></a>3.3、Mongoose 的 Schema 建模介绍</h4><p>如何在数据库中<code>建模</code>，也就是定义<code>Schema</code>，Schema 相当于 MongoDB 数据库的一个<code>映射</code>。<code>Schema 是一种以文件形式存储的数据库模型骨架</code>，无法直接通往数据库端，也就是说它不具备对数据库的操作能力。<code>Schema 是以 key-value 形式 Json 格式的数据</code>。</p>
 <h5 id="Schema-中的数据类型"><a href="#Schema-中的数据类型" class="headerlink" title="Schema 中的数据类型"></a>Schema 中的数据类型</h5><ul>
 <li>String ：字符串类型</li>
@@ -390,21 +390,21 @@ filters:{
 <li>model ：具备某张表操作能力的一个集合，是 mongoose 的核心能力。我们说的模型就是这个 Mondel</li>
 <li>entity ：类似记录，由 Model 创建的实体，也具有影响数据库的操作能力。</li>
 </ul>
-<h5 id="初学定义一个用户-Schema"><a href="#初学定义一个用户-Schema" class="headerlink" title="初学定义一个用户 Schema"></a>初学定义一个用户 Schema</h5><pre><code class="python">const mongoose = require(&#39;mongoose&#39;)    // 引入Mongoose
-const Schema = mongoose.Schema          // 声明Schema
-let ObjectId = Schema.Types.ObjectId    // 声明Object类型，主键
+<h5 id="初学定义一个用户-Schema"><a href="#初学定义一个用户-Schema" class="headerlink" title="初学定义一个用户 Schema"></a>初学定义一个用户 Schema</h5><pre class="line-numbers language-python"><code class="language-python">const mongoose <span class="token operator">=</span> require<span class="token punctuation">(</span><span class="token string">'mongoose'</span><span class="token punctuation">)</span>    <span class="token operator">//</span> 引入Mongoose
+const Schema <span class="token operator">=</span> mongoose<span class="token punctuation">.</span>Schema          <span class="token operator">//</span> 声明Schema
+let ObjectId <span class="token operator">=</span> Schema<span class="token punctuation">.</span>Types<span class="token punctuation">.</span>ObjectId    <span class="token operator">//</span> 声明Object类型，主键
 
-//创建用户Schema
-const userSchema = new Schema({
-  UserId: ObjectId,
-  userName:{ unique:true, type:String}, // unique 表示唯一
-  password: String,
-  createAt:{ type:Date,default:Date.now()},
-  lastLoginAt:{ type:Date,default:Date.now()}
-})
-//发布模型
-mongoose.model(&#39;User&#39;,userSchema)
-</code></pre>
+<span class="token operator">//</span>创建用户Schema
+const userSchema <span class="token operator">=</span> new Schema<span class="token punctuation">(</span><span class="token punctuation">{</span>
+  UserId<span class="token punctuation">:</span> ObjectId<span class="token punctuation">,</span>
+  userName<span class="token punctuation">:</span><span class="token punctuation">{</span> unique<span class="token punctuation">:</span>true<span class="token punctuation">,</span> type<span class="token punctuation">:</span>String<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token operator">//</span> unique 表示唯一
+  password<span class="token punctuation">:</span> String<span class="token punctuation">,</span>
+  createAt<span class="token punctuation">:</span><span class="token punctuation">{</span> type<span class="token punctuation">:</span>Date<span class="token punctuation">,</span>default<span class="token punctuation">:</span>Date<span class="token punctuation">.</span>now<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+  lastLoginAt<span class="token punctuation">:</span><span class="token punctuation">{</span> type<span class="token punctuation">:</span>Date<span class="token punctuation">,</span>default<span class="token punctuation">:</span>Date<span class="token punctuation">.</span>now<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token operator">//</span>发布模型
+mongoose<span class="token punctuation">.</span>model<span class="token punctuation">(</span><span class="token string">'User'</span><span class="token punctuation">,</span>userSchema<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h5 id="载入-Schema-和插入查出数据"><a href="#载入-Schema-和插入查出数据" class="headerlink" title="载入 Schema 和插入查出数据"></a>载入 Schema 和插入查出数据</h5><p>Schema 建立好以后，需要载入这些数据库，当然最好的方法就是在后台服务已启动的时候就把载入做好，所以在<code>service/init.js</code>里作这件事，然后在<code>index.js</code>里直接执行。</p>
 <h6 id="载入所有-Schema"><a href="#载入所有-Schema" class="headerlink" title="载入所有 Schema"></a>载入所有 Schema</h6><p>直接在<code>service\init.js</code> 先引入一个<code>glob</code>和一个<code>resolve</code></p>
 <ul>
@@ -412,598 +412,598 @@ mongoose.model(&#39;User&#39;,userSchema)
 <li>resolve: 将一系列路径或路径段解析为绝对路径。</li>
 </ul>
 <p>首先安装 glob</p>
-<pre><code class="python">npm install glob --save
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python">npm install glob <span class="token operator">-</span><span class="token operator">-</span>save
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>然后引入</p>
-<pre><code class="python">const glob = require(&#39;glob&#39;)
-const {resolve} = require(&#39;path&#39;)
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python">const glob <span class="token operator">=</span> require<span class="token punctuation">(</span><span class="token string">'glob'</span><span class="token punctuation">)</span>
+const <span class="token punctuation">{</span>resolve<span class="token punctuation">}</span> <span class="token operator">=</span> require<span class="token punctuation">(</span><span class="token string">'path'</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>一次性引入所有的 Schema 文件</p>
-<pre><code class="python">exports.initSchemas = () =&gt; {
-  glob.sync(resolve(__dirname, &#39;./schema/&#39;, &#39;`/*.js&#39;)).forEach(require)
-}
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python">exports<span class="token punctuation">.</span>initSchemas <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+  glob<span class="token punctuation">.</span>sync<span class="token punctuation">(</span>resolve<span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">'./schema/'</span><span class="token punctuation">,</span> <span class="token string">'`/*.js'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>forEach<span class="token punctuation">(</span>require<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>使用了<code>glob.sync</code>同步引入所有的 schema 文件，然后用 forEach 的方法 require（引入）进来。这比一条条引入要优雅的多。</p>
 <h6 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h6><p>在操作数据库前需在<code>service/index.js</code>先引入 Mongoose 和刚写好的<code>initSchemas</code></p>
-<pre><code class="python">const mongoose = require(&#39;mongoose&#39;)
-const {connect , initSchemas} = require(&#39;./database/init.js&#39;)
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python">const mongoose <span class="token operator">=</span> require<span class="token punctuation">(</span><span class="token string">'mongoose'</span><span class="token punctuation">)</span>
+const <span class="token punctuation">{</span>connect <span class="token punctuation">,</span> initSchemas<span class="token punctuation">}</span> <span class="token operator">=</span> require<span class="token punctuation">(</span><span class="token string">'./database/init.js'</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>插入数据</p>
-<pre><code class="python">// 立即执行函数
-;(async () =&gt; {
-    await connect()
-    initSchemas()
-})()
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">//</span> 立即执行函数
+<span class="token punctuation">;</span><span class="token punctuation">(</span><span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token keyword">await</span> connect<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    initSchemas<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h4 id="3-4、打造安全的用户密码加密机制"><a href="#3-4、打造安全的用户密码加密机制" class="headerlink" title="3.4、打造安全的用户密码加密机制"></a>3.4、打造安全的用户密码加密机制</h4><p>现在使用的都是普通的明文密码，这在实际工作中是肯定不允许，需要对密码进行<code>加密</code>和<code>加盐</code>的处理。</p>
 <h5 id="加密处理"><a href="#加密处理" class="headerlink" title="加密处理"></a>加密处理</h5><p>密码的加密有很多种加密算法，比如我们使用的<code>MD5 加密</code>或者<code>hash256 加密算法</code>，其实他们都是 hash 的算法。就是把你的密码进行一次不可逆的编译，这样就算别人得到了这个密码值，也不能进行直接登录操作</p>
 <h5 id="加盐处理"><a href="#加盐处理" class="headerlink" title="加盐处理"></a>加盐处理</h5><p>所谓<code>加盐技术</code>，其实就是把原来的密码里，加入一些其他的字符串，并且我们可以自己设置加入字符串的强度。</p>
 <h5 id="bcrypt-的使用"><a href="#bcrypt-的使用" class="headerlink" title="bcrypt 的使用"></a>bcrypt 的使用</h5><p>bcrypt 是一种跨平台的文件加密工具。由它加密的文件可在所有支持的操作系统和处理器上进行转移。它的口令必须是 8 至 56 个字符，并将在内部被转化为 448 位的密钥。</p>
 <p>安装并在<code>server/database/schema/User.js</code>引入 bcrypt</p>
-<pre><code class="python">npm instal --save bcrypt
+<pre class="line-numbers language-python"><code class="language-python">npm instal <span class="token operator">-</span><span class="token operator">-</span>save bcrypt
 
-const bcrypt = require(&#39;bcrypt&#39;)
-</code></pre>
+const bcrypt <span class="token operator">=</span> require<span class="token punctuation">(</span><span class="token string">'bcrypt'</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>然后是用<code>pre</code>每次进行保存时都进行加盐加密的操作</p>
-<pre><code class="python">// 加盐长度
-const SALT_WORK_FACTOR = 10
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">//</span> 加盐长度
+const SALT_WORK_FACTOR <span class="token operator">=</span> <span class="token number">10</span>
 
-userSchema.pre(&#39;save&#39;, function (next) {
-  // 加盐
-  bcrypt.genSalt(SALT_WORK_FACTOR, (err, salt) =&gt; {
-      if (err) return next(err)
-      // 加密
-      bcrypt.hash(this.passWord, salt, (err, hash) =&gt; {
-          if (err) return next(err)
-          this.passWord = hash
-          next()
-      })
-  })
-})
-</code></pre>
+userSchema<span class="token punctuation">.</span>pre<span class="token punctuation">(</span><span class="token string">'save'</span><span class="token punctuation">,</span> function <span class="token punctuation">(</span>next<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token operator">//</span> 加盐
+  bcrypt<span class="token punctuation">.</span>genSalt<span class="token punctuation">(</span>SALT_WORK_FACTOR<span class="token punctuation">,</span> <span class="token punctuation">(</span>err<span class="token punctuation">,</span> salt<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token keyword">return</span> next<span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+      <span class="token operator">//</span> 加密
+      bcrypt<span class="token punctuation">.</span>hash<span class="token punctuation">(</span>this<span class="token punctuation">.</span>passWord<span class="token punctuation">,</span> salt<span class="token punctuation">,</span> <span class="token punctuation">(</span>err<span class="token punctuation">,</span> hash<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+          <span class="token keyword">if</span> <span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token keyword">return</span> next<span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+          this<span class="token punctuation">.</span>passWord <span class="token operator">=</span> hash
+          next<span class="token punctuation">(</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h4 id="3-5、-Koa2-的用户操作的路由模块化"><a href="#3-5、-Koa2-的用户操作的路由模块化" class="headerlink" title="3.5、 Koa2 的用户操作的路由模块化"></a>3.5、 Koa2 的用户操作的路由模块化</h4><p>目前所有的路由都写在<code>service/idnex.js</code>里显然不是正确的选择，这会导致 index.js 页面越来越臃肿，最后变的没办法维护。此时需要把<code>Koa 程序模块化</code>，我们也叫做<code>路由模块化</code>。</p>
 <p>安装 koa-router</p>
-<pre><code class="python">npm install koa-router --save
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python">npm install koa<span class="token operator">-</span>router <span class="token operator">-</span><span class="token operator">-</span>save
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>新建一个<code>appApi/User.js</code>文件夹，有关 User.js 的操作，以后都会放到这个文件下，就是要编写的供前台使用的接口程序了。</p>
-<pre><code class="python">const Router = require(&#39;koa-router&#39;)
-let router = new Router()
-router.get(&#39;/&#39;, async (ctx) =&gt; {
-    ctx.body = &quot;这是用户操作首页&quot;
-})
-router.get(&#39;/register&#39;, async (ctx) =&gt; {
-    ctx.body = &quot;用户注册接口&quot;
-})
-module.exports = router;
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python">const Router <span class="token operator">=</span> require<span class="token punctuation">(</span><span class="token string">'koa-router'</span><span class="token punctuation">)</span>
+let router <span class="token operator">=</span> new Router<span class="token punctuation">(</span><span class="token punctuation">)</span>
+router<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">,</span> <span class="token keyword">async</span> <span class="token punctuation">(</span>ctx<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    ctx<span class="token punctuation">.</span>body <span class="token operator">=</span> <span class="token string">"这是用户操作首页"</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+router<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'/register'</span><span class="token punctuation">,</span> <span class="token keyword">async</span> <span class="token punctuation">(</span>ctx<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    ctx<span class="token punctuation">.</span>body <span class="token operator">=</span> <span class="token string">"用户注册接口"</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> router<span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>此时需要把这个文件和 koa-router 引入到<code>server/index.js</code>下面</p>
-<pre><code class="python">// 引入koa-router
-const Router = require(&#39;koa-router&#39;)
-// 引入user.js模块
-let user = require(&#39;./appApi/user.js&#39;)
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">//</span> 引入koa<span class="token operator">-</span>router
+const Router <span class="token operator">=</span> require<span class="token punctuation">(</span><span class="token string">'koa-router'</span><span class="token punctuation">)</span>
+<span class="token operator">//</span> 引入user<span class="token punctuation">.</span>js模块
+let user <span class="token operator">=</span> require<span class="token punctuation">(</span><span class="token string">'./appApi/user.js'</span><span class="token punctuation">)</span>
 
-// 装载所有子路由
-let router = new Router();
-router.use(&#39;/user&#39;,user.routes())
+<span class="token operator">//</span> 装载所有子路由
+let router <span class="token operator">=</span> new Router<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+router<span class="token punctuation">.</span>use<span class="token punctuation">(</span><span class="token string">'/user'</span><span class="token punctuation">,</span>user<span class="token punctuation">.</span>routes<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 
-// 加载路由中间件
-app.use(router.routes())
-app.use(router.allowedMethods())
-</code></pre>
+<span class="token operator">//</span> 加载路由中间件
+app<span class="token punctuation">.</span>use<span class="token punctuation">(</span>router<span class="token punctuation">.</span>routes<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+app<span class="token punctuation">.</span>use<span class="token punctuation">(</span>router<span class="token punctuation">.</span>allowedMethods<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h4 id="3-6、前端细节注意事项"><a href="#3-6、前端细节注意事项" class="headerlink" title="3.6、前端细节注意事项"></a>3.6、前端细节注意事项</h4><h5 id="注册的防重复提交"><a href="#注册的防重复提交" class="headerlink" title="注册的防重复提交"></a>注册的防重复提交</h5><p><code>注册的防重复提交</code>是注册中需要注意的细节。防重复提交一般是在前端来处理的，为什么会产生重复提交的现象那？比如用户的手机网速很慢，用户在 1 秒钟内还没得到结果，他认为可能是没点击到，就又点击了，这时候后台就被请求了两次。</p>
 <ol>
 <li>在按钮上绑定 loading 属性</li>
 </ol>
-<pre><code class="python"> &lt;van-button type=&quot;primary&quot;  @click=&quot;axiosRegisterUser&quot;  :loading=&quot;openLoading&quot; size=&quot;large&quot;&gt;   
+<pre class="line-numbers language-python"><code class="language-python"> <span class="token operator">&lt;</span>van<span class="token operator">-</span>button type<span class="token operator">=</span><span class="token string">"primary"</span>  @click<span class="token operator">=</span><span class="token string">"axiosRegisterUser"</span>  <span class="token punctuation">:</span>loading<span class="token operator">=</span><span class="token string">"openLoading"</span> size<span class="token operator">=</span><span class="token string">"large"</span><span class="token operator">></span>   
     马上注册 
- &lt;/van-button&gt;
+ <span class="token operator">&lt;</span><span class="token operator">/</span>van<span class="token operator">-</span>button<span class="token operator">></span>
 
-// data中声明
- openLoading: false, // 是否开启用户注册的loading状态
-</code></pre>
+<span class="token operator">//</span> data中声明
+ openLoading<span class="token punctuation">:</span> false<span class="token punctuation">,</span> <span class="token operator">//</span> 是否开启用户注册的loading状态
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ol start="2">
 <li>在一开始进入注册方法的时候，作的第一件事就是把注册按钮变成 loading 状态</li>
 </ol>
-<pre><code class="python">this.openLoading = true;
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python">this<span class="token punctuation">.</span>openLoading <span class="token operator">=</span> true<span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>然后在注册失败的时候取消 loading 状态（this.openLoading = false），注册成功就跳转到个人中心页面</p>
 <h5 id="注册时的前端验证"><a href="#注册时的前端验证" class="headerlink" title="注册时的前端验证"></a>注册时的前端验证</h5><p>登陆注册时，前端就必须作表单验证</p>
 <p>vant 框架提供的 field 属性提供了错误提示的机制，就是<code>error-message 属性</code>。现在 script 的 data 里注册两个属性，usernameErrorMsg 和 passwordErrorMsg 当值不符时，作用户提示使用。开始这两个值都为空，不给用户作任何提示操作，只有按下注册按钮时才进行检测提示</p>
 <p>验证表单信息</p>
 <h4 id="3-7、打通注册用户的前后端通讯"><a href="#3-7、打通注册用户的前后端通讯" class="headerlink" title="3.7、打通注册用户的前后端通讯"></a>3.7、打通注册用户的前后端通讯</h4><p>在前端写好用户操作页面以后，需要前后端进行打通，使用 API 接口的形式可以互相同通讯和传递数据</p>
 <p><code>接收来自前端发过来的请求---koa-bodyparser 中间件</code></p>
-<pre><code class="python">npm install --save koa-bodyparser
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python">npm install <span class="token operator">-</span><span class="token operator">-</span>save koa<span class="token operator">-</span>bodyparser
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>在<code>service/index.js</code>文件中注册和引入中间件</p>
-<pre><code class="python">const bodyParser = require(&#39;koa-bodyparser&#39;)
-app.use(bodyParser());
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python">const bodyParser <span class="token operator">=</span> require<span class="token punctuation">(</span><span class="token string">'koa-bodyparser'</span><span class="token punctuation">)</span>
+app<span class="token punctuation">.</span>use<span class="token punctuation">(</span>bodyParser<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p><code>支持跨域请求---koa2-cors 中间件</code></p>
-<pre><code class="python">npm install --save koa2-cors
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python">npm install <span class="token operator">-</span><span class="token operator">-</span>save koa2<span class="token operator">-</span>cors
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>在<code>service/index.js</code>文件中注册和引入中间件</p>
-<pre><code class="python">const cors = require(&#39;koa2-cors&#39;)
-app.use(cors())
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python">const cors <span class="token operator">=</span> require<span class="token punctuation">(</span><span class="token string">'koa2-cors'</span><span class="token punctuation">)</span>
+app<span class="token punctuation">.</span>use<span class="token punctuation">(</span>cors<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <h4 id="3-8、登陆的服务端业务逻辑"><a href="#3-8、登陆的服务端业务逻辑" class="headerlink" title="3.8、登陆的服务端业务逻辑"></a>3.8、登陆的服务端业务逻辑</h4><p>登录的业务逻辑还是很简单的，就是得到前端发来的用户名和密码，然后跟数据库进行比对，如果正确就显示登录成功，失败就显示登录失败。</p>
 <h5 id="Shema-中的比对实例方法"><a href="#Shema-中的比对实例方法" class="headerlink" title="Shema 中的比对实例方法"></a>Shema 中的比对实例方法</h5><p>需要在 Shema 中制作一个比对的实例方法，这个方法就是<code>比对我们加盐加密后的密码</code>的。在<code>service/database/schema/User.js</code>下增加下面的代码</p>
-<pre><code class="python">// 密码比对 实例方法
-userSchema.methods = {
-  //密码比对的方法  第一个： 客户端传递的； 数据库的
-  comparePassword: (_password, passWord) =&gt; {
-    return new Promise((resolve, reject) =&gt; {
-        bcrypt.compare(_password, passWord, (err, isMatch) =&gt; {
-            if (!err) resolve(isMatch)
-            else reject(err)
-        })
-    })
-  }
-}
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">//</span> 密码比对 实例方法
+userSchema<span class="token punctuation">.</span>methods <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token operator">//</span>密码比对的方法  第一个： 客户端传递的； 数据库的
+  comparePassword<span class="token punctuation">:</span> <span class="token punctuation">(</span>_password<span class="token punctuation">,</span> passWord<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> new Promise<span class="token punctuation">(</span><span class="token punctuation">(</span>resolve<span class="token punctuation">,</span> reject<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        bcrypt<span class="token punctuation">.</span>compare<span class="token punctuation">(</span>_password<span class="token punctuation">,</span> passWord<span class="token punctuation">,</span> <span class="token punctuation">(</span>err<span class="token punctuation">,</span> isMatch<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>!err<span class="token punctuation">)</span> resolve<span class="token punctuation">(</span>isMatch<span class="token punctuation">)</span>
+            <span class="token keyword">else</span> reject<span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>上面的代码声明了一个实例方法，方法叫做<code>comparePassword</code>，然后传递两个参数，一个是客户端密码，一个是数据库取出来的密码。用<code>bcrypt</code>提供的<code>compare 方法</code>就可以比对，最后包装成<code>Promise 返回</code>就可以了</p>
 <h5 id="编写登录的-Api-接口"><a href="#编写登录的-Api-接口" class="headerlink" title="编写登录的 Api 接口"></a>编写登录的 Api 接口</h5><p>进入<code>service/appApi/user.js</code>，增加一个 login 路由，并在路由内写入业务逻辑代码。</p>
-<pre><code class="python">// 用户登录
-router.post(&#39;/login&#39;, async (ctx) =&gt; {
-  // 得到前端传递过来的数据
-  let loginUser = ctx.request.body
-  console.log(loginUser)
-  let userName = loginUser.userName
-  let passWord = loginUser.passWord
-  // 引入User的model
-  const User = mongoose.model(&#39;User&#39;)
-  // 查找用户名是否存在，如果存在开始比对密码
-  await User.findOne({
-      userName: userName
-  }).exec()
-  .then(async (result) =&gt; {
-      if (result) {
-        //当用户名存在时，开始比对密码
-        console.log(result)
-        let newUser = new User() //因为是实例方法，所以要new出对象，才能调用
-        await newUser.comparePassword(passWord, result.passWord)
-            .then(isMatch =&gt; {
-                //返回比对结果
-                ctx.body = {
-                    code: 200,
-                    message: isMatch
-                }
-            })
-            .catch(error =&gt; {
-              //出现异常，返回异常
-              // console.log(error)
-              ctx.body = {
-                  code: 500,
-                  message: error
-              }
-            })
-    } else {
-      ctx.body = {
-          code: 200,
-          message: &#39;用户名不存在&#39;
-      }
-    }
-  })
-  .catch(error =&gt; {
-    ctx.body = {
-        code: 500,
-        message: error
-    }
-  })
-})
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">//</span> 用户登录
+router<span class="token punctuation">.</span>post<span class="token punctuation">(</span><span class="token string">'/login'</span><span class="token punctuation">,</span> <span class="token keyword">async</span> <span class="token punctuation">(</span>ctx<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+  <span class="token operator">//</span> 得到前端传递过来的数据
+  let loginUser <span class="token operator">=</span> ctx<span class="token punctuation">.</span>request<span class="token punctuation">.</span>body
+  console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>loginUser<span class="token punctuation">)</span>
+  let userName <span class="token operator">=</span> loginUser<span class="token punctuation">.</span>userName
+  let passWord <span class="token operator">=</span> loginUser<span class="token punctuation">.</span>passWord
+  <span class="token operator">//</span> 引入User的model
+  const User <span class="token operator">=</span> mongoose<span class="token punctuation">.</span>model<span class="token punctuation">(</span><span class="token string">'User'</span><span class="token punctuation">)</span>
+  <span class="token operator">//</span> 查找用户名是否存在，如果存在开始比对密码
+  <span class="token keyword">await</span> User<span class="token punctuation">.</span>findOne<span class="token punctuation">(</span><span class="token punctuation">{</span>
+      userName<span class="token punctuation">:</span> userName
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">exec</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span>then<span class="token punctuation">(</span><span class="token keyword">async</span> <span class="token punctuation">(</span>result<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>result<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token operator">//</span>当用户名存在时，开始比对密码
+        console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>result<span class="token punctuation">)</span>
+        let newUser <span class="token operator">=</span> new User<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">//</span>因为是实例方法，所以要new出对象，才能调用
+        <span class="token keyword">await</span> newUser<span class="token punctuation">.</span>comparePassword<span class="token punctuation">(</span>passWord<span class="token punctuation">,</span> result<span class="token punctuation">.</span>passWord<span class="token punctuation">)</span>
+            <span class="token punctuation">.</span>then<span class="token punctuation">(</span>isMatch <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+                <span class="token operator">//</span>返回比对结果
+                ctx<span class="token punctuation">.</span>body <span class="token operator">=</span> <span class="token punctuation">{</span>
+                    code<span class="token punctuation">:</span> <span class="token number">200</span><span class="token punctuation">,</span>
+                    message<span class="token punctuation">:</span> isMatch
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span>catch<span class="token punctuation">(</span>error <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+              <span class="token operator">//</span>出现异常，返回异常
+              <span class="token operator">//</span> console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>error<span class="token punctuation">)</span>
+              ctx<span class="token punctuation">.</span>body <span class="token operator">=</span> <span class="token punctuation">{</span>
+                  code<span class="token punctuation">:</span> <span class="token number">500</span><span class="token punctuation">,</span>
+                  message<span class="token punctuation">:</span> error
+              <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      ctx<span class="token punctuation">.</span>body <span class="token operator">=</span> <span class="token punctuation">{</span>
+          code<span class="token punctuation">:</span> <span class="token number">200</span><span class="token punctuation">,</span>
+          message<span class="token punctuation">:</span> <span class="token string">'用户名不存在'</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span>catch<span class="token punctuation">(</span>error <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    ctx<span class="token punctuation">.</span>body <span class="token operator">=</span> <span class="token punctuation">{</span>
+        code<span class="token punctuation">:</span> <span class="token number">500</span><span class="token punctuation">,</span>
+        message<span class="token punctuation">:</span> error
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h5 id="保存用户登录状态"><a href="#保存用户登录状态" class="headerlink" title="保存用户登录状态"></a>保存用户登录状态</h5><p>移动端的应用有一个特殊的地方，就是当用户登录一次后，下次就不用登录了。这时候登录的信息是存储到了<code>本地的 LocalStorage</code>里了。这个操作要等取得正确的登录状态以后再执行，也就是要在 axios 返回了登录成功结果以后执行</p>
-<pre><code class="python">//axios用户登录
-axiosLoginUser() {
-  //先把按钮进行loading状态，防止重复提交
-  this.openLoading = true;
-  axios({
-    url: url.login,
-    method: &quot;post&quot;,
-    data: {
-      userName: this.username,
-      passWord: this.password
-    }
-  })
-  .then(res =&gt; {
-    console.log(&quot;登录&quot;, res);
-    if (res.data.code === 200 &amp;&amp; res.data.message === true) {
-      new Promise((resolve, reject) =&gt; {
-        // 保存用户登录状态
-        localStorage.userInfo = {
-          userName: this.userName
-        };
-        setTimeout(() =&gt; {
-          resolve();
-        }, 500);
-      })
-        .then(() =&gt; {
-          Toast.success(&quot;登录成功&quot;);
-          this.$router.push(&quot;/&quot;);
-        })
-        .catch(err =&gt; {
-          Toast.fail(&quot;登录状态保存失败&quot;);
-          console.log(err);
-        });
-    } else {
-      Toast.fail(&quot;登录失败&quot;);
-      this.openLoading = false;
-    }
-  })
-  .catch(error =&gt; {
-    Toast.fail(&quot;登录失败&quot;);
-    this.openLoading = false;
-  });
-}
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">//</span>axios用户登录
+axiosLoginUser<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token operator">//</span>先把按钮进行loading状态，防止重复提交
+  this<span class="token punctuation">.</span>openLoading <span class="token operator">=</span> true<span class="token punctuation">;</span>
+  axios<span class="token punctuation">(</span><span class="token punctuation">{</span>
+    url<span class="token punctuation">:</span> url<span class="token punctuation">.</span>login<span class="token punctuation">,</span>
+    method<span class="token punctuation">:</span> <span class="token string">"post"</span><span class="token punctuation">,</span>
+    data<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      userName<span class="token punctuation">:</span> this<span class="token punctuation">.</span>username<span class="token punctuation">,</span>
+      passWord<span class="token punctuation">:</span> this<span class="token punctuation">.</span>password
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span>then<span class="token punctuation">(</span>res <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token string">"登录"</span><span class="token punctuation">,</span> res<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>res<span class="token punctuation">.</span>data<span class="token punctuation">.</span>code <span class="token operator">==</span><span class="token operator">=</span> <span class="token number">200</span> <span class="token operator">&amp;</span><span class="token operator">&amp;</span> res<span class="token punctuation">.</span>data<span class="token punctuation">.</span>message <span class="token operator">==</span><span class="token operator">=</span> true<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      new Promise<span class="token punctuation">(</span><span class="token punctuation">(</span>resolve<span class="token punctuation">,</span> reject<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        <span class="token operator">//</span> 保存用户登录状态
+        localStorage<span class="token punctuation">.</span>userInfo <span class="token operator">=</span> <span class="token punctuation">{</span>
+          userName<span class="token punctuation">:</span> this<span class="token punctuation">.</span>userName
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+        setTimeout<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+          resolve<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">500</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span>then<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+          Toast<span class="token punctuation">.</span>success<span class="token punctuation">(</span><span class="token string">"登录成功"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          this<span class="token punctuation">.</span>$router<span class="token punctuation">.</span>push<span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span>catch<span class="token punctuation">(</span>err <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+          Toast<span class="token punctuation">.</span>fail<span class="token punctuation">(</span><span class="token string">"登录状态保存失败"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+      Toast<span class="token punctuation">.</span>fail<span class="token punctuation">(</span><span class="token string">"登录失败"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      this<span class="token punctuation">.</span>openLoading <span class="token operator">=</span> false<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span>catch<span class="token punctuation">(</span>error <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    Toast<span class="token punctuation">.</span>fail<span class="token punctuation">(</span><span class="token string">"登录失败"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    this<span class="token punctuation">.</span>openLoading <span class="token operator">=</span> false<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>保存了用户登录状态以后，就有了一个是否登录的依据，然后就不会重复登录了，在已进入登录页面的<code>creadted</code>生命周期里，就判断是否已经登录</p>
-<pre><code class="python">created(){
-  if(localStorage.userInfo){
-      Toast.success(&#39;您已经登录&#39;)
-      this.$router.push(&#39;/&#39;)
-  }
-},
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python">created<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span>localStorage<span class="token punctuation">.</span>userInfo<span class="token punctuation">)</span><span class="token punctuation">{</span>
+      Toast<span class="token punctuation">.</span>success<span class="token punctuation">(</span><span class="token string">'您已经登录'</span><span class="token punctuation">)</span>
+      this<span class="token punctuation">.</span>$router<span class="token punctuation">.</span>push<span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="4、商品信息"><a href="#4、商品信息" class="headerlink" title="4、商品信息"></a>4、商品信息</h3><p>初次获取商品信息是通过<code>axios</code>请求<code>easy mock</code>获取的，但这次真实的从数据库中查出数据，并调用后台接口获得数据，然后在前端根据数据格式进行前端的编写。</p>
-<h4 id="4-1、编写后台数据接口"><a href="#4-1、编写后台数据接口" class="headerlink" title="4.1、编写后台数据接口"></a>4.1、编写后台数据接口</h4><pre><code class="python">router.post(&#39;/getDetailGoodsInfo&#39;, async (ctx) =&gt; {
-  try {
-    let goodsId = ctx.request.body.goodsId
-    const Goods = mongoose.model(&#39;Goods&#39;)
-    let result = await Goods.findOne({
-      ID: goodsId
-    }).exec()
-    ctx.body = {
-      code: 200,
-      message: result
-    }
-  } catch (err) {
-    ctx.body = {
-      code: 500,
-      message: err
-    }
-  }
-})
-</code></pre>
+<h4 id="4-1、编写后台数据接口"><a href="#4-1、编写后台数据接口" class="headerlink" title="4.1、编写后台数据接口"></a>4.1、编写后台数据接口</h4><pre class="line-numbers language-python"><code class="language-python">router<span class="token punctuation">.</span>post<span class="token punctuation">(</span><span class="token string">'/getDetailGoodsInfo'</span><span class="token punctuation">,</span> <span class="token keyword">async</span> <span class="token punctuation">(</span>ctx<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+  <span class="token keyword">try</span> <span class="token punctuation">{</span>
+    let goodsId <span class="token operator">=</span> ctx<span class="token punctuation">.</span>request<span class="token punctuation">.</span>body<span class="token punctuation">.</span>goodsId
+    const Goods <span class="token operator">=</span> mongoose<span class="token punctuation">.</span>model<span class="token punctuation">(</span><span class="token string">'Goods'</span><span class="token punctuation">)</span>
+    let result <span class="token operator">=</span> <span class="token keyword">await</span> Goods<span class="token punctuation">.</span>findOne<span class="token punctuation">(</span><span class="token punctuation">{</span>
+      ID<span class="token punctuation">:</span> goodsId
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">exec</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    ctx<span class="token punctuation">.</span>body <span class="token operator">=</span> <span class="token punctuation">{</span>
+      code<span class="token punctuation">:</span> <span class="token number">200</span><span class="token punctuation">,</span>
+      message<span class="token punctuation">:</span> result
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span> catch <span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    ctx<span class="token punctuation">.</span>body <span class="token operator">=</span> <span class="token punctuation">{</span>
+      code<span class="token punctuation">:</span> <span class="token number">500</span><span class="token punctuation">,</span>
+      message<span class="token punctuation">:</span> err
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>先获得了从前端得到的参数<code>goodsId</code>，然后得到<code>Goods</code>模型，用模型的<code>findOne</code>方法查找数据，查找出来进行返回。</p>
 <h4 id="4-2、商品详情页路由参数的传递"><a href="#4-2、商品详情页路由参数的传递" class="headerlink" title="4.2、商品详情页路由参数的传递"></a>4.2、商品详情页路由参数的传递</h4><ul>
 <li><strong>父组件</strong><code>ShoppingMall.vue</code>传递 goodsId 参数</li>
 </ul>
-<pre><code class="python">&lt;goods-info
-  :goodsId=&quot;item.goodsId&quot;
-  :goodsImage=&quot;item.image&quot;
-  :goodsName=&quot;item.name&quot;
-  :goodsPrice=&quot;item.price&quot;&gt;
-&lt;/goods-info&gt;
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">&lt;</span>goods<span class="token operator">-</span>info
+  <span class="token punctuation">:</span>goodsId<span class="token operator">=</span><span class="token string">"item.goodsId"</span>
+  <span class="token punctuation">:</span>goodsImage<span class="token operator">=</span><span class="token string">"item.image"</span>
+  <span class="token punctuation">:</span>goodsName<span class="token operator">=</span><span class="token string">"item.name"</span>
+  <span class="token punctuation">:</span>goodsPrice<span class="token operator">=</span><span class="token string">"item.price"</span><span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>goods<span class="token operator">-</span>info<span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li><strong>子组件</strong><code>goodsInfoComponent.vue文件</code>接收<strong><code>goodsId</code>参数</strong>并传递参数给<strong>孙组件</strong></li>
 </ul>
 <p>接收<strong><code>goodsId</code></strong>参数</p>
-<pre><code class="python">props:[&#39;goodsImage&#39;,&#39;goodsName&#39;,&#39;goodsPrice&#39;,&#39;goodsId&#39;],
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python">props<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'goodsImage'</span><span class="token punctuation">,</span><span class="token string">'goodsName'</span><span class="token punctuation">,</span><span class="token string">'goodsPrice'</span><span class="token punctuation">,</span><span class="token string">'goodsId'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><strong>跳转</strong>和<strong>传递参数给孙组件</strong>:</p>
-<pre><code class="python">methods: {
-  goGoodsPage() {
-    this.$router.push({
-      name: &#39;Goods&#39;,
-      query: {
-        goodsId: this.goodsId   // 携带参数路由跳转
-      }
-    })
-  }
-}
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python">methods<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+  goGoodsPage<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    this<span class="token punctuation">.</span>$router<span class="token punctuation">.</span>push<span class="token punctuation">(</span><span class="token punctuation">{</span>
+      name<span class="token punctuation">:</span> <span class="token string">'Goods'</span><span class="token punctuation">,</span>
+      query<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        goodsId<span class="token punctuation">:</span> this<span class="token punctuation">.</span>goodsId   <span class="token operator">//</span> 携带参数路由跳转
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>跳转方式为<code>this.$router.push({path:&#39;/AddShop&#39;,query:{id:val.ID}})</code></strong></p>
 <p><strong>在目标页面通过<code>this.$route.query.id</code>获取参数</strong></p>
 <ul>
 <li><strong>孙组件</strong><code>Goods.vue</code>接收路由传递的参数</li>
 </ul>
 <p>接收参数可以使用<strong><code>this.$route.query.goodsId</code></strong>,这样就可以得到又其他页面传递过来的参数了。 在<code>src/components/pages/Goods.vue</code>的<strong><code>created</code></strong>生命周期里修改</p>
-<pre><code class="python">created() {
-  this.goodsId = this.$route.query.goodsId
-  console.log(this.goodsId)
-  this.getInfo()
-}
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python">created<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  this<span class="token punctuation">.</span>goodsId <span class="token operator">=</span> this<span class="token punctuation">.</span>$route<span class="token punctuation">.</span>query<span class="token punctuation">.</span>goodsId
+  console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>this<span class="token punctuation">.</span>goodsId<span class="token punctuation">)</span>
+  this<span class="token punctuation">.</span>getInfo<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h4 id="4-3、商品详情页面"><a href="#4-3、商品详情页面" class="headerlink" title="4.3、商品详情页面"></a>4.3、商品详情页面</h4><p>主要涉及前端页面，无需累赘</p>
 <p>通过<code>axios</code>获取数据后，进行赋值时，严谨的写法，应该在赋值前判断一下<code>code</code>的值和<code>message</code>不为空</p>
-<pre><code class="python">if (response.data.code == 200 &amp;&amp; response.data.message) {
-    this.goodsInfo = response.data.message
-  } else {
-    Toast(&#39;服务器错误，数据取得失败&#39;)
-}
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">if</span> <span class="token punctuation">(</span>response<span class="token punctuation">.</span>data<span class="token punctuation">.</span>code <span class="token operator">==</span> <span class="token number">200</span> <span class="token operator">&amp;</span><span class="token operator">&amp;</span> response<span class="token punctuation">.</span>data<span class="token punctuation">.</span>message<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    this<span class="token punctuation">.</span>goodsInfo <span class="token operator">=</span> response<span class="token punctuation">.</span>data<span class="token punctuation">.</span>message
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    Toast<span class="token punctuation">(</span><span class="token string">'服务器错误，数据取得失败'</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>写入商品详细信息后，会发现图片之间是有空隙的，并不能完美的相连。这是因为每个图片后边是有空格的，而图片占了宽的 100%，所以空格被单独挤出了一行。<br>解决方法很简单，只要<strong>把字体设置为 0</strong>就好，但是这样是有弊端的，就是以后如果有图文混排就会出现不显示字体的 BUG。所以最好的解决方案是后端插入的时候就取消掉空格。</p>
 <h4 id="4-4、商品详细分类页面-API"><a href="#4-4、商品详细分类页面-API" class="headerlink" title="4.4、商品详细分类页面 API"></a>4.4、商品详细分类页面 API</h4><h5 id="读取大类别的-API"><a href="#读取大类别的-API" class="headerlink" title="读取大类别的 API"></a>读取大类别的 API</h5><p>在<code>/service/appApi/goods.js</code>里增加一个<strong><code>新的路由getCategoryList</code></strong></p>
-<pre><code class="python">// 读取大类
-router.get(&quot;/getCategoryList&quot;, async ctx =&gt; {
-    try {
-        const Category = mongoose.model(&quot;Category&quot;);
-        let res = await Category.find().exec();
-        ctx.body = {
-            code: 200,
-            message: res
-        };
-    } catch (error) {
-        ctx.body = {
-            code: 500,
-            message: error
-        };
-    }
-})
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">//</span> 读取大类
+router<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">"/getCategoryList"</span><span class="token punctuation">,</span> <span class="token keyword">async</span> ctx <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token keyword">try</span> <span class="token punctuation">{</span>
+        const Category <span class="token operator">=</span> mongoose<span class="token punctuation">.</span>model<span class="token punctuation">(</span><span class="token string">"Category"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        let res <span class="token operator">=</span> <span class="token keyword">await</span> Category<span class="token punctuation">.</span>find<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">exec</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        ctx<span class="token punctuation">.</span>body <span class="token operator">=</span> <span class="token punctuation">{</span>
+            code<span class="token punctuation">:</span> <span class="token number">200</span><span class="token punctuation">,</span>
+            message<span class="token punctuation">:</span> res
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> catch <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        ctx<span class="token punctuation">.</span>body <span class="token operator">=</span> <span class="token punctuation">{</span>
+            code<span class="token punctuation">:</span> <span class="token number">500</span><span class="token punctuation">,</span>
+            message<span class="token punctuation">:</span> error
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h5 id="读取小类别的-API"><a href="#读取小类别的-API" class="headerlink" title="读取小类别的 API"></a>读取小类别的 API</h5><p>在<code>/service/appApi/goods.js</code>里增加一个<strong><code>新的路由getCategorySubList</code></strong></p>
-<pre><code class="python">// 读取小类
-router.post(&quot;/getCategorySubList&quot;, async ctx =&gt; {
-    try {
-        let categoryId = ctx.request.body.categoryId; // 大类id
-        const CategorySub = mongoose.model(&quot;CategorySub&quot;);
-        let res = await CategorySub.find({
-            MALL_CATEGORY_ID: categoryId // 根据大类id查找
-        }).exec();
-        ctx.body = {
-            code: 200,
-            message: res
-        };
-    } catch (error) {
-        ctx.body = {
-            code: 500,
-            message: err
-        }
-    }
-})
-</code></pre>
-<h5 id="根据类别获取商品列表"><a href="#根据类别获取商品列表" class="headerlink" title="根据类别获取商品列表"></a>根据类别获取商品列表</h5><pre><code class="python">// 根据类别获取商品列表
-router.post(&quot;/getGoodsListByCategorySubID&quot;, async ctx =&gt; {
-try {
-    let categorySubId = ctx.request.body.categorySubId; // 子类ID号
-    let page = ctx.request.body.page; // 当前页数
-    let num = 10; // 每页显示数量
-    let start = (page - 1) * num; // 开始位置
-    const Goods = mongoose.model(&quot;Goods&quot;);
-    let result = await Goods.find({
-    SUB_ID: categorySubId
-    })
-    .skip(start)
-    .limit(num)
-    .exec();
-    /**
-    * mongodb数据库查询分页信息
-    *
-    * db.表名.find().skip((page-1)*pageSize).limit(pageSize)
-    * skip: 跳过当前已开始的
-    * limlt: 每页限制显示的数目
-    */
-    ctx.body = {
-    code: 200,
-    message: result
-    };
-} catch (error) {
-    ctx.body = {
-    code: 500,
-    message: error
-    };
-}
-});
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">//</span> 读取小类
+router<span class="token punctuation">.</span>post<span class="token punctuation">(</span><span class="token string">"/getCategorySubList"</span><span class="token punctuation">,</span> <span class="token keyword">async</span> ctx <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token keyword">try</span> <span class="token punctuation">{</span>
+        let categoryId <span class="token operator">=</span> ctx<span class="token punctuation">.</span>request<span class="token punctuation">.</span>body<span class="token punctuation">.</span>categoryId<span class="token punctuation">;</span> <span class="token operator">//</span> 大类id
+        const CategorySub <span class="token operator">=</span> mongoose<span class="token punctuation">.</span>model<span class="token punctuation">(</span><span class="token string">"CategorySub"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        let res <span class="token operator">=</span> <span class="token keyword">await</span> CategorySub<span class="token punctuation">.</span>find<span class="token punctuation">(</span><span class="token punctuation">{</span>
+            MALL_CATEGORY_ID<span class="token punctuation">:</span> categoryId <span class="token operator">//</span> 根据大类id查找
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">exec</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        ctx<span class="token punctuation">.</span>body <span class="token operator">=</span> <span class="token punctuation">{</span>
+            code<span class="token punctuation">:</span> <span class="token number">200</span><span class="token punctuation">,</span>
+            message<span class="token punctuation">:</span> res
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> catch <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        ctx<span class="token punctuation">.</span>body <span class="token operator">=</span> <span class="token punctuation">{</span>
+            code<span class="token punctuation">:</span> <span class="token number">500</span><span class="token punctuation">,</span>
+            message<span class="token punctuation">:</span> err
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h5 id="根据类别获取商品列表"><a href="#根据类别获取商品列表" class="headerlink" title="根据类别获取商品列表"></a>根据类别获取商品列表</h5><pre class="line-numbers language-python"><code class="language-python"><span class="token operator">//</span> 根据类别获取商品列表
+router<span class="token punctuation">.</span>post<span class="token punctuation">(</span><span class="token string">"/getGoodsListByCategorySubID"</span><span class="token punctuation">,</span> <span class="token keyword">async</span> ctx <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+<span class="token keyword">try</span> <span class="token punctuation">{</span>
+    let categorySubId <span class="token operator">=</span> ctx<span class="token punctuation">.</span>request<span class="token punctuation">.</span>body<span class="token punctuation">.</span>categorySubId<span class="token punctuation">;</span> <span class="token operator">//</span> 子类ID号
+    let page <span class="token operator">=</span> ctx<span class="token punctuation">.</span>request<span class="token punctuation">.</span>body<span class="token punctuation">.</span>page<span class="token punctuation">;</span> <span class="token operator">//</span> 当前页数
+    let num <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span> <span class="token operator">//</span> 每页显示数量
+    let start <span class="token operator">=</span> <span class="token punctuation">(</span>page <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">*</span> num<span class="token punctuation">;</span> <span class="token operator">//</span> 开始位置
+    const Goods <span class="token operator">=</span> mongoose<span class="token punctuation">.</span>model<span class="token punctuation">(</span><span class="token string">"Goods"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    let result <span class="token operator">=</span> <span class="token keyword">await</span> Goods<span class="token punctuation">.</span>find<span class="token punctuation">(</span><span class="token punctuation">{</span>
+    SUB_ID<span class="token punctuation">:</span> categorySubId
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span>skip<span class="token punctuation">(</span>start<span class="token punctuation">)</span>
+    <span class="token punctuation">.</span>limit<span class="token punctuation">(</span>num<span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token keyword">exec</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">/</span><span class="token operator">**</span>
+    <span class="token operator">*</span> mongodb数据库查询分页信息
+    <span class="token operator">*</span>
+    <span class="token operator">*</span> db<span class="token punctuation">.</span>表名<span class="token punctuation">.</span>find<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>skip<span class="token punctuation">(</span><span class="token punctuation">(</span>page<span class="token number">-1</span><span class="token punctuation">)</span><span class="token operator">*</span>pageSize<span class="token punctuation">)</span><span class="token punctuation">.</span>limit<span class="token punctuation">(</span>pageSize<span class="token punctuation">)</span>
+    <span class="token operator">*</span> skip<span class="token punctuation">:</span> 跳过当前已开始的
+    <span class="token operator">*</span> limlt<span class="token punctuation">:</span> 每页限制显示的数目
+    <span class="token operator">*</span><span class="token operator">/</span>
+    ctx<span class="token punctuation">.</span>body <span class="token operator">=</span> <span class="token punctuation">{</span>
+    code<span class="token punctuation">:</span> <span class="token number">200</span><span class="token punctuation">,</span>
+    message<span class="token punctuation">:</span> result
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> catch <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    ctx<span class="token punctuation">.</span>body <span class="token operator">=</span> <span class="token punctuation">{</span>
+    code<span class="token punctuation">:</span> <span class="token number">500</span><span class="token punctuation">,</span>
+    message<span class="token punctuation">:</span> error
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h4 id="4-5、-商品列表页"><a href="#4-5、-商品列表页" class="headerlink" title="4.5、 商品列表页"></a>4.5、 商品列表页</h4><p>在<code>/src/components/pages</code>文件夹下新建一个<code>CategoryList.vue</code>页面，该商品列表页面会涉及<strong>上拉加载</strong>，<strong>下拉刷新</strong>，<strong>Tab 动态切换</strong>等</p>
 <h5 id="滑动切换和吸顶效果"><a href="#滑动切换和吸顶效果" class="headerlink" title="滑动切换和吸顶效果"></a>滑动切换和吸顶效果</h5><p>利用<strong><code>van-tabs</code></strong> 实现<code>Tab页</code>滑动切换<code>swipeable</code>和吸顶效果<code>sticky</code></p>
-<pre><code class="python">&lt;van-tabs swipeable sticky&gt;
-    #########
-&lt;/van-tabs&gt;
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">&lt;</span>van<span class="token operator">-</span>tabs swipeable sticky<span class="token operator">></span>
+    <span class="token comment" spellcheck="true">#########</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>van<span class="token operator">-</span>tabs<span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <h5 id="左侧大类切换交互效果"><a href="#左侧大类切换交互效果" class="headerlink" title="左侧大类切换交互效果"></a>左侧大类切换交互效果</h5><p>列表页左侧的大类布局和交互效果主要用到的知识点有<strong><code>生命周期</code></strong>，<strong><code>v-for循环</code></strong>，<strong><code>class的动态绑定</code></strong>和<strong><code>操作原生DOM</code></strong></p>
 <ol>
 <li><p>在<code>data</code>属性里注册<code>category</code>变量为数组类型，且用<code>getCategory()</code>为<code>category</code>赋值</p>
-<pre><code class="python"> data() {
-   return {
-     category : [],     // 大类列表导航栏
-     categoryIndex : 0  // 控制导航索引
-   }
- }
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"> data<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+   <span class="token keyword">return</span> <span class="token punctuation">{</span>
+     category <span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>     <span class="token operator">//</span> 大类列表导航栏
+     categoryIndex <span class="token punctuation">:</span> <span class="token number">0</span>  <span class="token operator">//</span> 控制导航索引
+   <span class="token punctuation">}</span>
+ <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>在<code>template</code>部分利用<code>li</code>标签把数据循环出来，并事先写好 css</p>
-<pre><code class="python">&lt;ul&gt;
-  &lt;li v-for=&quot;(item,index) in category&quot; :key=&quot;index&quot;&gt;
-    {{item.MALL_CATEGORY_NAME}}
-  &lt;/li&gt;
-&lt;/ul&gt;
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">&lt;</span>ul<span class="token operator">></span>
+  <span class="token operator">&lt;</span>li v<span class="token operator">-</span><span class="token keyword">for</span><span class="token operator">=</span><span class="token string">"(item,index) in category"</span> <span class="token punctuation">:</span>key<span class="token operator">=</span><span class="token string">"index"</span><span class="token operator">></span>
+    <span class="token punctuation">{</span><span class="token punctuation">{</span>item<span class="token punctuation">.</span>MALL_CATEGORY_NAME<span class="token punctuation">}</span><span class="token punctuation">}</span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>li<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>ul<span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>在生命周期<strong><code>mounted</code></strong>里加入<code>原生JS</code>，让左侧当行适应页面高度</p>
-<pre><code class="python">mounted(){
-  let winHeight = document.documentElement.clientHeight
-  document.getElementById(&quot;leftNav&quot;).style.height= winHeight-46 +&#39;px&#39;
-}
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python">mounted<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  let winHeight <span class="token operator">=</span> document<span class="token punctuation">.</span>documentElement<span class="token punctuation">.</span>clientHeight
+  document<span class="token punctuation">.</span>getElementById<span class="token punctuation">(</span><span class="token string">"leftNav"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>style<span class="token punctuation">.</span>height<span class="token operator">=</span> winHeight<span class="token number">-46</span> <span class="token operator">+</span><span class="token string">'px'</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>点击后的交互效果制作-反白操作</p>
 <p>反白css样式</p>
-<pre><code class="python">.categoryActive{
-    background-color: #fff;
-}
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token punctuation">.</span>categoryActive<span class="token punctuation">{</span>
+    background<span class="token operator">-</span>color<span class="token punctuation">:</span> <span class="token comment" spellcheck="true">#fff;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>编写<code>clickCategory</code>方法，点击大类时调用改方法，方法就是把点击的索引传递过去，然后付给刚才注册的<code>categoryIndex</code>属性</p>
-<pre><code class="python">//点击大类的方法
-clickCategory(index){
-  this.categoryIndex = index
-}
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">//</span>点击大类的方法
+clickCategory<span class="token punctuation">(</span>index<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  this<span class="token punctuation">.</span>categoryIndex <span class="token operator">=</span> index
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>在<code>template</code>里注册这些方法，并进行<strong><code>class动态绑定</code></strong></p>
-<pre><code class="python">&lt;li @click=&quot;clickCategory(index)&quot; :class=&quot;{categoryActive:categoryIndex==index}&quot;  v-for=&quot;(item,index) in category&quot; :key=&quot;index&quot;&gt;
-    {{item.MALL_CATEGORY_NAME}}
-&lt;/li&gt;
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">&lt;</span>li @click<span class="token operator">=</span><span class="token string">"clickCategory(index)"</span> <span class="token punctuation">:</span><span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"{categoryActive:categoryIndex==index}"</span>  v<span class="token operator">-</span><span class="token keyword">for</span><span class="token operator">=</span><span class="token string">"(item,index) in category"</span> <span class="token punctuation">:</span>key<span class="token operator">=</span><span class="token string">"index"</span><span class="token operator">></span>
+    <span class="token punctuation">{</span><span class="token punctuation">{</span>item<span class="token punctuation">.</span>MALL_CATEGORY_NAME<span class="token punctuation">}</span><span class="token punctuation">}</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>li<span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 </li>
 </ol>
 <h5 id="一二级分类的联动效果制作"><a href="#一二级分类的联动效果制作" class="headerlink" title="一二级分类的联动效果制作"></a>一二级分类的联动效果制作</h5><p>实现一、二级分类的联动效果，说的简单点就是当点击一级分类时，二级分类要根据点击的一级分类进行变化。联动效果直接使用<code>Vant</code>的<code>Tab组件</code>来实现。</p>
 <ol>
 <li><p>根据大类<code>categoryId</code>获取小类</p>
 <p> 在<code>CategoryList</code>文件的<code>methods</code>属性里，加入一个<code>getCategorySubByCategoryId</code>方法。这里主要使用<code>axios</code>来获取后端的数据</p>
-<pre><code class="python"> // 根据大类id获取右侧小类列表导航栏
- getCategorySubByCategoryId(categoryId) {
-     axios({
-         url: url.getCategorySubList,
-         method: &quot;post&quot;,
-         data: {
-         categoryId: categoryId // 大类id
-         }
-     })
-     .then(res =&gt; {
-         console.log(&#39;小类列表导航栏&#39;, res.data);
-         if (res.data.code == 200 &amp;&amp; res.data.message) {
-         this.categorySub = res.data.message;
-         this.active = 0;
-         this.categorySubId = this.categorySub[0].ID // 读取小类别
-         this.onLoad()
-         } else {
-         Toast(&quot;数据取得失败&quot;);
-         }
-     })
-     .catch(error =&gt; {
-         console.log(error);
-     });
- }
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"> <span class="token operator">//</span> 根据大类id获取右侧小类列表导航栏
+ getCategorySubByCategoryId<span class="token punctuation">(</span>categoryId<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     axios<span class="token punctuation">(</span><span class="token punctuation">{</span>
+         url<span class="token punctuation">:</span> url<span class="token punctuation">.</span>getCategorySubList<span class="token punctuation">,</span>
+         method<span class="token punctuation">:</span> <span class="token string">"post"</span><span class="token punctuation">,</span>
+         data<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+         categoryId<span class="token punctuation">:</span> categoryId <span class="token operator">//</span> 大类id
+         <span class="token punctuation">}</span>
+     <span class="token punctuation">}</span><span class="token punctuation">)</span>
+     <span class="token punctuation">.</span>then<span class="token punctuation">(</span>res <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+         console<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token string">'小类列表导航栏'</span><span class="token punctuation">,</span> res<span class="token punctuation">.</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+         <span class="token keyword">if</span> <span class="token punctuation">(</span>res<span class="token punctuation">.</span>data<span class="token punctuation">.</span>code <span class="token operator">==</span> <span class="token number">200</span> <span class="token operator">&amp;</span><span class="token operator">&amp;</span> res<span class="token punctuation">.</span>data<span class="token punctuation">.</span>message<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+         this<span class="token punctuation">.</span>categorySub <span class="token operator">=</span> res<span class="token punctuation">.</span>data<span class="token punctuation">.</span>message<span class="token punctuation">;</span>
+         this<span class="token punctuation">.</span>active <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+         this<span class="token punctuation">.</span>categorySubId <span class="token operator">=</span> this<span class="token punctuation">.</span>categorySub<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>ID <span class="token operator">//</span> 读取小类别
+         this<span class="token punctuation">.</span>onLoad<span class="token punctuation">(</span><span class="token punctuation">)</span>
+         <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+         Toast<span class="token punctuation">(</span><span class="token string">"数据取得失败"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         <span class="token punctuation">}</span>
+     <span class="token punctuation">}</span><span class="token punctuation">)</span>
+     <span class="token punctuation">.</span>catch<span class="token punctuation">(</span>error <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+         console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>改写<code>clickCategory</code>方法，加入一个<code>categoryId参数</code>，然后在方法里调用刚才写的<code>getCategorySubByCategoryId</code>方法，将大类id传入获取小类信息的方法中</p>
-<pre><code class="python"> clickCategory(index, categoryId) {
-     this.categoryIndex = index
-     this.getCategorySubByCategoryId(categoryId)
- }
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"> clickCategory<span class="token punctuation">(</span>index<span class="token punctuation">,</span> categoryId<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     this<span class="token punctuation">.</span>categoryIndex <span class="token operator">=</span> index
+     this<span class="token punctuation">.</span>getCategorySubByCategoryId<span class="token punctuation">(</span>categoryId<span class="token punctuation">)</span>
+ <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>用<code>Vant`</code>的Tabs组件·`实现联动</p>
 <p> 直接使用Vant提供的Tabs组建来实现联动</p>
-<pre><code class="python"> &lt;van-tabs v-model=&quot;active&quot;&gt;
-   &lt;van-tab v-for=&quot;(item, index) in categorySub&quot; :key=&quot;index&quot; :title=&quot;item.MALL_SUB_NAME&quot;&gt;
-   &lt;/van-tab&gt;
- &lt;/van-tabs&gt;
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"> <span class="token operator">&lt;</span>van<span class="token operator">-</span>tabs v<span class="token operator">-</span>model<span class="token operator">=</span><span class="token string">"active"</span><span class="token operator">></span>
+   <span class="token operator">&lt;</span>van<span class="token operator">-</span>tab v<span class="token operator">-</span><span class="token keyword">for</span><span class="token operator">=</span><span class="token string">"(item, index) in categorySub"</span> <span class="token punctuation">:</span>key<span class="token operator">=</span><span class="token string">"index"</span> <span class="token punctuation">:</span>title<span class="token operator">=</span><span class="token string">"item.MALL_SUB_NAME"</span><span class="token operator">></span>
+   <span class="token operator">&lt;</span><span class="token operator">/</span>van<span class="token operator">-</span>tab<span class="token operator">></span>
+ <span class="token operator">&lt;</span><span class="token operator">/</span>van<span class="token operator">-</span>tabs<span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 </ol>
 <h4 id="4-6、Koa2分页服务制作"><a href="#4-6、Koa2分页服务制作" class="headerlink" title="4.6、Koa2分页服务制作"></a>4.6、Koa2分页服务制作</h4><p>制作<code>Koa2</code>中的数据读取服务了</p>
-<pre><code class="python">// 根据类别获取商品列表
-router.post(&#39;/getGoodsListByCategorySubID&#39;, async ctx =&gt; {
-    try {
-        let categorySubId = ctx.request.body.categorySubId // 子类ID号
-        let page = ctx.request.body.page // 当前页数
-        let num = 10 // 每页显示数量
-        let start = (page - 1) * num // 开始位置
-        const Goods = mongoose.model(&#39;Goods&#39;)
-        let result = await Goods.find({
-            SUB_ID: categorySubId
-        }).skip(start).limit(num).exec()
-        /**
-         * mongodb数据库查询分页信息
-         * 
-         * db.表名.find().skip((page-1)*pageSize).limit(pageSize)
-         * skip: 跳过当前已开始的
-         * limlt: 每页限制显示的数目
-         */
-        ctx.body = {
-            code: 200,
-            message: result
-        }
-    } catch (error) {
-        ctx.body = {
-            code: 500,
-            message: error
-        }
-    }
-})
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">//</span> 根据类别获取商品列表
+router<span class="token punctuation">.</span>post<span class="token punctuation">(</span><span class="token string">'/getGoodsListByCategorySubID'</span><span class="token punctuation">,</span> <span class="token keyword">async</span> ctx <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token keyword">try</span> <span class="token punctuation">{</span>
+        let categorySubId <span class="token operator">=</span> ctx<span class="token punctuation">.</span>request<span class="token punctuation">.</span>body<span class="token punctuation">.</span>categorySubId <span class="token operator">//</span> 子类ID号
+        let page <span class="token operator">=</span> ctx<span class="token punctuation">.</span>request<span class="token punctuation">.</span>body<span class="token punctuation">.</span>page <span class="token operator">//</span> 当前页数
+        let num <span class="token operator">=</span> <span class="token number">10</span> <span class="token operator">//</span> 每页显示数量
+        let start <span class="token operator">=</span> <span class="token punctuation">(</span>page <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">*</span> num <span class="token operator">//</span> 开始位置
+        const Goods <span class="token operator">=</span> mongoose<span class="token punctuation">.</span>model<span class="token punctuation">(</span><span class="token string">'Goods'</span><span class="token punctuation">)</span>
+        let result <span class="token operator">=</span> <span class="token keyword">await</span> Goods<span class="token punctuation">.</span>find<span class="token punctuation">(</span><span class="token punctuation">{</span>
+            SUB_ID<span class="token punctuation">:</span> categorySubId
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span>skip<span class="token punctuation">(</span>start<span class="token punctuation">)</span><span class="token punctuation">.</span>limit<span class="token punctuation">(</span>num<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">exec</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token operator">/</span><span class="token operator">**</span>
+         <span class="token operator">*</span> mongodb数据库查询分页信息
+         <span class="token operator">*</span> 
+         <span class="token operator">*</span> db<span class="token punctuation">.</span>表名<span class="token punctuation">.</span>find<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>skip<span class="token punctuation">(</span><span class="token punctuation">(</span>page<span class="token number">-1</span><span class="token punctuation">)</span><span class="token operator">*</span>pageSize<span class="token punctuation">)</span><span class="token punctuation">.</span>limit<span class="token punctuation">(</span>pageSize<span class="token punctuation">)</span>
+         <span class="token operator">*</span> skip<span class="token punctuation">:</span> 跳过当前已开始的
+         <span class="token operator">*</span> limlt<span class="token punctuation">:</span> 每页限制显示的数目
+         <span class="token operator">*</span><span class="token operator">/</span>
+        ctx<span class="token punctuation">.</span>body <span class="token operator">=</span> <span class="token punctuation">{</span>
+            code<span class="token punctuation">:</span> <span class="token number">200</span><span class="token punctuation">,</span>
+            message<span class="token punctuation">:</span> result
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span> catch <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        ctx<span class="token punctuation">.</span>body <span class="token operator">=</span> <span class="token punctuation">{</span>
+            code<span class="token punctuation">:</span> <span class="token number">500</span><span class="token punctuation">,</span>
+            message<span class="token punctuation">:</span> error
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>在前端对应页面，增加<code>getGoodList</code>方法，这个方法里传递两个参数，第一个是<strong>商品的子分类</strong>，第二个是<strong>请求分类的页数</strong></p>
-<pre><code class="python">data: {
-  categorySubId: this.categorySubId,  // 商品子类别id
-  page: this.page
-}
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python">data<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+  categorySubId<span class="token punctuation">:</span> this<span class="token punctuation">.</span>categorySubId<span class="token punctuation">,</span>  <span class="token operator">//</span> 商品子类别id
+  page<span class="token punctuation">:</span> this<span class="token punctuation">.</span>page
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>在下拉实现刷新获取数据时，需要使用<strong><code>concat</code></strong>合并数据,并且在没有数据时，上拉加载应禁止</p>
-<pre><code class="python">if (res.data.code === 200 &amp;&amp; res.data.message.length) {
- this.page++;
-  this.goodList = this.goodList.concat(res.data.message);
-} else {
-  // 没有数据 上拉加载禁止
-  this.finished = true;
-}
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">if</span> <span class="token punctuation">(</span>res<span class="token punctuation">.</span>data<span class="token punctuation">.</span>code <span class="token operator">==</span><span class="token operator">=</span> <span class="token number">200</span> <span class="token operator">&amp;</span><span class="token operator">&amp;</span> res<span class="token punctuation">.</span>data<span class="token punctuation">.</span>message<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+ this<span class="token punctuation">.</span>page<span class="token operator">+</span><span class="token operator">+</span><span class="token punctuation">;</span>
+  this<span class="token punctuation">.</span>goodList <span class="token operator">=</span> this<span class="token punctuation">.</span>goodList<span class="token punctuation">.</span>concat<span class="token punctuation">(</span>res<span class="token punctuation">.</span>data<span class="token punctuation">.</span>message<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+  <span class="token operator">//</span> 没有数据 上拉加载禁止
+  this<span class="token punctuation">.</span>finished <span class="token operator">=</span> true<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h5 id="Vue中图片失效替补图片的制作方法"><a href="#Vue中图片失效替补图片的制作方法" class="headerlink" title="Vue中图片失效替补图片的制作方法"></a>Vue中图片失效替补图片的制作方法</h5><p>在实际项目中，一些图片已经失效，但又不允许这样直接显示图片失效的，需要显示一个替补图片</p>
 <p>首先是在<code>data</code>中定义一个替补图片</p>
-<pre><code class="python">errorImg: &#39;this.src=&quot;&#39;+ require(&#39;@/assets/images/error.png&#39;)+&#39;&quot;&#39;
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python">errorImg<span class="token punctuation">:</span> <span class="token string">'this.src="'</span><span class="token operator">+</span> require<span class="token punctuation">(</span><span class="token string">'@/assets/images/error.png'</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token string">'"'</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>然后在图片位置加入<strong><code>onerror事件</code></strong>就ok了</p>
-<pre><code class="python">&lt;div class=&quot;list-item-img&quot;&gt;
-    &lt;img :src=&quot;item.IMAGE1&quot; width=&quot;100%&quot; :onerror=&quot;errorImg&quot;/&gt;
-&lt;/div&gt;
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"list-item-img"</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>img <span class="token punctuation">:</span>src<span class="token operator">=</span><span class="token string">"item.IMAGE1"</span> width<span class="token operator">=</span><span class="token string">"100%"</span> <span class="token punctuation">:</span>onerror<span class="token operator">=</span><span class="token string">"errorImg"</span><span class="token operator">/</span><span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <h4 id="4-7、购物车制作"><a href="#4-7、购物车制作" class="headerlink" title="4.7、购物车制作"></a>4.7、购物车制作</h4><p>购物车页面不合后台交互，并且还要保持用户数据的<strong>持久化</strong>，主要用于在<code>H5</code>新增<strong><code>localStorage本地存储</code></strong>里</p>
 <h5 id="获取购物车数据"><a href="#获取购物车数据" class="headerlink" title="获取购物车数据"></a>获取购物车数据</h5><p>进入页面要作的第一件事就是取得<code>localStorage</code>里的数据，先在<code>data</code>里注册两个属性<code>cartInfo</code>(购物车中商品的信息)和<code>isEmpty</code>（购物是否为空的标识，方便页面呈现）</p>
-<pre><code class="python">// 判断localStorage里是否有购物车数据
-getCartInfo() {
-  if (localStorage.cartInfo) {
-    this.cartInfo = JSON.parse(localStorage.cartInfo);
-  }
-  console.log(&quot;cartInfo:&quot;, JSON.stringify(this.cartInfo));
-  this.isEmpty = this.cartInfo.length &gt; 0 ? true : false;
-}
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">//</span> 判断localStorage里是否有购物车数据
+getCartInfo<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>localStorage<span class="token punctuation">.</span>cartInfo<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    this<span class="token punctuation">.</span>cartInfo <span class="token operator">=</span> JSON<span class="token punctuation">.</span>parse<span class="token punctuation">(</span>localStorage<span class="token punctuation">.</span>cartInfo<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  console<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token string">"cartInfo:"</span><span class="token punctuation">,</span> JSON<span class="token punctuation">.</span>stringify<span class="token punctuation">(</span>this<span class="token punctuation">.</span>cartInfo<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  this<span class="token punctuation">.</span>isEmpty <span class="token operator">=</span> this<span class="token punctuation">.</span>cartInfo<span class="token punctuation">.</span>length <span class="token operator">></span> <span class="token number">0</span> ? true <span class="token punctuation">:</span> false<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><code>localStorage</code>里的数据本为字符串，需要使用<code>JSON.parse</code>转化为对象对其操作</p>
 <h5 id="向购物车中添加商品"><a href="#向购物车中添加商品" class="headerlink" title="向购物车中添加商品"></a>向购物车中添加商品</h5><p>购物车商品的添加，其实就是对<code>localStorage</code>的操作和<strong>数组查找</strong>的使用，也就是<code>array.find()</code>操作.。该方法写在<code>Goods.vue</code>页面里，也就是商品详情页面，这样作的好处是以后好扩展，并且不用传递参数，直接操作<code>localStoarge</code></p>
-<pre><code class="python">// 添加商品到购物车
-addGoodsToCart() {
-  // localStorage.removeItem(&#39;cartInfo&#39;)
-  // 取出本地购物车中的商品并查重
-  let cartInfo = localStorage.cartInfo ? JSON.parse(localStorage.cartInfo) :[]
-  let isHaveGoods = cartInfo.find(cart =&gt; cart.goodsId == this.goodsId)
-  console.log(&#39;isHaveGoods&#39;,isHaveGoods)
-  if(!isHaveGoods) {
-    // 购物车中所属的商品信息
-    let newGoods = {
-      goodsId: this.goodsInfo.ID,
-      name: this.goodsInfo.NAME,
-      price:this.goodsInfo.PRESENT_PRICE,
-      image:this.goodsInfo.IMAGE1,
-      count:1
-    }
-    cartInfo.push(newGoods)
-    localStorage.cartInfo = JSON.stringify(cartInfo)  // localStorage本为字符串，要对数据进行处理
-    Toast.success(&#39;添加成功&#39;)
-  } else {
-    Toast.success(&#39;已有此商品&#39;)
-  }
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">//</span> 添加商品到购物车
+addGoodsToCart<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token operator">//</span> localStorage<span class="token punctuation">.</span>removeItem<span class="token punctuation">(</span><span class="token string">'cartInfo'</span><span class="token punctuation">)</span>
+  <span class="token operator">//</span> 取出本地购物车中的商品并查重
+  let cartInfo <span class="token operator">=</span> localStorage<span class="token punctuation">.</span>cartInfo ? JSON<span class="token punctuation">.</span>parse<span class="token punctuation">(</span>localStorage<span class="token punctuation">.</span>cartInfo<span class="token punctuation">)</span> <span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+  let isHaveGoods <span class="token operator">=</span> cartInfo<span class="token punctuation">.</span>find<span class="token punctuation">(</span>cart <span class="token operator">=</span><span class="token operator">></span> cart<span class="token punctuation">.</span>goodsId <span class="token operator">==</span> this<span class="token punctuation">.</span>goodsId<span class="token punctuation">)</span>
+  console<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token string">'isHaveGoods'</span><span class="token punctuation">,</span>isHaveGoods<span class="token punctuation">)</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span>!isHaveGoods<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token operator">//</span> 购物车中所属的商品信息
+    let newGoods <span class="token operator">=</span> <span class="token punctuation">{</span>
+      goodsId<span class="token punctuation">:</span> this<span class="token punctuation">.</span>goodsInfo<span class="token punctuation">.</span>ID<span class="token punctuation">,</span>
+      name<span class="token punctuation">:</span> this<span class="token punctuation">.</span>goodsInfo<span class="token punctuation">.</span>NAME<span class="token punctuation">,</span>
+      price<span class="token punctuation">:</span>this<span class="token punctuation">.</span>goodsInfo<span class="token punctuation">.</span>PRESENT_PRICE<span class="token punctuation">,</span>
+      image<span class="token punctuation">:</span>this<span class="token punctuation">.</span>goodsInfo<span class="token punctuation">.</span>IMAGE1<span class="token punctuation">,</span>
+      count<span class="token punctuation">:</span><span class="token number">1</span>
+    <span class="token punctuation">}</span>
+    cartInfo<span class="token punctuation">.</span>push<span class="token punctuation">(</span>newGoods<span class="token punctuation">)</span>
+    localStorage<span class="token punctuation">.</span>cartInfo <span class="token operator">=</span> JSON<span class="token punctuation">.</span>stringify<span class="token punctuation">(</span>cartInfo<span class="token punctuation">)</span>  <span class="token operator">//</span> localStorage本为字符串，要对数据进行处理
+    Toast<span class="token punctuation">.</span>success<span class="token punctuation">(</span><span class="token string">'添加成功'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    Toast<span class="token punctuation">.</span>success<span class="token punctuation">(</span><span class="token string">'已有此商品'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
 
-  this.$router.push({name:&#39;Cart&#39;})  //进行跳转
-}
-</code></pre>
-<h5 id="清空购物车"><a href="#清空购物车" class="headerlink" title="清空购物车"></a>清空购物车</h5><pre><code class="python">//清空购物车的商品
-clearCart(){
-    localStorage.removeItem(&#39;cartInfo&#39;)
-    this.cartInfo=[]
-}
-</code></pre>
+  this<span class="token punctuation">.</span>$router<span class="token punctuation">.</span>push<span class="token punctuation">(</span><span class="token punctuation">{</span>name<span class="token punctuation">:</span><span class="token string">'Cart'</span><span class="token punctuation">}</span><span class="token punctuation">)</span>  <span class="token operator">//</span>进行跳转
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h5 id="清空购物车"><a href="#清空购物车" class="headerlink" title="清空购物车"></a>清空购物车</h5><pre class="line-numbers language-python"><code class="language-python"><span class="token operator">//</span>清空购物车的商品
+clearCart<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    localStorage<span class="token punctuation">.</span>removeItem<span class="token punctuation">(</span><span class="token string">'cartInfo'</span><span class="token punctuation">)</span>
+    this<span class="token punctuation">.</span>cartInfo<span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h5 id="商品单价与总价的计算"><a href="#商品单价与总价的计算" class="headerlink" title="商品单价与总价的计算"></a>商品单价与总价的计算</h5><p>商品单价，直接就是数量*单价</p>
-<pre><code class="python">&lt;div class=&quot;allPrice&quot;&gt;
-     ${{ item.price * item.count | moneyFilter }}
-&lt;/div&gt;
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"allPrice"</span><span class="token operator">></span>
+     $<span class="token punctuation">{</span><span class="token punctuation">{</span> item<span class="token punctuation">.</span>price <span class="token operator">*</span> item<span class="token punctuation">.</span>count <span class="token operator">|</span> moneyFilter <span class="token punctuation">}</span><span class="token punctuation">}</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>而总价，需要用到<strong><code>计算属性computed</code></strong></p>
-<pre><code class="python">&lt;!-- 计算总价 --&gt;
-&lt;div class=&quot;totalMoney&quot;&gt;商品总价: ${{ totalMoney | moneyFilter}}&lt;/div&gt;
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">&lt;</span>!<span class="token operator">-</span><span class="token operator">-</span> 计算总价 <span class="token operator">-</span><span class="token operator">-</span><span class="token operator">></span>
+<span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"totalMoney"</span><span class="token operator">></span>商品总价<span class="token punctuation">:</span> $<span class="token punctuation">{</span><span class="token punctuation">{</span> totalMoney <span class="token operator">|</span> moneyFilter<span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
 
-// 计算属性 计算总价
-computed: {
-  totalMoney() {
-    let allMoney = 0;
-    this.cartInfo.forEach((item, index) =&gt; {
-      allMoney += item.price * item.count;
-    });
-    // 当页面刷新时原有的数据会消失，保存之
-    localStorage.cartInfo = JSON.stringify(this.cartInfo);
-    return allMoney;
-  }
-} 
-</code></pre>
+<span class="token operator">//</span> 计算属性 计算总价
+computed<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+  totalMoney<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    let allMoney <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    this<span class="token punctuation">.</span>cartInfo<span class="token punctuation">.</span>forEach<span class="token punctuation">(</span><span class="token punctuation">(</span>item<span class="token punctuation">,</span> index<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+      allMoney <span class="token operator">+=</span> item<span class="token punctuation">.</span>price <span class="token operator">*</span> item<span class="token punctuation">.</span>count<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">//</span> 当页面刷新时原有的数据会消失，保存之
+    localStorage<span class="token punctuation">.</span>cartInfo <span class="token operator">=</span> JSON<span class="token punctuation">.</span>stringify<span class="token punctuation">(</span>this<span class="token punctuation">.</span>cartInfo<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> allMoney<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> 
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 					
 				</div>

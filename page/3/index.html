@@ -62,7 +62,7 @@
 	
 	<!-- others: such as change-bg, time... -->
 	<p class="page-name-other">
-		1/10/2019 
+		1/13/2019 
 		<style type="text/css">
 	header:after {
 		content: '';
@@ -165,9 +165,10 @@
 								
 									真正掌握vuex的使用方法（三）@(Vuex)[vue, Vuex] 
  接下来看一下template当中计算总票数的表达式：
-&lt;div&gt;&lt;h2&gt;总票数：{{nodeVoteCount+vueVoteCount}}&lt;/h2&gt;&lt;/div&gt;
+&lt;div>&lt;h2>总票数：{{nodeVoteCount+vueVoteCount}}&lt;/h2>&lt;/div>
 
-是不是很长？是不是看着它很蓝瘦？ 正常的第一反应就是将其写入到计算属性内，方便调用！所以咱们可以将compute	
+是不是很长？是不是看着它很蓝瘦？ 正常的第一反应就是将其写入到计算属性内，方便调用！所以咱们可以将computed调整如下：
+compu	
 								  
 							</p>
 						
@@ -201,8 +202,8 @@
 								
 									真正掌握vuex的使用方法（二）@(Vuex)[vue, Vuex]       目前当前的票数已经可以在页面中渲染出来了！接下来要做的事就是让按钮起到应有的责任：点击对应的按钮让数字加1, 总票数也要加1。很简单，只要给按钮增加一个事件，直接改变其状态即可，代码如下：
 
-&lt;div id=&quot;app&quot;&gt;
-    &lt;div&gt;&lt;h2&gt;总票数：{{n	
+&lt;div id="app">
+    &lt;div>&lt;h2>总票数：{{nodeVoteCount+vueVot	
 								  
 							</p>
 						
@@ -236,8 +237,9 @@
 								
 									真正掌握vuex的使用方法（一）@[vue|Vuex]1、安装vuex   npm install vuex –save2、在src目录下创建vuex文件夹，然后在该文件夹下创建一个名字叫做store的js文件3、在store.js中写入以下代码：
 
-import Vue from &#39;vue&#39;;//引用vue
-import Vuex from &#39;vuex&#39;;//引用	
+import Vue from 'vue';//引用vue
+import Vuex from 'vuex';//引用vuex
+Vue.use(Vue	
 								  
 							</p>
 						

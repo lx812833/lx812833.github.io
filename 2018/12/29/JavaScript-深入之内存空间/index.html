@@ -62,7 +62,7 @@
 	
 	<!-- others: such as change-bg, time... -->
 	<p class="page-name-other">
-		1/10/2019 
+		1/13/2019 
 		<style type="text/css">
 	header:after {
 		content: '';
@@ -202,37 +202,37 @@
 <p>JavaScript 有自动垃圾收集机制，最常用的是通过标记清除的算法来找到哪些对象是不再继续使用的，使用 a = null 其实仅仅只是做了一个释放引用的操作，让 a 原本对应的值失去引用，脱离执行环境，这个值会在下一次垃圾收集器执行操作时被找到并释放。</p>
 <p>在局部作用域中，当函数执行完毕，局部变量也就没有存在的必要了，因此垃圾收集器很容易做出判断并回收。但是全局变量什么时候需要自动释放内存空间则很难判断，因此在开发中，需要尽量避免使用全局变量。</p>
 <h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><p>问题 1：</p>
-<pre><code class="python">var a = 20;
-var b = a;
-b = 30;
+<pre class="line-numbers language-python"><code class="language-python">var a <span class="token operator">=</span> <span class="token number">20</span><span class="token punctuation">;</span>
+var b <span class="token operator">=</span> a<span class="token punctuation">;</span>
+b <span class="token operator">=</span> <span class="token number">30</span><span class="token punctuation">;</span>
 
-// 这时a的值是多少？  20
-</code></pre>
+<span class="token operator">//</span> 这时a的值是多少？  <span class="token number">20</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>a、b 都是基本类型，它们的值是存储在栈中的，a、b 分别有各自独立的栈空间，所以修改了 b 的值以后，a 的值并不会发生变化</p>
 <p>问题 2：</p>
-<pre><code class="python">var a = { name: &#39;前端开发&#39; }
-var b = a;
-b.name = &#39;进阶&#39;;
+<pre class="line-numbers language-python"><code class="language-python">var a <span class="token operator">=</span> <span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token string">'前端开发'</span> <span class="token punctuation">}</span>
+var b <span class="token operator">=</span> a<span class="token punctuation">;</span>
+b<span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">'进阶'</span><span class="token punctuation">;</span>
 
-// 这时a.name的值是多少   进阶
-</code></pre>
+<span class="token operator">//</span> 这时a<span class="token punctuation">.</span>name的值是多少   进阶
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>a、b 都是引用类型，<code>栈内存中存放地址指向堆内存中的对象</code>，引用类型的复制会为新的变量自动分配一个新的值保存在变量对象中，但只是引用类型的一个<code>地址指针</code>而已，<code>实际指向的是同一个对象</code>，所以修改 b.name 的值后，相应的 a.name 也就发生了改变。</p>
 <p>问题 3：</p>
-<pre><code class="python">var a = { name: &#39;前端开发&#39; }
-var b = a;
-a = null;
+<pre class="line-numbers language-python"><code class="language-python">var a <span class="token operator">=</span> <span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token string">'前端开发'</span> <span class="token punctuation">}</span>
+var b <span class="token operator">=</span> a<span class="token punctuation">;</span>
+a <span class="token operator">=</span> null<span class="token punctuation">;</span>
 
-// 这时b的值是多少
-</code></pre>
+<span class="token operator">//</span> 这时b的值是多少
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>首先要说明的是<code>null</code>是基本类型，<code>a = null</code>之后只是把 a 存储在<code>栈</code>内存中地址改变成了基本类型 null，并不会影响堆内存中的对象，所以 b 的值不受影响。</p>
 <p>问题 4：</p>
-<pre><code class="python">var a = {n: 1};
-var b = a;
-a.x = a = {n: 2};
+<pre class="line-numbers language-python"><code class="language-python">var a <span class="token operator">=</span> <span class="token punctuation">{</span>n<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+var b <span class="token operator">=</span> a<span class="token punctuation">;</span>
+a<span class="token punctuation">.</span>x <span class="token operator">=</span> a <span class="token operator">=</span> <span class="token punctuation">{</span>n<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-a.x     // undefined
-b.x     // {n: 2}
-</code></pre>
+a<span class="token punctuation">.</span>x     <span class="token operator">//</span> undefined
+b<span class="token punctuation">.</span>x     <span class="token operator">//</span> <span class="token punctuation">{</span>n<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 					
 				</div>

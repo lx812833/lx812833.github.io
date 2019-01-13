@@ -62,7 +62,7 @@
 	
 	<!-- others: such as change-bg, time... -->
 	<p class="page-name-other">
-		1/10/2019 
+		1/13/2019 
 		<style type="text/css">
 	header:after {
 		content: '';
@@ -187,54 +187,138 @@
 			<div class="am-article-bd">
 				<div class="content" id="post-content">
 					
-						<h3 id="Vue-web读书器"><a href="#Vue-web读书器" class="headerlink" title="Vue web读书器"></a>Vue web读书器</h3><p>Vue web读书器是一款以<strong>Vue全家桶</strong>为主要的技术栈，媲美原生App的读书器。主要技术栈包括<strong>Vue全家桶、Vue-cli3.0、交互动画、LocalStorage+IndexedDB</strong>等</p>
-<h3 id="1、初始化项目"><a href="#1、初始化项目" class="headerlink" title="1、初始化项目"></a>1、初始化项目</h3><h4 id="1-1、使用Vue-cli3-0搭建开发环境"><a href="#1-1、使用Vue-cli3-0搭建开发环境" class="headerlink" title="1.1、使用Vue-cli3.0搭建开发环境"></a>1.1、使用Vue-cli3.0搭建开发环境</h4><p>已安装好Vue-cli3.0后直接创建项目</p>
-<pre><code class="python"> vue create my-project
-</code></pre>
-<h4 id="1-2、导入-Iconfont-svg图标"><a href="#1-2、导入-Iconfont-svg图标" class="headerlink" title="1.2、导入 Iconfont svg图标"></a>1.2、导入 Iconfont svg图标</h4><p>首先先去<a href="https://www.iconfont.cn/" target="_blank" rel="noopener">Iconfont</a>选好矢量图标并下载，再去<a href="https://icomoon.io/app/#/select" target="_blank" rel="noopener">Icomoon</a>将字体图标设置为svg格式并下载到本地。<br>具体步骤为： <code>New Empty Set</code> –&gt; <code>Import to Set</code> –&gt;<code>选择已下载的图标</code> –&gt;<code>Generate Font</code> –&gt; <code>Download</code>–&gt; 解压后将<code>style.css</code>和<code>fonts</code> 复制至<code>assets/styles</code> </p>
+						<h3 id="Vue-web-读书器"><a href="#Vue-web-读书器" class="headerlink" title="Vue web 读书器"></a>Vue web 读书器</h3><p>Vue web 读书器是一款以<strong>Vue 全家桶</strong>为主要的技术栈，媲美原生 App 的读书器。主要技术栈包括<strong>Vue 全家桶、Vue-cli3.0、交互动画、LocalStorage+IndexedDB</strong>等</p>
+<h3 id="1、初始化项目"><a href="#1、初始化项目" class="headerlink" title="1、初始化项目"></a>1、初始化项目</h3><h4 id="1-1、使用-Vue-cli3-0-搭建开发环境"><a href="#1-1、使用-Vue-cli3-0-搭建开发环境" class="headerlink" title="1.1、使用 Vue-cli3.0 搭建开发环境"></a>1.1、使用 Vue-cli3.0 搭建开发环境</h4><p>已安装好 Vue-cli3.0 后直接创建项目</p>
+<pre class="line-numbers language-python"><code class="language-python"> vue create my<span class="token operator">-</span>project
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="1-2、导入-Iconfont-svg-图标"><a href="#1-2、导入-Iconfont-svg-图标" class="headerlink" title="1.2、导入 Iconfont svg 图标"></a>1.2、导入 Iconfont svg 图标</h4><p>首先先去<a href="https://www.iconfont.cn/" target="_blank" rel="noopener">Iconfont</a>选好矢量图标并下载，再去<a href="https://icomoon.io/app/#/select" target="_blank" rel="noopener">Icomoon</a>将字体图标设置为 svg 格式并下载到本地。<br>具体步骤为： <code>New Empty Set</code> –&gt; <code>Import to Set</code> –&gt;<code>选择已下载的图标</code> –&gt;<code>Generate Font</code> –&gt; <code>Download</code>–&gt; 解压后将<code>style.css</code>和<code>fonts</code> 复制至<code>assets/styles</code></p>
 <p>最后在<code>main.js</code>中引入图标</p>
-<pre><code class="python">// 引入字体图标
-import &#39;./assets/styles/icon.css&#39;
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">//</span> 引入字体图标
+<span class="token keyword">import</span> <span class="token string">'./assets/styles/icon.css'</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <h4 id="1-3、引入字体"><a href="#1-3、引入字体" class="headerlink" title="1.3、引入字体"></a>1.3、引入字体</h4><p>将提前准备好的字体引入<code>src/assets/fonts</code><br>例如：</p>
-<pre><code class="python">// daysOne.css
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">//</span> daysOne<span class="token punctuation">.</span>css
 
-@font-face {
-    font-family: &#39;Days One&#39;;
-    font-style: normal;
-    font-weight: 400;
-    src: url(&#39;daysOne.woff2&#39;) format(&#39;woff2&#39;);
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-</code></pre>
+@font<span class="token operator">-</span>face <span class="token punctuation">{</span>
+    font<span class="token operator">-</span>family<span class="token punctuation">:</span> <span class="token string">'Days One'</span><span class="token punctuation">;</span>
+    font<span class="token operator">-</span>style<span class="token punctuation">:</span> normal<span class="token punctuation">;</span>
+    font<span class="token operator">-</span>weight<span class="token punctuation">:</span> <span class="token number">400</span><span class="token punctuation">;</span>
+    src<span class="token punctuation">:</span> url<span class="token punctuation">(</span><span class="token string">'daysOne.woff2'</span><span class="token punctuation">)</span> format<span class="token punctuation">(</span><span class="token string">'woff2'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    unicode<span class="token operator">-</span>range<span class="token punctuation">:</span> U<span class="token operator">+</span><span class="token number">0000</span><span class="token operator">-</span><span class="token number">00FF</span><span class="token punctuation">,</span> U<span class="token operator">+</span><span class="token number">0131</span><span class="token punctuation">,</span> U<span class="token operator">+</span><span class="token number">0152</span><span class="token operator">-</span><span class="token number">0153</span><span class="token punctuation">,</span> U<span class="token operator">+</span><span class="token number">02BB</span><span class="token operator">-</span><span class="token number">02BC</span><span class="token punctuation">,</span> U<span class="token operator">+</span><span class="token number">02C6</span><span class="token punctuation">,</span> U<span class="token operator">+</span><span class="token number">02DA</span><span class="token punctuation">,</span> U<span class="token operator">+</span><span class="token number">02DC</span><span class="token punctuation">,</span> U<span class="token operator">+</span><span class="token number">2000</span><span class="token operator">-</span><span class="token number">206F</span><span class="token punctuation">,</span> U<span class="token operator">+</span><span class="token number">2074</span><span class="token punctuation">,</span> U<span class="token operator">+</span><span class="token number">20AC</span><span class="token punctuation">,</span> U<span class="token operator">+</span><span class="token number">2122</span><span class="token punctuation">,</span> U<span class="token operator">+</span><span class="token number">2191</span><span class="token punctuation">,</span> U<span class="token operator">+</span><span class="token number">2193</span><span class="token punctuation">,</span> U<span class="token operator">+</span><span class="token number">2212</span><span class="token punctuation">,</span> U<span class="token operator">+</span><span class="token number">2215</span><span class="token punctuation">,</span> U<span class="token operator">+</span>FEFF<span class="token punctuation">,</span> U<span class="token operator">+</span>FFFD<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>引入字体的方式有几种：</p>
 <ul>
-<li>在<code>public/index.html</code>中引入<pre><code class="python">  &lt;link rel=&quot;stylesheet&quot; href=&quot;&lt;%= BASE_URL %&gt;fonts/daysOne.css&quot;&gt;
-</code></pre>
+<li>在<code>public/index.html</code>中引入<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">&lt;</span>link rel<span class="token operator">=</span><span class="token string">"stylesheet"</span> href<span class="token operator">=</span><span class="token string">"&lt;%= BASE_URL %>fonts/daysOne.css"</span><span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
-<li>在<code>src/main.js</code>中引入<pre><code class="python">  import &#39;./assets/fonts/daysOne.css&#39;
-</code></pre>
-使用时则需注明<code>font-family</code><pre><code class="python">.text {
-  font-family: &quot;Days One&quot;;
-  color: orange;
-}
-</code></pre>
-这里的<code>font-family</code>需和引入字体的<code>font-family</code>一致</li>
+<li>在<code>src/main.js</code>中引入<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> <span class="token string">'./assets/fonts/daysOne.css'</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+使用时则需注明<code>font-family</code></li>
 </ul>
-<h4 id="1-4、设置响应式rem"><a href="#1-4、设置响应式rem" class="headerlink" title="1.4、设置响应式rem"></a>1.4、设置响应式rem</h4><p><strong><code>rem</code></strong> 是指根元素（root element，html）的字体大小，在移动端中需要根据屏幕大小自动适应根源素大小从而响应其他<code>fong-size</code><br>在<code>src/App.vue</code>页面下进行<code>rem</code>设置</p>
-<pre><code class="python">export default {};  
-// 设置rem
-document.addEventListener(&quot;DOMContentLoaded&quot;, () =&gt; {
-    const html = document.querySelector(&quot;html&quot;);
-    let fontSize = window.innerWidth / 10;
-    fontSize = fontSize &gt; 50 ? 50 : fontSize;
-    html.style.fontSize = fontSize + &quot;px&quot;;
-});
-</code></pre>
-<h4 id="1-5、安装epub"><a href="#1-5、安装epub" class="headerlink" title="1.5、安装epub"></a>1.5、安装epub</h4><p><code>ePub</code> 是一种电子书的标准格式，该项目主要使用 <code>Vue</code> 和 <code>epub.js</code> 制作电子书阅读器</p>
-<pre><code class="python">// 安装epubjs
-npm i --save epubjs
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token punctuation">.</span>text <span class="token punctuation">{</span>
+   font<span class="token operator">-</span>family<span class="token punctuation">:</span> <span class="token string">"Days One"</span><span class="token punctuation">;</span>
+   color<span class="token punctuation">:</span> orange<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这里的<code>font-family</code>需和引入字体的<code>font-family</code>一致</p>
+<h4 id="1-4、设置响应式-rem"><a href="#1-4、设置响应式-rem" class="headerlink" title="1.4、设置响应式 rem"></a>1.4、设置响应式 rem</h4><p><strong><code>rem</code></strong> 是指根元素（root element，html）的字体大小，在移动端中需要根据屏幕大小自动适应根源素大小从而响应其他<code>fong-size</code><br>在<code>src/App.vue</code>页面下进行<code>rem</code>设置</p>
+<pre class="line-numbers language-python"><code class="language-python">export default <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token operator">//</span> 设置rem
+document<span class="token punctuation">.</span>addEventListener<span class="token punctuation">(</span><span class="token string">"DOMContentLoaded"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    const html <span class="token operator">=</span> document<span class="token punctuation">.</span>querySelector<span class="token punctuation">(</span><span class="token string">"html"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    let fontSize <span class="token operator">=</span> window<span class="token punctuation">.</span>innerWidth <span class="token operator">/</span> <span class="token number">10</span><span class="token punctuation">;</span>
+    fontSize <span class="token operator">=</span> fontSize <span class="token operator">></span> <span class="token number">50</span> ? <span class="token number">50</span> <span class="token punctuation">:</span> fontSize<span class="token punctuation">;</span>
+    html<span class="token punctuation">.</span>style<span class="token punctuation">.</span>fontSize <span class="token operator">=</span> fontSize <span class="token operator">+</span> <span class="token string">"px"</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="1-5、安装-epub"><a href="#1-5、安装-epub" class="headerlink" title="1.5、安装 epub"></a>1.5、安装 epub</h4><p><code>ePub</code> 是一种电子书的标准格式，该项目主要使用 <code>Vue</code> 和 <code>epub.js</code> 制作电子书阅读器<br>安装<code>epubjs</code></p>
+<pre class="line-numbers language-python"><code class="language-python">npm i <span class="token operator">-</span><span class="token operator">-</span>save epubjs
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>引入并使用<code>epubjs</code></p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> Epub <span class="token keyword">from</span> <span class="token string">"epubjs"</span><span class="token punctuation">;</span>
+<span class="token keyword">global</span><span class="token punctuation">.</span>Epub <span class="token operator">=</span> Epub<span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h4 id="1-6、安装-Nginx-作为代理服务器"><a href="#1-6、安装-Nginx-作为代理服务器" class="headerlink" title="1.6、安装 Nginx 作为代理服务器"></a>1.6、安装 Nginx 作为代理服务器</h4><p>安装<a href="http://nginx.org/en/download.html" target="_blank" rel="noopener">Nginx</a>作为代理服务器，具体配置以及跨域问题询问度娘</p>
+<h3 id="2、电子书解析与渲染"><a href="#2、电子书解析与渲染" class="headerlink" title="2、电子书解析与渲染"></a>2、电子书解析与渲染</h3><h4 id="2-1、动态路由"><a href="#2-1、动态路由" class="headerlink" title="2.1、动态路由"></a>2.1、动态路由</h4><p>在<code>router.js</code>下重定向到<code>/ebook</code>,并在<code>views/ebook</code>下创建<code>index.vue</code>作为根页面，在<code>components/ebook/</code> 创建<code>EbookReader.vue</code>二级路由</p>
+<pre class="line-numbers language-python"><code class="language-python">
+path<span class="token punctuation">:</span> <span class="token string">'/ebook'</span><span class="token punctuation">,</span>
+component<span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'./views/ebook/index.vue'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+children<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+        path<span class="token punctuation">:</span> <span class="token string">':fileName'</span><span class="token punctuation">,</span>   <span class="token operator">//</span> 动态路由
+        component<span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'./components/ebook/EbookReader.vue'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在<code>EbookReader.vue</code>组件中利用 <strong><code>$route.params.fileName</code></strong> 来获取<code>fileName</code>，然后利用<code>split、join</code>对<code>fileName</code>进行处理</p>
+<h4 id="2-2、vuex-模块化管理"><a href="#2-2、vuex-模块化管理" class="headerlink" title="2.2、vuex 模块化管理"></a>2.2、vuex 模块化管理</h4><p><strong><code>vuex</code></strong> 是 <strong><code>vue</code></strong> 用来集中管理状态的容器，用来管理全局的状态的，实现不同组件之间相互的数据访问。如果一个项目非常大的话状态就会非常的多，如果不进行分类处理，所有的状态都维护在一个<code>state</code>里面的话，状态管理就会变得非常的混乱，这样非常不利于项目的后期维护。这里需要使用到 <strong><code>vuex模块化管理</code></strong>。</p>
+<p>在<code>store/modules/book.js</code> 模块下</p>
+<ul>
+<li><strong><code>states</code></strong> 保存应用的状态值<pre class="line-numbers language-python"><code class="language-python">state<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    fileName<span class="token punctuation">:</span> <span class="token string">''</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><strong><code>mutations</code></strong> 定义对状态值的操作<br>更改<code>Vuex</code> 的 <code>store</code> 中的状态的唯一方法是<code>提交 mutation</code>。<code>Vuex</code> 中的 <code>mutation</code> 非常类似于事件：每个 <code>mutation</code> 都有一个字符串的  <strong><code>事件类型 (type)</code></strong>  和 一个  <strong><code>回调函数 (handler)</code></strong>。这个回调函数就是我们实际进行状态更改的地方，并且它会接受 <strong><code>state</code></strong> 作为第一个参数。且这里要注意不要在 <strong><code>mutations</code></strong> 里面进行异步操作。<pre class="line-numbers language-python"><code class="language-python">mutations<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token string">'SET_FILENAME'</span><span class="token punctuation">:</span> <span class="token punctuation">(</span>state<span class="token punctuation">,</span> fileName<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+         state<span class="token punctuation">.</span>fileName <span class="token operator">=</span> fileName
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p><strong><code>actions</code></strong> 将 <strong><code>mutations</code></strong> 中定义的方法进行了一次封装</p>
+<p><strong><code>actions</code></strong> 定义的方法只是将 <strong><code>mutations</code></strong> 中定义的方法进行了一次<strong>封装</strong>,就是去触发 <strong><code>mutations</code></strong> 中的方法。如果传递的参数需要<strong>异步获取</strong>的话，可以在这里等待异步返回成功，然后在触发 <strong><code>mutations</code></strong> 中的方法。</p>
+<p><strong><code>actions</code></strong> 通过调用 <strong><code>store.commit</code></strong> 提交载荷(<code>fileName</code>这个对象)到名为<code>SET_FILENAME</code>的 <code>mutation</code> 中</p>
+<pre class="line-numbers language-python"><code class="language-python">actions<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    setFileName<span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>commit<span class="token punctuation">}</span><span class="token punctuation">,</span> fileName<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> commit<span class="token punctuation">(</span><span class="token string">'SET_FILENAME'</span><span class="token punctuation">,</span> fileName<span class="token punctuation">)</span>
+        <span class="token operator">//</span> 需要<span class="token keyword">return</span>才能返回一个promise对象
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>且在<code>components/ebook/EbookReader.vue</code>中，<strong><code>actions</code></strong> 通过调用  <strong><code>store.dispatch</code></strong>  方法提交载荷(<code>fileName</code>这个对象)触发 <strong><code>actions</code></strong> 中的<code>setFileName</code></p>
+<pre class="line-numbers language-python"><code class="language-python">this<span class="token punctuation">.</span>$store<span class="token punctuation">.</span>dispatch<span class="token punctuation">(</span><span class="token string">"setFileName"</span><span class="token punctuation">,</span> fileName<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+</ul>
+<p>在<code>store/</code> 模块下</p>
+<ul>
+<li><p><strong><code>getters</code></strong> 将 <strong><code>states</code></strong> 中定义的值暴露在 <strong><code>store.getters对象</code></strong> 中</p>
+<pre class="line-numbers language-python"><code class="language-python">const book <span class="token operator">=</span> <span class="token punctuation">{</span>
+    fileName<span class="token punctuation">:</span> state <span class="token operator">=</span><span class="token operator">></span> state<span class="token punctuation">.</span>book<span class="token punctuation">.</span>fileName
+<span class="token punctuation">}</span>
+
+export default book
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这里将 <strong><code>getters</code></strong> 提取出来作为多个模块之间共享的方法，故提取出来。<br>在<code>components/ebook/EbookReader.vue</code>中， <strong><code>mapGetters 辅助函数</code></strong> 仅仅是将 store 中的 <code>getter</code>映射到局部计算属性,且使用对象展开运算符将 <code>getter</code> 混入<code>computed</code> 对象中</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> <span class="token punctuation">{</span> mapGetters <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"vuex"</span><span class="token punctuation">;</span>
+
+computed<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>mapGetters<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">"fileName"</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p><strong><code>index.js</code></strong> 入口文件</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span>
+<span class="token keyword">import</span> Vuex <span class="token keyword">from</span> <span class="token string">'vuex'</span>
+<span class="token keyword">import</span> book <span class="token keyword">from</span> <span class="token string">'./modules/book'</span>
+<span class="token keyword">import</span> actions <span class="token keyword">from</span> <span class="token string">'./actions'</span>
+<span class="token keyword">import</span> getters <span class="token keyword">from</span> <span class="token string">'./getters'</span>
+
+Vue<span class="token punctuation">.</span>use<span class="token punctuation">(</span>Vuex<span class="token punctuation">)</span>
+
+export default new Vuex<span class="token punctuation">.</span>Store<span class="token punctuation">(</span><span class="token punctuation">{</span>
+    modules<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        book
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    getters<span class="token punctuation">,</span>
+    actions
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+</ul>
+<p>最后在<code>main.js</code>里引入<code>store</code>: <code>import store from &#39;./store&#39;</code></p>
 
 					
 				</div>
@@ -337,7 +421,7 @@ npm i --save epubjs
 				
 				
 				<!--toc(post.content)-->
-				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Vue-web读书器"><span class="post-toc-text">Vue web读书器</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1、初始化项目"><span class="post-toc-text">1、初始化项目</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-1、使用Vue-cli3-0搭建开发环境"><span class="post-toc-text">1.1、使用Vue-cli3.0搭建开发环境</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-2、导入-Iconfont-svg图标"><span class="post-toc-text">1.2、导入 Iconfont svg图标</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-3、引入字体"><span class="post-toc-text">1.3、引入字体</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-4、设置响应式rem"><span class="post-toc-text">1.4、设置响应式rem</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-5、安装epub"><span class="post-toc-text">1.5、安装epub</span></a></li></ol></li></ol>
+				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Vue-web-读书器"><span class="post-toc-text">Vue web 读书器</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1、初始化项目"><span class="post-toc-text">1、初始化项目</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-1、使用-Vue-cli3-0-搭建开发环境"><span class="post-toc-text">1.1、使用 Vue-cli3.0 搭建开发环境</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-2、导入-Iconfont-svg-图标"><span class="post-toc-text">1.2、导入 Iconfont svg 图标</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-3、引入字体"><span class="post-toc-text">1.3、引入字体</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-4、设置响应式-rem"><span class="post-toc-text">1.4、设置响应式 rem</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-5、安装-epub"><span class="post-toc-text">1.5、安装 epub</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-6、安装-Nginx-作为代理服务器"><span class="post-toc-text">1.6、安装 Nginx 作为代理服务器</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2、电子书解析与渲染"><span class="post-toc-text">2、电子书解析与渲染</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-1、动态路由"><span class="post-toc-text">2.1、动态路由</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-2、vuex-模块化管理"><span class="post-toc-text">2.2、vuex 模块化管理</span></a></li></ol></li></ol>
 			</nav>
 			<div class="post-toc-bar"><div>
 		</div></div></aside>

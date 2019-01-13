@@ -62,7 +62,7 @@
 	
 	<!-- others: such as change-bg, time... -->
 	<p class="page-name-other">
-		1/10/2019 
+		1/13/2019 
 		<style type="text/css">
 	header:after {
 		content: '';
@@ -192,28 +192,28 @@
 <ol>
 <li>在Vue生命周期的<strong>created()钩子函数</strong>进行的DOM操作一定要放在<strong>Vue.nextTick()的回调函数</strong>中。原因是什么呢，原因是在created()钩子函数执行的时候DOM 其实并未进行任何渲染，而此时进行DOM操作无异于徒劳，所以此处一定要将DOM操作的js代码放进Vue.nextTick()的回调函数中。与之对应的就是mounted钩子函数，因为该钩子函数执行时所有的DOM挂载和渲染都已完成，此时在该钩子函数中进行任何DOM操作都不会有问题 。</li>
 <li>在数据变化后要执行的某个操作，而这个操作需要<strong>使用随数据改变而改变的DOM结构</strong>的时候，这个操作都应该放进Vue.nextTick()的回调函数中。</li>
-<li>如果没有提供回调且在支持 Promise 的环境中，则返回一个 Promise<pre><code class="ruby">export default {
- data() {
-     return {
-         msg: &quot;没有更新之前&quot;
-     };
- },
-methods: {
- updateMsg() {
-     this.msg = &quot;更新完成&quot;;
-     console.log(&quot;aaa&quot;, this.$el.textContent); // 没有更新之前
-     setTimeout(() =&gt; {
-         this.$nextTick(() =&gt; {
-             console.log(&quot;bb&quot;, this.$el.textContent); // 更新完成
-         });
-     }, 2000);
- }
-},
- mounted() {
-     this.updateMsg();
- }
-};
-</code></pre>
+<li>如果没有提供回调且在支持 Promise 的环境中，则返回一个 Promise<pre class="line-numbers language-ruby"><code class="language-ruby">export default <span class="token punctuation">{</span>
+ <span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     <span class="token keyword">return</span> <span class="token punctuation">{</span>
+         msg<span class="token punctuation">:</span> <span class="token string">"没有更新之前"</span>
+     <span class="token punctuation">}</span><span class="token punctuation">;</span>
+ <span class="token punctuation">}</span><span class="token punctuation">,</span>
+methods<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+ <span class="token function">updateMsg</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     this<span class="token punctuation">.</span>msg <span class="token operator">=</span> <span class="token string">"更新完成"</span><span class="token punctuation">;</span>
+     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"aaa"</span><span class="token punctuation">,</span> this<span class="token punctuation">.</span><span class="token variable">$el</span><span class="token punctuation">.</span>textContent<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">/</span><span class="token operator">/</span> 没有更新之前
+     <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+         this<span class="token punctuation">.</span><span class="token variable">$nextTick</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+             console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"bb"</span><span class="token punctuation">,</span> this<span class="token punctuation">.</span><span class="token variable">$el</span><span class="token punctuation">.</span>textContent<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">/</span><span class="token operator">/</span> 更新完成
+         <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">2000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span>
+ <span class="token function">mounted</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     this<span class="token punctuation">.</span><span class="token function">updateMsg</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 </ol>
 

@@ -62,7 +62,7 @@
 	
 	<!-- others: such as change-bg, time... -->
 	<p class="page-name-other">
-		1/10/2019 
+		1/13/2019 
 		<style type="text/css">
 	header:after {
 		content: '';
@@ -194,92 +194,92 @@
 </li>
 <li><p>async返回值是<strong>promise对象</strong>。<strong>async函数完全可以看做由多个异步操作包装成的一个promise对象</strong>，而await命令就是内部then命令的语法糖</p>
 </li>
-<li>async函数内部抛出错误会导致返回的promise对象变为reject状态。抛出的错误对象会被<strong>catch方法的回调函数</strong>接收到<br>将第一个await放在try … catch结构里面，即使第一个异步操作失败，也不会中断后面的异步操作，不管这个异步操作是否成功，第二个await都会执行<pre><code class="ruby">async function f() {    
- try {        
-     await Promise.reject(&#39;出错了&#39;)       
-         //如果有多个await命令，则可以统一放在tyr ... catch结构中         
-         let val1 = await firstStep()        
-         let val2 = await secondStep()    
-     } catch (error) {         
-         console.log(error);    // 会执行 
- }      
- return await Promise.resolve(&#39;hello world&#39;)  /也会执行}
- f().then(res =&gt; console.log(res))
-</code></pre>
+<li>async函数内部抛出错误会导致返回的promise对象变为reject状态。抛出的错误对象会被<strong>catch方法的回调函数</strong>接收到<br>将第一个await放在try … catch结构里面，即使第一个异步操作失败，也不会中断后面的异步操作，不管这个异步操作是否成功，第二个await都会执行<pre class="line-numbers language-ruby"><code class="language-ruby">async function <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>    
+ try <span class="token punctuation">{</span>        
+     await <span class="token constant">Promise</span><span class="token punctuation">.</span><span class="token function">reject</span><span class="token punctuation">(</span><span class="token string">'出错了'</span><span class="token punctuation">)</span>       
+         <span class="token operator">/</span><span class="token operator">/</span>如果有多个await命令，则可以统一放在tyr <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> catch结构中         
+         let val1 <span class="token operator">=</span> await <span class="token function">firstStep</span><span class="token punctuation">(</span><span class="token punctuation">)</span>        
+         let val2 <span class="token operator">=</span> await <span class="token function">secondStep</span><span class="token punctuation">(</span><span class="token punctuation">)</span>    
+     <span class="token punctuation">}</span> <span class="token function">catch</span> <span class="token punctuation">(</span><span class="token class-name">error</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>         
+         console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token operator">/</span><span class="token operator">/</span> 会执行 
+ <span class="token punctuation">}</span>      
+ <span class="token keyword">return</span> await <span class="token constant">Promise</span><span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">'hello world'</span><span class="token punctuation">)</span>  <span class="token operator">/</span>也会执行<span class="token punctuation">}</span>
+ <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">then</span><span class="token punctuation">(</span>res <span class="token operator">=</span><span class="token operator">></span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 </ol>
 <h4 id="async函数多种使用形式"><a href="#async函数多种使用形式" class="headerlink" title="async函数多种使用形式"></a>async函数多种使用形式</h4><ul>
-<li>函数声明<pre><code class="ruby">async function foo （）{}
-</code></pre>
+<li>函数声明<pre class="line-numbers language-ruby"><code class="language-ruby">async function foo （）<span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
-<li>函数表达式<pre><code class="ruby">const foo =  async function （）{} 
-</code></pre>
+<li>函数表达式<pre class="line-numbers language-ruby"><code class="language-ruby">const foo <span class="token operator">=</span>  async function （）<span class="token punctuation">{</span><span class="token punctuation">}</span> 
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
-<li>对象的方法<pre><code class="ruby">let obj = {
- async foo （）{}
-}
-obj.foo（）.then（...） 
-</code></pre>
+<li>对象的方法<pre class="line-numbers language-ruby"><code class="language-ruby">let obj <span class="token operator">=</span> <span class="token punctuation">{</span>
+ async foo （）<span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+obj<span class="token punctuation">.</span>foo（）<span class="token punctuation">.</span><span class="token keyword">then</span>（<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>） 
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li>箭头函数（推荐）<pre><code class="ruby">const foo = async （）=&gt; {}
-</code></pre>
+<li>箭头函数（推荐）<pre class="line-numbers language-ruby"><code class="language-ruby">const foo <span class="token operator">=</span> async （）<span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
 </ul>
-<h4 id="async运用实例（1）"><a href="#async运用实例（1）" class="headerlink" title="async运用实例（1）"></a>async运用实例（1）</h4><h5 id="Node导入文件"><a href="#Node导入文件" class="headerlink" title="Node导入文件"></a>Node导入文件</h5><pre><code class="ruby">const fs = require(&#39;fs&#39;) // 导入文件模块（fs)
-//依次读取两个文件
-function readFile(fileName) {
-    return new Promise((resolve, reject) =&gt; {
-        fs.readFile(fileName, (err, data) =&gt; {
-            if (err)
-                return reject(err)
-            resolve(data)
-        })
-    })
-}
-</code></pre>
-<h5 id="Promise-读取文件"><a href="#Promise-读取文件" class="headerlink" title="Promise 读取文件"></a>Promise 读取文件</h5><pre><code class="ruby">readFile(&#39;data/a.txt&#39;)
-   .then(res =&gt; {
-     console.log(res.toString());
-     return readFile(&#39;data/b.txt&#39;)
-   })
-   .then(res =&gt; {
-       console.log(res.toString());
-   })
-</code></pre>
-<h5 id="Generator-读取文件"><a href="#Generator-读取文件" class="headerlink" title="Generator 读取文件"></a>Generator 读取文件</h5><pre><code class="ruby">function* gen() {
-    yield readFile(&#39;data/a.txt&#39;)
-    yield readFile(&#39;data/b.txt&#39;)
-}
-let g1 = gen()
-g1.next().value.then(res =&gt; {
-    console.log(&#39;generator&#39;, res);
-    return g1.next().value
-}).then(res =&gt; {
-    console.log(&#39;generator&#39;, res.toString());
-})
-</code></pre>
-<h5 id="Async读取文件"><a href="#Async读取文件" class="headerlink" title="Async读取文件"></a>Async读取文件</h5><pre><code class="ruby">async function fn() {
-    let [a, b] = await Promise.all([
-        readFile(&#39;data/a.txt&#39;),
-        readFile(&#39;data/b.txt&#39;)
-])
-    console.log(&#39;async&#39;, a.toString());
-    console.log(&#39;async&#39;, b.toString());
-}
-fn()
-</code></pre>
+<h4 id="async运用实例（1）"><a href="#async运用实例（1）" class="headerlink" title="async运用实例（1）"></a>async运用实例（1）</h4><h5 id="Node导入文件"><a href="#Node导入文件" class="headerlink" title="Node导入文件"></a>Node导入文件</h5><pre class="line-numbers language-ruby"><code class="language-ruby">const fs <span class="token operator">=</span> <span class="token keyword">require</span><span class="token punctuation">(</span><span class="token string">'fs'</span><span class="token punctuation">)</span> <span class="token operator">/</span><span class="token operator">/</span> 导入文件模块（fs<span class="token punctuation">)</span>
+<span class="token operator">/</span><span class="token operator">/</span>依次读取两个文件
+function <span class="token function">readFile</span><span class="token punctuation">(</span>fileName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span>resolve<span class="token punctuation">,</span> reject<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        fs<span class="token punctuation">.</span><span class="token function">readFile</span><span class="token punctuation">(</span>fileName<span class="token punctuation">,</span> <span class="token punctuation">(</span>err<span class="token punctuation">,</span> data<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+                <span class="token keyword">return</span> <span class="token function">reject</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+            <span class="token function">resolve</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h5 id="Promise-读取文件"><a href="#Promise-读取文件" class="headerlink" title="Promise 读取文件"></a>Promise 读取文件</h5><pre class="line-numbers language-ruby"><code class="language-ruby"><span class="token function">readFile</span><span class="token punctuation">(</span><span class="token string">'data/a.txt'</span><span class="token punctuation">)</span>
+   <span class="token punctuation">.</span><span class="token keyword">then</span><span class="token punctuation">(</span>res <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token keyword">return</span> <span class="token function">readFile</span><span class="token punctuation">(</span><span class="token string">'data/b.txt'</span><span class="token punctuation">)</span>
+   <span class="token punctuation">}</span><span class="token punctuation">)</span>
+   <span class="token punctuation">.</span><span class="token keyword">then</span><span class="token punctuation">(</span>res <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+       console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h5 id="Generator-读取文件"><a href="#Generator-读取文件" class="headerlink" title="Generator 读取文件"></a>Generator 读取文件</h5><pre class="line-numbers language-ruby"><code class="language-ruby">function<span class="token operator">*</span> <span class="token function">gen</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">yield</span> <span class="token function">readFile</span><span class="token punctuation">(</span><span class="token string">'data/a.txt'</span><span class="token punctuation">)</span>
+    <span class="token keyword">yield</span> <span class="token function">readFile</span><span class="token punctuation">(</span><span class="token string">'data/b.txt'</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+let g1 <span class="token operator">=</span> <span class="token function">gen</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+g1<span class="token punctuation">.</span><span class="token keyword">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>value<span class="token punctuation">.</span><span class="token keyword">then</span><span class="token punctuation">(</span>res <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'generator'</span><span class="token punctuation">,</span> res<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> g1<span class="token punctuation">.</span><span class="token keyword">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>value
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">then</span><span class="token punctuation">(</span>res <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'generator'</span><span class="token punctuation">,</span> res<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h5 id="Async读取文件"><a href="#Async读取文件" class="headerlink" title="Async读取文件"></a>Async读取文件</h5><pre class="line-numbers language-ruby"><code class="language-ruby">async function <span class="token function">fn</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    let <span class="token punctuation">[</span>a<span class="token punctuation">,</span> b<span class="token punctuation">]</span> <span class="token operator">=</span> await <span class="token constant">Promise</span><span class="token punctuation">.</span><span class="token function">all</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
+        <span class="token function">readFile</span><span class="token punctuation">(</span><span class="token string">'data/a.txt'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token function">readFile</span><span class="token punctuation">(</span><span class="token string">'data/b.txt'</span><span class="token punctuation">)</span>
+<span class="token punctuation">]</span><span class="token punctuation">)</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'async'</span><span class="token punctuation">,</span> a<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'async'</span><span class="token punctuation">,</span> b<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token function">fn</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
-<h4 id="async运用实例（2）"><a href="#async运用实例（2）" class="headerlink" title="async运用实例（2）"></a>async运用实例（2）</h4><h5 id="指定多少毫秒后输出一个值"><a href="#指定多少毫秒后输出一个值" class="headerlink" title="指定多少毫秒后输出一个值"></a>指定多少毫秒后输出一个值</h5><pre><code class="ruby">   async function timeout(ms) {
-       await new Promise((resolve) =&gt; {
-           setTimeout(resolve, ms)
-       })
-   }
-   async function asyncPrint(value, ms) {
-       await timeout(ms)
-       console.log(value);
-   }
-   asyncPrint(&#39;hello world&#39;, 500)
-</code></pre>
+<h4 id="async运用实例（2）"><a href="#async运用实例（2）" class="headerlink" title="async运用实例（2）"></a>async运用实例（2）</h4><h5 id="指定多少毫秒后输出一个值"><a href="#指定多少毫秒后输出一个值" class="headerlink" title="指定多少毫秒后输出一个值"></a>指定多少毫秒后输出一个值</h5><pre class="line-numbers language-ruby"><code class="language-ruby">   async function <span class="token function">timeout</span><span class="token punctuation">(</span>ms<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       await <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span>resolve<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+           <span class="token function">setTimeout</span><span class="token punctuation">(</span>resolve<span class="token punctuation">,</span> ms<span class="token punctuation">)</span>
+       <span class="token punctuation">}</span><span class="token punctuation">)</span>
+   <span class="token punctuation">}</span>
+   async function <span class="token function">asyncPrint</span><span class="token punctuation">(</span>value<span class="token punctuation">,</span> ms<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       await <span class="token function">timeout</span><span class="token punctuation">(</span>ms<span class="token punctuation">)</span>
+       console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+   <span class="token function">asyncPrint</span><span class="token punctuation">(</span><span class="token string">'hello world'</span><span class="token punctuation">,</span> <span class="token number">500</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 					
 				</div>

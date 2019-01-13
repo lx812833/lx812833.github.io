@@ -62,7 +62,7 @@
 	
 	<!-- others: such as change-bg, time... -->
 	<p class="page-name-other">
-		1/10/2019 
+		1/13/2019 
 		<style type="text/css">
 	header:after {
 		content: '';
@@ -189,24 +189,24 @@
 					
 						<h3 id="扩展运算符"><a href="#扩展运算符" class="headerlink" title="扩展运算符"></a>扩展运算符</h3><p>@(Es6)</p>
 <ol>
-<li>将一个数组转为用逗号分隔的<strong>参数序列</strong><pre><code class="ruby"> let divStr = [...document.querySelectorAll(&#39;div&#39;)]
- console.log(divStr); // [&lt;div&gt;,&lt;div&gt;,&lt;div&gt;] 将DOM结点变为数组
-</code></pre>
+<li>将一个数组转为用逗号分隔的<strong>参数序列</strong><pre class="line-numbers language-ruby"><code class="language-ruby"> let divStr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>document<span class="token punctuation">.</span><span class="token function">querySelectorAll</span><span class="token punctuation">(</span><span class="token string">'div'</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+ console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>divStr<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">/</span><span class="token operator">/</span> <span class="token punctuation">[</span><span class="token operator">&lt;</span>div<span class="token operator">></span><span class="token punctuation">,</span><span class="token operator">&lt;</span>div<span class="token operator">></span><span class="token punctuation">,</span><span class="token operator">&lt;</span>div<span class="token operator">></span><span class="token punctuation">]</span> 将<span class="token constant">DOM</span>结点变为数组
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 </li>
 <li><p>由于<strong>扩展运算符可以展开数组</strong>，所以不在需要使用apply方法将数组转为函数的参数</p>
-<pre><code class="ruby">应用Math.max方法简化求一个数组中的最大元素
-console.log(Math.max(...[14, 2, 44, 3]));
+<pre class="line-numbers language-ruby"><code class="language-ruby">应用<span class="token constant">Math</span><span class="token punctuation">.</span>max方法简化求一个数组中的最大元素
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token constant">Math</span><span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">[</span><span class="token number">14</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">44</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 合并数组
-[...arr1, ...arr2, ...arr3]
-</code></pre>
+<span class="token punctuation">[</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>arr1<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>arr2<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>arr3<span class="token punctuation">]</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>将扩展运算符用于<strong>数组赋值</strong>，则只能将其放在参数的最后一位，否则会报错</p>
-<pre><code class="ruby">const [first, last, ...middle] = [1,3,4,5,6,7,8,9];
+<pre class="line-numbers language-ruby"><code class="language-ruby">const <span class="token punctuation">[</span>first<span class="token punctuation">,</span> last<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>middle<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 
-//扩展运算符还可将字符串转为真正的数组
-console.log([...&#39;hello&#39;]);
-</code></pre>
+<span class="token operator">/</span><span class="token operator">/</span>扩展运算符还可将字符串转为真正的数组
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token string">'hello'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 </ol>
 

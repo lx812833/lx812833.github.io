@@ -62,7 +62,7 @@
 	
 	<!-- others: such as change-bg, time... -->
 	<p class="page-name-other">
-		1/10/2019 
+		1/13/2019 
 		<style type="text/css">
 	header:after {
 		content: '';
@@ -163,11 +163,11 @@
 						
 							<p>
 								
-									Vue web读书器Vue web读书器是一款以Vue全家桶为主要的技术栈，媲美原生App的读书器。主要技术栈包括Vue全家桶、Vue-cli3.0、交互动画、LocalStorage+IndexedDB等
-1、初始化项目1.1、使用Vue-cli3.0搭建开发环境已安装好Vue-cli3.0后直接创建项目
+									Vue web 读书器Vue web 读书器是一款以Vue 全家桶为主要的技术栈，媲美原生 App 的读书器。主要技术栈包括Vue 全家桶、Vue-cli3.0、交互动画、LocalStorage+IndexedDB等
+1、初始化项目1.1、使用 Vue-cli3.0 搭建开发环境已安装好 Vue-cli3.0 后直接创建项目
  vue create my-project
 
-1.2、导入 Iconfont svg图标	
+1.2、导入 Icon	
 								  
 							</p>
 						
@@ -201,12 +201,13 @@
 								
 									编程式导航—params 与 queryVue 编程式导航，就是params和query传参的用法。
 Paramsparams传参，只能使用name
-this.$router.push({name: &#39;Goods&#39;,params: {goodsId: id}})
+this.$router.push({name: 'Goods',params: {goodsId: id}})
 
 获取数据时用params获取
 this.$route.params.goodsId
 
-Queryquery传参，用的是	
+Queryquery传参，用的是path
+thi	
 								  
 							</p>
 						
@@ -355,11 +356,12 @@ Symbol
 							<p>
 								
 									类与样式、template分组渲染对象语法适合较多的class名或者动态的class
-&lt;ul :class=&quot;{ &#39;test3&#39; : a3 }&quot;&gt; // 对象语法
+&lt;ul :class="{ 'test3' : a3 }"> // 对象语法
 
 数组语法适合较少的class名
-&lt;ul :class=&quot;[a1,a2]&quot;&gt;  // 数组语法
-    &lt;template v-for=&quot;i	
+&lt;ul :class="[a1,a2]">  // 数组语法
+    &lt;template v-for="item in list">   // template分组渲染
+       	
 								  
 							</p>
 						
@@ -428,9 +430,9 @@ npm i
 								
 									小程序图片上传至七牛云小程序图片上传至七牛云这些好处什么的就不哔哩哔哩的说了…..具体步骤如下：
 导入qiniuUploader.js首先下载七牛云qiniuUploader.js 在需要上传图片的js中文件中引入
-const qiniuUploader = require(&quot;../../../utils/qiniuUploader.js&quot;)
+const qiniuUploader = require("../../../utils/qiniuUploader.js")
 
-与后台对接获取token在onl	
+与后台对接获取token在onload函数中写请求，	
 								  
 							</p>
 						

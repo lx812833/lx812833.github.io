@@ -62,7 +62,7 @@
 	
 	<!-- others: such as change-bg, time... -->
 	<p class="page-name-other">
-		1/10/2019 
+		1/13/2019 
 		<style type="text/css">
 	header:after {
 		content: '';
@@ -183,40 +183,40 @@
 				<div class="content" id="post-content">
 					
 						<h3 id="类与样式、template分组渲染"><a href="#类与样式、template分组渲染" class="headerlink" title="类与样式、template分组渲染"></a>类与样式、template分组渲染</h3><h4 id="对象语法"><a href="#对象语法" class="headerlink" title="对象语法"></a>对象语法</h4><p>适合较多的class名或者动态的class</p>
-<pre><code class="ruby">&lt;ul :class=&quot;{ &#39;test3&#39; : a3 }&quot;&gt; // 对象语法
-</code></pre>
+<pre class="line-numbers language-ruby"><code class="language-ruby"><span class="token operator">&lt;</span>ul <span class="token symbol">:class</span><span class="token operator">=</span><span class="token string">"{ 'test3' : a3 }"</span><span class="token operator">></span> <span class="token operator">/</span><span class="token operator">/</span> 对象语法
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h4 id="数组语法"><a href="#数组语法" class="headerlink" title="数组语法"></a>数组语法</h4><p>适合较少的class名</p>
-<pre><code class="ruby">&lt;ul :class=&quot;[a1,a2]&quot;&gt;  // 数组语法
-    &lt;template v-for=&quot;item in list&quot;&gt;   // template分组渲染
-        &lt;li :key=&quot;item+1&quot;&gt;template分组&lt;/li&gt;
-        &lt;li :key=&quot;item&quot;&gt;{{ item }}&lt;/li&gt;
-    &lt;/template&gt;
-&lt;/ul&gt;
-</code></pre>
+<pre class="line-numbers language-ruby"><code class="language-ruby"><span class="token operator">&lt;</span>ul <span class="token symbol">:class</span><span class="token operator">=</span><span class="token string">"[a1,a2]"</span><span class="token operator">></span>  <span class="token operator">/</span><span class="token operator">/</span> 数组语法
+    <span class="token operator">&lt;</span>template v<span class="token operator">-</span><span class="token keyword">for</span><span class="token operator">=</span><span class="token string">"item in list"</span><span class="token operator">></span>   <span class="token operator">/</span><span class="token operator">/</span> template分组渲染
+        <span class="token operator">&lt;</span>li <span class="token symbol">:key</span><span class="token operator">=</span><span class="token string">"item+1"</span><span class="token operator">></span>template分组<span class="token operator">&lt;</span><span class="token operator">/</span>li<span class="token operator">></span>
+        <span class="token operator">&lt;</span>li <span class="token symbol">:key</span><span class="token operator">=</span><span class="token string">"item"</span><span class="token operator">></span><span class="token punctuation">{</span><span class="token punctuation">{</span> item <span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>li<span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>ul<span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h4 id="template分组渲染"><a href="#template分组渲染" class="headerlink" title="template分组渲染"></a>template分组渲染</h4><p>根据条件分别渲染不同条件的数据</p>
-<pre><code class="ruby">&lt;div v-for=&quot;people in arr&quot;&gt;
-      &lt;template v-if=&quot;people.name == &#39;张三&#39;&quot;&gt;
-            {{people.name}}的有{{people.length}}
-      &lt;/template&gt;
-      &lt;template v-if=&quot;people.name == &#39;李四&#39;&quot;&gt;
-            {{people.name}}有{{people.length}}
-      &lt;/template&gt;
-      &lt;template v-if=&quot;people.name == &#39;王五&#39;&quot;&gt;
-            {{people.name}}足有{{people.length}}
-      &lt;/template&gt;
-&lt;/div&gt;
-}
-</code></pre>
+<pre class="line-numbers language-ruby"><code class="language-ruby"><span class="token operator">&lt;</span>div v<span class="token operator">-</span><span class="token keyword">for</span><span class="token operator">=</span><span class="token string">"people in arr"</span><span class="token operator">></span>
+      <span class="token operator">&lt;</span>template v<span class="token operator">-</span><span class="token keyword">if</span><span class="token operator">=</span><span class="token string">"people.name == '张三'"</span><span class="token operator">></span>
+            <span class="token punctuation">{</span><span class="token punctuation">{</span>people<span class="token punctuation">.</span>name<span class="token punctuation">}</span><span class="token punctuation">}</span>的有<span class="token punctuation">{</span><span class="token punctuation">{</span>people<span class="token punctuation">.</span>length<span class="token punctuation">}</span><span class="token punctuation">}</span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">></span>
+      <span class="token operator">&lt;</span>template v<span class="token operator">-</span><span class="token keyword">if</span><span class="token operator">=</span><span class="token string">"people.name == '李四'"</span><span class="token operator">></span>
+            <span class="token punctuation">{</span><span class="token punctuation">{</span>people<span class="token punctuation">.</span>name<span class="token punctuation">}</span><span class="token punctuation">}</span>有<span class="token punctuation">{</span><span class="token punctuation">{</span>people<span class="token punctuation">.</span>length<span class="token punctuation">}</span><span class="token punctuation">}</span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">></span>
+      <span class="token operator">&lt;</span>template v<span class="token operator">-</span><span class="token keyword">if</span><span class="token operator">=</span><span class="token string">"people.name == '王五'"</span><span class="token operator">></span>
+            <span class="token punctuation">{</span><span class="token punctuation">{</span>people<span class="token punctuation">.</span>name<span class="token punctuation">}</span><span class="token punctuation">}</span>足有<span class="token punctuation">{</span><span class="token punctuation">{</span>people<span class="token punctuation">.</span>length<span class="token punctuation">}</span><span class="token punctuation">}</span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>因为 v-if 是一个指令，所以必须将它添加到一个元素上。但是如果想切换多个元素呢？此时可以把一个 <template> 元素当做不可见的包裹元素，并在上面使用 v-if。最终的渲染结果将不包含 <template> 元素。</template></template></p>
-<pre><code class="ruby">data() {
-    return {
-        a1: &quot;test1&quot;,
-        a2: &quot;test2&quot;,
-        a3: true
-        list: [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;]
-    };
-}
-</code></pre>
+<pre class="line-numbers language-ruby"><code class="language-ruby"><span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>
+        a1<span class="token punctuation">:</span> <span class="token string">"test1"</span><span class="token punctuation">,</span>
+        a2<span class="token punctuation">:</span> <span class="token string">"test2"</span><span class="token punctuation">,</span>
+        a3<span class="token punctuation">:</span> <span class="token keyword">true</span>
+        list<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"a"</span><span class="token punctuation">,</span> <span class="token string">"b"</span><span class="token punctuation">,</span> <span class="token string">"c"</span><span class="token punctuation">,</span> <span class="token string">"d"</span><span class="token punctuation">]</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 					
 				</div>

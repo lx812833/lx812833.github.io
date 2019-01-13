@@ -62,7 +62,7 @@
 	
 	<!-- others: such as change-bg, time... -->
 	<p class="page-name-other">
-		1/10/2019 
+		1/13/2019 
 		<style type="text/css">
 	header:after {
 		content: '';
@@ -189,191 +189,191 @@
 					
 						<h3 id="真正掌握vuex的使用方法（二）"><a href="#真正掌握vuex的使用方法（二）" class="headerlink" title="真正掌握vuex的使用方法（二）"></a>真正掌握vuex的使用方法（二）</h3><p>@(Vuex)[vue, Vuex]<br>       目前当前的票数已经可以在页面中渲染出来了！接下来要做的事就是让按钮起到应有的责任：点击对应的按钮让数字加1, 总票数也要加1。很简单，只要给按钮增加一个事件，直接改变其状态即可，代码如下：</p>
 <hr>
-<pre><code class="python">&lt;div id=&quot;app&quot;&gt;
-    &lt;div&gt;&lt;h2&gt;总票数：{{nodeVoteCount+vueVoteCount}}&lt;/h2&gt;&lt;/div&gt;
-    &lt;div&gt;
-        &lt;img src=&quot;./assets/node.png&quot;&gt;
-        &lt;h3&gt;如何通过node.js对数据进行MD5加密&lt;/h3&gt;
-        &lt;!--为该按钮增加一个事件，让nodeVoteCount的状态加1--&gt;
-        &lt;input type=&quot;button&quot; value=&quot;投票&quot; @click=&quot;$store.state.nodeVoteCount++&quot;&gt;票数:{{nodeVoteCount}}
-    &lt;/div&gt;
-    &lt;hr/&gt;
-    &lt;div&gt;
-        &lt;img src=&quot;./assets/vuex.png&quot;&gt;
-        &lt;h3&gt;真正掌握vuex的使用方法（一）&lt;/h3&gt;
-        &lt;!--为该按钮增加一个事件，让vueVoteCount的状态加1--&gt;
-        &lt;input type=&quot;button&quot; value=&quot;投票&quot; @click=&quot;$store.state.vueVoteCount++&quot;&gt;票数：{{vueVoteCount}}
-    &lt;/div&gt;
-&lt;/div&gt;
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">&lt;</span>div id<span class="token operator">=</span><span class="token string">"app"</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>div<span class="token operator">></span><span class="token operator">&lt;</span>h2<span class="token operator">></span>总票数：<span class="token punctuation">{</span><span class="token punctuation">{</span>nodeVoteCount<span class="token operator">+</span>vueVoteCount<span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>h2<span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+    <span class="token operator">&lt;</span>div<span class="token operator">></span>
+        <span class="token operator">&lt;</span>img src<span class="token operator">=</span><span class="token string">"./assets/node.png"</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>h3<span class="token operator">></span>如何通过node<span class="token punctuation">.</span>js对数据进行MD5加密<span class="token operator">&lt;</span><span class="token operator">/</span>h3<span class="token operator">></span>
+        <span class="token operator">&lt;</span>!<span class="token operator">-</span><span class="token operator">-</span>为该按钮增加一个事件，让nodeVoteCount的状态加<span class="token number">1</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"button"</span> value<span class="token operator">=</span><span class="token string">"投票"</span> @click<span class="token operator">=</span><span class="token string">"$store.state.nodeVoteCount++"</span><span class="token operator">></span>票数<span class="token punctuation">:</span><span class="token punctuation">{</span><span class="token punctuation">{</span>nodeVoteCount<span class="token punctuation">}</span><span class="token punctuation">}</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+    <span class="token operator">&lt;</span>hr<span class="token operator">/</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>div<span class="token operator">></span>
+        <span class="token operator">&lt;</span>img src<span class="token operator">=</span><span class="token string">"./assets/vuex.png"</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>h3<span class="token operator">></span>真正掌握vuex的使用方法（一）<span class="token operator">&lt;</span><span class="token operator">/</span>h3<span class="token operator">></span>
+        <span class="token operator">&lt;</span>!<span class="token operator">-</span><span class="token operator">-</span>为该按钮增加一个事件，让vueVoteCount的状态加<span class="token number">1</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"button"</span> value<span class="token operator">=</span><span class="token string">"投票"</span> @click<span class="token operator">=</span><span class="token string">"$store.state.vueVoteCount++"</span><span class="token operator">></span>票数：<span class="token punctuation">{</span><span class="token punctuation">{</span>vueVoteCount<span class="token punctuation">}</span><span class="token punctuation">}</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>在使用了vuex的情况下，在页面中不能直接更改状态值。在这个时候咱们就需要用到vuex当中的 <strong>mutation</strong>了。<br>咱们知道vue的视图都是由数据驱动的，也就是说状态(state)里面的数据是动态变化的，而要改变状态内数据的唯一的方法就是通过<strong>mutation</strong><br>也就是说mutation内可以存放一些改变状态的逻辑方法！这也是Vuex设计的一个特点，处理数据的逻辑和视图进行分离！</p>
 <p>接下来咱们要修改一下store.js当中的代码了，将其修改为：<br>Vuex 建议我们mutation需要用大写常量来表示，目的是与action进行区分！所以我们需要将代码修改一下下：</p>
 <hr>
-<pre><code class="python">import Vue from &#39;vue&#39;;//引用vue
-import Vuex from &#39;vuex&#39;;//引用vuex
-Vue.use(Vuex);//使用vuex
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span><span class="token punctuation">;</span><span class="token operator">//</span>引用vue
+<span class="token keyword">import</span> Vuex <span class="token keyword">from</span> <span class="token string">'vuex'</span><span class="token punctuation">;</span><span class="token operator">//</span>引用vuex
+Vue<span class="token punctuation">.</span>use<span class="token punctuation">(</span>Vuex<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token operator">//</span>使用vuex
 
 
-const state={
-    nodeVoteCount:1,//node的初始票数
-    vueVoteCount:2,//vue的初始票数
-};
-//生明一个常量mutations，将所有的mutation放入其中
-const mutations={
-//为nodeVoteCount加1
-    ADDNODEVOTE(state){    / /这里的state即是上面定义的state常量
-        state.nodeVoteCount++;
-    },
-//为vueVoteCount加1
-    ADDVUEVOTE(state){             //这里的state即是上面定义的state常量
-        state.vueVoteCount++;
-    }
-}
-export default new Vuex.Store({ //暴露Store对象
-     state,
-     mutation s//将mutations进行暴露
-})
-</code></pre>
+const state<span class="token operator">=</span><span class="token punctuation">{</span>
+    nodeVoteCount<span class="token punctuation">:</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token operator">//</span>node的初始票数
+    vueVoteCount<span class="token punctuation">:</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token operator">//</span>vue的初始票数
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token operator">//</span>生明一个常量mutations，将所有的mutation放入其中
+const mutations<span class="token operator">=</span><span class="token punctuation">{</span>
+<span class="token operator">//</span>为nodeVoteCount加<span class="token number">1</span>
+    ADDNODEVOTE<span class="token punctuation">(</span>state<span class="token punctuation">)</span><span class="token punctuation">{</span>    <span class="token operator">/</span> <span class="token operator">/</span>这里的state即是上面定义的state常量
+        state<span class="token punctuation">.</span>nodeVoteCount<span class="token operator">+</span><span class="token operator">+</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token operator">//</span>为vueVoteCount加<span class="token number">1</span>
+    ADDVUEVOTE<span class="token punctuation">(</span>state<span class="token punctuation">)</span><span class="token punctuation">{</span>             <span class="token operator">//</span>这里的state即是上面定义的state常量
+        state<span class="token punctuation">.</span>vueVoteCount<span class="token operator">+</span><span class="token operator">+</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+export default new Vuex<span class="token punctuation">.</span>Store<span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token operator">//</span>暴露Store对象
+     state<span class="token punctuation">,</span>
+     mutation s<span class="token operator">//</span>将mutations进行暴露
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>5、修改App.vue为：</p>
 <hr>
-<pre><code class="python">&lt;template&gt;
-    &lt;div id=&quot;app&quot;&gt;
-        &lt;!--通过$store.state.nodeVoteCount获得nodeVoteCount的状态值
-        通过$store.state.vueVoteCount获得vueVoteCount的状态值--&gt;
-        &lt;div&gt;&lt;h2&gt;总票数：{{$store.state.nodeVoteCount+$store.state.vueVoteCount}}&lt;/h2&gt;&lt;/div&gt;
-        &lt;div&gt;
-            &lt;img src=&quot;./assets/node.png&quot;&gt;
-            &lt;h3&gt;如何通过node.js对数据进行MD5加密&lt;/h3&gt;
-            &lt;input type=&quot;button&quot; value=&quot;投票&quot;&gt;票数:{{$store.state.nodeVoteCount}}
-        &lt;/div&gt;
-        &lt;hr/&gt;
-        &lt;div&gt;
-            &lt;img src=&quot;./assets/vuex.png&quot;&gt;
-            &lt;h3&gt;真正掌握vuex的使用方法（一）&lt;/h3&gt;
-            &lt;input type=&quot;button&quot; value=&quot;投票&quot;&gt;票数：{{$store.state.vueVoteCount}}
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/template&gt;
-&lt;script&gt;
-export default {
-    name: &#39;App&#39;
-}
-&lt;/script&gt;
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">&lt;</span>template<span class="token operator">></span>
+    <span class="token operator">&lt;</span>div id<span class="token operator">=</span><span class="token string">"app"</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>!<span class="token operator">-</span><span class="token operator">-</span>通过$store<span class="token punctuation">.</span>state<span class="token punctuation">.</span>nodeVoteCount获得nodeVoteCount的状态值
+        通过$store<span class="token punctuation">.</span>state<span class="token punctuation">.</span>vueVoteCount获得vueVoteCount的状态值<span class="token operator">-</span><span class="token operator">-</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>div<span class="token operator">></span><span class="token operator">&lt;</span>h2<span class="token operator">></span>总票数：<span class="token punctuation">{</span><span class="token punctuation">{</span>$store<span class="token punctuation">.</span>state<span class="token punctuation">.</span>nodeVoteCount<span class="token operator">+</span>$store<span class="token punctuation">.</span>state<span class="token punctuation">.</span>vueVoteCount<span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>h2<span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+        <span class="token operator">&lt;</span>div<span class="token operator">></span>
+            <span class="token operator">&lt;</span>img src<span class="token operator">=</span><span class="token string">"./assets/node.png"</span><span class="token operator">></span>
+            <span class="token operator">&lt;</span>h3<span class="token operator">></span>如何通过node<span class="token punctuation">.</span>js对数据进行MD5加密<span class="token operator">&lt;</span><span class="token operator">/</span>h3<span class="token operator">></span>
+            <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"button"</span> value<span class="token operator">=</span><span class="token string">"投票"</span><span class="token operator">></span>票数<span class="token punctuation">:</span><span class="token punctuation">{</span><span class="token punctuation">{</span>$store<span class="token punctuation">.</span>state<span class="token punctuation">.</span>nodeVoteCount<span class="token punctuation">}</span><span class="token punctuation">}</span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+        <span class="token operator">&lt;</span>hr<span class="token operator">/</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>div<span class="token operator">></span>
+            <span class="token operator">&lt;</span>img src<span class="token operator">=</span><span class="token string">"./assets/vuex.png"</span><span class="token operator">></span>
+            <span class="token operator">&lt;</span>h3<span class="token operator">></span>真正掌握vuex的使用方法（一）<span class="token operator">&lt;</span><span class="token operator">/</span>h3<span class="token operator">></span>
+            <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"button"</span> value<span class="token operator">=</span><span class="token string">"投票"</span><span class="token operator">></span>票数：<span class="token punctuation">{</span><span class="token punctuation">{</span>$store<span class="token punctuation">.</span>state<span class="token punctuation">.</span>vueVoteCount<span class="token punctuation">}</span><span class="token punctuation">}</span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">></span>
+<span class="token operator">&lt;</span>script<span class="token operator">></span>
+export default <span class="token punctuation">{</span>
+    name<span class="token punctuation">:</span> <span class="token string">'App'</span>
+<span class="token punctuation">}</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>到目前为止已经将mutation方法配置好了，那么接下来要做的事就是让按钮来触发mutation即可。触发的时候需要用到<strong>$store.commit</strong>方法，修改App.vue：</p>
 <hr>
-<pre><code class="python">&lt;div id=&quot;app&quot;&gt;
-    &lt;div&gt;&lt;h2&gt;总票数：{{nodeVoteCount+vueVoteCount}}&lt;/h2&gt;&lt;/div&gt;
-    &lt;div&gt;
-        &lt;img src=&quot;./assets/node.png&quot;&gt;
-        &lt;h3&gt;如何通过node.js对数据进行MD5加密&lt;/h3&gt;
-        &lt;!--通过store.commit来调用mutations的addNodeVote方法--&gt;
-        &lt;input type=&quot;button&quot; value=&quot;投票&quot; @click=&quot;$store.commit(&#39;ADDNODEVOTE&#39;)&quot;&gt;票数:{{nodeVoteCount}}
-    &lt;/div&gt;
-    &lt;hr/&gt;
-    &lt;div&gt;
-        &lt;img src=&quot;./assets/vuex.png&quot;&gt;
-        &lt;h3&gt;真正掌握vuex的使用方法（一）&lt;/h3&gt;
-        &lt;!--通过store.commit来调用mutations的addVueVoteCount方法--&gt;
-        &lt;input type=&quot;button&quot; value=&quot;投票&quot; @click=&quot;$store.commit(&#39;ADDVUEVOTE&#39;)&quot;&gt;票数：{{vueVoteCount}}
-    &lt;/div&gt;
-&lt;/div&gt;
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">&lt;</span>div id<span class="token operator">=</span><span class="token string">"app"</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>div<span class="token operator">></span><span class="token operator">&lt;</span>h2<span class="token operator">></span>总票数：<span class="token punctuation">{</span><span class="token punctuation">{</span>nodeVoteCount<span class="token operator">+</span>vueVoteCount<span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>h2<span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+    <span class="token operator">&lt;</span>div<span class="token operator">></span>
+        <span class="token operator">&lt;</span>img src<span class="token operator">=</span><span class="token string">"./assets/node.png"</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>h3<span class="token operator">></span>如何通过node<span class="token punctuation">.</span>js对数据进行MD5加密<span class="token operator">&lt;</span><span class="token operator">/</span>h3<span class="token operator">></span>
+        <span class="token operator">&lt;</span>!<span class="token operator">-</span><span class="token operator">-</span>通过store<span class="token punctuation">.</span>commit来调用mutations的addNodeVote方法<span class="token operator">-</span><span class="token operator">-</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"button"</span> value<span class="token operator">=</span><span class="token string">"投票"</span> @click<span class="token operator">=</span><span class="token string">"$store.commit('ADDNODEVOTE')"</span><span class="token operator">></span>票数<span class="token punctuation">:</span><span class="token punctuation">{</span><span class="token punctuation">{</span>nodeVoteCount<span class="token punctuation">}</span><span class="token punctuation">}</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+    <span class="token operator">&lt;</span>hr<span class="token operator">/</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>div<span class="token operator">></span>
+        <span class="token operator">&lt;</span>img src<span class="token operator">=</span><span class="token string">"./assets/vuex.png"</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>h3<span class="token operator">></span>真正掌握vuex的使用方法（一）<span class="token operator">&lt;</span><span class="token operator">/</span>h3<span class="token operator">></span>
+        <span class="token operator">&lt;</span>!<span class="token operator">-</span><span class="token operator">-</span>通过store<span class="token punctuation">.</span>commit来调用mutations的addVueVoteCount方法<span class="token operator">-</span><span class="token operator">-</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"button"</span> value<span class="token operator">=</span><span class="token string">"投票"</span> @click<span class="token operator">=</span><span class="token string">"$store.commit('ADDVUEVOTE')"</span><span class="token operator">></span>票数：<span class="token punctuation">{</span><span class="token punctuation">{</span>vueVoteCount<span class="token punctuation">}</span><span class="token punctuation">}</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>你会发现点击按钮的效果达到了你的预期，一切都在朝着好的方向发展！那这个mutation方法可以接收值吗？当然可以！咱们现在在原来的基础之上再给加一个按钮，点击该按钮让票数加2，修改App.vue:</p>
 <hr>
-<pre><code class="python">&lt;div id=&quot;app&quot;&gt;
-    &lt;div&gt;&lt;h2&gt;总票数：{{nodeVoteCount+vueVoteCount}}&lt;/h2&gt;&lt;/div&gt;
-    &lt;div&gt;
-        &lt;img src=&quot;./assets/node.png&quot;&gt;
-        &lt;h3&gt;如何通过node.js对数据进行MD5加密&lt;/h3&gt;
-        &lt;!--通过store.commit来调用mutations的addNodeVote方法--&gt;
-        &lt;input type=&quot;button&quot; value=&quot;投票&quot; @click=&quot;$store.commit(&#39;ADDNODEVOTE&#39;)&quot;&gt;
-        &lt;!--commit方法的第二个参数即为要传入的值--&gt;
-        &lt;input type=&quot;button&quot; value=&quot;加2&quot; @click=&quot;$store.commit(&#39;ADDNODEVOTE&#39;,2)&quot;&gt;票数:{{nodeVoteCount}}
-    &lt;/div&gt;
-    &lt;hr/&gt;
-    &lt;div&gt;
-        &lt;img src=&quot;./assets/vuex.png&quot;&gt;
-        &lt;h3&gt;真正掌握vuex的使用方法（一）&lt;/h3&gt;
-        &lt;!--通过store.commit来调用mutations的addVueVoteCount方法--&gt;
-        &lt;input type=&quot;button&quot; value=&quot;投票&quot; @click=&quot;$store.commit(&#39;ADDVUEVOTE&#39;)&quot;&gt;
-        &lt;!--commit方法的第二个参数即为要传入的值--&gt;
-        &lt;input type=&quot;button&quot; value=&quot;加2&quot; @click=&quot;$store.commit(&#39;ADDVUEVOTE&#39;,2)&quot;&gt;票数：{{vueVoteCount}}
-    &lt;/div&gt;
-&lt;/div&gt;
-</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">&lt;</span>div id<span class="token operator">=</span><span class="token string">"app"</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>div<span class="token operator">></span><span class="token operator">&lt;</span>h2<span class="token operator">></span>总票数：<span class="token punctuation">{</span><span class="token punctuation">{</span>nodeVoteCount<span class="token operator">+</span>vueVoteCount<span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>h2<span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+    <span class="token operator">&lt;</span>div<span class="token operator">></span>
+        <span class="token operator">&lt;</span>img src<span class="token operator">=</span><span class="token string">"./assets/node.png"</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>h3<span class="token operator">></span>如何通过node<span class="token punctuation">.</span>js对数据进行MD5加密<span class="token operator">&lt;</span><span class="token operator">/</span>h3<span class="token operator">></span>
+        <span class="token operator">&lt;</span>!<span class="token operator">-</span><span class="token operator">-</span>通过store<span class="token punctuation">.</span>commit来调用mutations的addNodeVote方法<span class="token operator">-</span><span class="token operator">-</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"button"</span> value<span class="token operator">=</span><span class="token string">"投票"</span> @click<span class="token operator">=</span><span class="token string">"$store.commit('ADDNODEVOTE')"</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>!<span class="token operator">-</span><span class="token operator">-</span>commit方法的第二个参数即为要传入的值<span class="token operator">-</span><span class="token operator">-</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"button"</span> value<span class="token operator">=</span><span class="token string">"加2"</span> @click<span class="token operator">=</span><span class="token string">"$store.commit('ADDNODEVOTE',2)"</span><span class="token operator">></span>票数<span class="token punctuation">:</span><span class="token punctuation">{</span><span class="token punctuation">{</span>nodeVoteCount<span class="token punctuation">}</span><span class="token punctuation">}</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+    <span class="token operator">&lt;</span>hr<span class="token operator">/</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>div<span class="token operator">></span>
+        <span class="token operator">&lt;</span>img src<span class="token operator">=</span><span class="token string">"./assets/vuex.png"</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>h3<span class="token operator">></span>真正掌握vuex的使用方法（一）<span class="token operator">&lt;</span><span class="token operator">/</span>h3<span class="token operator">></span>
+        <span class="token operator">&lt;</span>!<span class="token operator">-</span><span class="token operator">-</span>通过store<span class="token punctuation">.</span>commit来调用mutations的addVueVoteCount方法<span class="token operator">-</span><span class="token operator">-</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"button"</span> value<span class="token operator">=</span><span class="token string">"投票"</span> @click<span class="token operator">=</span><span class="token string">"$store.commit('ADDVUEVOTE')"</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>!<span class="token operator">-</span><span class="token operator">-</span>commit方法的第二个参数即为要传入的值<span class="token operator">-</span><span class="token operator">-</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"button"</span> value<span class="token operator">=</span><span class="token string">"加2"</span> @click<span class="token operator">=</span><span class="token string">"$store.commit('ADDVUEVOTE',2)"</span><span class="token operator">></span>票数：<span class="token punctuation">{</span><span class="token punctuation">{</span>vueVoteCount<span class="token punctuation">}</span><span class="token punctuation">}</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>然后再对store.js进行下调整：</p>
 <hr>
-<pre><code class="python">import Vue from &#39;vue&#39;; //引用vue
-import Vuex from &#39;vuex&#39;; //引用vuex
-Vue.use(Vuex); //使用vuex
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span><span class="token punctuation">;</span> <span class="token operator">//</span>引用vue
+<span class="token keyword">import</span> Vuex <span class="token keyword">from</span> <span class="token string">'vuex'</span><span class="token punctuation">;</span> <span class="token operator">//</span>引用vuex
+Vue<span class="token punctuation">.</span>use<span class="token punctuation">(</span>Vuex<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">//</span>使用vuex
 
-const state={
-    nodeVoteCount:1, //node的初始票数
-    vueVoteCount:2, //vue的初始票数
-};
+const state<span class="token operator">=</span><span class="token punctuation">{</span>
+    nodeVoteCount<span class="token punctuation">:</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">//</span>node的初始票数
+    vueVoteCount<span class="token punctuation">:</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token operator">//</span>vue的初始票数
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-//生明一个常量mutations，将所有的mutation放入其中
-const mutations={
-//为nodeVoteCount加1,voteNum为增加的值，默认加1
-    ADDNODEVOTE(state,voteNum=1){ //这里的state即是上面定义的state常量
-        state.nodeVoteCount+=voteNum;
-},
-//为vueVoteCount加1,voteNum为增加的值，默认加1
-    ADDVUEVOTE(state,voteNum=1) {//这里的state即是上面定义的state常量
-        state.vueVoteCount+=voteNum;;
-    }
-}
+<span class="token operator">//</span>生明一个常量mutations，将所有的mutation放入其中
+const mutations<span class="token operator">=</span><span class="token punctuation">{</span>
+<span class="token operator">//</span>为nodeVoteCount加<span class="token number">1</span><span class="token punctuation">,</span>voteNum为增加的值，默认加<span class="token number">1</span>
+    ADDNODEVOTE<span class="token punctuation">(</span>state<span class="token punctuation">,</span>voteNum<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">{</span> <span class="token operator">//</span>这里的state即是上面定义的state常量
+        state<span class="token punctuation">.</span>nodeVoteCount<span class="token operator">+=</span>voteNum<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token operator">//</span>为vueVoteCount加<span class="token number">1</span><span class="token punctuation">,</span>voteNum为增加的值，默认加<span class="token number">1</span>
+    ADDVUEVOTE<span class="token punctuation">(</span>state<span class="token punctuation">,</span>voteNum<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token operator">//</span>这里的state即是上面定义的state常量
+        state<span class="token punctuation">.</span>vueVoteCount<span class="token operator">+=</span>voteNum<span class="token punctuation">;</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-export default new Vuex.Store({ //暴露Store对象
-    state,
-    mutations //将mutations进行暴露
-})
-</code></pre>
+export default new Vuex<span class="token punctuation">.</span>Store<span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token operator">//</span>暴露Store对象
+    state<span class="token punctuation">,</span>
+    mutations <span class="token operator">//</span>将mutations进行暴露
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>到此再cnpm run dev。现在的你可以想加1加1，想加2加2了！是不是很爽？ 做到目前这一步，肯定有人在想：在view调用mutation方法的时候有没有简写的方式？有！不过这个要写到methods里，最终App.vue：</p>
 <hr>
-<pre><code class="python">&lt;template&gt;
-    &lt;div id=&quot;app&quot;&gt;
-    &lt;div&gt;&lt;h2&gt;总票数：{{nodeVoteCount+vueVoteCount}}&lt;/h2&gt;&lt;/div&gt;
-    &lt;div&gt;
-        &lt;img src=&quot;./assets/node.png&quot;&gt;
-        &lt;h3&gt;如何通过node.js对数据进行MD5加密&lt;/h3&gt;
-        &lt;!--直接调用ADDNODEVOTE--&gt;
-        &lt;input type=&quot;button&quot; value=&quot;投票&quot; @click=&quot;ADDNODEVOTE()&quot;&gt;
-        &lt;!--直接调用ADDNODEVOTE--&gt;
-        &lt;input type=&quot;button&quot; value=&quot;加2&quot; @click=&quot;ADDNODEVOTE(2)&quot;&gt;票数:{{nodeVoteCount}}
-    &lt;/div&gt;
-    &lt;hr/&gt;
-    &lt;div&gt;
-        &lt;img src=&quot;./assets/vuex.png&quot;&gt;
-        &lt;h3&gt;真正掌握vuex的使用方法（一）&lt;/h3&gt;
-        &lt;!--直接调用ADDVUEVOTE--&gt;
-        &lt;input type=&quot;button&quot; value=&quot;投票&quot; @click=&quot;ADDVUEVOTE()&quot;&gt;
-        &lt;!--直接调用ADDVUEVOTE--&gt;
-        &lt;input type=&quot;button&quot; value=&quot;加2&quot; @click=&quot;ADDVUEVOTE(2)&quot;&gt;票数：{{vueVoteCount}}
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/template&gt;
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">&lt;</span>template<span class="token operator">></span>
+    <span class="token operator">&lt;</span>div id<span class="token operator">=</span><span class="token string">"app"</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>div<span class="token operator">></span><span class="token operator">&lt;</span>h2<span class="token operator">></span>总票数：<span class="token punctuation">{</span><span class="token punctuation">{</span>nodeVoteCount<span class="token operator">+</span>vueVoteCount<span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>h2<span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+    <span class="token operator">&lt;</span>div<span class="token operator">></span>
+        <span class="token operator">&lt;</span>img src<span class="token operator">=</span><span class="token string">"./assets/node.png"</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>h3<span class="token operator">></span>如何通过node<span class="token punctuation">.</span>js对数据进行MD5加密<span class="token operator">&lt;</span><span class="token operator">/</span>h3<span class="token operator">></span>
+        <span class="token operator">&lt;</span>!<span class="token operator">-</span><span class="token operator">-</span>直接调用ADDNODEVOTE<span class="token operator">-</span><span class="token operator">-</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"button"</span> value<span class="token operator">=</span><span class="token string">"投票"</span> @click<span class="token operator">=</span><span class="token string">"ADDNODEVOTE()"</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>!<span class="token operator">-</span><span class="token operator">-</span>直接调用ADDNODEVOTE<span class="token operator">-</span><span class="token operator">-</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"button"</span> value<span class="token operator">=</span><span class="token string">"加2"</span> @click<span class="token operator">=</span><span class="token string">"ADDNODEVOTE(2)"</span><span class="token operator">></span>票数<span class="token punctuation">:</span><span class="token punctuation">{</span><span class="token punctuation">{</span>nodeVoteCount<span class="token punctuation">}</span><span class="token punctuation">}</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+    <span class="token operator">&lt;</span>hr<span class="token operator">/</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>div<span class="token operator">></span>
+        <span class="token operator">&lt;</span>img src<span class="token operator">=</span><span class="token string">"./assets/vuex.png"</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>h3<span class="token operator">></span>真正掌握vuex的使用方法（一）<span class="token operator">&lt;</span><span class="token operator">/</span>h3<span class="token operator">></span>
+        <span class="token operator">&lt;</span>!<span class="token operator">-</span><span class="token operator">-</span>直接调用ADDVUEVOTE<span class="token operator">-</span><span class="token operator">-</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"button"</span> value<span class="token operator">=</span><span class="token string">"投票"</span> @click<span class="token operator">=</span><span class="token string">"ADDVUEVOTE()"</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>!<span class="token operator">-</span><span class="token operator">-</span>直接调用ADDVUEVOTE<span class="token operator">-</span><span class="token operator">-</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"button"</span> value<span class="token operator">=</span><span class="token string">"加2"</span> @click<span class="token operator">=</span><span class="token string">"ADDVUEVOTE(2)"</span><span class="token operator">></span>票数：<span class="token punctuation">{</span><span class="token punctuation">{</span>vueVoteCount<span class="token punctuation">}</span><span class="token punctuation">}</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">></span>
 
-&lt;script&gt;
-import {mapState,mapMutations} from &quot;vuex&quot;;
-export default {
-    name: &#39;App&#39;,
-    methods:{
-        ..mapMutations([&quot;ADDNODEVOTE&quot;,&quot;ADDVUEVOTE&quot;]),
-        ...{
-            //写自己定义的方法
-        }
-    },
-    computed:{
-    ...mapState([&quot;nodeVoteCount&quot;,&quot;vueVoteCount&quot;]),
-        ...{
-    //自己的属性可以在这里面写哦
-    }
-    }
-}
-&lt;/script&gt;
-</code></pre>
+<span class="token operator">&lt;</span>script<span class="token operator">></span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>mapState<span class="token punctuation">,</span>mapMutations<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"vuex"</span><span class="token punctuation">;</span>
+export default <span class="token punctuation">{</span>
+    name<span class="token punctuation">:</span> <span class="token string">'App'</span><span class="token punctuation">,</span>
+    methods<span class="token punctuation">:</span><span class="token punctuation">{</span>
+        <span class="token punctuation">.</span><span class="token punctuation">.</span>mapMutations<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">"ADDNODEVOTE"</span><span class="token punctuation">,</span><span class="token string">"ADDVUEVOTE"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">{</span>
+            <span class="token operator">//</span>写自己定义的方法
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    computed<span class="token punctuation">:</span><span class="token punctuation">{</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>mapState<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">"nodeVoteCount"</span><span class="token punctuation">,</span><span class="token string">"vueVoteCount"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">{</span>
+    <span class="token operator">//</span>自己的属性可以在这里面写哦
+    <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 					
 				</div>

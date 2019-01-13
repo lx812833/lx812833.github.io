@@ -62,7 +62,7 @@
 	
 	<!-- others: such as change-bg, time... -->
 	<p class="page-name-other">
-		1/10/2019 
+		1/13/2019 
 		<style type="text/css">
 	header:after {
 		content: '';
@@ -190,14 +190,14 @@
 						<h3 id="Vue监听路由变化"><a href="#Vue监听路由变化" class="headerlink" title="Vue监听路由变化"></a>Vue监听路由变化</h3><p>@(Vue)</p>
 <p>当Vue监听路由变化，数据无法更新时，Vue-router官网，有这么一句话：提醒一下，<strong>当使用路由参数时，例如从 /user/foo 导航到 user/bar，原来的组件实例会被复用。因为两个路由都渲染同个组件，比起销毁再创建，复用则显得更加高效。</strong>不过，这也意味着组件的生命周期钩子不会再被调用。 意思很明显了：虽然路由参数发生了变化，但组件还是那个组件，Vue生命周期也还没结束，此时并不会刷新数据。<br>官网也提出了相应的解决方案：<strong>复用组件时，想对路由参数的变化作出响应的话，你可以简单地 watch（监测变化） $route 对象</strong></p>
 <p>用<strong>:key</strong>管理可复用的元素<br>：key是用来阻止“复用”的。  Vue 提供了一种方式来声明“这两个元素是完全独立的——不要复用它们”。<strong>只需添加一个具有唯一值的 key 属性即可(Vue文档原话)</strong></p>
-<pre><code class="ruby">&lt;router-view :key=&quot;key&quot;&gt;&lt;/router-view&gt;
+<pre class="line-numbers language-ruby"><code class="language-ruby"><span class="token operator">&lt;</span>router<span class="token operator">-</span>view <span class="token symbol">:key</span><span class="token operator">=</span><span class="token string">"key"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>router<span class="token operator">-</span>view<span class="token operator">></span>
 
-computed: {
-    key() {
-     return this.$route.name !== undefined? this.$route.name +new Date(): this.$route +new Date()
-    }
-}
-</code></pre>
+computed<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token function">key</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     <span class="token keyword">return</span> this<span class="token punctuation">.</span><span class="token variable">$route</span><span class="token punctuation">.</span>name <span class="token operator">!==</span> undefined<span class="token operator">?</span> this<span class="token punctuation">.</span><span class="token variable">$route</span><span class="token punctuation">.</span>name <span class="token operator">+</span><span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> this<span class="token punctuation">.</span><span class="token variable">$route</span> <span class="token operator">+</span><span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 					
 				</div>

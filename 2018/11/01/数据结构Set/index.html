@@ -62,7 +62,7 @@
 	
 	<!-- others: such as change-bg, time... -->
 	<p class="page-name-other">
-		1/10/2019 
+		1/13/2019 
 		<style type="text/css">
 	header:after {
 		content: '';
@@ -190,33 +190,33 @@
 						<h3 id="数据结构Set"><a href="#数据结构Set" class="headerlink" title="数据结构Set"></a>数据结构Set</h3><p>@(Es6)</p>
 <p><strong>集合的基本概论</strong>： 集合是由一组无序且唯一（既不能重复）的项组成。这个数据结构使用了与有限集合相同的数学概论，应用在计算机的数据结构中。特点：<strong>key和value相同，没有重复的value</strong></p>
 <p>ES6提供了数据结构set，类似于数组，但是<strong>成员的值都是唯一的</strong>，没有重复的值</p>
-<h4 id="如何创建一个Set"><a href="#如何创建一个Set" class="headerlink" title="如何创建一个Set"></a>如何创建一个Set</h4><pre><code class="ruby"> let s = new Set()
- let s = new Set([1, 2, 3]) // Set(3) {1, 2, 3}
- console.log(s)
-</code></pre>
-<h4 id="Set属性"><a href="#Set属性" class="headerlink" title="Set属性"></a>Set属性</h4><pre><code class="ruby"> console.log(s.size) // 3
-</code></pre>
+<h4 id="如何创建一个Set"><a href="#如何创建一个Set" class="headerlink" title="如何创建一个Set"></a>如何创建一个Set</h4><pre class="line-numbers language-ruby"><code class="language-ruby"> let s <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Set</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+ let s <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Set</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">/</span><span class="token operator">/</span> <span class="token function">Set</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">}</span>
+ console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h4 id="Set属性"><a href="#Set属性" class="headerlink" title="Set属性"></a>Set属性</h4><pre class="line-numbers language-ruby"><code class="language-ruby"> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>s<span class="token punctuation">.</span>size<span class="token punctuation">)</span> <span class="token operator">/</span><span class="token operator">/</span> <span class="token number">3</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h4 id="Set类的方法"><a href="#Set类的方法" class="headerlink" title="Set类的方法"></a>Set类的方法</h4><ol>
-<li>set.add(value) 添加一个数据，返回set结构本身<pre><code class="ruby">s.add(&#39;a&#39;).add(&#39;b&#39;).add(&#39;c&#39;)
-console.log(s) // Set(6) {1, 2, 3, &quot;a&quot;, &quot;b&quot;, &quot;c&quot;}
-</code></pre>
+<li>set.add(value) 添加一个数据，返回set结构本身<pre class="line-numbers language-ruby"><code class="language-ruby">s<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">'b'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">'c'</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token operator">/</span><span class="token operator">/</span> <span class="token function">Set</span><span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token string">"a"</span><span class="token punctuation">,</span> <span class="token string">"b"</span><span class="token punctuation">,</span> <span class="token string">"c"</span><span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 </li>
-<li>set.delete(value) 删除一个数据，返回一个布尔值，表示删除成功与否<pre><code class="ruby">s.delete(&#39;a&#39;)
-console.log(s)
-</code></pre>
+<li>set.delete(value) 删除一个数据，返回一个布尔值，表示删除成功与否<pre class="line-numbers language-ruby"><code class="language-ruby">s<span class="token punctuation">.</span><span class="token function">delete</span><span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 </li>
 <li>set.has(value) 判断该值是否为Set的成员，返回一个布尔值</li>
-<li>set.clear() 清除所有数据，没有返回值<pre><code class="ruby">s.clear()
-console.log(s) // Set(0) {}
-</code></pre>
+<li>set.clear() 清除所有数据，没有返回值<pre class="line-numbers language-ruby"><code class="language-ruby">s<span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token operator">/</span><span class="token operator">/</span> <span class="token function">Set</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 </li>
 <li>set.keys() 返回键名的遍历器</li>
 <li>set.keys() 返回键值的遍历器</li>
 <li>set.entries() 返回键值对的遍历器</li>
-<li>set.forEach() 使用回调函数遍历每个成员<pre><code class="ruby">s.forEach((value, key, set) =&gt; {
-console.log(value + &#39;lx&#39;)
-})
-</code></pre>
+<li>set.forEach() 使用回调函数遍历每个成员<pre class="line-numbers language-ruby"><code class="language-ruby">s<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span>value<span class="token punctuation">,</span> key<span class="token punctuation">,</span> set<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>value <span class="token operator">+</span> <span class="token string">'lx'</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 </li>
 </ol>
 

@@ -62,7 +62,7 @@
 	
 	<!-- others: such as change-bg, time... -->
 	<p class="page-name-other">
-		1/10/2019 
+		1/13/2019 
 		<style type="text/css">
 	header:after {
 		content: '';
@@ -189,72 +189,72 @@
 					
 						<h3 id="小程序图片上传至七牛云"><a href="#小程序图片上传至七牛云" class="headerlink" title="小程序图片上传至七牛云"></a>小程序图片上传至七牛云</h3><p>小程序图片上传至七牛云这些好处什么的就不哔哩哔哩的说了…..<br>具体步骤如下：</p>
 <h4 id="导入qiniuUploader-js"><a href="#导入qiniuUploader-js" class="headerlink" title="导入qiniuUploader.js"></a>导入qiniuUploader.js</h4><p>首先下载七牛云qiniuUploader.js 在需要上传图片的js中文件中引入</p>
-<pre><code class="ruby">const qiniuUploader = require(&quot;../../../utils/qiniuUploader.js&quot;)
-</code></pre>
+<pre class="line-numbers language-ruby"><code class="language-ruby">const qiniuUploader <span class="token operator">=</span> <span class="token keyword">require</span><span class="token punctuation">(</span><span class="token string">"../../../utils/qiniuUploader.js"</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h4 id="与后台对接获取token"><a href="#与后台对接获取token" class="headerlink" title="与后台对接获取token"></a>与后台对接获取token</h4><p>在onload函数中写请求，跟后端的接口对接，获取token</p>
-<pre><code class="ruby">// 获取七牛云token
-getToken() {
-  let cookie = &quot;jeesite.session.id=&quot; + wx.getStorageSync(&quot;cookieKey&quot;);
-  wx.request({
-    url: config.basicUrl + &quot;fault/oaFault/upToken&quot;,
-    header: {
-      Cookie: cookie
-    },
-    method: &quot;POST&quot;,
-    success: res =&gt; {
-       this.setData({
-          uploadToken: res.data
-       })
-     }
- })
-},
-</code></pre>
-<h4 id="图片选择途径"><a href="#图片选择途径" class="headerlink" title="图片选择途径"></a>图片选择途径</h4><pre><code class="ruby">//图片选择
-onChoise(event) {
-  wx.showActionSheet({
-    itemList: [&quot;从相册中选择&quot;, &quot;拍照&quot;, &quot;取消&quot;],
-    success: res =&gt; {
-      if (!res.cancel || res.tapIndex == 2) {
-          if (res.tapIndex == 0) {
-             this.chooseWxImage(&quot;album&quot;);
-          } else if (res.tapIndex == 1) {
-             this.chooseWxImage(&quot;camera&quot;);
-          }
-      }
-   }
- });
-}
-</code></pre>
-<h4 id="选择图片并上传到七牛云"><a href="#选择图片并上传到七牛云" class="headerlink" title="选择图片并上传到七牛云"></a>选择图片并上传到七牛云</h4><pre><code class="ruby">//图片选择途径并上传到七牛云
-chooseWxImage(type) {
-  wx.chooseImage({
-    count: 1,
-    sizeType: [&quot;original&quot;, &quot;compressed&quot;],
-    sourceType: [type],
-    success: res =&gt; {
-    const filepath = res.tempFilePaths[0]
-    console.log(&#39;filepath&#39;, filepath)
-    // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-    qiniuUploader.upload(filepath, res =&gt; {  // 七牛云提供的api
-    console.log(&#39;qiniuUploader.upload&#39;, res)
-    this.setData({
-    //注意这中间有个&quot;/&quot;
-        tempFilePaths: &#39;http://pih3875s4.bkt.clouddn.com&#39; + &quot;/&quot; + res.key
-    })
-        console.log(&#39;tempFilePaths&#39;, this.data.tempFilePaths)
-    }, (error) =&gt; {
-        console.log(&#39;error&#39; + error)
-    }, {
-        region: &#39;ECN&#39;,                         // 华东区
-        uploadURL: &#39;https://up-z1.qbox.me/&#39;,   // 所在大区的地址
-        domain: &#39;pih3875s4.bkt.clouddn.com&#39;,   // 外链默认域名
-        uptoken: this.data.uploadToken         // 后端返回来的uptoken
-       })
-    }
- });
-},
-}
-</code></pre>
+<pre class="line-numbers language-ruby"><code class="language-ruby"><span class="token operator">/</span><span class="token operator">/</span> 获取七牛云token
+<span class="token function">getToken</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  let cookie <span class="token operator">=</span> <span class="token string">"jeesite.session.id="</span> <span class="token operator">+</span> wx<span class="token punctuation">.</span><span class="token function">getStorageSync</span><span class="token punctuation">(</span><span class="token string">"cookieKey"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  wx<span class="token punctuation">.</span><span class="token function">request</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    url<span class="token punctuation">:</span> config<span class="token punctuation">.</span>basicUrl <span class="token operator">+</span> <span class="token string">"fault/oaFault/upToken"</span><span class="token punctuation">,</span>
+    header<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      <span class="token constant">Cookie</span><span class="token punctuation">:</span> cookie
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    method<span class="token punctuation">:</span> <span class="token string">"POST"</span><span class="token punctuation">,</span>
+    success<span class="token punctuation">:</span> res <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+       this<span class="token punctuation">.</span><span class="token function">setData</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+          uploadToken<span class="token punctuation">:</span> res<span class="token punctuation">.</span>data
+       <span class="token punctuation">}</span><span class="token punctuation">)</span>
+     <span class="token punctuation">}</span>
+ <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="图片选择途径"><a href="#图片选择途径" class="headerlink" title="图片选择途径"></a>图片选择途径</h4><pre class="line-numbers language-ruby"><code class="language-ruby"><span class="token operator">/</span><span class="token operator">/</span>图片选择
+<span class="token function">onChoise</span><span class="token punctuation">(</span>event<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  wx<span class="token punctuation">.</span><span class="token function">showActionSheet</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    itemList<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"从相册中选择"</span><span class="token punctuation">,</span> <span class="token string">"拍照"</span><span class="token punctuation">,</span> <span class="token string">"取消"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    success<span class="token punctuation">:</span> res <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>res<span class="token punctuation">.</span>cancel <span class="token operator">||</span> res<span class="token punctuation">.</span>tapIndex <span class="token operator">==</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">if</span> <span class="token punctuation">(</span>res<span class="token punctuation">.</span>tapIndex <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+             this<span class="token punctuation">.</span><span class="token function">chooseWxImage</span><span class="token punctuation">(</span><span class="token string">"album"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>res<span class="token punctuation">.</span>tapIndex <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+             this<span class="token punctuation">.</span><span class="token function">chooseWxImage</span><span class="token punctuation">(</span><span class="token string">"camera"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+   <span class="token punctuation">}</span>
+ <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="选择图片并上传到七牛云"><a href="#选择图片并上传到七牛云" class="headerlink" title="选择图片并上传到七牛云"></a>选择图片并上传到七牛云</h4><pre class="line-numbers language-ruby"><code class="language-ruby"><span class="token operator">/</span><span class="token operator">/</span>图片选择途径并上传到七牛云
+<span class="token function">chooseWxImage</span><span class="token punctuation">(</span>type<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  wx<span class="token punctuation">.</span><span class="token function">chooseImage</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    count<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+    sizeType<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"original"</span><span class="token punctuation">,</span> <span class="token string">"compressed"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    sourceType<span class="token punctuation">:</span> <span class="token punctuation">[</span>type<span class="token punctuation">]</span><span class="token punctuation">,</span>
+    success<span class="token punctuation">:</span> res <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    const filepath <span class="token operator">=</span> res<span class="token punctuation">.</span>tempFilePaths<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'filepath'</span><span class="token punctuation">,</span> filepath<span class="token punctuation">)</span>
+    <span class="token operator">/</span><span class="token operator">/</span> 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+    qiniuUploader<span class="token punctuation">.</span><span class="token function">upload</span><span class="token punctuation">(</span>filepath<span class="token punctuation">,</span> res <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>  <span class="token operator">/</span><span class="token operator">/</span> 七牛云提供的api
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'qiniuUploader.upload'</span><span class="token punctuation">,</span> res<span class="token punctuation">)</span>
+    this<span class="token punctuation">.</span><span class="token function">setData</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token operator">/</span><span class="token operator">/</span>注意这中间有个<span class="token string">"/"</span>
+        tempFilePaths<span class="token punctuation">:</span> <span class="token string">'http://pih3875s4.bkt.clouddn.com'</span> <span class="token operator">+</span> <span class="token string">"/"</span> <span class="token operator">+</span> res<span class="token punctuation">.</span>key
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'tempFilePaths'</span><span class="token punctuation">,</span> this<span class="token punctuation">.</span>data<span class="token punctuation">.</span>tempFilePaths<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'error'</span> <span class="token operator">+</span> error<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+        region<span class="token punctuation">:</span> <span class="token string">'ECN'</span><span class="token punctuation">,</span>                         <span class="token operator">/</span><span class="token operator">/</span> 华东区
+        uploadURL<span class="token punctuation">:</span> <span class="token string">'https://up-z1.qbox.me/'</span><span class="token punctuation">,</span>   <span class="token operator">/</span><span class="token operator">/</span> 所在大区的地址
+        domain<span class="token punctuation">:</span> <span class="token string">'pih3875s4.bkt.clouddn.com'</span><span class="token punctuation">,</span>   <span class="token operator">/</span><span class="token operator">/</span> 外链默认域名
+        uptoken<span class="token punctuation">:</span> this<span class="token punctuation">.</span>data<span class="token punctuation">.</span>uploadToken         <span class="token operator">/</span><span class="token operator">/</span> 后端返回来的uptoken
+       <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+ <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 					
 				</div>

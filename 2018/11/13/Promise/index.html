@@ -62,7 +62,7 @@
 	
 	<!-- others: such as change-bg, time... -->
 	<p class="page-name-other">
-		1/10/2019 
+		1/13/2019 
 		<style type="text/css">
 	header:after {
 		content: '';
@@ -197,94 +197,94 @@
 </li>
 </ol>
 <h4 id="Promise-用法"><a href="#Promise-用法" class="headerlink" title="Promise 用法"></a>Promise 用法</h4><p>ES6 规定，Promise对象是一个构造函数，用来生成Promise实例。</p>
-<pre><code class="ruby">const promise = new promise((resolve, reject) =&gt; {
-  if ( /*异步操作成功*/ ) {
-    resolve(value)
-  } else {
-    reject(erro)
-  }
-})
-</code></pre>
+<pre class="line-numbers language-ruby"><code class="language-ruby">const promise <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span>resolve<span class="token punctuation">,</span> reject<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token regex">/*异步操作成功*/</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">resolve</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token function">reject</span><span class="token punctuation">(</span>erro<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>Promise实例生成以后，可以用<strong>then方法</strong>分别指定resolved状态和rejected状态的回调函数。</p>
-<pre><code class="ruby">promise.then(function (value) {
-  // success
-}, function (error) {
-  // failure
-});
-</code></pre>
+<pre class="line-numbers language-ruby"><code class="language-ruby">promise<span class="token punctuation">.</span><span class="token keyword">then</span><span class="token punctuation">(</span><span class="token function">function</span> <span class="token punctuation">(</span>value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token operator">/</span><span class="token operator">/</span> success
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token function">function</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token operator">/</span><span class="token operator">/</span> failure
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>then方法可以接受两个<strong>回调函数</strong>作为参数。第一个回调函数是Promise对象的状态变为resolved时调用，第二个回调函数是Promise对象的状态变为rejected时调用。其中，第二个函数是可选的，不一定要提供。这两个函数都接受Promise对象传出的值作为参数。</p>
 <p>当Promise的状态变为fulfilled的时候，传递给.then的函数将会被调用。如果Promise的状态变为rejected，传递给.catch的函数将会被调用。这就意味着，在创建Promise的时候，要通过.then将希望异步请求成功时调用的函数传递进来，通过.catch将希望异步请求失败时调用的函数传递进来。</p>
 <h4 id="Promise-all"><a href="#Promise-all" class="headerlink" title="Promise.all()"></a>Promise.all()</h4><p>Promise.all方法用于将多个 Promise 实例，包装成一个新的 Promise 实例。</p>
-<pre><code class="ruby">const p = Promise.all([p1, p2, p3]);
-</code></pre>
+<pre class="line-numbers language-ruby"><code class="language-ruby">const p <span class="token operator">=</span> <span class="token constant">Promise</span><span class="token punctuation">.</span><span class="token function">all</span><span class="token punctuation">(</span><span class="token punctuation">[</span>p1<span class="token punctuation">,</span> p2<span class="token punctuation">,</span> p3<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>上面代码中，<strong>Promise.all</strong>方法接受一个数组作为参数，p1、p2、p3都是 Promise 实例，如果不是，就会先调用下面讲到的Promise.resolve方法，将参数转为 Promise 实例，再进一步处理。（Promise.all方法的参数可以不是数组，但必须具有 Iterator 接口，<strong>且返回的每个成员都是 Promise 实例</strong>。）</p>
 <p>p的状态由p1、p2、p3决定，分成两种情况。</p>
 <p>（1）只有p1、p2、p3的状态都变成fulfilled，p的状态才会变成fulfilled，此时p1、p2、p3的返回值组成一个数组，传递给p的回调函数。</p>
 <p>（2）只要p1、p2、p3之中有一个被rejected，p的状态就变成rejected，此时第一个被reject的实例的返回值，会传递给p的回调函数。</p>
 <h4 id="Promise-race"><a href="#Promise-race" class="headerlink" title="Promise.race()"></a>Promise.race()</h4><p>Promise.race方法同样是将多个 Promise 实例，包装成一个新的 Promise 实例。</p>
-<pre><code class="ruby">const p = Promise.all([p1, p2, p3]);
-</code></pre>
+<pre class="line-numbers language-ruby"><code class="language-ruby">const p <span class="token operator">=</span> <span class="token constant">Promise</span><span class="token punctuation">.</span><span class="token function">all</span><span class="token punctuation">(</span><span class="token punctuation">[</span>p1<span class="token punctuation">,</span> p2<span class="token punctuation">,</span> p3<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>上面代码中，只要p1、p2、p3之中有一个实例率先改变状态，p的状态就跟着改变。那个率先改变的 Promise 实例的返回值，就传递给p的回调函数。</p>
 <p>Promise.race方法的参数与Promise.all方法一样，如果不是 Promise 实例，就会先调用下面讲到的Promise.resolve方法，将参数转为 Promise 实例，再进一步处理。</p>
 <h4 id="Promise-resolve"><a href="#Promise-resolve" class="headerlink" title="Promise.resolve()"></a>Promise.resolve()</h4><p>有时需要将现有对象转为 Promise 对象，Promise.resolve方法就起到这个作用。</p>
-<pre><code class="ruby">const jsPromise = Promise.resolve($.ajax(&#39;/whatever.json&#39;));
-</code></pre>
+<pre class="line-numbers language-ruby"><code class="language-ruby">const jsPromise <span class="token operator">=</span> <span class="token constant">Promise</span><span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>$<span class="token punctuation">.</span><span class="token function">ajax</span><span class="token punctuation">(</span><span class="token string">'/whatever.json'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>上面代码将 jQuery 生成的deferred对象，转为一个新的 Promise 对象。</p>
-<h4 id="运用示例"><a href="#运用示例" class="headerlink" title="运用示例"></a>运用示例</h4><pre><code class="ruby">// 所有图片加载完成后再渲染到页面
-function loadImg(src) {
-  return new Promise((resove, reject) =&gt; {
-    img = document.createElement(&#39;img&#39;)
-    img.src = src
-    //  onload 事件会在页面或图像加载完成后立即发生。
-    img.onload = (() =&gt; {
-      resove(img)
-    })
-    img.onerror = (() =&gt; {
-      reject(err)
-    })
-  })
-};
+<h4 id="运用示例"><a href="#运用示例" class="headerlink" title="运用示例"></a>运用示例</h4><pre class="line-numbers language-ruby"><code class="language-ruby"><span class="token operator">/</span><span class="token operator">/</span> 所有图片加载完成后再渲染到页面
+function <span class="token function">loadImg</span><span class="token punctuation">(</span>src<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span><span class="token punctuation">(</span>resove<span class="token punctuation">,</span> reject<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    img <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">'img'</span><span class="token punctuation">)</span>
+    img<span class="token punctuation">.</span>src <span class="token operator">=</span> src
+    <span class="token operator">/</span><span class="token operator">/</span>  onload 事件会在页面或图像加载完成后立即发生。
+    img<span class="token punctuation">.</span>onload <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+      <span class="token function">resove</span><span class="token punctuation">(</span>img<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    img<span class="token punctuation">.</span>onerror <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+      <span class="token function">reject</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-function showImg(imgs) {
-  imgs.forEach((img) =&gt; {
-    document.body.appendChild(img)
-  });
-}
-Promise.all([
-  loadImg(&#39;http://pic26.photophoto.cn/20130323/0005018467298586_b.jpg&#39;),
-  loadImg(&#39;http://pic35.photophoto.cn/20150409/0005018337384017_b.jpg&#39;),
-  loadImg(&#39;http://pic34.photophoto.cn/20150202/0005018384491898_b.jpg&#39;)
-]).then(showImg)
-</code></pre>
-<pre><code class="ruby">模拟用户登录、获取用户信息
-let status = 1
-let userLogin = (resolve, reject) =&gt; {
-    setTimeout(() =&gt; {
-        if (status === 1) {
-            resolve({ data: &#39;skdafhksf&#39;, token: &#39;asdadad&#39;, msg: &#39;用户登录成功&#39; })
-        } else {
-            reject(&#39;用户登录失败&#39;)
-        }
-    }, 2000);
-}
-let getUserInfo = (resolve, reject) =&gt; {
-    setTimeout(() =&gt; {
-        if (status === 1) {
-            resolve({ data: &#39;adadada&#39;, msg: &#39;获取用户信息成功&#39; })
-        } else {
-            reject(&#39;获取用户信息失败&#39;)
-        }
-    }, 1000);
-}
-new Promise(userLogin).then(res =&gt; {
-        console.log(&quot;用户登录成功&quot;);
-        return new Promise(getUserInfo)
-    }).then(res =&gt; {
-        console.log(res);
-    }).catch(err =&gt; {
-        console.log(err);
-})
-</code></pre>
+function <span class="token function">showImg</span><span class="token punctuation">(</span>imgs<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  imgs<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span>img<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    document<span class="token punctuation">.</span>body<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>img<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token constant">Promise</span><span class="token punctuation">.</span><span class="token function">all</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
+  <span class="token function">loadImg</span><span class="token punctuation">(</span><span class="token string">'http://pic26.photophoto.cn/20130323/0005018467298586_b.jpg'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token function">loadImg</span><span class="token punctuation">(</span><span class="token string">'http://pic35.photophoto.cn/20150409/0005018337384017_b.jpg'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token function">loadImg</span><span class="token punctuation">(</span><span class="token string">'http://pic34.photophoto.cn/20150202/0005018384491898_b.jpg'</span><span class="token punctuation">)</span>
+<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">then</span><span class="token punctuation">(</span>showImg<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-ruby"><code class="language-ruby">模拟用户登录、获取用户信息
+let status <span class="token operator">=</span> <span class="token number">1</span>
+let userLogin <span class="token operator">=</span> <span class="token punctuation">(</span>resolve<span class="token punctuation">,</span> reject<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>status <span class="token operator">===</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">resolve</span><span class="token punctuation">(</span><span class="token punctuation">{</span> data<span class="token punctuation">:</span> <span class="token string">'skdafhksf'</span><span class="token punctuation">,</span> token<span class="token punctuation">:</span> <span class="token string">'asdadad'</span><span class="token punctuation">,</span> msg<span class="token punctuation">:</span> <span class="token string">'用户登录成功'</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            <span class="token function">reject</span><span class="token punctuation">(</span><span class="token string">'用户登录失败'</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">2000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+let getUserInfo <span class="token operator">=</span> <span class="token punctuation">(</span>resolve<span class="token punctuation">,</span> reject<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>status <span class="token operator">===</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">resolve</span><span class="token punctuation">(</span><span class="token punctuation">{</span> data<span class="token punctuation">:</span> <span class="token string">'adadada'</span><span class="token punctuation">,</span> msg<span class="token punctuation">:</span> <span class="token string">'获取用户信息成功'</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            <span class="token function">reject</span><span class="token punctuation">(</span><span class="token string">'获取用户信息失败'</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span>userLogin<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">then</span><span class="token punctuation">(</span>res <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"用户登录成功"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Promise</span><span class="token punctuation">(</span>getUserInfo<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">then</span><span class="token punctuation">(</span>res <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">catch</span><span class="token punctuation">(</span>err <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><a href="http://es6.ruanyifeng.com/#docs/promise" target="_blank" rel="noopener">阮一峰ECMAScript 6 入门</a></p>
 
 					
