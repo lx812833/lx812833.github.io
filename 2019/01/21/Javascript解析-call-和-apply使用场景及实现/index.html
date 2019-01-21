@@ -10,7 +10,7 @@
 		
 
 <head><meta name="generator" content="Hexo 3.8.0">
-	<title>真正掌握Vuex的使用方法（一）</title>
+	<title>Javascript 解析call和apply使用场景及实现</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="apple-mobile-web-app-title" content="Amaze UI">
@@ -55,7 +55,7 @@
 		
 		
 			
-			<p class="page-name">当前文章&nbsp;:&nbsp;《真正掌握Vuex的使用方法（一）》</p>
+			<p class="page-name">当前文章&nbsp;:&nbsp;《Javascript 解析call和apply使用场景及实现》</p>
 			
 		
 	
@@ -155,8 +155,8 @@
 					
 					
 	
-		<a href="/2018/10/27/真正掌握vuex的使用方法（一）/" itemprop="url">		
-			真正掌握Vuex的使用方法（一）		
+		<a href="/2019/01/21/Javascript解析-call-和-apply使用场景及实现/" itemprop="url">		
+			Javascript 解析call和apply使用场景及实现		
 		</a>
 	
 
@@ -165,20 +165,15 @@
 				<p class="am-article-meta blog-text-center">
 					<span>
 						<i class="fa fa-clock-o"></i> 
-						<a href="/2018/10/27/真正掌握vuex的使用方法（一）/" itemprop="url">
-	<time datetime="2018-10-27T06:11:21.000Z" itemprop="datePublished">
-  		2018-10-27
+						<a href="/2019/01/21/Javascript解析-call-和-apply使用场景及实现/" itemprop="url">
+	<time datetime="2019-01-21T11:37:30.000Z" itemprop="datePublished">
+  		2019-01-21
   </time>
 </a>    
 &nbsp;
 					</span>
 					
 					<span>						
-						
-							<i class="fa fa-tags"></i>
-							
-								<a href="#Vuex" title="Vuex" rel="3">Vuex</a>&nbsp;
-													 											
 						
 					</span>
 				</p>
@@ -187,100 +182,71 @@
 			<div class="am-article-bd">
 				<div class="content" id="post-content">
 					
-						<h3 id="真正掌握vuex的使用方法（一）"><a href="#真正掌握vuex的使用方法（一）" class="headerlink" title="真正掌握vuex的使用方法（一）"></a>真正掌握vuex的使用方法（一）</h3><p>@[vue|Vuex]<br>1、安装<strong>vuex</strong>   <strong>npm install vuex –save</strong><br>2、在src目录下创建vuex文件夹，然后在该文件夹下创建一个名字叫做store的js文件<br>3、在store.js中写入以下代码：</p>
-<hr>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span><span class="token punctuation">;</span><span class="token operator">//</span>引用vue
-<span class="token keyword">import</span> Vuex <span class="token keyword">from</span> <span class="token string">'vuex'</span><span class="token punctuation">;</span><span class="token operator">//</span>引用vuex
-Vue<span class="token punctuation">.</span>use<span class="token punctuation">(</span>Vuex<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token operator">//</span>使用vuex
-const state<span class="token operator">=</span><span class="token punctuation">{</span>
-    nodeVoteCount<span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token operator">//</span>node的初始票数
-    vueVoteCount<span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token operator">//</span>vue的初始票数
+						<h3 id="Javascript-解析-call-和-apply-使用场景及实现"><a href="#Javascript-解析-call-和-apply-使用场景及实现" class="headerlink" title="Javascript 解析 call 和 apply 使用场景及实现"></a>Javascript 解析 call 和 apply 使用场景及实现</h3><p>转载自<a href="https://mp.weixin.qq.com/s/ozbtzhHrjOEYA_v0Up7aLw" target="_blank" rel="noopener">元光木易杨 高级前端进阶</a></p>
+<h4 id="call-和-apply"><a href="#call-和-apply" class="headerlink" title="call() 和 apply()"></a>call() 和 apply()</h4><blockquote>
+<p><strong><code>call()</code></strong> 方法调用一个函数，其具有一个指定的<code>this</code>值和分别地提供的参数（<strong><code>参数列表</code></strong>）</p>
+</blockquote>
+<p><strong><code>call()</code></strong> 与 <strong><code>apply()</code></strong> 的区别在于，<strong><code>call()</code></strong> 方法接收的是 <strong><code>若干个参数的列表</code></strong> ，而 <strong><code>apply()</code></strong> 方法接收的是 <strong><code>一个包含多个参数的数组</code></strong></p>
+<pre class="line-numbers language-python"><code class="language-python">var func <span class="token operator">=</span> function<span class="token punctuation">(</span>arg1<span class="token punctuation">,</span> arg2<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+ <span class="token punctuation">}</span><span class="token punctuation">;</span>
+ func<span class="token punctuation">.</span>call<span class="token punctuation">(</span>this<span class="token punctuation">,</span> arg1<span class="token punctuation">,</span> arg2<span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token operator">//</span> 使用 call，参数列表
+ func<span class="token punctuation">.</span>apply<span class="token punctuation">(</span>this<span class="token punctuation">,</span> <span class="token punctuation">[</span>arg1<span class="token punctuation">,</span> arg2<span class="token punctuation">]</span><span class="token punctuation">)</span>  <span class="token operator">//</span> 使用 apply，参数数组
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="常用用法"><a href="#常用用法" class="headerlink" title="常用用法"></a>常用用法</h4><h5 id="1、合并两个数组"><a href="#1、合并两个数组" class="headerlink" title="1、合并两个数组"></a>1、合并两个数组</h5><pre class="line-numbers language-python"><code class="language-python">let vegetables <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'parsnip'</span><span class="token punctuation">,</span> <span class="token string">'potato'</span><span class="token punctuation">,</span> <span class="token string">'beetroot'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+let moreVegs <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'celery'</span><span class="token punctuation">,</span> <span class="token string">'beetroot'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token operator">//</span> 将第二个数组融合进第一个数组
+Array<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>push<span class="token punctuation">.</span>apply<span class="token punctuation">(</span>moreVegs<span class="token punctuation">,</span> vegetables<span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>moreVegs<span class="token punctuation">)</span> <span class="token operator">//</span> <span class="token punctuation">[</span><span class="token string">'parsnip'</span><span class="token punctuation">,</span> <span class="token string">'potato'</span><span class="token punctuation">,</span> <span class="token string">'beetroot'</span><span class="token punctuation">,</span> <span class="token string">'celery'</span><span class="token punctuation">,</span> <span class="token string">'beetroot'</span><span class="token punctuation">]</span>
+
+<span class="token operator">//</span> contact合并数组 <span class="token punctuation">(</span>不会去重<span class="token punctuation">)</span>
+let newArray <span class="token operator">=</span> vegetables<span class="token punctuation">.</span>concat<span class="token punctuation">(</span>moreVegs<span class="token punctuation">)</span>
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token string">'concat'</span><span class="token punctuation">,</span> newArray<span class="token punctuation">)</span>
+
+<span class="token operator">//</span> 在数组末尾新增元素
+vegetables<span class="token punctuation">.</span>push<span class="token punctuation">(</span><span class="token string">'carrots'</span><span class="token punctuation">,</span> <span class="token string">'cabbage'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>vegetables<span class="token punctuation">)</span>
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>但是，当第二个数组(如示例中的  moreVegs )太大时不要使用这个方法来合并数组，因为<strong>一个函数能够接受的参数个数是有限制</strong>的。不同的引擎有不同的限制，JS 核心限制在 65535，有些引擎会抛出异常，有些不抛出异常但丢失多余参数。</p>
+<p>如何解决呢？方法就是<strong>将参数数组切块后循环传入目标方法</strong></p>
+<h5 id="2、获取数组中的最大值与最小值"><a href="#2、获取数组中的最大值与最小值" class="headerlink" title="2、获取数组中的最大值与最小值"></a>2、获取数组中的最大值与最小值</h5><pre class="line-numbers language-python"><code class="language-python">let numbers <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">458</span><span class="token punctuation">,</span> <span class="token number">120</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">215</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>Math<span class="token punctuation">.</span>max<span class="token punctuation">.</span>apply<span class="token punctuation">(</span>Math<span class="token punctuation">,</span> numbers<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>            <span class="token operator">//</span><span class="token number">458</span>
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>Math<span class="token punctuation">.</span>max<span class="token punctuation">.</span>call<span class="token punctuation">(</span>Math<span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">458</span><span class="token punctuation">,</span> <span class="token number">120</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">215</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token operator">//</span><span class="token number">458</span>
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>Math<span class="token punctuation">.</span>min<span class="token punctuation">.</span>apply<span class="token punctuation">(</span>Math<span class="token punctuation">,</span> numbers<span class="token punctuation">)</span><span class="token punctuation">)</span>             <span class="token operator">//</span> <span class="token operator">-</span><span class="token number">215</span>
+<span class="token operator">//</span> ES6
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>Math<span class="token punctuation">.</span>max<span class="token punctuation">.</span>call<span class="token punctuation">(</span>Math<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>numbers<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>             <span class="token operator">//</span> <span class="token number">458</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>为什么要这么用呢，因为数组  <code>numbers</code>  本身没有  <code>max</code>方法，但是  <code>Math</code>有呀，所以这里就是借助  <code>call / apply</code>  使用  <code>Math.max</code>方法。</p>
+<h5 id="3、验证是否是数组"><a href="#3、验证是否是数组" class="headerlink" title="3、验证是否是数组"></a>3、验证是否是数组</h5><pre class="line-numbers language-python"><code class="language-python">function isArray<span class="token punctuation">(</span>obj<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> Object<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>toString<span class="token punctuation">.</span>call<span class="token punctuation">(</span>obj<span class="token punctuation">)</span> <span class="token operator">==</span><span class="token operator">=</span> <span class="token string">'[object Array]'</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-export default new Vuex<span class="token punctuation">.</span>Store<span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token operator">//</span><span class="token operator">//</span>暴露Store对象
-    state
-<span class="token punctuation">}</span><span class="token punctuation">)</span>
+isArray<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>            <span class="token operator">//</span> true
+<span class="token operator">//</span> 直接使用 toString<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">.</span>toString<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>          <span class="token operator">//</span> <span class="token string">"1,2,3"</span>
+<span class="token string">"123"</span><span class="token punctuation">.</span>toString<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>             <span class="token operator">//</span> <span class="token string">"123"</span>
+<span class="token number">123</span><span class="token punctuation">.</span> toString<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>              <span class="token operator">//</span> SyntaxError<span class="token punctuation">:</span> Invalid <span class="token operator">or</span> unexpected token
+Number<span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">)</span><span class="token punctuation">.</span>toString<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token operator">//</span> <span class="token string">"123"</span>
+Object<span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">)</span><span class="token punctuation">.</span>toString<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token operator">//</span> <span class="token string">"123"</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>4、在main.js当中引入在store.js文件当中创建的store对象，并在Vue实例中添加</p>
-<hr>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span>
-<span class="token keyword">import</span> App <span class="token keyword">from</span> <span class="token string">'./App'</span>
-<span class="token keyword">import</span> router <span class="token keyword">from</span> <span class="token string">'./router'</span>
-<span class="token keyword">import</span> store <span class="token keyword">from</span> <span class="token string">'./vuex/store'</span><span class="token operator">//</span>导入store<span class="token punctuation">.</span>js
-Vue<span class="token punctuation">.</span>config<span class="token punctuation">.</span>productionTip <span class="token operator">=</span> fals
+<p>可以通过<code>toString()</code>  来获取每个对象的类型，但是不同对象的  <code>toString()</code>有不同的实现，所以通过  <code>Object.prototype.toString()</code>  来检测，需要以  <code>call() / apply()</code>的形式来调用，传递要检查的对象作为第一个参数。</p>
+<h5 id="4、调用父构造函数实现继承"><a href="#4、调用父构造函数实现继承" class="headerlink" title="4、调用父构造函数实现继承"></a>4、调用父构造函数实现继承</h5><pre class="line-numbers language-python"><code class="language-python">function SuperType<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    this<span class="token punctuation">.</span>color <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"red"</span><span class="token punctuation">,</span> <span class="token string">"green"</span><span class="token punctuation">,</span> <span class="token string">"blue"</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+function SubType<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token operator">//</span> 核心代码，继承自SuperType
+    SuperType<span class="token punctuation">.</span>call<span class="token punctuation">(</span>this<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+var instance1 <span class="token operator">=</span> new SubType<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+instance1<span class="token punctuation">.</span>color<span class="token punctuation">.</span>push<span class="token punctuation">(</span><span class="token string">"black"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>instance1<span class="token punctuation">.</span>color<span class="token punctuation">)</span><span class="token punctuation">;</span>           <span class="token operator">//</span> <span class="token punctuation">[</span><span class="token string">"red"</span><span class="token punctuation">,</span> <span class="token string">"green"</span><span class="token punctuation">,</span> <span class="token string">"blue"</span><span class="token punctuation">,</span> <span class="token string">"black"</span><span class="token punctuation">]</span>
 
-enew Vue<span class="token punctuation">(</span><span class="token punctuation">{</span>
-    el<span class="token punctuation">:</span> <span class="token string">'#app'</span><span class="token punctuation">,</span>
-    router<span class="token punctuation">,</span>
-    store<span class="token punctuation">,</span><span class="token operator">//</span>添加store
-    components<span class="token punctuation">:</span> <span class="token punctuation">{</span> App <span class="token punctuation">}</span><span class="token punctuation">,</span>
-    template<span class="token punctuation">:</span> <span class="token string">'&lt;App/>'</span><span class="token punctuation">}</span>
-<span class="token punctuation">)</span>
+var instance2 <span class="token operator">=</span> new SubType<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>instance2<span class="token punctuation">.</span>color<span class="token punctuation">)</span><span class="token punctuation">;</span>           <span class="token operator">//</span> <span class="token punctuation">[</span><span class="token string">"red"</span><span class="token punctuation">,</span> <span class="token string">"green"</span><span class="token punctuation">,</span> <span class="token string">"blue"</span><span class="token punctuation">]</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>5、修改App.vue为：</p>
-<hr>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">&lt;</span>template<span class="token operator">></span>
-    <span class="token operator">&lt;</span>div id<span class="token operator">=</span><span class="token string">"app"</span><span class="token operator">></span>
-        <span class="token operator">&lt;</span>!<span class="token operator">-</span><span class="token operator">-</span>通过$store<span class="token punctuation">.</span>state<span class="token punctuation">.</span>nodeVoteCount获得nodeVoteCount的状态值
-        通过$store<span class="token punctuation">.</span>state<span class="token punctuation">.</span>vueVoteCount获得vueVoteCount的状态值<span class="token operator">-</span><span class="token operator">-</span><span class="token operator">></span>
-        <span class="token operator">&lt;</span>div<span class="token operator">></span><span class="token operator">&lt;</span>h2<span class="token operator">></span>总票数：<span class="token punctuation">{</span><span class="token punctuation">{</span>$store<span class="token punctuation">.</span>state<span class="token punctuation">.</span>nodeVoteCount<span class="token operator">+</span>$store<span class="token punctuation">.</span>state<span class="token punctuation">.</span>vueVoteCount<span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>h2<span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
-        <span class="token operator">&lt;</span>div<span class="token operator">></span>
-            <span class="token operator">&lt;</span>img src<span class="token operator">=</span><span class="token string">"./assets/node.png"</span><span class="token operator">></span>
-            <span class="token operator">&lt;</span>h3<span class="token operator">></span>如何通过node<span class="token punctuation">.</span>js对数据进行MD5加密<span class="token operator">&lt;</span><span class="token operator">/</span>h3<span class="token operator">></span>
-            <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"button"</span> value<span class="token operator">=</span><span class="token string">"投票"</span><span class="token operator">></span>票数<span class="token punctuation">:</span><span class="token punctuation">{</span><span class="token punctuation">{</span>$store<span class="token punctuation">.</span>state<span class="token punctuation">.</span>nodeVoteCount<span class="token punctuation">}</span><span class="token punctuation">}</span>
-        <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
-        <span class="token operator">&lt;</span>hr<span class="token operator">/</span><span class="token operator">></span>
-        <span class="token operator">&lt;</span>div<span class="token operator">></span>
-            <span class="token operator">&lt;</span>img src<span class="token operator">=</span><span class="token string">"./assets/vuex.png"</span><span class="token operator">></span>
-            <span class="token operator">&lt;</span>h3<span class="token operator">></span>真正掌握vuex的使用方法（一）<span class="token operator">&lt;</span><span class="token operator">/</span>h3<span class="token operator">></span>
-            <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"button"</span> value<span class="token operator">=</span><span class="token string">"投票"</span><span class="token operator">></span>票数：<span class="token punctuation">{</span><span class="token punctuation">{</span>$store<span class="token punctuation">.</span>state<span class="token punctuation">.</span>vueVoteCount<span class="token punctuation">}</span><span class="token punctuation">}</span>
-        <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
-    <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
-<span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">></span>
-<span class="token operator">&lt;</span>script<span class="token operator">></span>
-export default <span class="token punctuation">{</span>
-    name<span class="token punctuation">:</span> <span class="token string">'App'</span>
-<span class="token punctuation">}</span>
-<span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>6、通过ES6的知识再将上面的JS部分进行一番优化。 首先将引入的vuex那部分修改为：</p>
-<p><strong>import {mapState} from “vuex”;//通过ES6的对象解构赋值</strong></p>
-<p>当然也可以用<strong>…(扩展运算符）</strong>来合并对象</p>
-<hr>
-<pre class="line-numbers language-python"><code class="language-python">computed<span class="token punctuation">:</span><span class="token punctuation">{</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>mapState<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">"vueVoteCount"</span><span class="token punctuation">,</span><span class="token string">"nodeVoteCount"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">{</span>
-        <span class="token operator">//</span>自己的计算属性可以在这里面写哦
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span> <span class="token operator">//</span>或
-computed <span class="token punctuation">:</span> <span class="token punctuation">{</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>mapState<span class="token punctuation">(</span><span class="token punctuation">{</span>
-    vueVoteCount<span class="token punctuation">:</span>state<span class="token operator">=</span><span class="token operator">></span>state<span class="token punctuation">.</span>vueVoteCount<span class="token punctuation">,</span>
-    nodeVoteCount<span class="token punctuation">:</span><span class="token punctuation">(</span>state<span class="token punctuation">)</span><span class="token operator">=</span><span class="token operator">></span>state<span class="token punctuation">.</span>nodeVoteCount
-    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">{</span>
-    <span class="token operator">//</span>自己的计算属性可以在这里面写哦
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>再然后修改App.vue的template为：</p>
-<hr>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">&lt;</span>div id<span class="token operator">=</span><span class="token string">"app"</span><span class="token operator">></span>
-    <span class="token operator">&lt;</span>!<span class="token operator">-</span><span class="token operator">-</span>是不是很方便？直接写状态名称即可<span class="token operator">-</span><span class="token operator">-</span><span class="token operator">></span>
-    <span class="token operator">&lt;</span>div<span class="token operator">></span><span class="token operator">&lt;</span>h2<span class="token operator">></span>总票数：<span class="token punctuation">{</span><span class="token punctuation">{</span>nodeVoteCount<span class="token operator">+</span>vueVoteCount<span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>h2<span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
-    <span class="token operator">&lt;</span>div<span class="token operator">></span>
-        <span class="token operator">&lt;</span>img src<span class="token operator">=</span><span class="token string">"./assets/node.png"</span><span class="token operator">></span>
-        <span class="token operator">&lt;</span>h3<span class="token operator">></span>如何通过node<span class="token punctuation">.</span>js对数据进行MD5加密<span class="token operator">&lt;</span><span class="token operator">/</span>h3<span class="token operator">></span>
-        <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"button"</span> value<span class="token operator">=</span><span class="token string">"投票"</span><span class="token operator">></span>票数<span class="token punctuation">:</span><span class="token punctuation">{</span><span class="token punctuation">{</span>nodeVoteCount<span class="token punctuation">}</span><span class="token punctuation">}</span>
-    <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
-    <span class="token operator">&lt;</span>hr<span class="token operator">/</span><span class="token operator">></span>
-    <span class="token operator">&lt;</span>div<span class="token operator">></span>
-        <span class="token operator">&lt;</span>img src<span class="token operator">=</span><span class="token string">"./assets/vuex.png"</span><span class="token operator">></span>
-        <span class="token operator">&lt;</span>h3<span class="token operator">></span>真正掌握vuex的使用方法（一）<span class="token operator">&lt;</span><span class="token operator">/</span>h3<span class="token operator">></span>
-        <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"button"</span> value<span class="token operator">=</span><span class="token string">"投票"</span><span class="token operator">></span>票数：<span class="token punctuation">{</span><span class="token punctuation">{</span>vueVoteCount<span class="token punctuation">}</span><span class="token punctuation">}</span>
-    <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
-<span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+<p>在子构造函数中，通过调用父构造函数的<code>call</code>方法来实现继承，于是 SubType 的每个实例都会将 SuperType  中的属性复制一份。<br>不好，推荐使用 Es6 <code>class</code></p>
+<h4 id="call-模拟实现"><a href="#call-模拟实现" class="headerlink" title="call 模拟实现"></a>call 模拟实现</h4>
 					
 				</div>
 			</div>
@@ -288,13 +254,13 @@ computed <span class="token punctuation">:</span> <span class="token punctuation
 
 		<ul class="am-pagination">
     
-    	<li class="am-pagination-prev">
-   		<a class="pull-left" href="/2018/10/27/真正掌握vuex的使用方法（二）/" title="真正掌握vuex的使用方法（二）">
-      		&laquo; 上一篇
+	
+		<li class="am-pagination-next">
+		<a class="pull-right" href="/2019/01/17/vue-cli3-从搭建到优化/" title="vue-cli3 从搭建到优化">
+			下一篇 &raquo;
 		</a>
 		</li>
-	
-	
+	 
  </ul>
         
 
@@ -382,7 +348,7 @@ computed <span class="token punctuation">:</span> <span class="token punctuation
 				
 				
 				<!--toc(post.content)-->
-				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#真正掌握vuex的使用方法（一）"><span class="post-toc-text">真正掌握vuex的使用方法（一）</span></a></li></ol>
+				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Javascript-解析-call-和-apply-使用场景及实现"><span class="post-toc-text">Javascript 解析 call 和 apply 使用场景及实现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#call-和-apply"><span class="post-toc-text">call() 和 apply()</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#常用用法"><span class="post-toc-text">常用用法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1、合并两个数组"><span class="post-toc-text">1、合并两个数组</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#2、获取数组中的最大值与最小值"><span class="post-toc-text">2、获取数组中的最大值与最小值</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#3、验证是否是数组"><span class="post-toc-text">3、验证是否是数组</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#4、调用父构造函数实现继承"><span class="post-toc-text">4、调用父构造函数实现继承</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#call-模拟实现"><span class="post-toc-text">call 模拟实现</span></a></li></ol></li></ol>
 			</nav>
 			<div class="post-toc-bar"><div>
 		</div></div></aside>
