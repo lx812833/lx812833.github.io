@@ -10,7 +10,7 @@
 		
 
 <head><meta name="generator" content="Hexo 3.8.0">
-	<title>tag: 小程序</title>
+	<title>Vue--ref的使用</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="apple-mobile-web-app-title" content="Amaze UI">
@@ -55,7 +55,7 @@
 		
 		
 			
-			<p class="page-name">标签</p>
+			<p class="page-name">当前文章&nbsp;:&nbsp;《Vue--ref的使用》</p>
 			
 		
 	
@@ -144,50 +144,180 @@
 		<!-- content srart -->
 <div class="am-g am-g-fixed blog-fixed blog-content">
 	<div class="am-u-md-8 am-u-sm-12">
-		<div class="archive">
 
-			<div class="blog-text-center">
+		<article class="am-article blog-article-p">
+
+			<div class="am-article-hd">
 				
-					<i class="fa fa-book">小程序</i>
-				
-			</div>  
 
-			
 
+				<h1 class="am-article-title blog-text-center">
+					
+					
+	
+		<a href="/2019/01/24/Vue-ref的使用/" itemprop="url">		
+			Vue--ref的使用		
+		</a>
+	
+
+				</h1>
+
+				<p class="am-article-meta blog-text-center">
+					<span>
+						<i class="fa fa-clock-o"></i> 
+						<a href="/2019/01/24/Vue-ref的使用/" itemprop="url">
+	<time datetime="2019-01-24T12:49:00.000Z" itemprop="datePublished">
+  		2019-01-24
+  </time>
+</a>    
+&nbsp;
+					</span>
+					
+					<span>						
+						
+							<i class="fa fa-tags"></i>
 							
-				
-				
-				
+								<a href="#Vue" title="Vue" rel="5">Vue</a>&nbsp;
+													 											
+						
+					</span>
+				</p>
+			</div>
+
+			<div class="am-article-bd">
+				<div class="content" id="post-content">
 					
+						<h3 id="Vue-中-ref-的使用"><a href="#Vue-中-ref-的使用" class="headerlink" title="Vue 中 ref 的使用"></a>Vue 中 ref 的使用</h3><p><a href="https://cn.vuejs.org/v2/api/#ref" target="_blank" rel="noopener">Vue 官网上对 ref 详解</a>：<strong><code>ref</code></strong> 被用来给元素或子组件注册引用信息。引用信息将会注册在父组件的  <strong><code>$refs</code></strong> 对象上。如果在普通的 <strong>DOM</strong> 元素上使用，引用指向的就是 <strong>DOM</strong>元素；如果用在子组件上，引用就指向组件实例：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">&lt;</span>!<span class="token operator">-</span><span class="token operator">-</span> `vm<span class="token punctuation">.</span>$refs<span class="token punctuation">.</span>p` will be the DOM node <span class="token operator">-</span><span class="token operator">-</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>p ref<span class="token operator">=</span><span class="token string">"p"</span><span class="token operator">></span>hello<span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">></span>
+
+<span class="token operator">&lt;</span>!<span class="token operator">-</span><span class="token operator">-</span> `vm<span class="token punctuation">.</span>$refs<span class="token punctuation">.</span>child` will be the child component instance <span class="token operator">-</span><span class="token operator">-</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>child<span class="token operator">-</span>component ref<span class="token operator">=</span><span class="token string">"child"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>child<span class="token operator">-</span>component<span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>关于 <strong><code>ref</code></strong> 注册时间的重要说明：因为 <strong><code>ref</code></strong> 本身是作为渲染结果被创建的，在初始渲染的时候你不能访问它们 - 它们还不存在！<strong><code>$refs</code></strong>  也不是响应式的，因此你不应该试图用它在模板中做数据绑定。</p>
+<p><strong><code>ref</code></strong> 有三种用法：</p>
+<ol>
+<li><strong><code>ref</code></strong> 放在普通的元素上，用 <strong><code>this.$refs.name</code></strong> 获取的是 <strong>DOM</strong> 元素</li>
+<li><strong><code>ref</code></strong> 放在<strong>子组件</strong>上，用 <strong><code>this.$refs.name</code></strong> 获取的是 <strong><code>组件实例，可以使用组件的所有方法</code></strong></li>
+<li>利用<strong>v-for</strong> 和 <strong>ref</strong> 获取<strong>一组数组</strong>或者<strong>DOM 节点</strong></li>
+</ol>
+<p><img src="https://images2018.cnblogs.com/blog/1158910/201808/1158910-20180801214632214-356594092.png" alt="enter image description here"></p>
+<p>注意：</p>
+<ol>
+<li><strong><code>ref需要在DOM渲染完成后才会有</code></strong>，在使用的时候要确保<strong>DOM</strong>已经渲染完成。比如在生命周期  <strong><code>mounted(){} 钩子</code></strong> 中调用，或者在 <strong><code>this.$nextTick(()=&gt;{})</code></strong> 中调用</li>
+<li>如果 <strong><code>ref</code></strong> 是循环出来的，有多个重名，那么<strong><code>ref</code></strong> 的值会是一个数组  ，此时要拿到单个的 <strong><code>ref</code></strong> 只需要<strong>循环</strong>就可以了</li>
+<li>通过 <strong><code>this.$refs.name</code></strong> 调用已注册的 <code>ref</code>，甚至可以通过其父级组件定义方法：</li>
+</ol>
 
 					
-					<!--<a href="/archives/2018" class="archive-year">2018</a>-->
-				
-								
-				
-					  
-					<div class="archive-year">
-						<a href="/archives/2018/12">
-							2018-12
-						</a>
-					</div>				
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/12/06/小程序图片上传至七牛云/" itemprop="url">小程序图片上传至七牛云</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/12/06/小程序图片上传至七牛云/" itemprop="url">12-06</a>
-					</div>
-				</div>		        							
-			
-				
-			    
-		</div>
-	</div>
+				</div>
+			</div>
+		</article>
+
+		<ul class="am-pagination">
+    
+	
+		<li class="am-pagination-next">
+		<a class="pull-right" href="/2019/01/21/Javascript解析-call-和-apply使用场景及实现/" title="Javascript 解析call和apply使用场景及实现">
+			下一篇 &raquo;
+		</a>
+		</li>
+	 
+ </ul>
+        
+
+		<div class="theme-annie-comment-button-container">
+	<button id="annie-comment-button" class="theme-annie-comment-button" onclick="Annie_Comment()">
+		加载评论
+		<!--加载评论-->
+	</button>
 </div>
 
+<div id="annie-comment-container" class="theme-annie-comment-main-container">
+
+	
+		
+			<!-- comment valine -->
+			<!-- show valine comment -->
+<div id="valineComment" class="comment"></div>
+
+<!-- valine`s js & css -->
+<script>
+	window.jQuery || document.write('<script src="/js/jquery-2.1.1.min.js"><\/script>')
+</script>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/js/valine.min.js"></script>
+<link rel="stylesheet" href="/css/comment.css">
+
+<script>
+	var checkExistComment = setInterval(function() {
+		if( $('#valineComment').length ) {
+			new Valine({
+				// AV 对象来自上面引入av-min.js(老司机们不要开车➳♡゛扎心了老铁)
+				av: AV,
+				//使用id寻找div元素（使用class可能找不到）
+				el: '#valineComment',
+				emoticon_url: 'https://cloud.panjunwen.com/alu',
+				emoticon_list: ["吐.png", "期待.png", "高兴.png", "吐血倒地.png", "哭泣.png", "欢呼.png"],
+				app_id: "3333....", //获取APP ID
+				app_key: "3333......", //获取APP KEY
+				placeholder: "no any!", //评论框占位提示文字        			
+			});
+			clearInterval(checkExistComment);
+		}
+	}, 100);
+</script>
+		
+	
+
+</div>
+
+<script type="text/javascript">
+	/* Show Comment */
+	var Annie_Comment = function() {
+		function Show_Hidden(obj) {
+			obj.style.display = 'block';
+		}
+		
+		//var obutton = $('#annie-comment-button');
+		//var obutton = $('#annie-comment-container');
+		var obutton = document.getElementById("annie-comment-button" || "0");
+		var odiv = document.getElementById("annie-comment-container");
+		if( 'obutton' ) {
+			obutton.onclick = function() {
+				Show_Hidden(odiv);
+				$("#annie-comment-button").css("display", 'none');
+				return false;
+			}
+		}
+	};
+
+	(function Annie_Init() {
+		Annie_Comment();
+	})();
+</script>
+		
+		<!--
+	时间：2018-09-24
+	描述：The TOC module refers to 'https://github.com/codefine/hexo-theme-mellow', include toc.ejs、toc.js、toc.css. All rights reserved by codefine. 
+-->
+
+	
+		<aside class="post-widget">
+			<nav class="post-toc-wrap" id="post-toc">
+				
+					<strong>文章目录</strong>
+				
+				
+				<!--toc(post.content)-->
+				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Vue-中-ref-的使用"><span class="post-toc-text">Vue 中 ref 的使用</span></a></li></ol>
+			</nav>
+			<div class="post-toc-bar"><div>
+		</div></div></aside>
+	
+
+	</div>
+</div>
 		</div>
 		</main>
 		
@@ -257,6 +387,11 @@
 	}
 </style>
 
+
+	<script src="/js/motto.js"></script>
+	<script type="text/javascript">
+		$(".motto").html(getMingYanContent());
+	</script>	
 
 
 
@@ -598,6 +733,8 @@
 
 
 
+
+	<script type="text/javascript" src="/js/toc.js"></script>
 
 
 <script type="text/javascript" src="/js/main.js"></script>

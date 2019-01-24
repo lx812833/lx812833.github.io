@@ -62,7 +62,7 @@
 	
 	<!-- others: such as change-bg, time... -->
 	<p class="page-name-other">
-		1/21/2019 
+		1/24/2019 
 		<style type="text/css">
 	header:after {
 		content: '';
@@ -319,6 +319,295 @@ export default new Vuex<span class="token punctuation">.</span>Store<span class=
 </li>
 </ul>
 <p>最后在<code>main.js</code>里引入<code>store</code>: <code>import store from &#39;./store&#39;</code></p>
+<h4 id="2-3、mixins-混入"><a href="#2-3、mixins-混入" class="headerlink" title="2.3、mixins 混入"></a>2.3、<strong><code>mixins</code></strong> 混入</h4><p>混入 <strong><code>mixins</code></strong> 是一种分发 <code>Vue</code>组件中可复用功能的非常灵活的方式。<strong>混入对象</strong>可以包含任意组件选项。当组件使用混入对象时，所有混入对象的选项将被混入该组件本身的选项。</p>
+<p>全局注册一个<strong>混入</strong>，影响注册之后所有创建的每个 <code>Vue</code> 实例</p>
+<p><strong><code>mapActions</code></strong></p>
+<p>组件中使用<code>this.$store.dispatch(&#39;xxx&#39;)</code>  分发<code>action</code>，或者使用 <strong><code>mapActions</code></strong> 辅助函数将组件的<code>methods</code> 映射为  <code>store.dispatch</code></p>
+<ul>
+<li><p>在<code>src/store/actions.js</code>中定义<code>actions</code></p>
+<pre class="line-numbers language-python"><code class="language-python">const actions <span class="token operator">=</span> <span class="token punctuation">{</span>
+    setFileName<span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">{</span> commit <span class="token punctuation">}</span><span class="token punctuation">,</span> fileName<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> commit<span class="token punctuation">(</span><span class="token string">'SET_FILENAME'</span><span class="token punctuation">,</span> fileName<span class="token punctuation">)</span>
+        <span class="token operator">//</span> 需要<span class="token keyword">return</span>才能返回一个promise对象
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    setMenuVisible<span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">{</span> commit <span class="token punctuation">}</span><span class="token punctuation">,</span> menuVisible<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> commit<span class="token punctuation">(</span><span class="token string">'SET_MENUVISIBLE'</span><span class="token punctuation">,</span> menuVisible<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+ <span class="token punctuation">}</span>
+
+ export default actions
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>在<code>src/store/getters.js</code>中定义 <code>getters.js</code></p>
+<pre class="line-numbers language-python"><code class="language-python">const book <span class="token operator">=</span> <span class="token punctuation">{</span>
+    fileName<span class="token punctuation">:</span> state <span class="token operator">=</span><span class="token operator">></span> state<span class="token punctuation">.</span>book<span class="token punctuation">.</span>fileName<span class="token punctuation">,</span>
+    menuVisible<span class="token punctuation">:</span> state <span class="token operator">=</span><span class="token operator">></span> state<span class="token punctuation">.</span>book<span class="token punctuation">.</span>menuVisible
+<span class="token punctuation">}</span>
+
+export default book
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>在<code>src/utils/mixin.js</code>中创建<code>mixin.js</code></p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> <span class="token punctuation">{</span> mapGetters<span class="token punctuation">,</span> mapActions <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vuex'</span>
+export const ebookMixin <span class="token operator">=</span> <span class="token punctuation">{</span>
+  computed<span class="token punctuation">:</span><span class="token punctuation">{</span>
+      <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>mapGetters<span class="token punctuation">(</span><span class="token punctuation">[</span>
+          <span class="token string">"fileName"</span><span class="token punctuation">,</span>
+          <span class="token string">"menuVisible"</span><span class="token punctuation">,</span>
+          <span class="token operator">//</span> 这里是 getters 暴露 state中的对象
+      <span class="token punctuation">]</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  methods<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>mapActions<span class="token punctuation">(</span><span class="token punctuation">[</span>
+          <span class="token string">"setMenuVisible"</span><span class="token punctuation">,</span>
+          <span class="token string">"setFileName"</span><span class="token punctuation">,</span>
+          <span class="token operator">//</span>  这里是定义 actions<span class="token punctuation">.</span>js中分发 mutations 中的方法
+      <span class="token punctuation">]</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+</ul>
+<p>最后在组件中引入<code>mixins</code>并使用<code>mixins</code></p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> <span class="token punctuation">{</span> ebookMixin <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"../../utils/mixin"</span><span class="token punctuation">;</span>
+
+<span class="token operator">//</span> 使用mixins
+ mixins<span class="token punctuation">:</span> <span class="token punctuation">[</span>ebookMixin<span class="token punctuation">]</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>使用<code>mixins</code>中定义的方法时，直接<code>this.+函数名</code>，如<code>this.setFileName()</code></p>
+<h3 id="3、阅读器开发"><a href="#3、阅读器开发" class="headerlink" title="3、阅读器开发"></a>3、阅读器开发</h3><h4 id="3-1、标题栏和菜单栏实现"><a href="#3-1、标题栏和菜单栏实现" class="headerlink" title="3.1、标题栏和菜单栏实现"></a>3.1、标题栏和菜单栏实现</h4><blockquote>
+<p>transition</p>
+</blockquote>
+<p>在<code>src/components/ebook</code>下分别新建<code>EbookTitle.vue</code>、<code>EbookMenu.vue</code>作为顶部标题栏，底部菜单栏。为了使其过渡流程，需使用 <strong><code>transition</code></strong></p>
+<p><code>&lt;transition&gt;</code>  元素作为单个元素/组件的过渡效果。<code>&lt;transition&gt;</code>  只会把过渡效果应用到其包裹的内容上，而不会额外渲染 <code>DOM</code> 元素，也不会出现在检测过的组件层级中。</p>
+<p><code>动态组件</code></p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">&lt;</span>transition name<span class="token operator">=</span><span class="token string">"fade"</span> mode<span class="token operator">=</span><span class="token string">"out-in"</span> appear<span class="token operator">></span>
+    <span class="token operator">&lt;</span>component <span class="token punctuation">:</span><span class="token keyword">is</span><span class="token operator">=</span><span class="token string">"view"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>component<span class="token operator">></span>
+ <span class="token operator">&lt;</span><span class="token operator">/</span>transition<span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p><code>transition.css</code></p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token punctuation">.</span>slide<span class="token operator">-</span>down<span class="token operator">-</span>enter<span class="token punctuation">,</span> <span class="token punctuation">.</span>slide<span class="token operator">-</span>down<span class="token operator">-</span>leave<span class="token operator">-</span>to <span class="token punctuation">{</span>
+    transform<span class="token punctuation">:</span> translate3d<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">100</span><span class="token operator">%</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+ <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>切换标题栏和菜单栏</p>
+</blockquote>
+<p>如同电子阅读类 App 一样，通过手势来实现上/下页滑动、切换标题栏和菜单栏等。<code>Epub</code>集成了手势操作类方法。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">//</span> 手势操作
+this<span class="token punctuation">.</span>rendition<span class="token punctuation">.</span>on<span class="token punctuation">(</span><span class="token string">"touchstart"</span><span class="token punctuation">,</span> event <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    this<span class="token punctuation">.</span>touchStartX <span class="token operator">=</span> event<span class="token punctuation">.</span>changedTouches<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>clientX<span class="token punctuation">;</span>
+    this<span class="token punctuation">.</span>touchStartTime <span class="token operator">=</span> event<span class="token punctuation">.</span>timeStamp<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+this<span class="token punctuation">.</span>rendition<span class="token punctuation">.</span>on<span class="token punctuation">(</span><span class="token string">"touchend"</span><span class="token punctuation">,</span> event <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token operator">//</span> 滑动x轴偏移量
+    const offsetX <span class="token operator">=</span> event<span class="token punctuation">.</span>changedTouches<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>clientX <span class="token operator">-</span> this<span class="token punctuation">.</span>touchStartX<span class="token punctuation">;</span>
+    <span class="token operator">//</span> 滑动时间差
+    const time <span class="token operator">=</span> event<span class="token punctuation">.</span>timeStamp <span class="token operator">-</span> this<span class="token punctuation">.</span>touchStartTime<span class="token punctuation">;</span>
+    <span class="token operator">//</span> console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>offsetX<span class="token punctuation">,</span> time<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>time <span class="token operator">&lt;</span> <span class="token number">500</span> <span class="token operator">&amp;</span><span class="token operator">&amp;</span> offsetX <span class="token operator">></span> <span class="token number">40</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        this<span class="token punctuation">.</span>prevPage<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token operator">//</span> 上一页
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>time <span class="token operator">&lt;</span> <span class="token number">500</span> <span class="token operator">&amp;</span><span class="token operator">&amp;</span> offsetX <span class="token operator">&lt;</span> <span class="token operator">-</span><span class="token number">40</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        this<span class="token punctuation">.</span>nextPage<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token operator">//</span> 下一页
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        this<span class="token punctuation">.</span>toggleTitleAndMenu<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token operator">//</span> 切换标题栏和菜单栏
+    <span class="token punctuation">}</span>
+<span class="token operator">//</span> 停止事件默认动作及传播
+<span class="token operator">//</span> event<span class="token punctuation">.</span>preventDefault<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+event<span class="token punctuation">.</span>stopPropagation<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>算了，get 不到<code>Epub</code>使用方法，学习了解其手势操作的思想才是正道。这个项目最大的学习收获我觉得应该是 <strong><code>Vuex</code></strong></p>
+<blockquote>
+<p><strong><code>Vuex在项目中的具体使用</code></strong></p>
+</blockquote>
+<p><code>Vuex</code> 的状态存储是响应式的。当 <code>Vue</code> 组件从 <code>store</code> 中读取状态的时候，若 <code>store</code> 中的状态发生变化，那么相应的组件也会相应地得到高效更新。所以说，这就十分有利于使用函数操作<code>store</code>里的变量。</p>
+<p>在没有使用 <strong><code>mixins</code></strong> 时，使用<code>$store.dispatch</code>分发</p>
+<pre class="line-numbers language-python"><code class="language-python">this<span class="token punctuation">.</span>$store<span class="token punctuation">.</span>dispatch<span class="token punctuation">(</span><span class="token string">"setMenuVisible"</span><span class="token punctuation">,</span> !this<span class="token punctuation">.</span>menuVisible<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>引入 <strong><code>mixins</code></strong> 后</p>
+<pre class="line-numbers language-python"><code class="language-python">this<span class="token punctuation">.</span>setMenuVisible<span class="token punctuation">(</span>!this<span class="token punctuation">.</span>menuVisible<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="3-2、WebStorageCache"><a href="#3-2、WebStorageCache" class="headerlink" title="3.2、WebStorageCache"></a>3.2、WebStorageCache</h4><p>在 HTML5 中，新加入了一个<code>localStorage</code>特性，这个特性主要是用来作为<code>本地存储</code>来使用的，解决了<code>cookie</code>存储空间不足的问题(cookie 中每条 cookie 的存储空间为<code>4k</code>)，<code>localStorage</code>中一般浏览器支持的是<code>5M</code>大小，这个在不同的浏览器中 localStorage 会有所不同。</p>
+<p><strong><code>WebStorageCache</code></strong>  对<code>HTML5 localStorage</code>和<code>sessionStorage</code>  进行了扩展，添加了超时时间，序列化方法。可以直接存储<code>json</code>对象，同时可以非常简单的进行超时时间的设置。</p>
+<p>具体使用方法可查看<a href="https://www.npmjs.com/package/web-storage-cache" target="_blank" rel="noopener">WebStorageCache</a></p>
+<ul>
+<li>安装<strong>WebStorageCache</strong><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> Storage <span class="token keyword">from</span> <span class="token string">"web-storage-cache"</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li>在<code>src/utils</code> 下创建<code>localStorage.js</code>，并导入<strong>WebStorageCache</strong><pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> Storage <span class="token keyword">from</span> <span class="token string">"web-storage-cache"</span><span class="token punctuation">;</span>
+const localStorage <span class="token operator">=</span> new Storage<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+</ul>
+<p><strong><code>WebStorageCache API</code></strong></p>
+<ul>
+<li><strong>set</strong> 往缓存中插入数据</li>
+</ul>
+<pre class="line-numbers language-python"><code class="language-python">export function setLocalStorage<span class="token punctuation">(</span>key<span class="token punctuation">,</span> value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> localStorage<span class="token punctuation">.</span>set<span class="token punctuation">(</span>key<span class="token punctuation">,</span> value<span class="token punctuation">)</span>
+ <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li><strong>get</strong> 根据<code>key</code>获取缓存中未超时数据。返回相应类型<code>String</code>、<code>Boolean</code>、<code>PlainObject</code>、<code>Array</code>的值。</li>
+</ul>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">//</span> 根据key获取缓存中未超时数据
+export function getLocalStorage<span class="token punctuation">(</span>key<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> localStorage<span class="token punctuation">.</span>get<span class="token punctuation">(</span>key<span class="token punctuation">)</span>
+ <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li><strong>delete</strong> 根据<code>key</code>删除缓存中的值</li>
+</ul>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">//</span> 根据key删除缓存中的值。
+export function removeLocalStorage<span class="token punctuation">(</span>key<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> localStorage<span class="token punctuation">.</span>delete<span class="token punctuation">(</span>key<span class="token punctuation">)</span>
+ <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li><strong>clear</strong> 清空缓存中全部的值</li>
+</ul>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">//</span> 清空缓存中全部的值
+export function clearLocalStorage<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> localStorage<span class="token punctuation">.</span>clear<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li><strong>WebStorageCache</strong> 在组件中的具体使用</li>
+</ul>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> <span class="token punctuation">{</span>saveFontFamily<span class="token punctuation">,</span>getFontFamily<span class="token punctuation">,</span>getFontSize<span class="token punctuation">,</span>saveFontSize<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"../../utils/localStorage"</span><span class="token punctuation">;</span>
+
+直接调用localStorage中的函数就ok了
+
+
+<span class="token operator">//</span> 设置字体样式
+initFontFamily<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    let font <span class="token operator">=</span> getFontFamily<span class="token punctuation">(</span>this<span class="token punctuation">.</span>fileName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>!font<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        saveFontFamily<span class="token punctuation">(</span>this<span class="token punctuation">.</span>fileName<span class="token punctuation">,</span> this<span class="token punctuation">.</span>defaultFontFamily<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        this<span class="token punctuation">.</span>rendition<span class="token punctuation">.</span>themes<span class="token punctuation">.</span>font<span class="token punctuation">(</span>font<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        this<span class="token punctuation">.</span>setDefaultFontFamily<span class="token punctuation">(</span>font<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+ <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="3-3、国际化——Vue-i18n-的使用"><a href="#3-3、国际化——Vue-i18n-的使用" class="headerlink" title="3.3、国际化——Vue-i18n 的使用"></a>3.3、国际化——Vue-i18n 的使用</h4><p><code>vue-i18n</code>是一个<code>vue</code>插件，主要作用就是让项目支持国际化多语言。</p>
+<ul>
+<li>安装 <strong><code>vue-i18n</code></strong><pre class="line-numbers language-python"><code class="language-python"><span class="token operator">//</span> 安装vue<span class="token operator">-</span>i18n
+npm install vue<span class="token operator">-</span>i18n <span class="token operator">-</span><span class="token operator">-</span>save
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p>引入 <strong><code>vue-i18n</code></strong></p>
+<p>在<code>src/lang</code>下创建<code>index.js</code>作为根路径，引入<code>vue-i18n</code></p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span>
+<span class="token keyword">import</span> VueI18N <span class="token keyword">from</span> <span class="token string">'vue-i18n'</span>
+<span class="token keyword">import</span> en <span class="token keyword">from</span> <span class="token string">'./en'</span>
+<span class="token keyword">import</span> cn <span class="token keyword">from</span> <span class="token string">'./cn'</span>
+
+<span class="token operator">//</span> 加载插件
+Vue<span class="token punctuation">.</span>use<span class="token punctuation">(</span>VueI18N<span class="token punctuation">)</span>
+
+const messages <span class="token operator">=</span> <span class="token punctuation">{</span>
+    en<span class="token punctuation">,</span>  <span class="token operator">//</span> 英文语言包
+    cn  <span class="token operator">//</span>  中文语言包
+<span class="token punctuation">}</span>
+
+export default i18n
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>定义语言包</p>
+<pre class="line-numbers language-python"><code class="language-python">const messages <span class="token operator">=</span> <span class="token punctuation">{</span>
+    home<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        title<span class="token punctuation">:</span> <span class="token string">'书城'</span><span class="token punctuation">,</span>
+        <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    category<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>在 <strong><code>main.js</code></strong> 中引入 <strong><code>lang</code></strong></p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">//</span> 引入多语言
+<span class="token keyword">import</span> i18n <span class="token keyword">from</span> <span class="token string">'./lang'</span>
+
+new Vue<span class="token punctuation">(</span><span class="token punctuation">{</span>
+    router<span class="token punctuation">,</span>
+    store<span class="token punctuation">,</span>
+    i18n<span class="token punctuation">,</span>
+    render<span class="token punctuation">:</span> h <span class="token operator">=</span><span class="token operator">></span> h<span class="token punctuation">(</span>App
+<span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span>$mount<span class="token punctuation">(</span><span class="token string">'#app'</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+</ul>
+<h4 id="3-4、全局样式的改变"><a href="#3-4、全局样式的改变" class="headerlink" title="3.4、全局样式的改变"></a>3.4、全局样式的改变</h4><p>上次实现了标题栏和菜单栏样式的改变，但并没有涉及到全局样式的改变。这次实阅读器全局样式的改变。<br>采用链接的方式在 HTML 中导入 CSS，即使用 HTML 头部的  <code>&lt;head&gt;</code>标签引入外部的 CSS 文件</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">&lt;</span>link rel<span class="token operator">=</span><span class="token string">"stylesheet"</span> type<span class="token operator">=</span><span class="token string">"text/css"</span> href<span class="token operator">=</span><span class="token string">"style.css"</span><span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ol>
+<li>将外部 CSS 文件放入 Nginx 中，获取其链接</li>
+<li><p>在<code>src/utils/book.js</code>下使用 <strong><code>setAttribute</code></strong> 构建导入 CSS 文件的链接方式</p>
+<pre class="line-numbers language-python"><code class="language-python">export function addCss<span class="token punctuation">(</span>href<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    const link <span class="token operator">=</span> document<span class="token punctuation">.</span>createElement<span class="token punctuation">(</span><span class="token string">'link'</span><span class="token punctuation">)</span>
+    link<span class="token punctuation">.</span>setAttribute<span class="token punctuation">(</span><span class="token string">'rel'</span><span class="token punctuation">,</span> <span class="token string">'stylesheet'</span><span class="token punctuation">)</span>
+    link<span class="token punctuation">.</span>setAttribute<span class="token punctuation">(</span><span class="token string">'type'</span><span class="token punctuation">,</span> <span class="token string">'text/css'</span><span class="token punctuation">)</span>
+    link<span class="token punctuation">.</span>setAttribute<span class="token punctuation">(</span><span class="token string">'href'</span><span class="token punctuation">,</span> href<span class="token punctuation">)</span>
+    document<span class="token punctuation">.</span>getElementsByTagName<span class="token punctuation">(</span><span class="token string">'head'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>appendChild<span class="token punctuation">(</span>link<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>在<code>EbookReader.vue</code>组件中，当 Epub 加载好后调用 <strong><code>initGlobalStyle</code></strong> 方法</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">//</span> 初始化字体样式、字体大小、主题、全局主题
+this<span class="token punctuation">.</span>rendition<span class="token punctuation">.</span>display<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>then<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token punctuation">{</span>
+    this<span class="token punctuation">.</span>initFontSize<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    this<span class="token punctuation">.</span>initFontFamily<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    this<span class="token punctuation">.</span>initTheme<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    this<span class="token punctuation">.</span>initGlobalStyle<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong><code>initGlobalStyle()</code></strong></p>
+<pre class="line-numbers language-python"><code class="language-python">initGlobalStyle<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    removeAllCss<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    switch <span class="token punctuation">(</span>this<span class="token punctuation">.</span>defaultTheme<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        case <span class="token string">"Default"</span><span class="token punctuation">:</span>
+            addCss<span class="token punctuation">(</span>`$<span class="token punctuation">{</span>process<span class="token punctuation">.</span>env<span class="token punctuation">.</span>VUE_APP_RES_URL<span class="token punctuation">}</span><span class="token operator">/</span>theme<span class="token operator">/</span>theme_default<span class="token punctuation">.</span>css`<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        case <span class="token string">"Eye"</span><span class="token punctuation">:</span>
+            addCss<span class="token punctuation">(</span>`$<span class="token punctuation">{</span>process<span class="token punctuation">.</span>env<span class="token punctuation">.</span>VUE_APP_RES_URL<span class="token punctuation">}</span><span class="token operator">/</span>theme<span class="token operator">/</span>theme_eye<span class="token punctuation">.</span>css`<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        case <span class="token string">"Gold"</span><span class="token punctuation">:</span>
+            addCss<span class="token punctuation">(</span>`$<span class="token punctuation">{</span>process<span class="token punctuation">.</span>env<span class="token punctuation">.</span>VUE_APP_RES_URL<span class="token punctuation">}</span><span class="token operator">/</span>theme<span class="token operator">/</span>theme_gold<span class="token punctuation">.</span>css`<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        case <span class="token string">"Night"</span><span class="token punctuation">:</span>
+            addCss<span class="token punctuation">(</span>`$<span class="token punctuation">{</span>process<span class="token punctuation">.</span>env<span class="token punctuation">.</span>VUE_APP_RES_URL<span class="token punctuation">}</span><span class="token operator">/</span>theme<span class="token operator">/</span>theme_night<span class="token punctuation">.</span>css`<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        default<span class="token punctuation">:</span>
+            addCss<span class="token punctuation">(</span>`$<span class="token punctuation">{</span>process<span class="token punctuation">.</span>env<span class="token punctuation">.</span>VUE_APP_RES_URL<span class="token punctuation">}</span><span class="token operator">/</span>theme<span class="token operator">/</span>theme_default<span class="token punctuation">.</span>css`<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+     <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>但是，当多次点击切换样式时，header 中会逐个加载 CSS 样式，后面的覆盖前面的，影响渲染速度，故需要清楚</p>
+<pre class="line-numbers language-python"><code class="language-python">export function removeCss<span class="token punctuation">(</span>href<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    const links <span class="token operator">=</span> document<span class="token punctuation">.</span>getElementsByTagName<span class="token punctuation">(</span><span class="token string">'link'</span><span class="token punctuation">)</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>let i <span class="token operator">=</span> links<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">-</span><span class="token operator">-</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        const link <span class="token operator">=</span> links<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>link <span class="token operator">&amp;</span><span class="token operator">&amp;</span> link<span class="token punctuation">.</span>getAttribute<span class="token punctuation">(</span><span class="token string">'href'</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span><span class="token operator">&amp;</span> link<span class="token punctuation">.</span>getAttribute<span class="token punctuation">(</span><span class="token string">'href'</span><span class="token punctuation">)</span> <span class="token operator">==</span><span class="token operator">=</span> href<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            link<span class="token punctuation">.</span>parentNode<span class="token punctuation">.</span>removeChild<span class="token punctuation">(</span>link<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-python"><code class="language-python">export function removeAllCss<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        removeCss<span class="token punctuation">(</span>`$<span class="token punctuation">{</span>process<span class="token punctuation">.</span>env<span class="token punctuation">.</span>VUE_APP_RES_URL<span class="token punctuation">}</span><span class="token operator">/</span>theme<span class="token operator">/</span>theme_default<span class="token punctuation">.</span>css`<span class="token punctuation">)</span>
+        removeCss<span class="token punctuation">(</span>`$<span class="token punctuation">{</span>process<span class="token punctuation">.</span>env<span class="token punctuation">.</span>VUE_APP_RES_URL<span class="token punctuation">}</span><span class="token operator">/</span>theme<span class="token operator">/</span>theme_eye<span class="token punctuation">.</span>css`<span class="token punctuation">)</span>
+        removeCss<span class="token punctuation">(</span>`$<span class="token punctuation">{</span>process<span class="token punctuation">.</span>env<span class="token punctuation">.</span>VUE_APP_RES_URL<span class="token punctuation">}</span><span class="token operator">/</span>theme<span class="token operator">/</span>theme_gold<span class="token punctuation">.</span>css`<span class="token punctuation">)</span>
+        removeCss<span class="token punctuation">(</span>`$<span class="token punctuation">{</span>process<span class="token punctuation">.</span>env<span class="token punctuation">.</span>VUE_APP_RES_URL<span class="token punctuation">}</span><span class="token operator">/</span>theme<span class="token operator">/</span>theme_night<span class="token punctuation">.</span>css`<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>由于 <strong><code>initGlobalStyle()</code></strong> 方法需要在<code>EbookReader.vue</code>组件和<code>EbookSettingTheme.vue</code> 组件中调用，为提高代码复用性，故将 <strong><code>initGlobalStyle()</code></strong> 放入<code>src/utils/mixin.js</code>中。</p>
+</li>
+</ol>
 
 					
 				</div>
@@ -427,7 +716,7 @@ export default new Vuex<span class="token punctuation">.</span>Store<span class=
 				
 				
 				<!--toc(post.content)-->
-				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Vue-web-读书器"><span class="post-toc-text">Vue web 读书器</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1、初始化项目"><span class="post-toc-text">1、初始化项目</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-1、使用-Vue-cli3-0-搭建开发环境"><span class="post-toc-text">1.1、使用 Vue-cli3.0 搭建开发环境</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-2、导入-Iconfont-svg-图标"><span class="post-toc-text">1.2、导入 Iconfont svg 图标</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-3、引入字体"><span class="post-toc-text">1.3、引入字体</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-4、设置响应式-rem"><span class="post-toc-text">1.4、设置响应式 rem</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-5、安装-epub"><span class="post-toc-text">1.5、安装 epub</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-6、安装-Nginx-作为代理服务器"><span class="post-toc-text">1.6、安装 Nginx 作为代理服务器</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2、电子书解析与渲染"><span class="post-toc-text">2、电子书解析与渲染</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-1、动态路由"><span class="post-toc-text">2.1、动态路由</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-2、vuex-模块化管理"><span class="post-toc-text">2.2、vuex 模块化管理</span></a></li></ol></li></ol>
+				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Vue-web-读书器"><span class="post-toc-text">Vue web 读书器</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1、初始化项目"><span class="post-toc-text">1、初始化项目</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-1、使用-Vue-cli3-0-搭建开发环境"><span class="post-toc-text">1.1、使用 Vue-cli3.0 搭建开发环境</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-2、导入-Iconfont-svg-图标"><span class="post-toc-text">1.2、导入 Iconfont svg 图标</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-3、引入字体"><span class="post-toc-text">1.3、引入字体</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-4、设置响应式-rem"><span class="post-toc-text">1.4、设置响应式 rem</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-5、安装-epub"><span class="post-toc-text">1.5、安装 epub</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-6、安装-Nginx-作为代理服务器"><span class="post-toc-text">1.6、安装 Nginx 作为代理服务器</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2、电子书解析与渲染"><span class="post-toc-text">2、电子书解析与渲染</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-1、动态路由"><span class="post-toc-text">2.1、动态路由</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-2、vuex-模块化管理"><span class="post-toc-text">2.2、vuex 模块化管理</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-3、mixins-混入"><span class="post-toc-text">2.3、mixins 混入</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3、阅读器开发"><span class="post-toc-text">3、阅读器开发</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-1、标题栏和菜单栏实现"><span class="post-toc-text">3.1、标题栏和菜单栏实现</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-2、WebStorageCache"><span class="post-toc-text">3.2、WebStorageCache</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-3、国际化——Vue-i18n-的使用"><span class="post-toc-text">3.3、国际化——Vue-i18n 的使用</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-4、全局样式的改变"><span class="post-toc-text">3.4、全局样式的改变</span></a></li></ol></li></ol>
 			</nav>
 			<div class="post-toc-bar"><div>
 		</div></div></aside>

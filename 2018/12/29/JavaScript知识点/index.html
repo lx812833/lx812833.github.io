@@ -62,7 +62,7 @@
 	
 	<!-- others: such as change-bg, time... -->
 	<p class="page-name-other">
-		1/21/2019 
+		1/24/2019 
 		<style type="text/css">
 	header:after {
 		content: '';
@@ -471,6 +471,64 @@ console<span class="token punctuation">.</span>log<span class="token punctuation
 <li>在一次执行回调函数时，当前值（1）和初始值（0）相加得出结果  1，该结果会在第二次执行回调函数时当做第一个参数传入</li>
 <li>所以在第二次执行回调函数时，相加的值就分别是  1  和  2，以此类推，循环结束后得到结果  6</li>
 </ul>
+<h4 id="并发（concurrency）和并行（parallelism）区别"><a href="#并发（concurrency）和并行（parallelism）区别" class="headerlink" title="并发（concurrency）和并行（parallelism）区别"></a>并发（concurrency）和并行（parallelism）区别</h4><blockquote>
+<p>并发（concurrency）和并行（parallelism）区别</p>
+</blockquote>
+<ul>
+<li><strong>并发是宏观概念</strong>，假设分别有任务 A 和任务 B，在一段时间内通过任务间的切换完成了这两个任务，这种情况就可以称之为并发。</li>
+<li><strong>并行是微观概念</strong>，假设 CPU 中存在两个核心，那么我就可以同时完成任务 A、B。同时完成多个任务的情况就可以称之为并行。</li>
+</ul>
+<h4 id="回调函数（Callback）"><a href="#回调函数（Callback）" class="headerlink" title="回调函数（Callback）"></a>回调函数（Callback）</h4><blockquote>
+<p>什么是回调函数？回调函数有什么缺点？如何解决回调地狱问题？</p>
+</blockquote>
+<p><strong>闭包</strong>： 闭包是指有权访问另一个函数作用域中的变量的函数</p>
+<pre class="line-numbers language-python"><code class="language-python">function A<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    let a <span class="token operator">=</span> <span class="token number">1</span>
+    function B<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> B
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>闭包的定义很简单：函数 A 返回了一个函数 B，并且函数 B 中使用了函数 A 的变量，函数 B 就被称为闭包。</p>
+<p><strong>回调函数</strong>：<a href="https://developer.mozilla.org/zh-CN/docs/Glossary/Callback_function" target="_blank" rel="noopener">MDN</a>上解释为：被作为<strong>实参</strong>传入另一函数，并在该外部函数内被调用，用以来完成某些任务的函数，称为回调函数。</p>
+<pre class="line-numbers language-python"><code class="language-python">ajax<span class="token punctuation">(</span>url<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+         <span class="token operator">//</span> 处理逻辑
+    <span class="token punctuation">}</span>
+ <span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>但是回调函数有一个致命的弱点，就是容易写出回调地狱（Callback hell）</p>
+<pre class="line-numbers language-python"><code class="language-python">ajax<span class="token punctuation">(</span>url<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token operator">//</span> 处理逻辑
+    ajax<span class="token punctuation">(</span>url1<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+            <span class="token operator">//</span> 处理逻辑
+        ajax<span class="token punctuation">(</span>url2<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+                <span class="token operator">//</span> 处理逻辑
+         <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+ <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>回调地狱的根本问题就是：</p>
+<ol>
+<li>嵌套函数存在耦合性，一旦有所改动，就会牵一发而动全身</li>
+<li>嵌套函数一多，就很难处理错误</li>
+</ol>
+<p>当然，回调函数还存在着别的几个缺点，比如不能使用  <code>try catch</code>  捕获错误，不能<code>直接 return</code></p>
+<p>一般使用 <strong><code>promise</code></strong> 解决回调地狱的问题。</p>
+<pre class="line-numbers language-python"><code class="language-python">ajax<span class="token punctuation">(</span>url<span class="token punctuation">)</span>
+    <span class="token punctuation">.</span>then<span class="token punctuation">(</span>res <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>res<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> ajax<span class="token punctuation">(</span>url1<span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span>then<span class="token punctuation">(</span>res <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>res<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> ajax<span class="token punctuation">(</span>url2<span class="token punctuation">)</span>
+ <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span>then<span class="token punctuation">(</span>res <span class="token operator">=</span><span class="token operator">></span>
+    console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>res<span class="token punctuation">)</span>
+ <span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="async-及-await"><a href="#async-及-await" class="headerlink" title="async 及 await"></a>async 及 await</h4><blockquote>
+<p>async 及 await 的特点，它们的优点和缺点分别是什么？await 原理是什么？</p>
+</blockquote>
 
 					
 				</div>
@@ -579,7 +637,7 @@ console<span class="token punctuation">.</span>log<span class="token punctuation
 				
 				
 				<!--toc(post.content)-->
-				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#JavaScript-基础知识点"><span class="post-toc-text">JavaScript 基础知识点</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#原始（Primitive）类型"><span class="post-toc-text">原始（Primitive）类型</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#对象（Object）类型"><span class="post-toc-text">对象（Object）类型</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#typeof-vs-instanceof"><span class="post-toc-text">typeof vs instanceof</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#类型转换"><span class="post-toc-text">类型转换</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#转-Boolean"><span class="post-toc-text">转 Boolean</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#对象转基本类型"><span class="post-toc-text">对象转基本类型</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#四则运算符"><span class="post-toc-text">四则运算符</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#this"><span class="post-toc-text">this</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#闭包"><span class="post-toc-text">闭包</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#深浅拷贝"><span class="post-toc-text">深浅拷贝</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#var、let-及-const-区别"><span class="post-toc-text">var、let 及 const 区别</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#原型继承和-Class-继承"><span class="post-toc-text">原型继承和 Class 继承</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#组合继承"><span class="post-toc-text">组合继承</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#map、filter、reduce"><span class="post-toc-text">map、filter、reduce</span></a></li></ol></li></ol>
+				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#JavaScript-基础知识点"><span class="post-toc-text">JavaScript 基础知识点</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#原始（Primitive）类型"><span class="post-toc-text">原始（Primitive）类型</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#对象（Object）类型"><span class="post-toc-text">对象（Object）类型</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#typeof-vs-instanceof"><span class="post-toc-text">typeof vs instanceof</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#类型转换"><span class="post-toc-text">类型转换</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#转-Boolean"><span class="post-toc-text">转 Boolean</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#对象转基本类型"><span class="post-toc-text">对象转基本类型</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#四则运算符"><span class="post-toc-text">四则运算符</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#this"><span class="post-toc-text">this</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#闭包"><span class="post-toc-text">闭包</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#深浅拷贝"><span class="post-toc-text">深浅拷贝</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#var、let-及-const-区别"><span class="post-toc-text">var、let 及 const 区别</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#原型继承和-Class-继承"><span class="post-toc-text">原型继承和 Class 继承</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#组合继承"><span class="post-toc-text">组合继承</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#map、filter、reduce"><span class="post-toc-text">map、filter、reduce</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#并发（concurrency）和并行（parallelism）区别"><span class="post-toc-text">并发（concurrency）和并行（parallelism）区别</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#回调函数（Callback）"><span class="post-toc-text">回调函数（Callback）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#async-及-await"><span class="post-toc-text">async 及 await</span></a></li></ol></li></ol>
 			</nav>
 			<div class="post-toc-bar"><div>
 		</div></div></aside>
