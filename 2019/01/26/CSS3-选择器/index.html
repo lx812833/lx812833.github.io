@@ -10,7 +10,7 @@
 		
 
 <head><meta name="generator" content="Hexo 3.8.0">
-	<title>tag: Promise</title>
+	<title>CSS3--选择器</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="apple-mobile-web-app-title" content="Amaze UI">
@@ -55,7 +55,7 @@
 		
 		
 			
-			<p class="page-name">标签</p>
+			<p class="page-name">当前文章&nbsp;:&nbsp;《CSS3--选择器》</p>
 			
 		
 	
@@ -144,50 +144,233 @@
 		<!-- content srart -->
 <div class="am-g am-g-fixed blog-fixed blog-content">
 	<div class="am-u-md-8 am-u-sm-12">
-		<div class="archive">
 
-			<div class="blog-text-center">
+		<article class="am-article blog-article-p">
+
+			<div class="am-article-hd">
 				
-					<i class="fa fa-book">Promise</i>
-				
-			</div>  
 
-			
 
+				<h1 class="am-article-title blog-text-center">
+					
+					
+	
+		<a href="/2019/01/26/CSS3-选择器/" itemprop="url">		
+			CSS3--选择器		
+		</a>
+	
+
+				</h1>
+
+				<p class="am-article-meta blog-text-center">
+					<span>
+						<i class="fa fa-clock-o"></i> 
+						<a href="/2019/01/26/CSS3-选择器/" itemprop="url">
+	<time datetime="2019-01-26T11:43:24.000Z" itemprop="datePublished">
+  		2019-01-26
+  </time>
+</a>    
+&nbsp;
+					</span>
+					
+					<span>						
+						
+							<i class="fa fa-tags"></i>
 							
-				
-				
-				
+								<a href="#CSS3" title="CSS3" rel="1">CSS3</a>&nbsp;
+													 											
+						
+					</span>
+				</p>
+			</div>
+
+			<div class="am-article-bd">
+				<div class="content" id="post-content">
 					
+						<h3 id="CSS3-选择器"><a href="#CSS3-选择器" class="headerlink" title="CSS3 选择器"></a>CSS3 选择器</h3><h4 id="CSS3-选择器分类"><a href="#CSS3-选择器分类" class="headerlink" title="CSS3 选择器分类"></a>CSS3 选择器分类</h4><p><img src="https://www.wanwuxiangyang.com/css3.png" alt="css3选择器分类"></p>
+<h4 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h4><ol>
+<li><p>基本选择器</p>
+<p><strong>id、class、通配符</strong>选择器，复合选择器（选择器分组），无兼容问题</p>
+</li>
+<li><p>层次选择器</p>
+<ul>
+<li>后代选择器: <strong>e f</strong></li>
+<li>子选择器: <strong>e &gt; f</strong></li>
+<li>相邻兄弟选择器: <strong>e + f</strong>，只能选择之后的一个</li>
+<li>通用兄弟选择器: <strong>e ~ f</strong>，之后的所有</li>
+</ul>
+</li>
+<li><p>目标伪类选择器</p>
+<p><strong>e:target</strong> 针对连接到的部分，兼容 ie9+</p>
+</li>
+<li><p>动态选择器</p>
+<p><strong>:linked :visited :active :hover :focus</strong> 其中 active 和 focus 兼容 8+支持</p>
+</li>
+<li><p>ui 元素状态伪类: 指定的样式只有当元素处于某种状态下时才起作用，在默认状态下不起作用。</p>
+<ul>
+<li><strong>:hover</strong> : 指定当鼠标指针移动到元素上时元素所使用的样式</li>
+<li><strong>:active</strong> : 指定元素被激活时使用的样式</li>
+<li><strong>:focus</strong> : 指定元素获得光标聚焦点使用的样式，主要是在文本框控件获得聚焦点并进行文字输入时使用</li>
+</ul>
+<pre class="line-numbers language-python"><code class="language-python">input<span class="token punctuation">[</span>type<span class="token operator">=</span><span class="token string">"text"</span><span class="token punctuation">]</span><span class="token punctuation">:</span>active<span class="token punctuation">{</span>
+    background<span class="token punctuation">:</span> blue<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+input<span class="token punctuation">[</span>type<span class="token operator">=</span><span class="token string">"password"</span><span class="token punctuation">]</span><span class="token punctuation">:</span>hover<span class="token punctuation">{</span>
+    background<span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li><strong>:enabled</strong> : 指定当元素处于可用状态时的样式</li>
+<li><strong>:disabled</strong> : 指定当元素处于不可用状态时的样式</li>
+<li><strong>:read-only</strong> : 指定当元素处于只读状态时的样式</li>
+<li><strong>:read-write</strong> : 指定当元素处于非只读状态时的样式</li>
+</ul>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"text"</span> placeholder<span class="token operator">=</span><span class="token string">"请输入姓名"</span> value<span class="token operator">=</span><span class="token string">"winson"</span> readonly<span class="token operator">></span>
+
+input<span class="token punctuation">[</span>type<span class="token operator">=</span><span class="token string">"text"</span><span class="token punctuation">]</span><span class="token punctuation">:</span>read<span class="token operator">-</span>only<span class="token punctuation">{</span>
+    background<span class="token punctuation">:</span> <span class="token comment" spellcheck="true">#000;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li><strong>:cehcked</strong> : 指定当表单中的 radio 单选框或者是 checkbox 复选框处于选取状态时的样式</li>
+<li><strong>:selection</strong> : 指定当元素处于选中状态时的样式。</li>
+<li><strong>:in-range</strong> : 指定当元素的有效值被限定在一段范围之内，且实际的输入值在该范围之内时的样式</li>
+<li><strong>:out-of-range</strong> : 指定当元素的有效值被限定在一段范围之内，但实际输入值在超过时使用的样式</li>
+</ul>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"number"</span> min<span class="token operator">=</span><span class="token string">"0"</span> max<span class="token operator">=</span><span class="token string">"100"</span> value<span class="token operator">=</span><span class="token string">"0"</span><span class="token operator">></span>
+
+input<span class="token punctuation">[</span>type<span class="token operator">=</span><span class="token string">"number"</span><span class="token punctuation">]</span><span class="token punctuation">:</span><span class="token keyword">in</span><span class="token operator">-</span>range<span class="token punctuation">{</span>
+    background<span class="token punctuation">:</span> green<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+input<span class="token punctuation">[</span>type<span class="token operator">=</span><span class="token string">"number"</span><span class="token punctuation">]</span><span class="token punctuation">:</span>out<span class="token operator">-</span>of<span class="token operator">-</span>range<span class="token punctuation">{</span>
+    background<span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>结构伪类</p>
+<ul>
+<li><strong>:first-line</strong> : 指定某个元素的第一行文字使用样式</li>
+<li><strong>:first-letter</strong> : 指定某个元素中的文字的首字母或第一个字使用样式</li>
+<li><strong>:before</strong> : 指定在某个元素之前插入一些内容</li>
+<li><strong>:after</strong> : 指定在某个元素之后插入一些内容</li>
+<li><strong>:nth-child(n)</strong> :   指定定位某个父元素的一个或多个特定的子元素</li>
+<li>。。。</li>
+</ul>
+</li>
+<li><p>否定伪类</p>
+<p><strong>:not()</strong> : 指定匹配非指定元素/选择器的每个元素</p>
+</li>
+</ol>
 
 					
-					<!--<a href="/archives/2018" class="archive-year">2018</a>-->
-				
-								
-				
-					  
-					<div class="archive-year">
-						<a href="/archives/2018/11">
-							2018-11
-						</a>
-					</div>				
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/11/13/Promise/" itemprop="url">Promise</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/11/13/Promise/" itemprop="url">11-13</a>
-					</div>
-				</div>		        							
-			
-				
-			    
-		</div>
-	</div>
+				</div>
+			</div>
+		</article>
+
+		<ul class="am-pagination">
+    
+	
+		<li class="am-pagination-next">
+		<a class="pull-right" href="/2019/01/24/Vue-ref的使用/" title="Vue--ref的使用">
+			下一篇 &raquo;
+		</a>
+		</li>
+	 
+ </ul>
+        
+
+		<div class="theme-annie-comment-button-container">
+	<button id="annie-comment-button" class="theme-annie-comment-button" onclick="Annie_Comment()">
+		加载评论
+		<!--加载评论-->
+	</button>
 </div>
 
+<div id="annie-comment-container" class="theme-annie-comment-main-container">
+
+	
+		
+			<!-- comment valine -->
+			<!-- show valine comment -->
+<div id="valineComment" class="comment"></div>
+
+<!-- valine`s js & css -->
+<script>
+	window.jQuery || document.write('<script src="/js/jquery-2.1.1.min.js"><\/script>')
+</script>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/js/valine.min.js"></script>
+<link rel="stylesheet" href="/css/comment.css">
+
+<script>
+	var checkExistComment = setInterval(function() {
+		if( $('#valineComment').length ) {
+			new Valine({
+				// AV 对象来自上面引入av-min.js(老司机们不要开车➳♡゛扎心了老铁)
+				av: AV,
+				//使用id寻找div元素（使用class可能找不到）
+				el: '#valineComment',
+				emoticon_url: 'https://cloud.panjunwen.com/alu',
+				emoticon_list: ["吐.png", "期待.png", "高兴.png", "吐血倒地.png", "哭泣.png", "欢呼.png"],
+				app_id: "3333....", //获取APP ID
+				app_key: "3333......", //获取APP KEY
+				placeholder: "no any!", //评论框占位提示文字        			
+			});
+			clearInterval(checkExistComment);
+		}
+	}, 100);
+</script>
+		
+	
+
+</div>
+
+<script type="text/javascript">
+	/* Show Comment */
+	var Annie_Comment = function() {
+		function Show_Hidden(obj) {
+			obj.style.display = 'block';
+		}
+		
+		//var obutton = $('#annie-comment-button');
+		//var obutton = $('#annie-comment-container');
+		var obutton = document.getElementById("annie-comment-button" || "0");
+		var odiv = document.getElementById("annie-comment-container");
+		if( 'obutton' ) {
+			obutton.onclick = function() {
+				Show_Hidden(odiv);
+				$("#annie-comment-button").css("display", 'none');
+				return false;
+			}
+		}
+	};
+
+	(function Annie_Init() {
+		Annie_Comment();
+	})();
+</script>
+		
+		<!--
+	时间：2018-09-24
+	描述：The TOC module refers to 'https://github.com/codefine/hexo-theme-mellow', include toc.ejs、toc.js、toc.css. All rights reserved by codefine. 
+-->
+
+	
+		<aside class="post-widget">
+			<nav class="post-toc-wrap" id="post-toc">
+				
+					<strong>文章目录</strong>
+				
+				
+				<!--toc(post.content)-->
+				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#CSS3-选择器"><span class="post-toc-text">CSS3 选择器</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#CSS3-选择器分类"><span class="post-toc-text">CSS3 选择器分类</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#选择器"><span class="post-toc-text">选择器</span></a></li></ol></li></ol>
+			</nav>
+			<div class="post-toc-bar"><div>
+		</div></div></aside>
+	
+
+	</div>
+</div>
 		</div>
 		</main>
 		
@@ -257,6 +440,11 @@
 	}
 </style>
 
+
+	<script src="/js/motto.js"></script>
+	<script type="text/javascript">
+		$(".motto").html(getMingYanContent());
+	</script>	
 
 
 
@@ -598,6 +786,8 @@
 
 
 
+
+	<script type="text/javascript" src="/js/toc.js"></script>
 
 
 <script type="text/javascript" src="/js/main.js"></script>

@@ -62,7 +62,7 @@
 	
 	<!-- others: such as change-bg, time... -->
 	<p class="page-name-other">
-		1/24/2019 
+		1/26/2019 
 		<style type="text/css">
 	header:after {
 		content: '';
@@ -583,7 +583,7 @@ this<span class="token punctuation">.</span>rendition<span class="token punctuat
             addCss<span class="token punctuation">(</span>`$<span class="token punctuation">{</span>process<span class="token punctuation">.</span>env<span class="token punctuation">.</span>VUE_APP_RES_URL<span class="token punctuation">}</span><span class="token operator">/</span>theme<span class="token operator">/</span>theme_default<span class="token punctuation">.</span>css`<span class="token punctuation">)</span><span class="token punctuation">;</span>
             <span class="token keyword">break</span><span class="token punctuation">;</span>
      <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
+ <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>但是，当多次点击切换样式时，header 中会逐个加载 CSS 样式，后面的覆盖前面的，影响渲染速度，故需要清楚</p>
@@ -595,19 +595,75 @@ this<span class="token punctuation">.</span>rendition<span class="token punctuat
             link<span class="token punctuation">.</span>parentNode<span class="token punctuation">.</span>removeChild<span class="token punctuation">(</span>link<span class="token punctuation">)</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
+ <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <pre class="line-numbers language-python"><code class="language-python">export function removeAllCss<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         removeCss<span class="token punctuation">(</span>`$<span class="token punctuation">{</span>process<span class="token punctuation">.</span>env<span class="token punctuation">.</span>VUE_APP_RES_URL<span class="token punctuation">}</span><span class="token operator">/</span>theme<span class="token operator">/</span>theme_default<span class="token punctuation">.</span>css`<span class="token punctuation">)</span>
         removeCss<span class="token punctuation">(</span>`$<span class="token punctuation">{</span>process<span class="token punctuation">.</span>env<span class="token punctuation">.</span>VUE_APP_RES_URL<span class="token punctuation">}</span><span class="token operator">/</span>theme<span class="token operator">/</span>theme_eye<span class="token punctuation">.</span>css`<span class="token punctuation">)</span>
         removeCss<span class="token punctuation">(</span>`$<span class="token punctuation">{</span>process<span class="token punctuation">.</span>env<span class="token punctuation">.</span>VUE_APP_RES_URL<span class="token punctuation">}</span><span class="token operator">/</span>theme<span class="token operator">/</span>theme_gold<span class="token punctuation">.</span>css`<span class="token punctuation">)</span>
         removeCss<span class="token punctuation">(</span>`$<span class="token punctuation">{</span>process<span class="token punctuation">.</span>env<span class="token punctuation">.</span>VUE_APP_RES_URL<span class="token punctuation">}</span><span class="token operator">/</span>theme<span class="token operator">/</span>theme_night<span class="token punctuation">.</span>css`<span class="token punctuation">)</span>
-<span class="token punctuation">}</span>
+ <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>由于 <strong><code>initGlobalStyle()</code></strong> 方法需要在<code>EbookReader.vue</code>组件和<code>EbookSettingTheme.vue</code> 组件中调用，为提高代码复用性，故将 <strong><code>initGlobalStyle()</code></strong> 放入<code>src/utils/mixin.js</code>中。</p>
 </li>
 </ol>
+<h4 id="3-5、进度条组件"><a href="#3-5、进度条组件" class="headerlink" title="3.5、进度条组件"></a>3.5、进度条组件</h4><p>在<code>src/components/ebook</code> 下新建<code>EbookSettingProgress.vue</code>作为进度条组件。<br>进度条组件主要用来滑动进度条切换阅读进度和查看进度的，核心部分由<code>input</code>完成。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"progress-wrapper"</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"progress-icon-wrapper"</span> @click<span class="token operator">=</span><span class="token string">"prevSection()"</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>span <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"icon-back"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>span<span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+    <span class="token operator">&lt;</span>input
+        <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"progress"</span>
+        type<span class="token operator">=</span><span class="token string">"range"</span>
+        max<span class="token operator">=</span><span class="token string">"100"</span>
+        min<span class="token operator">=</span><span class="token string">"0"</span>
+        step<span class="token operator">=</span><span class="token string">"1"</span>
+        @change<span class="token operator">=</span><span class="token string">"onProgressChange($event.target.value)"</span>
+        @input<span class="token operator">=</span><span class="token string">"onProgressInput($event.target.value)"</span>
+        <span class="token punctuation">:</span>value<span class="token operator">=</span><span class="token string">"progress"</span>
+        <span class="token punctuation">:</span>disabled<span class="token operator">=</span><span class="token string">"!bookAvailable"</span>
+        ref<span class="token operator">=</span><span class="token string">"progress"</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"progress-icon-wrapper"</span> @click<span class="token operator">=</span><span class="token string">"nextSection()"</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>span <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"icon-forward"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>span<span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+ <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>真心觉得<code>CSS</code>还挺难的…</p>
+<h5 id="input-type-与-step-属性"><a href="#input-type-与-step-属性" class="headerlink" title="input type 与 step 属性"></a>input type 与 step 属性</h5><p>作为一个滑块组件，主要用到 <strong><code>input</code></strong> <strong>type</strong> 和 <strong>step</strong> 属性</p>
+<table>
+<thead>
+<tr>
+<th>type</th>
+<th>返回滑块控件的表单元素类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>step</td>
+<td>设置或返回滑块控件的 step 属性值 ；step 属性规定输入字段的合法数字间隔；step 属性可以与 max 以及 min 属性配合使用，以创建合法值的范围</td>
+</tr>
+</tbody>
+</table>
+<p>再调用函数监听 <strong><code>input</code></strong> 数据变化：</p>
+<pre class="line-numbers language-python"><code class="language-python"> @change<span class="token operator">=</span><span class="token string">"onProgressChange($event.target.value)"</span>
+ @input<span class="token operator">=</span><span class="token string">"onProgressInput($event.target.value)"</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h5 id="ref"><a href="#ref" class="headerlink" title="ref"></a>ref</h5><p><a href="https://cn.vuejs.org/v2/api/#ref" target="_blank" rel="noopener">Vue 官网上对 ref 详解</a>：<strong><code>ref</code></strong> 被用来给元素或子组件注册引用信息。引用信息将会注册在父组件的  <strong><code>$refs</code></strong> 对象上。如果在普通的 <strong>DOM</strong> 元素上使用，引用指向的就是 <strong>DOM</strong>元素；如果用在子组件上，引用就指向组件实例：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">&lt;</span>!<span class="token operator">-</span><span class="token operator">-</span> `vm<span class="token punctuation">.</span>$refs<span class="token punctuation">.</span>p` will be the DOM node <span class="token operator">-</span><span class="token operator">-</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>p ref<span class="token operator">=</span><span class="token string">"p"</span><span class="token operator">></span>hello<span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">></span>
+
+<span class="token operator">&lt;</span>!<span class="token operator">-</span><span class="token operator">-</span> `vm<span class="token punctuation">.</span>$refs<span class="token punctuation">.</span>child` will be the child component instance <span class="token operator">-</span><span class="token operator">-</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>child<span class="token operator">-</span>component ref<span class="token operator">=</span><span class="token string">"child"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>child<span class="token operator">-</span>component<span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>关于 <strong><code>ref</code></strong> 注册时间的重要说明：因为 <strong><code>ref</code></strong> 本身是作为渲染结果被创建的，在初始渲染的时候你不能访问它们 - 它们还不存在！<strong><code>$refs</code></strong>  也不是响应式的，因此你不应该试图用它在模板中做数据绑定。</p>
+<p><strong><code>ref</code></strong> 有三种用法：</p>
+<ol>
+<li><strong><code>ref</code></strong> 放在普通的元素上，用 <strong><code>this.ref.name</code></strong> 获取的是 <strong>DOM</strong> 元素</li>
+<li><strong><code>ref</code></strong> 放在<strong>子组件</strong>上，用 <strong><code>this.ref.name</code></strong> 获取的是 <strong><code>组件实例，可以使用组件的所有方法</code></strong></li>
+<li>利用<strong>v-for</strong> 和 <strong>ref</strong> 获取<strong>一组数组</strong>或者<strong>DOM 节点</strong></li>
+</ol>
+<p><img src="https://www.wanwuxiangyang.com/ref.png" alt="enter image description here"></p>
 
 					
 				</div>
@@ -716,7 +772,7 @@ this<span class="token punctuation">.</span>rendition<span class="token punctuat
 				
 				
 				<!--toc(post.content)-->
-				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Vue-web-读书器"><span class="post-toc-text">Vue web 读书器</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1、初始化项目"><span class="post-toc-text">1、初始化项目</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-1、使用-Vue-cli3-0-搭建开发环境"><span class="post-toc-text">1.1、使用 Vue-cli3.0 搭建开发环境</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-2、导入-Iconfont-svg-图标"><span class="post-toc-text">1.2、导入 Iconfont svg 图标</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-3、引入字体"><span class="post-toc-text">1.3、引入字体</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-4、设置响应式-rem"><span class="post-toc-text">1.4、设置响应式 rem</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-5、安装-epub"><span class="post-toc-text">1.5、安装 epub</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-6、安装-Nginx-作为代理服务器"><span class="post-toc-text">1.6、安装 Nginx 作为代理服务器</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2、电子书解析与渲染"><span class="post-toc-text">2、电子书解析与渲染</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-1、动态路由"><span class="post-toc-text">2.1、动态路由</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-2、vuex-模块化管理"><span class="post-toc-text">2.2、vuex 模块化管理</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-3、mixins-混入"><span class="post-toc-text">2.3、mixins 混入</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3、阅读器开发"><span class="post-toc-text">3、阅读器开发</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-1、标题栏和菜单栏实现"><span class="post-toc-text">3.1、标题栏和菜单栏实现</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-2、WebStorageCache"><span class="post-toc-text">3.2、WebStorageCache</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-3、国际化——Vue-i18n-的使用"><span class="post-toc-text">3.3、国际化——Vue-i18n 的使用</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-4、全局样式的改变"><span class="post-toc-text">3.4、全局样式的改变</span></a></li></ol></li></ol>
+				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Vue-web-读书器"><span class="post-toc-text">Vue web 读书器</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1、初始化项目"><span class="post-toc-text">1、初始化项目</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-1、使用-Vue-cli3-0-搭建开发环境"><span class="post-toc-text">1.1、使用 Vue-cli3.0 搭建开发环境</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-2、导入-Iconfont-svg-图标"><span class="post-toc-text">1.2、导入 Iconfont svg 图标</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-3、引入字体"><span class="post-toc-text">1.3、引入字体</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-4、设置响应式-rem"><span class="post-toc-text">1.4、设置响应式 rem</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-5、安装-epub"><span class="post-toc-text">1.5、安装 epub</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-6、安装-Nginx-作为代理服务器"><span class="post-toc-text">1.6、安装 Nginx 作为代理服务器</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2、电子书解析与渲染"><span class="post-toc-text">2、电子书解析与渲染</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-1、动态路由"><span class="post-toc-text">2.1、动态路由</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-2、vuex-模块化管理"><span class="post-toc-text">2.2、vuex 模块化管理</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-3、mixins-混入"><span class="post-toc-text">2.3、mixins 混入</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3、阅读器开发"><span class="post-toc-text">3、阅读器开发</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-1、标题栏和菜单栏实现"><span class="post-toc-text">3.1、标题栏和菜单栏实现</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-2、WebStorageCache"><span class="post-toc-text">3.2、WebStorageCache</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-3、国际化——Vue-i18n-的使用"><span class="post-toc-text">3.3、国际化——Vue-i18n 的使用</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-4、全局样式的改变"><span class="post-toc-text">3.4、全局样式的改变</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-5、进度条组件"><span class="post-toc-text">3.5、进度条组件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#input-type-与-step-属性"><span class="post-toc-text">input type 与 step 属性</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#ref"><span class="post-toc-text">ref</span></a></li></ol></li></ol></li></ol>
 			</nav>
 			<div class="post-toc-bar"><div>
 		</div></div></aside>
