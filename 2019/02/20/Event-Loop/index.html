@@ -10,7 +10,7 @@
 		
 
 <head><meta name="generator" content="Hexo 3.8.0">
-	<title>数组去重</title>
+	<title>Event Loop</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="apple-mobile-web-app-title" content="Amaze UI">
@@ -55,7 +55,7 @@
 		
 		
 			
-			<p class="page-name">当前文章&nbsp;:&nbsp;《数组去重》</p>
+			<p class="page-name">当前文章&nbsp;:&nbsp;《Event Loop》</p>
 			
 		
 	
@@ -155,8 +155,8 @@
 					
 					
 	
-		<a href="/2018/11/09/数组去重/" itemprop="url">		
-			数组去重		
+		<a href="/2019/02/20/Event-Loop/" itemprop="url">		
+			Event Loop		
 		</a>
 	
 
@@ -165,9 +165,9 @@
 				<p class="am-article-meta blog-text-center">
 					<span>
 						<i class="fa fa-clock-o"></i> 
-						<a href="/2018/11/09/数组去重/" itemprop="url">
-	<time datetime="2018-11-09T14:01:53.000Z" itemprop="datePublished">
-  		2018-11-09
+						<a href="/2019/02/20/Event-Loop/" itemprop="url">
+	<time datetime="2019-02-20T12:42:31.000Z" itemprop="datePublished">
+  		2019-02-20
   </time>
 </a>    
 &nbsp;
@@ -187,15 +187,108 @@
 			<div class="am-article-bd">
 				<div class="content" id="post-content">
 					
-						<h3 id="数组去重"><a href="#数组去重" class="headerlink" title="数组去重"></a>数组去重</h3><p>@[JS]</p>
-<p><strong>Set</strong>：是ES6中一种新的数据结构，它可以接收一个数组或者是类数组对象，自动去重其中的重复项目。</p>
-<pre class="line-numbers language-ruby"><code class="language-ruby">let array <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token string">'1'</span><span class="token punctuation">]</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Set</span><span class="token punctuation">(</span>array<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p><strong>Array.from</strong>：把类数组对象、可迭代对象转化为数组。</p>
-<pre class="line-numbers language-ruby"><code class="language-ruby">let array1 <span class="token operator">=</span> <span class="token builtin">Array</span><span class="token punctuation">.</span><span class="token function">from</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Set</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>array1<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+						<h4 id="Event-Loop"><a href="#Event-Loop" class="headerlink" title="Event Loop"></a>Event Loop</h4><h5 id="进程与线程"><a href="#进程与线程" class="headerlink" title="进程与线程"></a>进程与线程</h5><blockquote>
+<p>JS 为什么是单线程的? 为什么需要异步? 单线程又是如何实现异步的呢?</p>
+</blockquote>
+<ul>
+<li><p>（1）JS 为什么是单线程的？</p>
+<p>JS 最初被设计用在浏览器中。如果假设浏览器中的 JS 是多线程的，那么现在有 2 个线程,process1 process2,由于是多线程的 JS,所以他们对同一个 dom,同时进行操作，process1 删除了该 dom,而 process2 编辑了该 dom,同时下达 2 个矛盾的命令,浏览器究竟该如何执行呢?</p>
+</li>
+<li><p>（2）JS 为什么需要异步？</p>
+<p>如果 JS 中不存在异步,只能自上而下执行,如果上一行解析时间很长,那么下面的代码就会被阻塞。<br>对于用户而言,阻塞就意味着”卡死”,这样就导致了很差的用户体验<br>所以 JS 中存在异步执行</p>
+</li>
+<li><p>JS 单线程又是如何实现异步的呢？</p>
+<p><strong>是通过的事件循环(event loop),理解了 event loop 机制,就理解了 JS 的执行机制</strong></p>
+</li>
+</ul>
+<blockquote>
+<p>进程与线程的区别？JS 单线程带来的好处？</p>
+</blockquote>
+<p>JS 是<strong>单线程执行</strong>的。<strong>进程</strong>与<strong>线程</strong>，本质上来说，两个名词都是<strong>CPU 工作时间片</strong>的一个描述。</p>
+<p><strong><code>进程</code></strong> 描述了 <strong>CPU 在运行指令及加载和保存上下文所需的时间</strong>，放在应用上来说就代表了一个程序。<strong><code>线程</code> 是进程中的更小单位，描述了执行一段指令所需的时间</strong>。</p>
+<p>把这些概念拿到浏览器中来说，当打开一个 Tab 页时，其实就是创建了一个<strong>进程</strong>，一个进程中可以有<strong>多个线程</strong>，比如渲染线程、JS 引擎线程、HTTP 请求线程等等。当发起一个请求时，其实就是创建了一个线程，当请求结束后，该线程可能就会被销毁。上文说到了 JS 引擎线程和渲染线程，大家应该都知道，在 JS 运行的时候可能会阻止 UI 渲染，这说明了两个线程是互斥的。这其中的原因是因为 JS 可以修改 DOM，如果在 JS 执行的时候 UI 线程还在工作，就可能导致不能安全的渲染 UI。这其实也是一个<strong>单线程的好处</strong>，得益于 JS 是单线程运行的，可以达到<strong>节省内存，节约上下文切换时间，没有锁</strong>的问题的好处。当然前面两点在服务端中更容易体现，对于锁的问题，形象的来说就是当读取一个数字 15 的时候，同时有两个操作对数字进行了加减，这时候结果就出现了错误。解决这个问题也不难，只需要在读取的时候加锁，直到读取完毕之前都不能进行写入操作。</p>
+<h5 id="执行栈"><a href="#执行栈" class="headerlink" title="执行栈"></a>执行栈</h5><blockquote>
+<p>什么是执行栈？</p>
+</blockquote>
+<p><strong>执行栈 :</strong> 用于存储在代码执行期间创建的所有执行上下文，也可以认为是一个存储函数调用的<strong>栈结构</strong> ，<br>遵循<strong>先进后出</strong>的原则</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/11/13/1670d2d20ead32ec?imageslim" alt="执行栈"></p>
+<p>当开始执行 JS 代码时，首先会执行一个  <code>main 函数</code>，然后执行我们的代码。根据<code>先进后出</code>的原则，后执行的函数会先弹出栈，在图中我们也可以发现，foo  函数后执行，当执行完毕后就从栈中弹出了。</p>
+<p>当使用递归的时候，因为<strong>栈可存放的函数是有限制的</strong>，一旦存放了过多的函数且没有得到释放的话，就会出现爆栈的问题</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/11/13/1670c128acce975f?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="执行栈限制"></p>
+<h5 id="浏览器中的-Event-Loop"><a href="#浏览器中的-Event-Loop" class="headerlink" title="浏览器中的 Event Loop"></a>浏览器中的 Event Loop</h5><blockquote>
+<p>异步代码执行顺序？什么是 Event Loop？</p>
+</blockquote>
+<p><strong>当执行 JS 代码的时候其实就是往执行栈中放入函数</strong>，那么遇到异步代码的时候该怎么办？其实当遇到<strong>异步代码</strong>时，<strong>会被挂起并在需要执行的时候加入到 Task（有多种 Task） 队列中。一旦执行栈为空，Event Loop 就会从 Task 队列中拿出需要执行的代码并放入执行栈中执行，所以本质上来说 JS 中的异步还是同步行为。</strong></p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/11/23/16740fa4cd9c6937?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="事假循环"></p>
+<p>不同的任务源会被分配到不同的 <code>Task（任务）</code> 队列中，<strong>任务源</strong>可以分为  <strong>微任务（microtask）</strong> 和  <strong>宏任务（macrotask）</strong>。在 ES6 规范中， <strong>微任务（microtask）</strong> 称为  <code>jobs</code>， <strong>宏任务（macrotask）</strong>称为  <code>task</code></p>
+<pre class="line-numbers language-python"><code class="language-python">console<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token string">'script start'</span><span class="token punctuation">)</span>
+
+<span class="token keyword">async</span> function async1<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">await</span> async2<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    console<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token string">'async1 end'</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">async</span> function async2<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token string">'async2 end'</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+async1<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+setTimeout<span class="token punctuation">(</span>function<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token string">'setTimeout'</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+
+new Promise<span class="token punctuation">(</span>resolve <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token string">'Promise'</span><span class="token punctuation">)</span>
+    resolve<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">.</span>then<span class="token punctuation">(</span>function<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token string">'promise1'</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">.</span>then<span class="token punctuation">(</span>function<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token string">'promise2'</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token string">'script end'</span><span class="token punctuation">)</span>
+
+
+<span class="token operator">//</span> script start <span class="token operator">=</span><span class="token operator">></span> async2 end <span class="token operator">=</span><span class="token operator">></span> Promise <span class="token operator">=</span><span class="token operator">></span> script end <span class="token operator">=</span><span class="token operator">></span> promise1 <span class="token operator">=</span><span class="token operator">></span> promise2 <span class="token operator">=</span><span class="token operator">></span> async1 end <span class="token operator">=</span><span class="token operator">></span> setTimeout
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>首先先来解释下上述代码的  <code>async</code>  和  <code>await</code>  的执行顺序。当调用  <code>async1</code>  函数时，会马上输出  <code>async2 end</code>，并且函数返回一个  <code>Promise</code>，接下来在遇到  <code>await</code>的时候会就让出线程开始执行  <code>async1</code>  外的代码，所以完全可以把  <code>await</code>  看成是<strong>让出线程</strong>的标志。然后当<strong>同步代码</strong>全部执行完毕以后，就会去执行所有的异步代码，那么又会回到  <code>await</code>  的位置执行返回的  <code>Promise</code>  的  <code>resolve</code>  函数，这又会把  <code>resolve</code>  丢到微任务队列中，接下来去执行  <code>then</code>  中的回调，当两个  <code>then</code>  中的回调全部执行完毕以后，又会回到  <code>await</code>  的位置处理返回值，这时候可以看成是  <code>Promise.resolve(返回值).then()</code>，然后  <code>await</code>  后的代码全部被包裹进了  <code>then</code>  的回调中，所以  console.log(‘async1 end’)  会优先执行于  <code>setTimeout</code>。</p>
+<p>…….</p>
+<p>所以<strong>Event Loop</strong>执行顺序如下所示：</p>
+<ul>
+<li>首先执行<strong>同步代码</strong>，这属于<strong>宏任务</strong></li>
+<li>当执行完所有同步代码后，<strong>执行栈为空</strong>，查询是否有异步代码需要执行</li>
+<li>执行所有<strong>微任务</strong></li>
+<li>当执行完所有微任务后，如有必要会渲染页面</li>
+<li>然后开始下一轮 <code>Event Loop</code>，执行宏任务中的异步代码，也就是  <code>setTimeout</code>  中的回调函数</li>
+</ul>
+<p><img src="https://image-static.segmentfault.com/386/112/386112937-5a5763d9ef823_articlex" alt="事件循环"></p>
+<p><strong>异步任务中才包含宏任务和微任务</strong><br><strong><code>宏任务</code></strong> 包括： <code>script</code> ， <code>setTimeout</code> ，<code>setInterval</code> ，<code>setImmediate</code>，<code>I/O</code> ，<code>UI rendering（UI渲染）</code></p>
+<p><strong><code>微任务</code></strong> 包括： <code>process.nextTick</code> ，<code>promise</code> ，<code>MutationObserver</code></p>
+<pre class="line-numbers language-python"><code class="language-python">setTimeout<span class="token punctuation">(</span>function<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token string">'定时器开始啦'</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+new Promise<span class="token punctuation">(</span>function<span class="token punctuation">(</span>resolve<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token string">'马上执行for循环啦'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>var i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">10000</span><span class="token punctuation">;</span> i<span class="token operator">+</span><span class="token operator">+</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        i <span class="token operator">==</span> <span class="token number">99</span> <span class="token operator">&amp;</span><span class="token operator">&amp;</span> resolve<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span>then<span class="token punctuation">(</span>function<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token string">'执行then函数啦'</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token string">'代码执行结束'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token operator">//</span>  马上执行<span class="token keyword">for</span>循环啦 <span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span> 代码执行结束 <span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span> 执行then函数啦 <span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span> 定时器开始啦
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>解析执行机制，分析案例：</p>
+<p>首先执行<code>script</code>下的宏任务,遇到<code>setTimeout</code>,是<strong>异步任务</strong>，将其放到宏任务的【队列】里</p>
+<p>遇到 <code>new Promise</code>，是<code>同步任务</code>，直接执行,打印”马上执行 for 循环啦”</p>
+<p>遇到<code>then</code>方法，是<code>异步任务</code>,是微任务,将其放到微任务的【队列里】</p>
+<p>打印 “代码执行结束”</p>
+<p>本轮宏任务执行完毕,查看本轮的微任务,发现有一个<code>then</code>方法里的函数, 打印”执行 then 函数啦”</p>
+<p>到此,本轮的<code>event loop</code> 全部完成。</p>
 
 					
 				</div>
@@ -204,15 +297,9 @@ console<span class="token punctuation">.</span><span class="token function">log<
 
 		<ul class="am-pagination">
     
-    	<li class="am-pagination-prev">
-   		<a class="pull-left" href="/2018/11/13/Promise/" title="Promise">
-      		&laquo; 上一篇
-		</a>
-		</li>
-	
 	
 		<li class="am-pagination-next">
-		<a class="pull-right" href="/2018/11/06/原型和原型链/" title="原型和原型链">
+		<a class="pull-right" href="/2019/02/18/防抖与节流见解/" title="防抖与节流见解">
 			下一篇 &raquo;
 		</a>
 		</li>
@@ -304,7 +391,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 				
 				
 				<!--toc(post.content)-->
-				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#数组去重"><span class="post-toc-text">数组去重</span></a></li></ol>
+				<ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Event-Loop"><span class="post-toc-text">Event Loop</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#进程与线程"><span class="post-toc-text">进程与线程</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#执行栈"><span class="post-toc-text">执行栈</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#浏览器中的-Event-Loop"><span class="post-toc-text">浏览器中的 Event Loop</span></a></li></ol></li></ol>
 			</nav>
 			<div class="post-toc-bar"><div>
 		</div></div></aside>
