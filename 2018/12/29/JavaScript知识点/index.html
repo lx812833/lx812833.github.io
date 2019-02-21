@@ -62,7 +62,7 @@
 	
 	<!-- others: such as change-bg, time... -->
 	<p class="page-name-other">
-		2/20/2019 
+		2/21/2019 
 		<style type="text/css">
 	header:after {
 		content: '';
@@ -834,6 +834,99 @@ console<span class="token punctuation">.</span>log<span class="token punctuation
 <p>打印 “代码执行结束”</p>
 <p>本轮宏任务执行完毕,查看本轮的微任务,发现有一个<code>then</code>方法里的函数, 打印”执行 then 函数啦”</p>
 <p>到此,本轮的<code>event loop</code> 全部完成。</p>
+<h3 id="VUE-相关知识点"><a href="#VUE-相关知识点" class="headerlink" title="VUE 相关知识点"></a>VUE 相关知识点</h3><h4 id="MVVM"><a href="#MVVM" class="headerlink" title="MVVM"></a>MVVM</h4><blockquote>
+<p>什么是 MVVM？比之 MVC 有什么区别</p>
+</blockquote>
+<p><strong>MVVM</strong>是<strong>Model-View-ViewModel</strong>的缩写。<code>mvvm</code>是一种设计思想。<code>Model 层</code>代表数据模型，也可以在<code>Model</code>中定义数据修改和操作的业务逻辑；<code>View</code> 代表<code>UI</code> 组件，它负责将数据模型转化成<code>UI</code> 展现出来，<code>ViewModel</code> 是一个同步 View 和 Model 的对象。</p>
+<p>通过 <code>ViewModel</code> 将视图中的<code>状态</code>和用户的<code>行为</code>分离出一个抽象，这才是 <code>MVVM</code>的精髓</p>
+<h4 id="路由原理"><a href="#路由原理" class="headerlink" title="路由原理"></a>路由原理</h4><blockquote>
+<p>前端路由原理？两种实现方式有什么区别？</p>
+</blockquote>
+<p><strong>前端路由</strong>实现起来其实很简单，本质就是<strong>监听 URL 的变化</strong>，然后匹配路由规则，显示相应的页面，并且无须刷新页面。目前前端使用的路由就只有两种实现方式</p>
+<ul>
+<li>Hash 模式</li>
+<li>History 模式</li>
+</ul>
+<h5 id="Hash-模式"><a href="#Hash-模式" class="headerlink" title="Hash 模式"></a>Hash 模式</h5><p><code>www.test.com/#/</code>  就是 <strong>Hash URL</strong>，当  <code>#</code>  后面的哈希值发生变化时，可以通过  <code>hashchange 事件</code>来监听到 <code>URL</code> 的变化，从而进行跳转页面，并且无论哈希值如何变化，服务端接收到的 <code>URL</code> 请求永远是  <code>www.test.com</code>。</p>
+<pre class="line-numbers language-python"><code class="language-python">window<span class="token punctuation">.</span>addEventListener<span class="token punctuation">(</span><span class="token string">'hashchange'</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">{</span>
+    <span class="token operator">//</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> 具体逻辑
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>Hash 模式相对来说更简单，并且兼容性也更好。</p>
+<h5 id="History-模式"><a href="#History-模式" class="headerlink" title="History 模式"></a>History 模式</h5><p><strong>History 模式</strong>是 HTML5 新推出的功能，主要使用  <code>history.pushState</code>  和  <code>history.replaceState</code>  改变 <code>URL</code>。通过 History 模式改变 URL 同样不会引起页面的刷新，只会更新浏览器的历史记录。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">//</span> 新增历史记录
+history<span class="token punctuation">.</span>pushState<span class="token punctuation">(</span>stateObject<span class="token punctuation">,</span> title<span class="token punctuation">,</span> URL<span class="token punctuation">)</span>
+
+<span class="token operator">//</span> 替换当前历史记录
+history<span class="token punctuation">.</span>replaceState<span class="token punctuation">(</span>stateObject<span class="token punctuation">,</span> title<span class="token punctuation">,</span> URL<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>当用户做出浏览器动作时，比如点击<strong>后退按钮</strong>时会触发  <code>popState</code>  事件</p>
+<pre class="line-numbers language-python"><code class="language-python">window<span class="token punctuation">.</span>addEventListener<span class="token punctuation">(</span><span class="token string">'popstate'</span><span class="token punctuation">,</span> e <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token operator">//</span> e<span class="token punctuation">.</span>state 就是 pushState<span class="token punctuation">(</span>stateObject<span class="token punctuation">)</span> 中的 stateObject                     console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>e<span class="token punctuation">.</span>state<span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h5 id="Hash-模式与-History-模式对比"><a href="#Hash-模式与-History-模式对比" class="headerlink" title="Hash 模式与 History 模式对比"></a>Hash 模式与 History 模式对比</h5><ul>
+<li><code>Hash 模式</code>只可以更改  <code>#</code>  后面的内容，<code>History 模式</code>可以通过 <code>API</code> 设置任意的同源 <code>URL</code></li>
+<li><code>History 模式</code>可以通过 <code>API</code> 添加任意类型的数据到历史记录中，<code>Hash 模式</code>只能更改哈希值，也就是字符串</li>
+<li><code>Hash 模式</code>无需后端配置，并且兼容性好。<code>History 模式</code>在用户手动输入地址或者刷新页面的时候会发起 <code>URL</code> 请求，后端需要配置  <code>index.html</code>  页面用于匹配不到静态资源的时候</li>
+</ul>
+<h4 id="VUE-生命周期钩子函数"><a href="#VUE-生命周期钩子函数" class="headerlink" title="VUE 生命周期钩子函数"></a>VUE 生命周期钩子函数</h4><p>在  <code>beforeCreate</code>  钩子函数调用的时候，是获取不到  <code>props</code>  或者  <code>data</code>  中的数据的，因为这些数据的初始化都在  <code>initState</code>  中。</p>
+<p>然后会执行  <code>created</code>  钩子函数，在这一步的时候已经可以访问到之前不能访问到的数据，但是这时候组件还没被挂载，所以是看不到的。</p>
+<p>接下来会先执行  <code>beforeMount</code>  钩子函数，开始创建 <code>VDOM</code>，最后执行  <code>mounted</code>  钩子，并将 <code>VDOM</code> 渲染为真实 <code>DOM</code> 并且渲染数据。组件中如果有子组件的话，会递归挂载子组件，只有当所有子组件全部挂载完毕，才会执行根组件的挂载钩子。</p>
+<p>接下来是数据更新时会调用的钩子函数  <code>beforeUpdate</code>  和  <code>updated</code>，这两个钩子函数没什么好说的，就是分别在数据更新前和更新后会调用。</p>
+<p>另外还有  <code>keep-alive</code>  独有的生命周期，分别为  <code>activated</code>  和  <code>deactivated</code> 。用  <code>keep-alive</code>  包裹的组件在切换时不会进行销毁，而是缓存到内存中并执行  <code>deactivated</code>  钩子函数，命中缓存渲染后会执行  <code>actived</code>  钩子函数。</p>
+<p>最后就是销毁组件的钩子函数  <code>beforeDestroy</code>  和  <code>destroyed</code>。前者适合移除事件、定时器等等，否则可能会引起内存泄露的问题。然后进行一系列的销毁操作，如果有子组件的话，也会递归销毁子组件，所有子组件都销毁完毕后才会执行根组件的  <code>destroyed</code>  钩子函数。</p>
+<table>
+<thead>
+<tr>
+<th>生命周期钩子</th>
+<th>组件状态</th>
+<th>最佳实践</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>beforeCreate</td>
+<td>实例初始化后，<code>this</code>指向创建的实例，不能访问到<code>data</code>、<code>computed</code>、<code>watch</code>、<code>methods</code>上的数据和方法</td>
+<td>常用于初始化非响应式变量</td>
+</tr>
+<tr>
+<td>created</td>
+<td>实例创建完例成，可访问<code>data</code>、<code>computed</code>、<code>watch</code>、<code>methods</code>上的方法和数据，未挂载到<code>DOM</code>，不能访问到<code>$el</code>属性，<code>$ref</code>属性内容为空数组</td>
+<td>常用于简单的<code>ajax</code>请求，页面的初始化</td>
+</tr>
+<tr>
+<td>beforeMount</td>
+<td>在挂载开始之前被调用,开始创建 <code>VDOM</code>，最后执行  mounted  钩子，并将 <code>VDOM</code> 渲染为真实 <code>DOM</code> 并且渲染数据，<code>beforeMount</code>之前，会找到对应的<code>template</code>，并编译成<code>render</code>函数</td>
+<td>—</td>
+</tr>
+<tr>
+<td>mounted</td>
+<td>实例挂载到<code>DOM</code>上，此时可以通过<code>DOM API</code>获取到<code>DOM</code>节点，<code>$ref</code>属性可以访问</td>
+<td>常用于获取<code>VNode</code>信息和操作，<code>ajax</code>、<code>axios</code>请求</td>
+</tr>
+<tr>
+<td>beforeupdate</td>
+<td>响应数据更新时调用，发生在虚拟<code>VDOM</code>打补丁之前</td>
+<td>适合在更新之前访问现有的<code>DOM</code>，比如手动移出已添加的事件监听器</td>
+</tr>
+<tr>
+<td>updated</td>
+<td>虚拟<code>VDOM</code>重新渲染和打补丁之后调用，组件<code>DOM</code>已经跟新，可执行依赖于<code>DOM</code>的操作</td>
+<td>避免在这个钩子函数中操作数据，可能陷入死循环</td>
+</tr>
+<tr>
+<td>beforeDestroy</td>
+<td>实例销毁之前调用。这一步，实例任然完全可用，<code>this</code>仍能获取到实例</td>
+<td>常用于销毁定时器、解绑全局事件、销毁插件对象等操作</td>
+</tr>
+<tr>
+<td>destroyed</td>
+<td>实例销毁后调用，调用后，<code>Vue</code>实例指示的所有东西都会解绑，所有的事件监听器会被移出，所有的子实例也会被销毁</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
 
 					
 				</div>
@@ -942,7 +1035,7 @@ console<span class="token punctuation">.</span>log<span class="token punctuation
 				
 				
 				<!--toc(post.content)-->
-				<ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#tags"><span class="post-toc-text">tags:</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#JavaScript-基础知识点"><span class="post-toc-text">JavaScript 基础知识点</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#基本数据（Primitive）类型"><span class="post-toc-text">基本数据（Primitive）类型</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#对象（Object）类型"><span class="post-toc-text">对象（Object）类型</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#typeof-vs-instanceof"><span class="post-toc-text">typeof vs instanceof</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#类型转换"><span class="post-toc-text">类型转换</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#转-Boolean"><span class="post-toc-text">转 Boolean</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#对象转基本类型"><span class="post-toc-text">对象转基本类型</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#四则运算符"><span class="post-toc-text">四则运算符</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#this"><span class="post-toc-text">this</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#闭包"><span class="post-toc-text">闭包</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#深浅拷贝"><span class="post-toc-text">深浅拷贝</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#深拷贝数组（只拷贝第一级数组元素）"><span class="post-toc-text">深拷贝数组（只拷贝第一级数组元素）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#直接遍历"><span class="post-toc-text">直接遍历</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#slice"><span class="post-toc-text">slice()</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#concat"><span class="post-toc-text">concat()</span></a></li></ol></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#深拷贝对象"><span class="post-toc-text">深拷贝对象</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#直接遍历-1"><span class="post-toc-text">直接遍历</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#Object-assign"><span class="post-toc-text">Object.assign</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#扩展运算符-…"><span class="post-toc-text">扩展运算符 …</span></a></li></ol></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#拷贝所有层级"><span class="post-toc-text">拷贝所有层级</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#JSON-parse-JSON-stringify-XXXX"><span class="post-toc-text">JSON.parse(JSON.stringify(XXXX))</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#var、let-及-const-区别"><span class="post-toc-text">var、let 及 const 区别</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#原型继承和-Class-继承"><span class="post-toc-text">原型继承和 Class 继承</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#组合继承"><span class="post-toc-text">组合继承</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#模块化"><span class="post-toc-text">模块化</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#map、filter、reduce"><span class="post-toc-text">map、filter、reduce</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#并发（concurrency）和并行（parallelism）区别"><span class="post-toc-text">并发（concurrency）和并行（parallelism）区别</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#回调函数（Callback）"><span class="post-toc-text">回调函数（Callback）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#async-及-await"><span class="post-toc-text">async 及 await</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#常用定时器"><span class="post-toc-text">常用定时器</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#setTimeout"><span class="post-toc-text">setTimeout</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#setInterval"><span class="post-toc-text">setInterval</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#requestAnimationFrame"><span class="post-toc-text">requestAnimationFrame</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#setTimeout-和-setInterval-的区别"><span class="post-toc-text">setTimeout 和 setInterval 的区别</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Event-Loop"><span class="post-toc-text">Event Loop</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#进程与线程"><span class="post-toc-text">进程与线程</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#执行栈"><span class="post-toc-text">执行栈</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#浏览器中的-Event-Loop"><span class="post-toc-text">浏览器中的 Event Loop</span></a></li></ol></li></ol></li></ol></li></ol>
+				<ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#tags"><span class="post-toc-text">tags:</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#JavaScript-基础知识点"><span class="post-toc-text">JavaScript 基础知识点</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#基本数据（Primitive）类型"><span class="post-toc-text">基本数据（Primitive）类型</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#对象（Object）类型"><span class="post-toc-text">对象（Object）类型</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#typeof-vs-instanceof"><span class="post-toc-text">typeof vs instanceof</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#类型转换"><span class="post-toc-text">类型转换</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#转-Boolean"><span class="post-toc-text">转 Boolean</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#对象转基本类型"><span class="post-toc-text">对象转基本类型</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#四则运算符"><span class="post-toc-text">四则运算符</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#this"><span class="post-toc-text">this</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#闭包"><span class="post-toc-text">闭包</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#深浅拷贝"><span class="post-toc-text">深浅拷贝</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#深拷贝数组（只拷贝第一级数组元素）"><span class="post-toc-text">深拷贝数组（只拷贝第一级数组元素）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#直接遍历"><span class="post-toc-text">直接遍历</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#slice"><span class="post-toc-text">slice()</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#concat"><span class="post-toc-text">concat()</span></a></li></ol></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#深拷贝对象"><span class="post-toc-text">深拷贝对象</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#直接遍历-1"><span class="post-toc-text">直接遍历</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#Object-assign"><span class="post-toc-text">Object.assign</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#扩展运算符-…"><span class="post-toc-text">扩展运算符 …</span></a></li></ol></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#拷贝所有层级"><span class="post-toc-text">拷贝所有层级</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#JSON-parse-JSON-stringify-XXXX"><span class="post-toc-text">JSON.parse(JSON.stringify(XXXX))</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#var、let-及-const-区别"><span class="post-toc-text">var、let 及 const 区别</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#原型继承和-Class-继承"><span class="post-toc-text">原型继承和 Class 继承</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#组合继承"><span class="post-toc-text">组合继承</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#模块化"><span class="post-toc-text">模块化</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#map、filter、reduce"><span class="post-toc-text">map、filter、reduce</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#并发（concurrency）和并行（parallelism）区别"><span class="post-toc-text">并发（concurrency）和并行（parallelism）区别</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#回调函数（Callback）"><span class="post-toc-text">回调函数（Callback）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#async-及-await"><span class="post-toc-text">async 及 await</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#常用定时器"><span class="post-toc-text">常用定时器</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#setTimeout"><span class="post-toc-text">setTimeout</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#setInterval"><span class="post-toc-text">setInterval</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#requestAnimationFrame"><span class="post-toc-text">requestAnimationFrame</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#setTimeout-和-setInterval-的区别"><span class="post-toc-text">setTimeout 和 setInterval 的区别</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Event-Loop"><span class="post-toc-text">Event Loop</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#进程与线程"><span class="post-toc-text">进程与线程</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#执行栈"><span class="post-toc-text">执行栈</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#浏览器中的-Event-Loop"><span class="post-toc-text">浏览器中的 Event Loop</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#VUE-相关知识点"><span class="post-toc-text">VUE 相关知识点</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#MVVM"><span class="post-toc-text">MVVM</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#路由原理"><span class="post-toc-text">路由原理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Hash-模式"><span class="post-toc-text">Hash 模式</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#History-模式"><span class="post-toc-text">History 模式</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Hash-模式与-History-模式对比"><span class="post-toc-text">Hash 模式与 History 模式对比</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#VUE-生命周期钩子函数"><span class="post-toc-text">VUE 生命周期钩子函数</span></a></li></ol></li></ol></li></ol>
 			</nav>
 			<div class="post-toc-bar"><div>
 		</div></div></aside>
