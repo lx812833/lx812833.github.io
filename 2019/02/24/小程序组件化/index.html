@@ -62,7 +62,7 @@
 	
 	<!-- others: such as change-bg, time... -->
 	<p class="page-name-other">
-		2/24/2019 
+		2/25/2019 
 		<style type="text/css">
 	header:after {
 		content: '';
@@ -343,14 +343,138 @@ data<span class="token punctuation">:</span> <span class="token punctuation">{</
     <span class="token punctuation">}</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>1、由于函数作用域发生了改变，success回调函数内不可访问到this,this指代不明确<br>    如 success: function(res) {<br>        console.log(this.data.test)  // 出错<br>    }</p>
-<p>  （1）传统方法里，在回调函数外重新定义this  let _this = this<br>  （2）使用Es6箭头函数</p>
-<pre><code>   success: (res) =&gt; {
-       console.log(this.data.test)  // 正确调用
-   }
-</code></pre><p>2、配置config及暴露</p>
-<p>3、Es6模块导入导出 import时只能使用相对路径</p>
-<p>4、封装https utils/httpjs<br>    1、使用Es6 class 定义HTTP类，在封装一个request实例方法<br>    2、Es6 if (code.startsWith(‘2’)) { // 表示参数字符串是否在源字符串的头部<br>    3、定义错误码</p>
+<p>此外，还需注意的是，由于函数作用域发生了改变，在异步回调函数<code>success</code>里想要获取<code>data</code>中的<code>test</code>的值，是不可能访问到<code>this</code>的，<code>this</code>指代不明确，此时访问会报错。<br>如：</p>
+<pre class="line-numbers language-python"><code class="language-python">success<span class="token punctuation">:</span> function<span class="token punctuation">(</span>res<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>this<span class="token punctuation">.</span>data<span class="token punctuation">.</span>test<span class="token punctuation">)</span>   <span class="token operator">//</span> 报错
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>传统方法里，在回调函数内重新定义<code>this</code> <strong><code>let _this = this</code></strong> ，让<code>this</code>指向<code>_this</code></li>
+<li><p>使用 <strong><code>Es6箭头函数</code></strong></p>
+<pre class="line-numbers language-python"><code class="language-python">success<span class="token punctuation">:</span> <span class="token punctuation">(</span>res<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>this<span class="token punctuation">.</span>data<span class="token punctuation">.</span>test<span class="token punctuation">)</span> <span class="token operator">//</span> 正确
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+</ul>
+<h3 id="3、小程序网络请求的封装"><a href="#3、小程序网络请求的封装" class="headerlink" title="3、小程序网络请求的封装"></a>3、小程序网络请求的封装</h3><h4 id="3-1、config-配置"><a href="#3-1、config-配置" class="headerlink" title="3.1、config 配置"></a>3.1、config 配置</h4><p>在小程序根目录下定义 <strong><code>config.js</code></strong> 文件，里面配置小程序网络请求前缀，这样，如果以后请求前缀发生了更改，只需在<code>config</code>里重新修改即可。</p>
+<pre class="line-numbers language-python"><code class="language-python">const config <span class="token operator">=</span> <span class="token punctuation">{</span>
+    api_blink_url<span class="token punctuation">:</span> <span class="token string">'http://bl.7yue.pro/v1/'</span><span class="token punctuation">,</span>
+    appkey<span class="token punctuation">:</span> <span class="token string">'AbhC31IG7ruCDp57'</span>
+<span class="token punctuation">}</span>
+export <span class="token punctuation">{</span>
+    config
+<span class="token punctuation">}</span> <span class="token operator">//</span>输出暴露config
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="3-2、封装网络请求-https"><a href="#3-2、封装网络请求-https" class="headerlink" title="3.2、封装网络请求 https"></a>3.2、封装网络请求 https</h4><p>在 <strong><code>util/http.js</code></strong> 中封装网络请求 <strong><code>https</code></strong>，小程序中所有的网络请求都写在这里，如果页面需要用到网络请求，就需要<code>import</code>这个<code>https</code>，这样维护代码的时候更加方便。</p>
+<ul>
+<li>使用 <strong><code>Es6 class</code></strong> 定义 <code>HTTP</code>类，在封装一个<code>request</code>实例方法</li>
+</ul>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">//</span>ES6 定义一个HTTP类
+<span class="token keyword">class</span> <span class="token class-name">HTTP</span> <span class="token punctuation">{</span>
+    request<span class="token punctuation">(</span>params<span class="token punctuation">)</span> <span class="token punctuation">{</span>   <span class="token operator">//</span> request 实例方法<span class="token punctuation">(</span>函数<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>!params<span class="token punctuation">.</span>method<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        params<span class="token punctuation">.</span>method <span class="token operator">=</span> <span class="token string">"GET"</span>
+    <span class="token punctuation">}</span>
+    wx<span class="token punctuation">.</span>request<span class="token punctuation">(</span><span class="token punctuation">{</span>
+        url<span class="token punctuation">:</span> config<span class="token punctuation">.</span>api_blink_url <span class="token operator">+</span> params<span class="token punctuation">.</span>url<span class="token punctuation">,</span>
+        data<span class="token punctuation">:</span> params<span class="token punctuation">.</span>data<span class="token punctuation">,</span>
+        header<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            <span class="token string">'content-type'</span><span class="token punctuation">:</span> <span class="token string">'application/json'</span><span class="token punctuation">,</span>
+            <span class="token string">'appkey'</span><span class="token punctuation">:</span> config<span class="token punctuation">.</span>appkey
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        success<span class="token punctuation">:</span> <span class="token punctuation">(</span>res<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+            <span class="token operator">//</span>开发者服务器返回的 HTTP 状态码
+            <span class="token operator">//</span> 判断以<span class="token number">2</span>（2xx<span class="token punctuation">)</span>开头的状态码为正确
+            let code <span class="token operator">=</span> res<span class="token punctuation">.</span>statusCode<span class="token punctuation">.</span>toString<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>code<span class="token punctuation">.</span>startsWith<span class="token punctuation">(</span><span class="token string">'2'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token operator">//</span> 表示参数字符串是否在源字符串的头部
+                params<span class="token punctuation">.</span>success <span class="token operator">&amp;</span><span class="token operator">&amp;</span> params<span class="token punctuation">.</span>success<span class="token punctuation">(</span>res<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                let error_code <span class="token operator">=</span> res<span class="token punctuation">.</span>data<span class="token punctuation">.</span>error_code
+                this<span class="token punctuation">.</span>_show_error<span class="token punctuation">(</span>error_code<span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        fail<span class="token punctuation">:</span> <span class="token punctuation">(</span>err<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+            this<span class="token punctuation">.</span>_show_error<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>小程序 <strong><code>request</code></strong> 需要包含 url、data、header、method、success、fail 等。这里封装的网络请求 <strong><code>https</code></strong> 中为优化 method，在 request 之前就先进行判断。</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">if</span> <span class="token punctuation">(</span>!params<span class="token punctuation">.</span>method<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    params<span class="token punctuation">.</span>method <span class="token operator">=</span> <span class="token string">"GET"</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>这里运用 Es6 新特性<strong>函数默认参数</strong>进行判断，如果<code>request</code>请求中没有携带<code>method</code>，则<code>method</code>定义为<code>GET</code>；如果携带了，<code>method</code>就以携带值为准。</p>
+<ul>
+<li>以 <strong><code>str.startWith()</code> 判断参数字符串是否在原字符串的头部</strong>来判断服务器返回的<code>HTTP</code>状态码是否是以‘2’开头的，如果是就执行参数<code>params</code>下的<code>success</code>异步回调函数。</li>
+</ul>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">if</span> <span class="token punctuation">(</span>code<span class="token punctuation">.</span>startsWith<span class="token punctuation">(</span><span class="token string">'2'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>  <span class="token operator">//</span>表示参数字符串是否在源字符串的头部
+    params<span class="token punctuation">.</span>success <span class="token operator">&amp;</span><span class="token operator">&amp;</span> params<span class="token punctuation">.</span>success<span class="token punctuation">(</span>res<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
+<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    let error_code <span class="token operator">=</span> res<span class="token punctuation">.</span>data<span class="token punctuation">.</span>error_code
+    this<span class="token punctuation">.</span>_show_error<span class="token punctuation">(</span>error_code<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>自定义状态码</li>
+</ul>
+<p>一个谨慎严谨的自定义状态码能严谨的提示相关提示信息</p>
+<pre class="line-numbers language-python"><code class="language-python">const tips <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token number">1</span><span class="token punctuation">:</span> <span class="token string">'默认提示信息'</span><span class="token punctuation">,</span>
+    <span class="token number">1005</span><span class="token punctuation">:</span> <span class="token string">'无效的开发者key'</span><span class="token punctuation">,</span>
+    <span class="token number">3000</span><span class="token punctuation">:</span> <span class="token string">'暂无新期刊'</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这里使用自定义私有方法定义弹窗</p>
+<pre class="line-numbers language-python"><code class="language-python">_show_error<span class="token punctuation">(</span>error_code<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token operator">//</span>下划线代表自定义私有方法
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>!error_code<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        error_code <span class="token operator">=</span> <span class="token number">1</span>
+    <span class="token punctuation">}</span>
+    wx<span class="token punctuation">.</span>showToast<span class="token punctuation">(</span><span class="token punctuation">{</span>
+        title<span class="token punctuation">:</span> tips<span class="token punctuation">[</span>error_code<span class="token punctuation">]</span><span class="token punctuation">,</span>
+        icon<span class="token punctuation">:</span> <span class="token string">'none'</span><span class="token punctuation">,</span>
+        duration<span class="token punctuation">:</span> <span class="token number">2000</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这里获取网络请求的异步回调用的是 <strong><code>callBack回调函数</code></strong> 。封装的每一层都要传入 callBack 回调函数中去，而如果用 <strong><code>promise</code></strong> 的方式的话，是不用层层传入的，只要一直<code>return</code>到上一层，直到在<code>page</code>页面需要回调结果了，再获取这个<code>promise</code>对象，再通过<code>promise</code>对象的<code>then</code>方法获取网络请求的结果。</p>
+<p>例如在<code>modules/classic.js</code>中：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> <span class="token punctuation">{</span>HTTP<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'../util/http.js'</span>
+
+<span class="token keyword">class</span> <span class="token class-name">ClassicModel</span> extends HTTP <span class="token punctuation">{</span>
+    getLatest<span class="token punctuation">(</span>sCallBack<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        this<span class="token punctuation">.</span>request<span class="token punctuation">(</span><span class="token punctuation">{</span>
+            url<span class="token punctuation">:</span> <span class="token string">'classic/latest'</span><span class="token punctuation">,</span>
+            success<span class="token punctuation">:</span> <span class="token punctuation">(</span>res<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+                sCallBack<span class="token punctuation">(</span>res<span class="token punctuation">)</span>
+                this<span class="token punctuation">.</span>_setLatestIndex<span class="token punctuation">(</span>res<span class="token punctuation">.</span>index<span class="token punctuation">)</span>  <span class="token operator">//</span> 缓存的写入
+                let key <span class="token operator">=</span> this<span class="token punctuation">.</span>_getKey<span class="token punctuation">(</span>res<span class="token punctuation">.</span>index<span class="token punctuation">)</span>
+                wx<span class="token punctuation">.</span>setStorageSync<span class="token punctuation">(</span>key<span class="token punctuation">,</span> res<span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在<code>pages/classic/classic.js</code>中引入使用<code>ClassicModel</code></p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">import</span> <span class="token punctuation">{</span>ClassicModel<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'../../modules/classic.js'</span>
+
+<span class="token operator">//</span> 进行实例化
+let classicModel <span class="token operator">=</span> new ClassicModel<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">//</span>实例化
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>通过 <strong><code>new Model</code></strong> 实例化后使用</p>
+<pre class="line-numbers language-python"><code class="language-python">classicModel<span class="token punctuation">.</span>getLatest<span class="token punctuation">(</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>res<span class="token punctuation">)</span>  <span class="token operator">//</span>获取的数据
+    this<span class="token punctuation">.</span>setData<span class="token punctuation">(</span><span class="token punctuation">{</span>
+        classic<span class="token punctuation">:</span> res<span class="token punctuation">,</span> <span class="token operator">//</span> 数据绑定
+        <span class="token operator">//</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>res 扩展字符串 引用时去掉classic
+        likeStatus<span class="token punctuation">:</span> res<span class="token punctuation">.</span>like_status<span class="token punctuation">,</span>  <span class="token operator">//</span>页面初始化时数据渲染                   
+        likeCount<span class="token punctuation">:</span> res<span class="token punctuation">.</span>fav_nums
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 					
 				</div>
@@ -453,7 +577,7 @@ data<span class="token punctuation">:</span> <span class="token punctuation">{</
 				
 				
 				<!--toc(post.content)-->
-				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#小程序组件化实践"><span class="post-toc-text">小程序组件化实践</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1、初始化项目"><span class="post-toc-text">1、初始化项目</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-1、组件概述"><span class="post-toc-text">1.1、组件概述</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-2、Flex-布局与-rpx-设置"><span class="post-toc-text">1.2、Flex 布局与 rpx 设置</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2、自定义组件"><span class="post-toc-text">2、自定义组件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-1、自定义组件的-properties-属性与-data-属性"><span class="post-toc-text">2.1、自定义组件的 properties 属性与 data 属性</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-2、triggerEvent-触发事件"><span class="post-toc-text">2.2、triggerEvent 触发事件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-3、自定义组件生命周期"><span class="post-toc-text">2.3、自定义组件生命周期</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-4、observer-在设置月份上的运用"><span class="post-toc-text">2.4、observer 在设置月份上的运用</span></a></li></ol></li></ol>
+				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#小程序组件化实践"><span class="post-toc-text">小程序组件化实践</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1、初始化项目"><span class="post-toc-text">1、初始化项目</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-1、组件概述"><span class="post-toc-text">1.1、组件概述</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-2、Flex-布局与-rpx-设置"><span class="post-toc-text">1.2、Flex 布局与 rpx 设置</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2、自定义组件"><span class="post-toc-text">2、自定义组件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-1、自定义组件的-properties-属性与-data-属性"><span class="post-toc-text">2.1、自定义组件的 properties 属性与 data 属性</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-2、triggerEvent-触发事件"><span class="post-toc-text">2.2、triggerEvent 触发事件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-3、自定义组件生命周期"><span class="post-toc-text">2.3、自定义组件生命周期</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-4、observer-在设置月份上的运用"><span class="post-toc-text">2.4、observer 在设置月份上的运用</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3、小程序网络请求的封装"><span class="post-toc-text">3、小程序网络请求的封装</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-1、config-配置"><span class="post-toc-text">3.1、config 配置</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-2、封装网络请求-https"><span class="post-toc-text">3.2、封装网络请求 https</span></a></li></ol></li></ol>
 			</nav>
 			<div class="post-toc-bar"><div>
 		</div></div></aside>
