@@ -10,7 +10,7 @@
 		
 
 <head><meta name="generator" content="Hexo 3.8.0">
-	<title>JavaScript知识点</title>
+	<title>Web相关知识点</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="apple-mobile-web-app-title" content="Amaze UI">
@@ -55,14 +55,14 @@
 		
 		
 			
-			<p class="page-name">当前文章&nbsp;:&nbsp;《JavaScript知识点》</p>
+			<p class="page-name">当前文章&nbsp;:&nbsp;《Web相关知识点》</p>
 			
 		
 	
 	
 	<!-- others: such as change-bg, time... -->
 	<p class="page-name-other">
-		2/28/2019 
+		3/6/2019 
 		<style type="text/css">
 	header:after {
 		content: '';
@@ -156,7 +156,7 @@
 					
 	
 		<a href="/2018/12/29/JavaScript知识点/" itemprop="url">		
-			JavaScript知识点		
+			Web相关知识点		
 		</a>
 	
 
@@ -182,13 +182,10 @@
 			<div class="am-article-bd">
 				<div class="content" id="post-content">
 					
-						<hr>
-<p>title: 基础<br>date: 2019-01-24 17:36:13</p>
-<h2 id="tags"><a href="#tags" class="headerlink" title="tags:"></a>tags:</h2><h3 id="JavaScript-基础知识点"><a href="#JavaScript-基础知识点" class="headerlink" title="JavaScript 基础知识点"></a>JavaScript 基础知识点</h3><p>@[常考知识点] 个人总结于<a href="https://juejin.im/book/5bdc715fe51d454e755f75ef/section/5bdc715f6fb9a049c15ea4e0" target="_blank" rel="noopener">前端面试之道</a>，请支持正版</p>
+						<h3 id="JavaScript-基础知识点"><a href="#JavaScript-基础知识点" class="headerlink" title="JavaScript 基础知识点"></a>JavaScript 基础知识点</h3><p>@[常考知识点] 个人总结于<a href="https://juejin.im/book/5bdc715fe51d454e755f75ef/section/5bdc715f6fb9a049c15ea4e0" target="_blank" rel="noopener">前端面试之道</a>，请支持正版</p>
 <h4 id="基本数据（Primitive）类型"><a href="#基本数据（Primitive）类型" class="headerlink" title="基本数据（Primitive）类型"></a>基本数据（Primitive）类型</h4><blockquote>
-<p>基本数据类型有哪几种？null 是对象嘛？</p>
+<p>基本数据类型有哪几种？null 是对象嘛？<br>在 JS 中，存在着 6 种原始值，分别是:</p>
 </blockquote>
-<p>在 JS 中，存在着 6 种原始值，分别是:</p>
 <ul>
 <li><code>Boolean</code></li>
 <li><code>Null</code></li>
@@ -206,22 +203,23 @@
 <p>typeof 是否能正确判断类型？instanceof 能正确判断对象的原理是什么？</p>
 </blockquote>
 <p><code>typeof</code> 对于<strong>基本数据类型</strong>来说，除了 <code>null</code> 都可以显示正确的类型</p>
-<pre class="line-numbers language-python"><code class="language-python">typeof <span class="token number">1</span> <span class="token operator">//</span> <span class="token string">'number'</span>
-typeof <span class="token string">'1'</span> <span class="token operator">//</span> <span class="token string">'string'</span>
-typeof undefined <span class="token operator">//</span> <span class="token string">'undefined'</span>
-typeof true <span class="token operator">//</span> <span class="token string">'boolean'</span>
-typeof Symbol<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">//</span> <span class="token string">'symbol'</span>
+<pre class="line-numbers language-python"><code class="language-python">typeof <span class="token number">1</span>                    <span class="token operator">//</span> <span class="token string">'number'</span>
+typeof <span class="token string">'1'</span>                  <span class="token operator">//</span> <span class="token string">'string'</span>
+typeof undefined            <span class="token operator">//</span> <span class="token string">'undefined'</span>
+typeof true                 <span class="token operator">//</span> <span class="token string">'boolean'</span>
+typeof Symbol<span class="token punctuation">(</span><span class="token punctuation">)</span>             <span class="token operator">//</span> <span class="token string">'symbol'</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><code>typeof</code> 对于<strong>对象</strong>来说，除了函数都会显示 <code>object</code>，所以说 <code>typeof</code>并不能准确判断变量到底是什么类型</p>
-<pre class="line-numbers language-python"><code class="language-python">typeof <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">//</span> <span class="token string">'object'</span>
-typeof <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token operator">//</span> <span class="token string">'object'</span>
-typeof console<span class="token punctuation">.</span>log <span class="token operator">//</span> <span class="token string">'function'</span>
+<pre class="line-numbers language-python"><code class="language-python">typeof <span class="token punctuation">[</span><span class="token punctuation">]</span>                    <span class="token operator">//</span> <span class="token string">'object'</span>
+typeof <span class="token punctuation">{</span><span class="token punctuation">}</span>                    <span class="token operator">//</span> <span class="token string">'object'</span>
+typeof console<span class="token punctuation">.</span>log           <span class="token operator">//</span> <span class="token string">'function'</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>如果想判断一个对象的正确类型，这时候可以考虑使用 <code>instanceof</code>，因为内部机制是通过<strong>原型链</strong>来判断的 <code>instanceof操作符</code><strong>用来判断要检测对象的原型链上是否存在某个构造函数的 prototype 属性。</strong> 语法：<code>A instanceof B</code>，意思是<strong>对象 A 的原型是否是 B.prototype</strong>。如果是，返回 true，如果不是，返回 false。</p>
+<p>如果想判断一个对象的正确类型，这时候可以考虑使用 <code>instanceof</code>，因为内部机制是通过<strong>原型链</strong>来判断的 </p>
+<p><code>instanceof操作符</code><strong>用来判断要检测对象的原型链上是否存在某个构造函数的 prototype 属性。</strong> 语法：<code>A instanceof B</code>，意思是<strong>对象 A 的原型是否是 B.prototype</strong>。如果是，返回 true，如果不是，返回 false。</p>
 <pre class="line-numbers language-python"><code class="language-python">var a<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
 var b<span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>a instanceof Object<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">//</span>true
-console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>b instanceof Array<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">//</span>true
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>a instanceof Object<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token operator">//</span> true
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>b instanceof Array<span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token operator">//</span> true
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>对于基本数据类型来说，想直接通过 instanceof 来判断类型是不行的，当然还是有办法让 <code>instanceof</code>判断基本数据类型的</p>
 <pre class="line-numbers language-python"><code class="language-python">function textInstanceof<span class="token punctuation">(</span>left<span class="token punctuation">,</span> right<span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -235,12 +233,12 @@ console<span class="token punctuation">.</span>log<span class="token punctuation
             <span class="token keyword">return</span> false
         <span class="token keyword">if</span> <span class="token punctuation">(</span>prototype <span class="token operator">==</span><span class="token operator">=</span> left<span class="token punctuation">)</span>
             <span class="token keyword">return</span> true
-        left <span class="token operator">=</span> left<span class="token punctuation">.</span>__proto__
+            left <span class="token operator">=</span> left<span class="token punctuation">.</span>__proto__
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>textInstanceof<span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">,</span> String<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">//</span> false
-console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>textInstanceof<span class="token punctuation">(</span><span class="token string">'123'</span><span class="token punctuation">,</span> String<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">//</span> true
-console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>textInstanceof<span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">,</span> Number<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">//</span> true
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>textInstanceof<span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">,</span> String<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token operator">//</span> false
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>textInstanceof<span class="token punctuation">(</span><span class="token string">'123'</span><span class="token punctuation">,</span> String<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token operator">//</span> true
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>textInstanceof<span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">,</span> Number<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token operator">//</span> true
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h4 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h4><p>在 JS 中类型转换只有三种情况，分别是：</p>
 <ul>
@@ -261,10 +259,10 @@ console<span class="token punctuation">.</span>log<span class="token punctuation
 <li>运算中其中一方为字符串，那么就会把另一方也转换为字符串</li>
 <li>如果一方不是字符串或者数字，那么会将它转换为数字或者字符串</li>
 </ul>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token number">1</span> <span class="token operator">+</span> <span class="token string">'1'</span> <span class="token operator">//</span> <span class="token string">'11'</span>
-true <span class="token operator">+</span> true <span class="token operator">//</span> <span class="token number">2</span>
-<span class="token number">4</span> <span class="token operator">+</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">//</span> <span class="token string">"41,2,3"</span>
-<span class="token string">'a'</span> <span class="token operator">+</span> <span class="token operator">+</span> <span class="token string">'b'</span> <span class="token operator">//</span> <span class="token string">"aNaN"</span>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token number">1</span> <span class="token operator">+</span> <span class="token string">'1'</span>          <span class="token operator">//</span>  <span class="token string">'11'</span>
+true <span class="token operator">+</span> true      <span class="token operator">//</span>   <span class="token number">2</span>
+<span class="token number">4</span> <span class="token operator">+</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span>      <span class="token operator">//</span>   <span class="token string">"41,2,3"</span>
+<span class="token string">'a'</span> <span class="token operator">+</span> <span class="token operator">+</span> <span class="token string">'b'</span>      <span class="token operator">//</span>   <span class="token string">"aNaN"</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>因为<code>+ &#39;b&#39;</code>等于 <code>NaN</code>，所以结果为 <code>&quot;aNaN&quot;</code>，你可能也会在一些代码中看到过 + ‘1’ 的形式来快速获取 number 类型。</p>
 <h4 id="this"><a href="#this" class="headerlink" title="this"></a>this</h4><blockquote>
@@ -276,18 +274,20 @@ true <span class="token operator">+</span> true <span class="token operator">//<
 <span class="token punctuation">}</span>
 var a <span class="token operator">=</span> <span class="token number">1</span>
 foo<span class="token punctuation">(</span><span class="token punctuation">)</span>
-
 const obj <span class="token operator">=</span> <span class="token punctuation">{</span>
     a<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
     foo<span class="token punctuation">:</span> foo
 <span class="token punctuation">}</span>
-obj<span class="token punctuation">.</span>foo<span class="token punctuation">(</span><span class="token punctuation">)</span>
+obj<span class="token punctuation">.</span>foo<span class="token punctuation">(</span><span class="token punctuation">)</span>  
 const c <span class="token operator">=</span> new foo<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
-<li>对于直接调用<code>foo</code>来说，不管<code>foo</code> 函数被放在了什么地方，<code>this</code>一定是 <code>window</code></li>
-<li>对于 obj.foo() 来说，我们只需要记住，<strong><code>谁调用了函数，谁就是 this</code></strong>，所以在这个场景下 foo 函数中的 <code>this</code> 就是 obj 对象</li>
-<li>对于 <code>new</code>的方式来说，<code>this</code> 被永远绑定在了 <code>c</code>上面，不会被任何方式改变 <code>this</code></li>
+<li><p>对于直接调用<code>foo</code>来说，不管<code>foo</code> 函数被放在了什么地方，<code>this</code>一定是 <code>window</code></p>
+</li>
+<li><p>对于 obj.foo() 来说，我们只需要记住，<strong><code>谁调用了函数，谁就是 this</code></strong>，所以在这个场景下 foo 函数中的 <code>this</code> 就是 obj 对象</p>
+</li>
+<li><p>对于 <code>new</code>的方式来说，<code>this</code> 被永远绑定在了 <code>c</code>上面，不会被任何方式改变 <code>this</code></p>
+</li>
 </ul>
 <p><strong><code>箭头函数</code></strong> 其实是没有 <code>this</code> 的，箭头函数中的 <code>this</code>只取决包裹箭头函数的第一个普通函数的<code>this</code></p>
 <pre class="line-numbers language-python"><code class="language-python">function a<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -299,8 +299,45 @@ const c <span class="token operator">=</span> new foo<span class="token punctuat
 <span class="token punctuation">}</span>
 console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>a<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>在这个例子中，因为包裹箭头函数的第一个普通函数是<code>a</code>，所以此时的 <code>this</code>是<code>window</code>。另外 <strong>对箭头函数使用 <code>bind</code> 这类函数是无效的</strong>。</p>
-<p><img src="https://user-gold-cdn.xitu.io/2018/11/15/16717eaf3383aae8?imageslim" alt="图片"></p>
+<p>在这个例子中，因为包裹箭头函数的第一个普通函数是<code>a</code>，所以此时的 <code>this</code>是<code>window</code>。另外 <strong>对箭头函数使用 <code>bind</code> 这类函数是无效的</strong>。<br><img src="https://user-gold-cdn.xitu.io/2018/11/15/16717eaf3383aae8?imageslim" alt="图片"></p>
+<h4 id="堆、栈以及队列"><a href="#堆、栈以及队列" class="headerlink" title="堆、栈以及队列"></a>堆、栈以及队列</h4><h5 id="堆数据结构"><a href="#堆数据结构" class="headerlink" title="堆数据结构"></a>堆数据结构</h5><p><strong>堆</strong>数据结构是一种<strong>树状结构</strong>。它的存取数据的方式与书架和书非常相似。我们只需要知道书的名字就可以直接取出书了，并不需要把上面的书取出来。JSON格式的数据中，我们存储的<code>key-value</code>可以是无序的，因为顺序的不同并不影响我们的使用，我们只需要关心书的名字。</p>
+<h5 id="栈数据结构"><a href="#栈数据结构" class="headerlink" title="栈数据结构"></a>栈数据结构</h5><p><strong>栈</strong>，又叫<strong>堆栈</strong>，是和列表类似的一种数据结构，但是却更高效，因为栈内的元素只能通过列表的一端访问，称为<strong>栈顶</strong>，数据只能在栈顶添加或删除，如同一个装有羽毛球的球桶只能通过上放装入球，遵循 <strong>先入后出</strong>(LIFO，last-in-first-out) 的原则，普遍运用于计算机的方方面面。 对栈的操作主要有两种，一是将一个元素压入栈，<code>push</code>方法，另一个就是将栈顶元素出栈，<code>pop</code>方法。</p>
+<h5 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h5><p><strong>队列</strong>是一种 <strong>先进先出</strong>的数据结构，这是事件循环（Event Loop）的基础结构 </p>
+<h5 id="变量的存放"><a href="#变量的存放" class="headerlink" title="变量的存放"></a>变量的存放</h5><p>首先应该知道<strong>内存中有栈和堆</strong>，那么变量应该存放在哪里呢，堆？栈？ </p>
+<ul>
+<li><p><strong>基本数据类型:</strong> 保存在<strong>栈</strong>内存中，因为这些类型在内存中分别占有固定大小的空间，通过按值来访问。基本类型一共有6种：<code>Undefined</code>、<code>Null</code>、<code>Boolean</code>、<code>Number</code>、<code>String</code>和<code>Symbol</code></p>
+</li>
+<li><p><strong>引用数据类型:</strong> 保存在<strong>堆</strong>内存中，因为这种值的大小不固定，因此不能把它们保存到栈内存中，但<strong>内存地址</strong>是固定的，因此保存在堆内存中，在栈内存中存放的只是该对象的<strong>访问地址</strong>。当查询引用类型的变量时， <strong><code>先从栈中读取内存地址， 然后再通过地址找到堆中的值</code></strong>。 对于这种，我们把它叫做按引用访问。</p>
+</li>
+</ul>
+<p>在计算机的数据结构中，<strong>栈</strong>比<strong>堆</strong>的运算速度快，Object是一个复杂的结构且可以扩展：<strong>数组</strong>可扩充，<strong>对象</strong>可添加属性，都可以增删改查。将他们放在堆中是为了不影响栈的效率。而是通过引用的方式查找到堆中的实际对象再进行操作。所以查找引用类型值的时候先去 <strong><code>栈</code></strong> 查找再去 <strong><code>堆</code></strong> 查找。 </p>
+<h5 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h5><p>问题1： </p>
+<pre class="line-numbers language-python"><code class="language-python">var a <span class="token operator">=</span> <span class="token number">20</span><span class="token punctuation">;</span> 
+var b <span class="token operator">=</span> a<span class="token punctuation">;</span>
+b <span class="token operator">=</span> <span class="token number">30</span><span class="token punctuation">;</span> 
+<span class="token operator">//</span> 这时a的值是多少？ <span class="token number">20</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>a、b都是基本类型，它们的值是存储在 <strong>栈</strong> 中的，a、b分别有各自独立的栈空间，所以修改了b的值以后，a的值并不会发生变化</p>
+<p>问题2： </p>
+<pre class="line-numbers language-python"><code class="language-python">var a <span class="token operator">=</span> <span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token string">'前端开发'</span> <span class="token punctuation">}</span>
+var b <span class="token operator">=</span> a<span class="token punctuation">;</span> 
+b<span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">'进阶'</span><span class="token punctuation">;</span> 
+<span class="token operator">//</span> 这时a<span class="token punctuation">.</span>name的值是多少 进阶 
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>a、b都是引用类型，<code>栈内存中存放地址指向堆内存中的对象</code>，引用类型的复制会为新的变量自动分配一个新的值保存在变量对象中，但只是引用类型的一个<code>地址指针</code>而已，<code>实际指向的是同一个对象</code>，所以修改b.name的值后，相应的a.name也就发生了改变。</p>
+<p>问题3： </p>
+<pre class="line-numbers language-python"><code class="language-python">var a <span class="token operator">=</span> <span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token string">'前端开发'</span> <span class="token punctuation">}</span>
+var b <span class="token operator">=</span> a<span class="token punctuation">;</span> a <span class="token operator">=</span> null<span class="token punctuation">;</span>
+<span class="token operator">//</span> 这时b的值是多少
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>首先要说明的是<code>null</code>是基本类型，<code>a = null</code>之后只是把a存储在<code>栈</code>内存中地址改变成了基本类型null，并不会影响堆内存中的对象，所以b的值不受影响。</p>
+<p>问题4： </p>
+<pre class="line-numbers language-python"><code class="language-python">var a <span class="token operator">=</span> <span class="token punctuation">{</span>n<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">;</span> 
+var b <span class="token operator">=</span> a<span class="token punctuation">;</span>
+a<span class="token punctuation">.</span>x <span class="token operator">=</span> a <span class="token operator">=</span> <span class="token punctuation">{</span>n<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+a<span class="token punctuation">.</span>x <span class="token operator">//</span> undefined
+b<span class="token punctuation">.</span>x <span class="token operator">//</span> <span class="token punctuation">{</span>n<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">}</span> 
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h4 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h4><blockquote>
 <p>什么是闭包</p>
 </blockquote>
@@ -312,8 +349,8 @@ console<span class="token punctuation">.</span>log<span class="token punctuation
         console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>a<span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-A<span class="token punctuation">(</span><span class="token punctuation">)</span>
-B<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">//</span> <span class="token number">1</span>
+A<span class="token punctuation">(</span><span class="token punctuation">)</span>      <span class="token operator">//</span> undefined
+B<span class="token punctuation">(</span><span class="token punctuation">)</span>      <span class="token operator">//</span> <span class="token number">1</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><code>在 JS 中，闭包存在的意义就是让我们可以间接访问函数内部的变量。</code></p>
 <blockquote>
@@ -332,10 +369,11 @@ B<span class="token punctuation">(</span><span class="token punctuation">)</span
 <pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">for</span> <span class="token punctuation">(</span>var i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> <span class="token number">5</span><span class="token punctuation">;</span> i<span class="token operator">+</span><span class="token operator">+</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token punctuation">;</span><span class="token punctuation">(</span>function<span class="token punctuation">(</span>j<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         setTimeout<span class="token punctuation">(</span>function timer<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>j<span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> j <span class="token operator">*</span> <span class="token number">1000</span><span class="token punctuation">)</span>
+            console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>j<span class="token punctuation">)</span> 
+        <span class="token punctuation">}</span><span class="token punctuation">,</span> j <span class="token operator">*</span> <span class="token number">1000</span><span class="token punctuation">)</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>在上述代码中，我们首先使用了<strong>立即执行函数</strong>将 <code>i</code>传入函数内部，这个时候值就被固定在了参数 j 上面不会改变，当下次执行 <code>timer</code>这个<code>闭包</code>的时候，就可以使用外部函数的变量 j，从而达到目的。</p>
 <ul>
 <li>使用 <code>let</code></li>
@@ -345,8 +383,7 @@ B<span class="token punctuation">(</span><span class="token punctuation">)</span
         console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>i<span class="token punctuation">)</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span> i <span class="token operator">*</span> <span class="token number">1000</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
-
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h4 id="深浅拷贝"><a href="#深浅拷贝" class="headerlink" title="深浅拷贝"></a>深浅拷贝</h4><blockquote>
 <p>什么是浅拷贝？如何实现浅拷贝？什么是深拷贝？如何实现深拷贝？</p>
 </blockquote>
@@ -354,8 +391,7 @@ B<span class="token punctuation">(</span><span class="token punctuation">)</span
 <p><strong><code>深拷贝</code></strong>： 创建一个新的对象和数组，将原对象的各项属性的“值”（数组的所有元素）拷贝过来，<code>是“值”而不是“引用”</code></p>
 <ul>
 <li><p><strong>浅拷贝</strong></p>
-<p><strong>浅拷贝</strong>就是对<code>内存地址的复制</code>，让<code>目标对象指针</code>和<code>源对象</code>指向<code>同一片内存空间</code>.</p>
-<p>首先可以通过<code>Object.assign</code> 来解决浅拷贝，很多人认为这个函数是用来深拷贝的。其实并不是，<code>Object.assign</code>  只会拷贝所有的属性值到新的对象中，如果属性值是对象的话，拷贝的是地址，所以并不是深拷贝。</p>
+<p>  <strong>浅拷贝</strong>就是对<code>内存地址的复制</code>，让<code>目标对象指针</code>和<code>源对象</code>指向<code>同一片内存空间</code>.<br>首先可以通过<code>Object.assign</code> 来解决浅拷贝，很多人认为这个函数是用来深拷贝的。其实并不是，<code>Object.assign</code>  只会拷贝所有的属性值到新的对象中，如果属性值是对象的话，拷贝的是地址，所以并不是深拷贝。</p>
 </li>
 </ul>
 <pre class="line-numbers language-python"><code class="language-python">let a <span class="token operator">=</span> <span class="token punctuation">{</span>
@@ -363,14 +399,14 @@ B<span class="token punctuation">(</span><span class="token punctuation">)</span
 <span class="token punctuation">}</span>
 let b <span class="token operator">=</span> a
 a<span class="token punctuation">.</span>age <span class="token operator">=</span> <span class="token number">2</span>
-console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>b<span class="token punctuation">.</span>age<span class="token punctuation">)</span> <span class="token operator">//</span> <span class="token number">2</span>
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>b<span class="token punctuation">.</span>age<span class="token punctuation">)</span>           <span class="token operator">//</span> <span class="token number">2</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <pre class="line-numbers language-python"><code class="language-python">let a <span class="token operator">=</span> <span class="token punctuation">{</span>
     age<span class="token punctuation">:</span> <span class="token number">1</span>
 <span class="token punctuation">}</span>
 let b <span class="token operator">=</span> Object<span class="token punctuation">.</span>assign<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> a<span class="token punctuation">)</span>
 a<span class="token punctuation">.</span>age <span class="token operator">=</span> <span class="token number">2</span>
-console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>b<span class="token punctuation">.</span>age<span class="token punctuation">)</span> <span class="token operator">//</span> <span class="token number">1</span>
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>b<span class="token punctuation">.</span>age<span class="token punctuation">)</span>           <span class="token operator">//</span> <span class="token number">1</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>还可以通过<code>扩展运算符 ...</code>来实现<code>浅拷贝</code></p>
 <pre class="line-numbers language-python"><code class="language-python">let a <span class="token operator">=</span> <span class="token punctuation">{</span>
@@ -388,40 +424,40 @@ console<span class="token punctuation">.</span>log<span class="token punctuation
 </blockquote>
 <p>希望在改变新的数组（对象）的时候，<code>不改变原数组（对象)</code></p>
 <h5 id="深拷贝数组（只拷贝第一级数组元素）"><a href="#深拷贝数组（只拷贝第一级数组元素）" class="headerlink" title="深拷贝数组（只拷贝第一级数组元素）"></a>深拷贝数组（只拷贝第一级数组元素）</h5><h6 id="直接遍历"><a href="#直接遍历" class="headerlink" title="直接遍历"></a>直接遍历</h6><pre class="line-numbers language-python"><code class="language-python">let array <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-
 function copy<span class="token punctuation">(</span>array<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     let newArray <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
     <span class="token keyword">for</span> <span class="token punctuation">(</span>let item of array<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         newArray<span class="token punctuation">.</span>push<span class="token punctuation">(</span>item<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-    <span class="token keyword">return</span> newArray<span class="token punctuation">;</span>
+<span class="token keyword">return</span> newArray<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-let copyArray <span class="token operator">=</span> copy<span class="token punctuation">(</span>array<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
+let copyArray <span class="token operator">=</span> copy<span class="token punctuation">(</span>array<span class="token punctuation">)</span><span class="token punctuation">;</span>
 copyArray<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>array<span class="token punctuation">)</span><span class="token punctuation">;</span>                <span class="token operator">//</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span>
-console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>copyArray<span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token operator">//</span> <span class="token punctuation">[</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>array<span class="token punctuation">)</span><span class="token punctuation">;</span>             <span class="token operator">//</span>   <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span>
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>copyArray<span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token operator">//</span>   <span class="token punctuation">[</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h6 id="slice"><a href="#slice" class="headerlink" title="slice()"></a>slice()</h6><pre class="line-numbers language-python"><code class="language-python">let array <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 let copyArray <span class="token operator">=</span> array<span class="token punctuation">.</span>slice<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 copyArray<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>array<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">//</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span>
-console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>copyArray<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">//</span> <span class="token punctuation">[</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span>
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>array<span class="token punctuation">)</span><span class="token punctuation">;</span>              <span class="token operator">//</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span>
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>copyArray<span class="token punctuation">)</span><span class="token punctuation">;</span>          <span class="token operator">//</span> <span class="token punctuation">[</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><strong><code>slice() 方法</code></strong> : 返回一个从已有的数组中截取一部分元素片段组成的新数组（不改变原来的数组）<br>用法：array.slice(start,end)　 start 表示是起始元素的下标，end 表示的是终止元素的下标，当 slice()不带任何参数的时候，默认返回一个长度和原数组相同的新数组</p>
+<p><strong><code>slice() 方法</code></strong> : 已有的数组中返回选定的元素（不改变原来的数组）</p>
+<p>用法：<strong>array.slice(start,end)</strong>　 start 表示是起始元素的下标，end 表示的是终止元素的下标，当 slice()不带任何参数的时候，默认返回一个长度和原数组相同的新数组</p>
 <h6 id="concat"><a href="#concat" class="headerlink" title="concat()"></a>concat()</h6><pre class="line-numbers language-python"><code class="language-python">let array <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 let copyArray <span class="token operator">=</span> array<span class="token punctuation">.</span>concat<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 copyArray<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>array<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">//</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span>
-console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>copyArray<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">//</span> <span class="token punctuation">[</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span>
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>array<span class="token punctuation">)</span><span class="token punctuation">;</span>               <span class="token operator">//</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span>
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>copyArray<span class="token punctuation">)</span><span class="token punctuation">;</span>           <span class="token operator">//</span> <span class="token punctuation">[</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><strong><code>concat() 方法</code></strong> : 用于连接两个或多个数组。该方法不会改变现有的数组，而仅仅会返回被连接数组的一个副本。上面调用<code>concat</code>的时候没有带上参数，所以<code>let copyArray = array.concat();</code>实际上相当于<code>let copyArray = array.concat([]);</code>也即把返回数组和一个空数组合并后返回</p>
+<p><strong><code>concat() 方法</code></strong> : 用于连接两个或多个数组。该方法不会改变现有的数组，而仅仅会返回被连接数组的一个副本。</p>
+<p>上面调用<code>concat</code>的时候没有带上参数，所以<code>let copyArray = array.concat();</code>实际上相当于<code>let copyArray = array.concat([]);</code>也即把返回数组和一个空数组合并后返回</p>
 <p><strong>深拷贝数组（只拷贝第一级数组元素）</strong>，这里说的意思是对于一级数组元素是<code>基本类型变量（</code>如<code>number</code>,<code>String</code>,<code>boolean</code>）的简单数组, 上面这三种拷贝方式都能成功，但对第一级数组元素是对象或者数组等<code>引用类型变量</code>的数组，上面的三种方式都将失效。</p>
 <h5 id="深拷贝对象"><a href="#深拷贝对象" class="headerlink" title="深拷贝对象"></a>深拷贝对象</h5><h6 id="直接遍历-1"><a href="#直接遍历-1" class="headerlink" title="直接遍历"></a>直接遍历</h6><pre class="line-numbers language-python"><code class="language-python">let obj <span class="token operator">=</span> <span class="token punctuation">{</span>
     name<span class="token punctuation">:</span> <span class="token string">'Fate'</span><span class="token punctuation">,</span>
     job<span class="token punctuation">:</span> <span class="token string">'IT'</span>
 <span class="token punctuation">}</span>
-
 function copy<span class="token punctuation">(</span>obj<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     let newObj <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
     <span class="token keyword">for</span> <span class="token punctuation">(</span>let item <span class="token keyword">in</span> obj<span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -429,35 +465,30 @@ function copy<span class="token punctuation">(</span>obj<span class="token punct
     <span class="token punctuation">}</span>
     <span class="token keyword">return</span> newObj<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-
 let copyObj <span class="token operator">=</span> copy<span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span>
 copyObj<span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">'Fate HF'</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span>               <span class="token operator">//</span> <span class="token punctuation">{</span>name<span class="token punctuation">:</span> <span class="token string">"Fate"</span><span class="token punctuation">,</span> job<span class="token punctuation">:</span> <span class="token string">"IT"</span><span class="token punctuation">}</span>
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span>            <span class="token operator">//</span> <span class="token punctuation">{</span>name<span class="token punctuation">:</span> <span class="token string">"Fate"</span><span class="token punctuation">,</span> job<span class="token punctuation">:</span> <span class="token string">"IT"</span><span class="token punctuation">}</span>
 console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>copyObj<span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token operator">//</span> <span class="token punctuation">{</span>name<span class="token punctuation">:</span> <span class="token string">"Fate HF"</span><span class="token punctuation">,</span> job<span class="token punctuation">:</span> Object<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h6 id="Object-assign"><a href="#Object-assign" class="headerlink" title="Object.assign"></a>Object.assign</h6><pre class="line-numbers language-python"><code class="language-python">let obj <span class="token operator">=</span> <span class="token punctuation">{</span>
     name<span class="token punctuation">:</span> <span class="token string">'Fate'</span><span class="token punctuation">,</span>
     job<span class="token punctuation">:</span> <span class="token string">'IT'</span>
 <span class="token punctuation">}</span>
-
 let copyObj <span class="token operator">=</span> Object<span class="token punctuation">.</span>assign<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> obj<span class="token punctuation">)</span>
-
 copyObj<span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">'Fate HF'</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">//</span> <span class="token punctuation">{</span>name<span class="token punctuation">:</span> <span class="token string">"Fate"</span><span class="token punctuation">,</span> job<span class="token punctuation">:</span> <span class="token string">"IT"</span><span class="token punctuation">}</span>
-console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>copyObj<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">//</span> <span class="token punctuation">{</span>name<span class="token punctuation">:</span> <span class="token string">"Fate HF"</span><span class="token punctuation">,</span> job<span class="token punctuation">:</span> Object<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span>           <span class="token operator">//</span> <span class="token punctuation">{</span>name<span class="token punctuation">:</span> <span class="token string">"Fate"</span><span class="token punctuation">,</span> job<span class="token punctuation">:</span> <span class="token string">"IT"</span><span class="token punctuation">}</span>
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>copyObj<span class="token punctuation">)</span><span class="token punctuation">;</span>       <span class="token operator">//</span> <span class="token punctuation">{</span>name<span class="token punctuation">:</span> <span class="token string">"Fate HF"</span><span class="token punctuation">,</span> job<span class="token punctuation">:</span> Object<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong><code>Object.assign</code></strong> ：用于对象的合并，将源对象（source）的所有可枚举属性，复制到目标对象（target），并返回合并后的 target<br>用法： <code>Object.assign(target, source1, source2);</code>  所以 <code>copyObj = Object.assign({}, obj);</code> 这段代码将会把 obj 中的一级属性都拷贝到 ｛｝中，然后将其返回赋给 copyObj</p>
 <h6 id="扩展运算符-…"><a href="#扩展运算符-…" class="headerlink" title="扩展运算符 …"></a>扩展运算符 …</h6><pre class="line-numbers language-python"><code class="language-python">let obj <span class="token operator">=</span> <span class="token punctuation">{</span>
     name<span class="token punctuation">:</span> <span class="token string">'Fate'</span><span class="token punctuation">,</span>
     job<span class="token punctuation">:</span> <span class="token string">'IT'</span>
 <span class="token punctuation">}</span>
-
 let copyObj <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>obj <span class="token punctuation">}</span>
-
 copyObj<span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">'Fate HF'</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">//</span> <span class="token punctuation">{</span>name<span class="token punctuation">:</span> <span class="token string">"Fate"</span><span class="token punctuation">,</span> job<span class="token punctuation">:</span> <span class="token string">"IT"</span><span class="token punctuation">}</span>
-console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>copyObj<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">//</span> <span class="token punctuation">{</span>name<span class="token punctuation">:</span> <span class="token string">"Fate HF"</span><span class="token punctuation">,</span> job<span class="token punctuation">:</span> Object<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span>           <span class="token operator">//</span> <span class="token punctuation">{</span>name<span class="token punctuation">:</span> <span class="token string">"Fate"</span><span class="token punctuation">,</span> job<span class="token punctuation">:</span> <span class="token string">"IT"</span><span class="token punctuation">}</span>
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>copyObj<span class="token punctuation">)</span><span class="token punctuation">;</span>       <span class="token operator">//</span> <span class="token punctuation">{</span>name<span class="token punctuation">:</span> <span class="token string">"Fate HF"</span><span class="token punctuation">,</span> job<span class="token punctuation">:</span> Object<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong><code>扩展运算符（...）</code></strong> : 用于取出参数对象的所有可遍历属性，拷贝到当前对象之中</p>
 <h5 id="拷贝所有层级"><a href="#拷贝所有层级" class="headerlink" title="拷贝所有层级"></a>拷贝所有层级</h5><h6 id="JSON-parse-JSON-stringify-XXXX"><a href="#JSON-parse-JSON-stringify-XXXX" class="headerlink" title="JSON.parse(JSON.stringify(XXXX))"></a>JSON.parse(JSON.stringify(XXXX))</h6><p><strong>1. 不仅拷贝第一层级，还能够拷贝数组或对象所有层级的各项值</strong><br><strong>2. 不是单独针对数组或对象，而是能够通用于数组，对象和其他复杂的 JSON 形式的对象</strong></p>
 <pre class="line-numbers language-python"><code class="language-python">let array <span class="token operator">=</span> <span class="token punctuation">[</span>
@@ -465,74 +496,83 @@ console<span class="token punctuation">.</span>log<span class="token punctuation
     <span class="token punctuation">{</span> number<span class="token punctuation">:</span> <span class="token number">2</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">{</span> number<span class="token punctuation">:</span> <span class="token number">3</span> <span class="token punctuation">}</span>
 <span class="token punctuation">]</span><span class="token punctuation">;</span>
-
 let copyArray <span class="token operator">=</span> JSON<span class="token punctuation">.</span>parse<span class="token punctuation">(</span>JSON<span class="token punctuation">.</span>stringify<span class="token punctuation">(</span>array<span class="token punctuation">)</span><span class="token punctuation">)</span>
-
 copyArray<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>number <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>array<span class="token punctuation">)</span><span class="token punctuation">;</span>             <span class="token operator">//</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>number<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> number<span class="token punctuation">:</span> <span class="token number">2</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> number<span class="token punctuation">:</span> <span class="token number">3</span> <span class="token punctuation">}</span><span class="token punctuation">]</span>
-console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>copyArray<span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token operator">//</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>number<span class="token punctuation">:</span> <span class="token number">100</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> number<span class="token punctuation">:</span> <span class="token number">2</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> number<span class="token punctuation">:</span> <span class="token number">3</span> <span class="token punctuation">}</span><span class="token punctuation">]</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>array<span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token operator">//</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>number<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> number<span class="token punctuation">:</span> <span class="token number">2</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> number<span class="token punctuation">:</span> <span class="token number">3</span> <span class="token punctuation">}</span><span class="token punctuation">]</span>
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>copyArray<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">//</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>number<span class="token punctuation">:</span> <span class="token number">100</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> number<span class="token punctuation">:</span> <span class="token number">2</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> number<span class="token punctuation">:</span> <span class="token number">3</span> <span class="token punctuation">}</span><span class="token punctuation">]</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h4 id="var、let-及-const-区别"><a href="#var、let-及-const-区别" class="headerlink" title="var、let 及 const 区别"></a>var、let 及 const 区别</h4><blockquote>
 <p>什么是提升？什么是暂时性死区？var、let 及 const 区别？</p>
 </blockquote>
 <pre class="line-numbers language-python"><code class="language-python">console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>a<span class="token punctuation">)</span> <span class="token operator">//</span> undefined
 var a <span class="token operator">=</span> <span class="token number">1</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>从上述代码中我们可以发现，虽然<code>变量还没有被声明，但是我们却可以使用这个未被声明的变量</code>，这种情况就叫做<strong>提升</strong>，并且提升的是声明。即<code>声明提前</code></p>
-<p>上述代码可等同于</p>
+<p>从上述代码中我们可以发现，虽然<code>变量还没有被声明，但是我们却可以使用这个未被声明的变量</code>，这种情况就叫做<strong>提升</strong>，并且提升的是声明。即<code>声明提前</code><br>上述代码可等同于</p>
 <pre class="line-numbers language-python"><code class="language-python">var a
-console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>a<span class="token punctuation">)</span>  <span class="token operator">//</span> undefind
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>a<span class="token punctuation">)</span> <span class="token operator">//</span> undefind
 a <span class="token operator">=</span> <span class="token number">1</span>
-
 var a <span class="token operator">=</span> <span class="token number">10</span>
 var a
-console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>a<span class="token punctuation">)</span>  <span class="token operator">//</span> <span class="token number">10</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>a<span class="token punctuation">)</span> <span class="token operator">//</span> <span class="token number">10</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>又例如</p>
 <pre class="line-numbers language-python"><code class="language-python">console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>a<span class="token punctuation">)</span> <span class="token operator">//</span> ƒ a<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
 function a<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
 var a <span class="token operator">=</span> <span class="token number">1</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p><code>var</code>  声明的变量会被提升到作用域的顶部</p>
-<pre class="line-numbers language-python"><code class="language-python">
-var a <span class="token operator">=</span> <span class="token number">1</span>
+<pre class="line-numbers language-python"><code class="language-python">var a <span class="token operator">=</span> <span class="token number">1</span>
 let b <span class="token operator">=</span> <span class="token number">1</span>
 const c <span class="token operator">=</span> <span class="token number">1</span>
-console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>window<span class="token punctuation">.</span>b<span class="token punctuation">)</span> <span class="token operator">//</span> undefined
-console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>window<span class="token punctuation">.</span> c<span class="token punctuation">)</span> <span class="token operator">//</span> undefined
-
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>window<span class="token punctuation">.</span>b<span class="token punctuation">)</span>    <span class="token operator">//</span> undefined
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>window<span class="token punctuation">.</span> c<span class="token punctuation">)</span>   <span class="token operator">//</span> undefined
 function test<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>a<span class="token punctuation">)</span>  <span class="token operator">//</span> 报错 暂时性死区
+    console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>a<span class="token punctuation">)</span>       <span class="token operator">//</span> 报错 暂时性死区
     let a
 <span class="token punctuation">}</span>
 test<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>首先在全局作用域下使用<code>let</code>  和<code>const</code>声明变量，变量并不会被挂载到  <code>window</code>上，这一点就和  <code>var</code>声明有了区别。</p>
-<p>报错的原因是因为存在<code>暂时性死区</code>，不能在声明前就使用变量，因为<code>函数提升优先于变量提升.</code></p>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>首先在全局作用域下使用<code>let</code>  和<code>const</code>声明变量，变量并不会被挂载到  <code>window</code>上，这一点就和  <code>var</code>声明有了区别。<br>报错的原因是因为存在<code>暂时性死区</code>，不能在声明前就使用变量，因为<code>函数提升优先于变量提升.</code></p>
 <p>总结</p>
 <ul>
-<li>函数提升优先于变量提升，函数提升会把整个函数挪到作用域顶部，变量提升只会把声明挪到作用域顶部</li>
+<li><strong>函数提升优先于变量提升</strong>，函数提升会把整个函数挪到作用域顶部，变量提升只会把声明挪到作用域顶部</li>
 <li><code>var</code>存在提升，我们能在声明之前使用。<code>let</code>、<code>const</code>  因为暂时性死区的原因，不能在声明前使用</li>
 <li><code>var</code>  在全局作用域下声明变量会导致变量挂载在  <code>window</code>  上，其他两者不会</li>
 <li><code>let</code>  和  <code>const</code>  作用基本一致，但是后者声明的变量不能再次赋值</li>
 <li><code>let</code>、<code>const</code> 相同的变量名不能重复声明。</li>
 </ul>
+<h5 id="函数提升与变量提升"><a href="#函数提升与变量提升" class="headerlink" title="函数提升与变量提升"></a>函数提升与变量提升</h5><p>创建函数有两种形式，一种是<strong>函数声明</strong>，另外一种是<strong>函数字面量</strong>，但只有函数声明才有变量提升。</p>
+<pre class="line-numbers language-python"><code class="language-python">console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>a<span class="token punctuation">)</span>      <span class="token operator">//</span> f a<span class="token punctuation">(</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>b<span class="token punctuation">)</span>      <span class="token operator">//</span> undefined
+function a<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+var b <span class="token operator">=</span> function<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>b<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>相当于：</p>
+<pre class="line-numbers language-python"><code class="language-python">var a <span class="token operator">=</span> <span class="token string">'function'</span>
+var b
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>b<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <h4 id="原型继承和-Class-继承"><a href="#原型继承和-Class-继承" class="headerlink" title="原型继承和 Class 继承"></a>原型继承和 Class 继承</h4><blockquote>
 <p>原型如何实现继承？Class 如何实现继承？Class 本质是什么？</p>
 </blockquote>
-<p>在 <code>JS</code> 中并不存在<code>类</code>，<code>class</code>  只是语法糖，本质还是<code>函数</code>。</p>
+<p>在 <code>JS</code> 中并不存在<code>类</code>，<code>class</code>  只是语法糖，本质还是<code>函数</code></p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Person</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
 console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>Person instanceof Function<span class="token punctuation">)</span> <span class="token operator">//</span> true
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <h5 id="组合继承"><a href="#组合继承" class="headerlink" title="组合继承"></a>组合继承</h5><p>组合继承是常用的继承方式</p>
 <pre class="line-numbers language-python"><code class="language-python">function Parent<span class="token punctuation">(</span>value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    this<span class="token punctuation">.</span>val <span class="token operator">=</span> value
+this<span class="token punctuation">.</span>val <span class="token operator">=</span> value
 <span class="token punctuation">}</span>
 Parent<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>getValue <span class="token operator">=</span> function <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    console<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token string">'显示原型'</span><span class="token punctuation">,</span> this<span class="token punctuation">.</span>val<span class="token punctuation">)</span> <span class="token operator">//</span> <span class="token number">1</span>
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token string">'显示原型'</span><span class="token punctuation">,</span> this<span class="token punctuation">.</span>val<span class="token punctuation">)</span>    <span class="token operator">//</span> <span class="token number">1</span>
 <span class="token punctuation">}</span>
 function Child<span class="token punctuation">(</span>value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    Parent<span class="token punctuation">.</span>call<span class="token punctuation">(</span>this<span class="token punctuation">,</span> value<span class="token punctuation">)</span>  <span class="token operator">//</span> 继承父类的属性
+Parent<span class="token punctuation">.</span>call<span class="token punctuation">(</span>this<span class="token punctuation">,</span> value<span class="token punctuation">)</span>            <span class="token operator">//</span> 继承父类的属性
 <span class="token punctuation">}</span>
 Child<span class="token punctuation">.</span>prototype <span class="token operator">=</span> new Parent<span class="token punctuation">(</span><span class="token punctuation">)</span>
 const child <span class="token operator">=</span> new Child<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
@@ -541,8 +581,7 @@ console<span class="token punctuation">.</span>log<span class="token punctuation
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>以上继承的方式核心是在<strong>子类的构造函数</strong>中通过  <code>Parent.call(this)</code>继承父类的属性，<code>然后改变子类的原型为 new Parent() 来继承父类的函数</code>。这种继承方式优点在于构造函数可以传参，不会与父类引用属性共享，可以复用父类的函数，但是也存在一个缺点就是在继承父类函数的时候调用了父类构造函数，导致子类的原型上多了不需要的父类属性，存在内存上的浪费。</p>
 <p>ES6 中使用<code>Class</code>实现继承</p>
-<pre class="line-numbers language-python"><code class="language-python">
-<span class="token keyword">class</span> <span class="token class-name">Parent</span> <span class="token punctuation">{</span>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Parent</span> <span class="token punctuation">{</span>
     constructor<span class="token punctuation">(</span>value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         this<span class="token punctuation">.</span>val <span class="token operator">=</span> value
     <span class="token punctuation">}</span>
@@ -550,18 +589,16 @@ console<span class="token punctuation">.</span>log<span class="token punctuation
         console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>this<span class="token punctuation">.</span>val<span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-
 <span class="token keyword">class</span> <span class="token class-name">Child</span> extends Parent <span class="token punctuation">{</span>
     constructor<span class="token punctuation">(</span>value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         super<span class="token punctuation">(</span>value<span class="token punctuation">)</span>
         this<span class="token punctuation">.</span>val <span class="token operator">=</span> value
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-
 let child <span class="token operator">=</span> new Child<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
 child<span class="token punctuation">.</span>getValue<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">//</span> <span class="token number">1</span>
 console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>child instanceof Parent<span class="token punctuation">)</span> <span class="token operator">//</span> true
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><code>class</code>实现继承的核心在于使用<code>extends</code>  表明继承自哪个父类，并且在子类构造函数中必须调用<code>super</code>，因为这段代码可以看成  <code>Parent.call(this, value)</code>。当然了，之前也说了在 JS 中并不存在类，<code>class 的本质就是函数</code>。</p>
 <h4 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h4><blockquote>
 <p>为什么要使用模块化？都有哪几种方式可以实现模块化，各有什么特点？</p>
@@ -574,32 +611,32 @@ console<span class="token punctuation">.</span>log<span class="token punctuation
 </ul>
 <p>常用方式实现模块化：</p>
 <ul>
-<li><strong>立即执行函数</strong><br>在早期，使用立即执行函数实现模块化是常见的手段，通过<strong>函数作用域</strong>解决了命名冲突、污染全局作用域的问题<pre class="line-numbers language-python"><code class="language-python"><span class="token punctuation">(</span>function<span class="token punctuation">(</span>globalVariable<span class="token punctuation">)</span><span class="token punctuation">{</span>
+<li><strong>立即执行函数</strong><br>在早期，使用立即执行函数实现模块化是常见的手段，通过<strong>函数作用域</strong>解决了命名冲突、污染全局作用域的问题</li>
+</ul>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token punctuation">(</span>function<span class="token punctuation">(</span>globalVariable<span class="token punctuation">)</span><span class="token punctuation">{</span>
     globalVariable<span class="token punctuation">.</span>test <span class="token operator">=</span> function<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
     <span class="token operator">//</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> 声明各种变量、函数都不会污染全局作用域
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span>globalVariable<span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-<li><p><strong>CommonJS</strong><br>CommonJS 最早是 Node 在使用，目前也仍然广泛使用，比如在 Webpack 中你就能见到它</p>
+<ul>
+<li><strong>CommonJS</strong></li>
+</ul>
+<p>CommonJS 最早是 Node 在使用，目前也仍然广泛使用，比如在 Webpack 中你就能见到它</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token operator">//</span> a<span class="token punctuation">.</span>js
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
     a<span class="token punctuation">:</span> <span class="token number">1</span>
 <span class="token punctuation">}</span>
-
 <span class="token operator">//</span> <span class="token operator">or</span>
 exports<span class="token punctuation">.</span>a <span class="token operator">=</span> <span class="token number">1</span>
-
 <span class="token operator">//</span> b<span class="token punctuation">.</span>js
 var module <span class="token operator">=</span> require<span class="token punctuation">(</span><span class="token string">'./a.js'</span><span class="token punctuation">)</span>
 module<span class="token punctuation">.</span>a <span class="token operator">//</span> <span class="token operator">-</span><span class="token operator">></span> log <span class="token number">1</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-</ul>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h4 id="map、filter、reduce"><a href="#map、filter、reduce" class="headerlink" title="map、filter、reduce"></a>map、filter、reduce</h4><blockquote>
 <p>map、filter、reduce 各自有什么作用？</p>
 </blockquote>
 <p><code>map</code>作用是生成一个新数组，遍历原数组，将每个元素都拿出来做一些变换然后放入到新的数组中。</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">.</span>map<span class="token punctuation">(</span>v <span class="token operator">=</span><span class="token operator">></span> v<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span>   <span class="token operator">//</span> <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">]</span>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">.</span>map<span class="token punctuation">(</span>v <span class="token operator">=</span><span class="token operator">></span> v<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">//</span> <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">]</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>另外<code>map</code>的回调函数接受三个参数，分别是<code>当前元素</code>，<code>索引</code>，<code>原数组</code></p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token punctuation">[</span><span class="token string">'1'</span><span class="token punctuation">,</span><span class="token string">'2'</span><span class="token punctuation">,</span><span class="token string">'3'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>map<span class="token punctuation">(</span>parseInt<span class="token punctuation">)</span>
@@ -614,8 +651,7 @@ module<span class="token punctuation">.</span>a <span class="token operator">//<
 let newArray <span class="token operator">=</span> array<span class="token punctuation">.</span>filter<span class="token punctuation">(</span>item <span class="token operator">=</span><span class="token operator">></span> item <span class="token operator">!=</span><span class="token operator">=</span> <span class="token number">6</span><span class="token punctuation">)</span>
 console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>newArray<span class="token punctuation">)</span> <span class="token operator">//</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>和  <code>map</code>  一样，<code>filter</code>  的回调函数也接受三个参数，用处也相同。</p>
-<p><code>reduce</code>  可以将数组中的元素通过<code>回调函数</code>最终转换为一个值。</p>
+<p>和  <code>map</code>  一样，<code>filter</code>  的回调函数也接受三个参数，用处也相同。<code>reduce</code>  可以将数组中的元素通过<code>回调函数</code>最终转换为一个值。</p>
 <pre class="line-numbers language-python"><code class="language-python">const arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span>
 const sum <span class="token operator">=</span> arr<span class="token punctuation">.</span>reduce<span class="token punctuation">(</span><span class="token punctuation">(</span>acc<span class="token punctuation">,</span> current<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> acc <span class="token operator">+</span> current<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
 console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>sum<span class="token punctuation">)</span>
@@ -637,7 +673,8 @@ console<span class="token punctuation">.</span>log<span class="token punctuation
 <h4 id="回调函数（Callback）"><a href="#回调函数（Callback）" class="headerlink" title="回调函数（Callback）"></a>回调函数（Callback）</h4><blockquote>
 <p>什么是回调函数？回调函数有什么缺点？如何解决回调地狱问题？</p>
 </blockquote>
-<p><strong><code>回调函数：</code></strong> 被作为实参传入另一函数，并在该外部函数内被调用，用以来完成某些任务的函数，称为回调函数。<br>回调函数经常被用于继续执行一个<code>异步</code>完成后的操作，它们被称为 <strong><code>异步回调</code></strong></p>
+<p><strong><code>回调函数：</code></strong> 被作为实参传入另一函数，并在该外部函数内被调用，用以来完成某些任务的函数，称为回调函数。</p>
+<p>回调函数经常被用于继续执行一个<code>异步</code>完成后的操作，它们被称为 <strong><code>异步回调</code></strong></p>
 <p><strong>闭包</strong>： 闭包是指有权访问另一个函数作用域中的变量的函数</p>
 <pre class="line-numbers language-python"><code class="language-python">function A<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     let a <span class="token operator">=</span> <span class="token number">1</span>
@@ -647,42 +684,40 @@ console<span class="token punctuation">.</span>log<span class="token punctuation
     <span class="token keyword">return</span> B
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>闭包的定义很简单：函数 A 返回了一个函数 B，并且函数 B 中使用了函数 A 的变量，函数 B 就被称为闭包。</p>
-<p><strong>回调函数</strong>：<a href="https://developer.mozilla.org/zh-CN/docs/Glossary/Callback_function" target="_blank" rel="noopener">MDN</a>上解释为：被作为<strong>实参</strong>传入另一函数，并在该外部函数内被调用，用以来完成某些任务的函数，称为回调函数。</p>
+<p>闭包的定义很简单：函数 A 返回了一个函数 B，并且函数 B 中使用了函数 A 的变量，函数 B 就被称为闭包。<br><strong>回调函数</strong>：<a href="https://developer.mozilla.org/zh-CN/docs/Glossary/Callback_function" target="_blank" rel="noopener">MDN</a>上解释为：被作为<strong>实参</strong>传入另一函数，并在该外部函数内被调用，用以来完成某些任务的函数，称为回调函数。</p>
 <pre class="line-numbers language-python"><code class="language-python">ajax<span class="token punctuation">(</span>url<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
-         <span class="token operator">//</span> 处理逻辑
-    <span class="token punctuation">}</span>
-<span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token operator">//</span> 处理逻辑
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>但是回调函数有一个致命的弱点，就是容易写出回调地狱（Callback hell）</p>
 <pre class="line-numbers language-python"><code class="language-python">ajax<span class="token punctuation">(</span>url<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
     <span class="token operator">//</span> 处理逻辑
     ajax<span class="token punctuation">(</span>url1<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
-            <span class="token operator">//</span> 处理逻辑
+        <span class="token operator">//</span> 处理逻辑
         ajax<span class="token punctuation">(</span>url2<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
-                <span class="token operator">//</span> 处理逻辑
-         <span class="token punctuation">}</span><span class="token punctuation">)</span>
+            <span class="token operator">//</span> 处理逻辑
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>回调地狱的根本问题就是：</p>
 <ol>
 <li>嵌套函数存在耦合性，一旦有所改动，就会牵一发而动全身</li>
-<li>嵌套函数一多，就很难处理错误</li>
+<li>嵌套函数一多，就很难处理错误<br>当然，回调函数还存在着别的几个缺点，比如不能使用  <code>try catch</code>  捕获错误，不能<code>直接 return</code>，一般使用 <strong><code>promise</code></strong> 解决回调地狱的问题。</li>
 </ol>
-<p>当然，回调函数还存在着别的几个缺点，比如不能使用  <code>try catch</code>  捕获错误，不能<code>直接 return</code></p>
-<p>一般使用 <strong><code>promise</code></strong> 解决回调地狱的问题。</p>
 <pre class="line-numbers language-python"><code class="language-python">ajax<span class="token punctuation">(</span>url<span class="token punctuation">)</span>
     <span class="token punctuation">.</span>then<span class="token punctuation">(</span>res <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
         console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>res<span class="token punctuation">)</span>
         <span class="token keyword">return</span> ajax<span class="token punctuation">(</span>url1<span class="token punctuation">)</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span>then<span class="token punctuation">(</span>res <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
-    console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>res<span class="token punctuation">)</span>
-    <span class="token keyword">return</span> ajax<span class="token punctuation">(</span>url2<span class="token punctuation">)</span>
- <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span>then<span class="token punctuation">(</span>res <span class="token operator">=</span><span class="token operator">></span>
-    console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>res<span class="token punctuation">)</span>
-<span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span>then<span class="token punctuation">(</span>res <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>res<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> ajax<span class="token punctuation">(</span>url2<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span>then<span class="token punctuation">(</span>res <span class="token operator">=</span><span class="token operator">></span>
+        console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>res<span class="token punctuation">)</span>
+    <span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h4 id="async-及-await"><a href="#async-及-await" class="headerlink" title="async 及 await"></a>async 及 await</h4><blockquote>
 <p>async 及 await 的特点，它们的优点和缺点分别是什么？await 原理是什么？</p>
 </blockquote>
@@ -690,19 +725,17 @@ console<span class="token punctuation">.</span>log<span class="token punctuation
 <pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">async</span> function test<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">return</span> <span class="token string">'1'</span>
 <span class="token punctuation">}</span>
-console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>test<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>   <span class="token operator">//</span> <span class="token operator">-</span><span class="token operator">></span> Promise <span class="token punctuation">{</span><span class="token operator">&lt;</span>resolved<span class="token operator">></span><span class="token punctuation">:</span> <span class="token string">"1"</span><span class="token punctuation">}</span>
+console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>test<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>     <span class="token operator">//</span> <span class="token operator">-</span><span class="token operator">></span> Promise <span class="token punctuation">{</span><span class="token operator">&lt;</span>resolved<span class="token operator">></span><span class="token punctuation">:</span> <span class="token string">"1"</span><span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p><code>async</code>  就是将函数返回值使用  <code>Promise.resolve()</code>  包裹了下，和  <code>then</code>  中处理返回值一样，并且  <code>await</code>  只能配套  <code>async</code>  使用</p>
-<p><code>async</code>  和  <code>await</code>  可以说是异步终极解决方案了，相比直接使用  <code>Promise</code>  来说，<strong>优势在于处理  <code>then</code>的调用链，能够更清晰准确的写出代码</strong>，毕竟写一大堆  then  也很恶心，并且也<strong>能优雅地解决回调地狱问题</strong>。当然也存在一些缺点，因为  <code>await</code>  将异步代码改造成了<code>同步代码</code>，如果多个异步代码没有依赖性却使用了  await  会导致性能上的降低。</p>
+<p><code>async</code>  就是将函数返回值使用  <code>Promise.resolve()</code>  包裹了下，和  <code>then</code>  中处理返回值一样，并且  <code>await</code>  只能配套  <code>async</code>  使用<br><code>async</code>  和  <code>await</code>  可以说是异步终极解决方案了，相比直接使用  <code>Promise</code>  来说，<strong>优势在于处理  <code>then</code>的调用链，能够更清晰准确的写出代码</strong>，毕竟写一大堆  then  也很恶心，并且也<strong>能优雅地解决回调地狱问题</strong>。当然也存在一些缺点，因为  <code>await</code>  将异步代码改造成了<code>同步代码</code>，如果多个异步代码没有依赖性却使用了  <code>await</code>  会导致性能上的降低。</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">async</span> function test<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token operator">//</span> 以下代码没有依赖性的话，完全可以使用 Promise<span class="token punctuation">.</span>all 的方式
     <span class="token operator">//</span> 如果有依赖性的话，其实就是解决回调地狱的例子了
-
     <span class="token keyword">await</span> fetch<span class="token punctuation">(</span>url<span class="token punctuation">)</span>
     <span class="token keyword">await</span> fetch<span class="token punctuation">(</span>url1<span class="token punctuation">)</span>
     <span class="token keyword">await</span> fetch<span class="token punctuation">(</span>url2<span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h4 id="常用定时器"><a href="#常用定时器" class="headerlink" title="常用定时器"></a>常用定时器</h4><blockquote>
 <p>setTimeout、setInterval、requestAnimationFrame 各有什么特点？</p>
 </blockquote>
@@ -731,44 +764,37 @@ var intervalId <span class="token operator">=</span> window<span class="token pu
 <h5 id="requestAnimationFrame"><a href="#requestAnimationFrame" class="headerlink" title="requestAnimationFrame"></a>requestAnimationFrame</h5><p><strong>requestAnimationFrame</strong>: 专门为实现高性能的帧动画而设计的 API，但是不能指定延迟时间，而是根据浏览器的刷新频率而定（帧）</p>
 <pre class="line-numbers language-python"><code class="language-python">var requestId <span class="token operator">=</span> window<span class="token punctuation">.</span>requestAnimationFrame<span class="token punctuation">(</span>func<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h5 id="setTimeout-和-setInterval-的区别"><a href="#setTimeout-和-setInterval-的区别" class="headerlink" title="setTimeout 和 setInterval 的区别"></a>setTimeout 和 setInterval 的区别</h5><p>setTimeout 和 setInterval 仅仅在执行次数上有区别，setTimeout 一次、setInterval n 次</p>
+<h5 id="setTimeout-和-setInterval-的区别"><a href="#setTimeout-和-setInterval-的区别" class="headerlink" title="setTimeout 和 setInterval 的区别"></a>setTimeout 和 setInterval 的区别</h5><p>和 setInterval 仅仅在执行次数上有区别，setTimeout 一次、setInterval n 次</p>
 <h4 id="Event-Loop"><a href="#Event-Loop" class="headerlink" title="Event Loop"></a>Event Loop</h4><h5 id="进程与线程"><a href="#进程与线程" class="headerlink" title="进程与线程"></a>进程与线程</h5><blockquote>
 <p>JS 为什么是单线程的? 为什么需要异步? 单线程又是如何实现异步的呢?</p>
 </blockquote>
 <ul>
-<li><p>（1）JS 为什么是单线程的？</p>
-<p>JS 最初被设计用在浏览器中。如果假设浏览器中的 JS 是多线程的，那么现在有 2 个线程,process1 process2,由于是多线程的 JS,所以他们对同一个 dom,同时进行操作，process1 删除了该 dom,而 process2 编辑了该 dom,同时下达 2 个矛盾的命令,浏览器究竟该如何执行呢?</p>
-</li>
-<li><p>（2）JS 为什么需要异步？</p>
-<p> 如果 JS 中不存在异步,只能自上而下执行,如果上一行解析时间很长,那么下面的代码就会被阻塞。<br>对于用户而言,阻塞就意味着”卡死”,这样就导致了很差的用户体验<br>所以 JS 中存在异步执行</p>
-</li>
-<li><p>JS 单线程又是如何实现异步的呢？</p>
-<p><strong>是通过的事件循环(event loop),理解了 event loop 机制,就理解了 JS 的执行机制</strong></p>
-</li>
+<li>（1）JS 为什么是单线程的？</li>
 </ul>
+<p>最初被设计用在浏览器中。如果假设浏览器中的 JS 是多线程的，那么现在有 2 个线程,process1 process2,由于是多线程的 JS,所以他们对同一个 dom,同时进行操作，process1 删除了该 dom,而 process2 编辑了该 dom,同时下达 2 个矛盾的命令,浏览器究竟该如何执行呢?</p>
+<ul>
+<li>（2）JS 为什么需要异步？</li>
+</ul>
+<p>如果 JS 中不存在异步,只能自上而下执行,如果上一行解析时间很长,那么下面的代码就会被阻塞。对于用户而言,阻塞就意味着”卡死”,这样就导致了很差的用户体验,所以 JS 中存在异步执行</p>
+<ul>
+<li>JS 单线程又是如何实现异步的呢？</li>
+</ul>
+<p><strong>是通过的事件循环(event loop),理解了 event loop 机制,就理解了 JS 的执行机制</strong></p>
 <blockquote>
 <p>进程与线程的区别？JS 单线程带来的好处？</p>
 </blockquote>
-<p>JS 是<strong>单线程执行</strong>的。<strong>进程</strong>与<strong>线程</strong>，本质上来说，两个名词都是<strong>CPU 工作时间片</strong>的一个描述。</p>
-<p><strong><code>进程</code></strong> 描述了 <strong>CPU 在运行指令及加载和保存上下文所需的时间</strong>，放在应用上来说就代表了一个程序。<strong><code>线程</code> 是进程中的更小单位，描述了执行一段指令所需的时间</strong>。</p>
-<p>把这些概念拿到浏览器中来说，当打开一个 Tab 页时，其实就是创建了一个<strong>进程</strong>，一个进程中可以有<strong>多个线程</strong>，比如渲染线程、JS 引擎线程、HTTP 请求线程等等。当发起一个请求时，其实就是创建了一个线程，当请求结束后，该线程可能就会被销毁。上文说到了 JS 引擎线程和渲染线程，大家应该都知道，在 JS 运行的时候可能会阻止 UI 渲染，这说明了两个线程是互斥的。这其中的原因是因为 JS 可以修改 DOM，如果在 JS 执行的时候 UI 线程还在工作，就可能导致不能安全的渲染 UI。这其实也是一个<strong>单线程的好处</strong>，得益于 JS 是单线程运行的，可以达到<strong>节省内存，节约上下文切换时间，没有锁</strong>的问题的好处。当然前面两点在服务端中更容易体现，对于锁的问题，形象的来说就是当读取一个数字 15 的时候，同时有两个操作对数字进行了加减，这时候结果就出现了错误。解决这个问题也不难，只需要在读取的时候加锁，直到读取完毕之前都不能进行写入操作。</p>
+<p>JS 是<strong>单线程执行</strong>的。<strong>进程</strong>与<strong>线程</strong>，本质上来说，两个名词都是<strong>CPU 工作时间片</strong>的一个描述。<br><strong><code>进程</code></strong> 描述了 <strong>CPU 在运行指令及加载和保存上下文所需的时间</strong>，放在应用上来说就代表了一个程序。<strong><code>线程</code> 是进程中的更小单位，描述了执行一段指令所需的时间</strong>。<br>把这些概念拿到浏览器中来说，当打开一个 Tab 页时，其实就是创建了一个<strong>进程</strong>，一个进程中可以有<strong>多个线程</strong>，比如渲染线程、JS 引擎线程、HTTP 请求线程等等。当发起一个请求时，其实就是创建了一个线程，当请求结束后，该线程可能就会被销毁。上文说到了 JS 引擎线程和渲染线程，大家应该都知道，在 JS 运行的时候可能会阻止 UI 渲染，这说明了两个线程是互斥的。这其中的原因是因为 JS 可以修改 DOM，如果在 JS 执行的时候 UI 线程还在工作，就可能导致不能安全的渲染 UI。这其实也是一个<strong>单线程的好处</strong>，得益于 JS 是单线程运行的，可以达到<strong>节省内存，节约上下文切换时间，没有锁</strong>的问题的好处。当然前面两点在服务端中更容易体现，对于锁的问题，形象的来说就是当读取一个数字 15 的时候，同时有两个操作对数字进行了加减，这时候结果就出现了错误。解决这个问题也不难，只需要在读取的时候加锁，直到读取完毕之前都不能进行写入操作。</p>
 <h5 id="执行栈"><a href="#执行栈" class="headerlink" title="执行栈"></a>执行栈</h5><blockquote>
 <p>什么是执行栈？</p>
 </blockquote>
-<p><strong>执行栈 :</strong> 用于存储在代码执行期间创建的所有执行上下文，也可以认为是一个存储函数调用的<strong>栈结构</strong> ，<br>遵循<strong>先进后出</strong>的原则</p>
-<p><img src="https://user-gold-cdn.xitu.io/2018/11/13/1670d2d20ead32ec?imageslim" alt="执行栈"></p>
-<p>当开始执行 JS 代码时，首先会执行一个  <code>main 函数</code>，然后执行我们的代码。根据<code>先进后出</code>的原则，后执行的函数会先弹出栈，在图中我们也可以发现，foo  函数后执行，当执行完毕后就从栈中弹出了。</p>
-<p>当使用递归的时候，因为<strong>栈可存放的函数是有限制的</strong>，一旦存放了过多的函数且没有得到释放的话，就会出现爆栈的问题</p>
-<p><img src="https://user-gold-cdn.xitu.io/2018/11/13/1670c128acce975f?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="执行栈限制"></p>
+<p><strong>执行栈 :</strong> 用于存储在代码执行期间创建的所有执行上下文，也可以认为是一个存储函数调用的<strong>栈结构</strong> ，<br>遵循<strong>先进后出</strong>的原则<br><img src="https://user-gold-cdn.xitu.io/2018/11/13/1670d2d20ead32ec?imageslim" alt="执行栈"><br>当开始执行 JS 代码时，首先会执行一个  <code>main 函数</code>，然后执行我们的代码。根据<code>先进后出</code>的原则，后执行的函数会先弹出栈，在图中我们也可以发现，foo  函数后执行，当执行完毕后就从栈中弹出了。<br>当使用递归的时候，因为<strong>栈可存放的函数是有限制的</strong>，一旦存放了过多的函数且没有得到释放的话，就会出现爆栈的问题<br><img src="https://user-gold-cdn.xitu.io/2018/11/13/1670c128acce975f?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="执行栈限制"></p>
 <h5 id="浏览器中的-Event-Loop"><a href="#浏览器中的-Event-Loop" class="headerlink" title="浏览器中的 Event Loop"></a>浏览器中的 Event Loop</h5><blockquote>
 <p>异步代码执行顺序？什么是 Event Loop？</p>
 </blockquote>
-<p><strong>当执行 JS 代码的时候其实就是往执行栈中放入函数</strong>，那么遇到异步代码的时候该怎么办？其实当遇到<strong>异步代码</strong>时，<strong>会被挂起并在需要执行的时候加入到 Task（有多种 Task） 队列中。一旦执行栈为空，Event Loop 就会从 Task 队列中拿出需要执行的代码并放入执行栈中执行，所以本质上来说 JS 中的异步还是同步行为。</strong></p>
-<p><img src="https://user-gold-cdn.xitu.io/2018/11/23/16740fa4cd9c6937?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="事假循环"></p>
-<p>不同的任务源会被分配到不同的 <code>Task（任务）</code> 队列中，<strong>任务源</strong>可以分为  <strong>微任务（microtask）</strong> 和  <strong>宏任务（macrotask）</strong>。在 ES6 规范中， <strong>微任务（microtask）</strong> 称为  <code>jobs</code>， <strong>宏任务（macrotask）</strong>称为  <code>task</code></p>
+<p><strong>当执行 JS 代码的时候其实就是往执行栈中放入函数</strong>，那么遇到异步代码的时候该怎么办？其实当遇到<strong>异步代码</strong>时，<strong>会被挂起并在需要执行的时候加入到 Task（有多种 Task） 队列中。一旦执行栈为空，Event Loop 就会从 Task 队列中拿出需要执行的代码并放入执行栈中执行，所以本质上来说 JS 中的异步还是同步行为。</strong><br><img src="https://user-gold-cdn.xitu.io/2018/11/23/16740fa4cd9c6937?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="事假循环"><br>不同的任务源会被分配到不同的 <code>Task（任务）</code> 队列中，<strong>任务源</strong>可以分为  <strong>微任务（microtask）</strong> 和  **宏任务（macrotask）</p>
+<p><strong>。在 ES6 规范中， </strong>微任务（microtask）<strong> 称为  <code>jobs</code>， </strong>宏任务（macrotask）**称为  <code>task</code></p>
 <pre class="line-numbers language-python"><code class="language-python">console<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token string">'script start'</span><span class="token punctuation">)</span>
-
-<span class="token keyword">async</span> function async1<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">async</span> function async1<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">await</span> async2<span class="token punctuation">(</span><span class="token punctuation">)</span>
     console<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token string">'async1 end'</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
@@ -776,11 +802,9 @@ var intervalId <span class="token operator">=</span> window<span class="token pu
     console<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token string">'async2 end'</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
 async1<span class="token punctuation">(</span><span class="token punctuation">)</span>
-
 setTimeout<span class="token punctuation">(</span>function<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     console<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token string">'setTimeout'</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
-
 new Promise<span class="token punctuation">(</span>resolve <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
     console<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token string">'Promise'</span><span class="token punctuation">)</span>
     resolve<span class="token punctuation">(</span><span class="token punctuation">)</span>
@@ -791,14 +815,10 @@ new Promise<span class="token punctuation">(</span>resolve <span class="token op
 <span class="token punctuation">.</span>then<span class="token punctuation">(</span>function<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     console<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token string">'promise2'</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span>
-
 console<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token string">'script end'</span><span class="token punctuation">)</span>
-
-
 <span class="token operator">//</span> script start <span class="token operator">=</span><span class="token operator">></span> async2 end <span class="token operator">=</span><span class="token operator">></span> Promise <span class="token operator">=</span><span class="token operator">></span> script end <span class="token operator">=</span><span class="token operator">></span> promise1 <span class="token operator">=</span><span class="token operator">></span> promise2 <span class="token operator">=</span><span class="token operator">></span> async1 end <span class="token operator">=</span><span class="token operator">></span> setTimeout
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>首先先来解释下上述代码的  <code>async</code>  和  <code>await</code>  的执行顺序。当调用  <code>async1</code>  函数时，会马上输出  <code>async2 end</code>，并且函数返回一个  <code>Promise</code>，接下来在遇到  <code>await</code>的时候会就让出线程开始执行  <code>async1</code>  外的代码，所以完全可以把  <code>await</code>  看成是<strong>让出线程</strong>的标志。然后当<strong>同步代码</strong>全部执行完毕以后，就会去执行所有的异步代码，那么又会回到  <code>await</code>  的位置执行返回的  <code>Promise</code>  的  <code>resolve</code>  函数，这又会把  <code>resolve</code>  丢到微任务队列中，接下来去执行  <code>then</code>  中的回调，当两个  <code>then</code>  中的回调全部执行完毕以后，又会回到  <code>await</code>  的位置处理返回值，这时候可以看成是  <code>Promise.resolve(返回值).then()</code>，然后  <code>await</code>  后的代码全部被包裹进了  <code>then</code>  的回调中，所以  console.log(‘async1 end’)  会优先执行于  <code>setTimeout</code>。</p>
-<p>…….</p>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>首先先来解释下上述代码的  <code>async</code>  和  <code>await</code>  的执行顺序。当调用  <code>async1</code>  函数时，会马上输出  <code>async2 end</code>，并且函数返回一个  <code>Promise</code>，接下来在遇到  <code>await</code>的时候会就让出线程开始执行  <code>async1</code>  外的代码，所以完全可以把  <code>await</code>  看成是<strong>让出线程</strong>的标志。然后当<strong>同步代码</strong>全部执行完毕以后，就会去执行所有的异步代码，那么又会回到  <code>await</code>  的位置执行返回的  <code>Promise</code>  的  <code>resolve</code>  函数，这又会把  <code>resolve</code>  丢到微任务队列中，接下来去执行  <code>then</code>  中的回调，当两个  <code>then</code>  中的回调全部执行完毕以后，又会回到  <code>await</code>  的位置处理返回值，这时候可以看成是  <code>Promise.resolve(返回值).then()</code>，然后  <code>await</code>  后的代码全部被包裹进了  <code>then</code>  的回调中，所以  console.log(‘async1 end’)  会优先执行于  <code>setTimeout</code>。<br>…….</p>
 <p>所以<strong>Event Loop</strong>执行顺序如下所示：</p>
 <ul>
 <li>首先执行<strong>同步代码</strong>，这属于<strong>宏任务</strong></li>
@@ -808,12 +828,11 @@ console<span class="token punctuation">.</span>log<span class="token punctuation
 <li>然后开始下一轮 <code>Event Loop</code>，执行宏任务中的异步代码，也就是  <code>setTimeout</code>  中的回调函数</li>
 </ul>
 <p><img src="https://image-static.segmentfault.com/386/112/386112937-5a5763d9ef823_articlex" alt="事件循环"></p>
-<p><strong>异步任务中才包含宏任务和微任务</strong><br><strong><code>宏任务</code></strong> 包括： <code>script</code> ， <code>setTimeout</code> ，<code>setInterval</code> ，<code>setImmediate</code>，<code>I/O</code> ，<code>UI rendering（UI渲染）</code></p>
-<p><strong><code>微任务</code></strong> 包括： <code>process.nextTick</code> ，<code>promise</code> ，<code>MutationObserver</code></p>
+<p><strong>异步任务中才包含宏任务和微任务</strong></p>
+<p><strong><code>宏任务</code></strong> 包括： <code>script</code> ， <code>setTimeout</code> ，<code>setInterval</code> ，<code>setImmediate</code>，<code>I/O</code> ，<code>UI rendering（UI渲染）</code><br><strong><code>微任务</code></strong> 包括： <code>process.nextTick</code> ，<code>promise</code> ，<code>MutationObserver</code></p>
 <pre class="line-numbers language-python"><code class="language-python">setTimeout<span class="token punctuation">(</span>function<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     console<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token string">'定时器开始啦'</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
 new Promise<span class="token punctuation">(</span>function<span class="token punctuation">(</span>resolve<span class="token punctuation">)</span><span class="token punctuation">{</span>
     console<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token string">'马上执行for循环啦'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">for</span><span class="token punctuation">(</span>var i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">10000</span><span class="token punctuation">;</span> i<span class="token operator">+</span><span class="token operator">+</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
@@ -822,111 +841,14 @@ new Promise<span class="token punctuation">(</span>function<span class="token pu
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span>then<span class="token punctuation">(</span>function<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
     console<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token string">'执行then函数啦'</span><span class="token punctuation">)</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
 console<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token string">'代码执行结束'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token operator">//</span>  马上执行<span class="token keyword">for</span>循环啦 <span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span> 代码执行结束 <span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span> 执行then函数啦 <span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span> 定时器开始啦
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>解析执行机制，分析案例：</p>
-<p>首先执行<code>script</code>下的宏任务,遇到<code>setTimeout</code>,是<strong>异步任务</strong>，将其放到宏任务的【队列】里</p>
-<p>遇到 <code>new Promise</code>，是<code>同步任务</code>，直接执行,打印”马上执行 for 循环啦”</p>
-<p>遇到<code>then</code>方法，是<code>异步任务</code>,是微任务,将其放到微任务的【队列里】</p>
-<p>打印 “代码执行结束”</p>
-<p>本轮宏任务执行完毕,查看本轮的微任务,发现有一个<code>then</code>方法里的函数, 打印”执行 then 函数啦”</p>
-<p>到此,本轮的<code>event loop</code> 全部完成。</p>
-<h3 id="VUE-相关知识点"><a href="#VUE-相关知识点" class="headerlink" title="VUE 相关知识点"></a>VUE 相关知识点</h3><h4 id="MVVM"><a href="#MVVM" class="headerlink" title="MVVM"></a>MVVM</h4><blockquote>
-<p>什么是 MVVM？比之 MVC 有什么区别</p>
+<span class="token operator">//</span> 马上执行<span class="token keyword">for</span>循环啦 <span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span> 代码执行结束 <span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span> 执行then函数啦 <span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span> 定时器开始啦
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>解析执行机制，分析案例：<br>首先执行<code>script</code>下的宏任务,遇到<code>setTimeout</code>,是<strong>异步任务</strong>，将其放到宏任务的【队列】里<br>遇到 <code>new Promise</code>，是<code>同步任务</code>，直接执行,打印”马上执行 for 循环啦”<br>遇到<code>then</code>方法，是<code>异步任务</code>,是微任务,将其放到微任务的【队列里】<br>打印 “代码执行结束”<br>本轮宏任务执行完毕,查看本轮的微任务,发现有一个<code>then</code>方法里的函数, 打印”执行 then 函数啦”<br>到此,本轮的<code>event loop</code> 全部完成。</p>
+<h4 id="VUE相关知识点"><a href="#VUE相关知识点" class="headerlink" title="VUE相关知识点"></a>VUE相关知识点</h4><h5 id="MVVM"><a href="#MVVM" class="headerlink" title="MVVM"></a>MVVM</h5><blockquote>
+<p>什么是MVVM？比之MVC有什么区别</p>
 </blockquote>
-<p><strong>MVVM</strong>是<strong>Model-View-ViewModel</strong>的缩写。<code>mvvm</code>是一种设计思想。<code>Model 层</code>代表数据模型，也可以在<code>Model</code>中定义数据修改和操作的业务逻辑；<code>View</code> 代表<code>UI</code> 组件，它负责将数据模型转化成<code>UI</code> 展现出来，<code>ViewModel</code> 是一个同步 View 和 Model 的对象。</p>
-<p>通过 <code>ViewModel</code> 将视图中的<code>状态</code>和用户的<code>行为</code>分离出一个抽象，这才是 <code>MVVM</code>的精髓</p>
-<h4 id="路由原理"><a href="#路由原理" class="headerlink" title="路由原理"></a>路由原理</h4><blockquote>
-<p>前端路由原理？两种实现方式有什么区别？</p>
-</blockquote>
-<p><strong>前端路由</strong>实现起来其实很简单，本质就是<strong>监听 URL 的变化</strong>，然后匹配路由规则，显示相应的页面，并且无须刷新页面。目前前端使用的路由就只有两种实现方式</p>
-<ul>
-<li>Hash 模式</li>
-<li>History 模式</li>
-</ul>
-<h5 id="Hash-模式"><a href="#Hash-模式" class="headerlink" title="Hash 模式"></a>Hash 模式</h5><p><code>www.test.com/#/</code>  就是 <strong>Hash URL</strong>，当  <code>#</code>  后面的哈希值发生变化时，可以通过  <code>hashchange 事件</code>来监听到 <code>URL</code> 的变化，从而进行跳转页面，并且无论哈希值如何变化，服务端接收到的 <code>URL</code> 请求永远是  <code>www.test.com</code>。</p>
-<pre class="line-numbers language-python"><code class="language-python">window<span class="token punctuation">.</span>addEventListener<span class="token punctuation">(</span><span class="token string">'hashchange'</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">{</span>
-    <span class="token operator">//</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> 具体逻辑
-<span class="token punctuation">}</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>Hash 模式相对来说更简单，并且兼容性也更好。</p>
-<h5 id="History-模式"><a href="#History-模式" class="headerlink" title="History 模式"></a>History 模式</h5><p><strong>History 模式</strong>是 HTML5 新推出的功能，主要使用  <code>history.pushState</code>  和  <code>history.replaceState</code>  改变 <code>URL</code>。通过 History 模式改变 URL 同样不会引起页面的刷新，只会更新浏览器的历史记录。</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">//</span> 新增历史记录
-history<span class="token punctuation">.</span>pushState<span class="token punctuation">(</span>stateObject<span class="token punctuation">,</span> title<span class="token punctuation">,</span> URL<span class="token punctuation">)</span>
-
-<span class="token operator">//</span> 替换当前历史记录
-history<span class="token punctuation">.</span>replaceState<span class="token punctuation">(</span>stateObject<span class="token punctuation">,</span> title<span class="token punctuation">,</span> URL<span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>当用户做出浏览器动作时，比如点击<strong>后退按钮</strong>时会触发  <code>popState</code>  事件</p>
-<pre class="line-numbers language-python"><code class="language-python">window<span class="token punctuation">.</span>addEventListener<span class="token punctuation">(</span><span class="token string">'popstate'</span><span class="token punctuation">,</span> e <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
-    <span class="token operator">//</span> e<span class="token punctuation">.</span>state 就是 pushState<span class="token punctuation">(</span>stateObject<span class="token punctuation">)</span> 中的 stateObject                     console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>e<span class="token punctuation">.</span>state<span class="token punctuation">)</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<h5 id="Hash-模式与-History-模式对比"><a href="#Hash-模式与-History-模式对比" class="headerlink" title="Hash 模式与 History 模式对比"></a>Hash 模式与 History 模式对比</h5><ul>
-<li><code>Hash 模式</code>只可以更改  <code>#</code>  后面的内容，<code>History 模式</code>可以通过 <code>API</code> 设置任意的同源 <code>URL</code></li>
-<li><code>History 模式</code>可以通过 <code>API</code> 添加任意类型的数据到历史记录中，<code>Hash 模式</code>只能更改哈希值，也就是字符串</li>
-<li><code>Hash 模式</code>无需后端配置，并且兼容性好。<code>History 模式</code>在用户手动输入地址或者刷新页面的时候会发起 <code>URL</code> 请求，后端需要配置  <code>index.html</code>  页面用于匹配不到静态资源的时候</li>
-</ul>
-<h4 id="VUE-生命周期钩子函数"><a href="#VUE-生命周期钩子函数" class="headerlink" title="VUE 生命周期钩子函数"></a>VUE 生命周期钩子函数</h4><p>在  <code>beforeCreate</code>  钩子函数调用的时候，是获取不到  <code>props</code>  或者  <code>data</code>  中的数据的，因为这些数据的初始化都在  <code>initState</code>  中。</p>
-<p>然后会执行  <code>created</code>  钩子函数，在这一步的时候已经可以访问到之前不能访问到的数据，但是这时候组件还没被挂载，所以是看不到的。</p>
-<p>接下来会先执行  <code>beforeMount</code>  钩子函数，开始创建 <code>VDOM</code>，最后执行  <code>mounted</code>  钩子，并将 <code>VDOM</code> 渲染为真实 <code>DOM</code> 并且渲染数据。组件中如果有子组件的话，会递归挂载子组件，只有当所有子组件全部挂载完毕，才会执行根组件的挂载钩子。</p>
-<p>接下来是数据更新时会调用的钩子函数  <code>beforeUpdate</code>  和  <code>updated</code>，这两个钩子函数没什么好说的，就是分别在数据更新前和更新后会调用。</p>
-<p>另外还有  <code>keep-alive</code>  独有的生命周期，分别为  <code>activated</code>  和  <code>deactivated</code> 。用  <code>keep-alive</code>  包裹的组件在切换时不会进行销毁，而是缓存到内存中并执行  <code>deactivated</code>  钩子函数，命中缓存渲染后会执行  <code>actived</code>  钩子函数。</p>
-<p>最后就是销毁组件的钩子函数  <code>beforeDestroy</code>  和  <code>destroyed</code>。前者适合移除事件、定时器等等，否则可能会引起内存泄露的问题。然后进行一系列的销毁操作，如果有子组件的话，也会递归销毁子组件，所有子组件都销毁完毕后才会执行根组件的  <code>destroyed</code>  钩子函数。</p>
-<table>
-<thead>
-<tr>
-<th>生命周期钩子</th>
-<th>组件状态</th>
-<th>最佳实践</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>beforeCreate</td>
-<td>实例初始化后，<code>this</code>指向创建的实例，不能访问到<code>data</code>、<code>computed</code>、<code>watch</code>、<code>methods</code>上的数据和方法</td>
-<td>常用于初始化非响应式变量</td>
-</tr>
-<tr>
-<td>created</td>
-<td>实例创建完例成，可访问<code>data</code>、<code>computed</code>、<code>watch</code>、<code>methods</code>上的方法和数据，未挂载到<code>DOM</code>，不能访问到<code>$el</code>属性，<code>$ref</code>属性内容为空数组</td>
-<td>常用于简单的<code>ajax</code>请求，页面的初始化</td>
-</tr>
-<tr>
-<td>beforeMount</td>
-<td>在挂载开始之前被调用,开始创建 <code>VDOM</code>，最后执行  mounted  钩子，并将 <code>VDOM</code> 渲染为真实 <code>DOM</code> 并且渲染数据，<code>beforeMount</code>之前，会找到对应的<code>template</code>，并编译成<code>render</code>函数</td>
-<td>—</td>
-</tr>
-<tr>
-<td>mounted</td>
-<td>实例挂载到<code>DOM</code>上，此时可以通过<code>DOM API</code>获取到<code>DOM</code>节点，<code>$ref</code>属性可以访问</td>
-<td>常用于获取<code>VNode</code>信息和操作，<code>ajax</code>、<code>axios</code>请求</td>
-</tr>
-<tr>
-<td>beforeupdate</td>
-<td>响应数据更新时调用，发生在虚拟<code>VDOM</code>打补丁之前</td>
-<td>适合在更新之前访问现有的<code>DOM</code>，比如手动移出已添加的事件监听器</td>
-</tr>
-<tr>
-<td>updated</td>
-<td>虚拟<code>VDOM</code>重新渲染和打补丁之后调用，组件<code>DOM</code>已经跟新，可执行依赖于<code>DOM</code>的操作</td>
-<td>避免在这个钩子函数中操作数据，可能陷入死循环</td>
-</tr>
-<tr>
-<td>beforeDestroy</td>
-<td>实例销毁之前调用。这一步，实例任然完全可用，<code>this</code>仍能获取到实例</td>
-<td>常用于销毁定时器、解绑全局事件、销毁插件对象等操作</td>
-</tr>
-<tr>
-<td>destroyed</td>
-<td>实例销毁后调用，调用后，<code>Vue</code>实例指示的所有东西都会解绑，所有的事件监听器会被移出，所有的子实例也会被销毁</td>
-<td>—</td>
-</tr>
-</tbody>
-</table>
+<p><strong>MVVM</strong>是<strong>Model-View-ViewModel</strong>的缩写。<code>mvvm</code>是一种设计思想。<code>Model 层</code>代表数据模型，也可以在<code>Model</code>中定义数据修改和操作的业务逻辑；<code>View</code> 代表<code>UI</code> 组件，它负责将数据模型转化成<code>UI</code> 展现出来，<code>ViewModel</code> 是一个同步View 和 Model的对象。</p>
 
 					
 				</div>
@@ -1035,7 +957,7 @@ history<span class="token punctuation">.</span>replaceState<span class="token pu
 				
 				
 				<!--toc(post.content)-->
-				<ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#tags"><span class="post-toc-text">tags:</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#JavaScript-基础知识点"><span class="post-toc-text">JavaScript 基础知识点</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#基本数据（Primitive）类型"><span class="post-toc-text">基本数据（Primitive）类型</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#对象（Object）类型"><span class="post-toc-text">对象（Object）类型</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#typeof-vs-instanceof"><span class="post-toc-text">typeof vs instanceof</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#类型转换"><span class="post-toc-text">类型转换</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#转-Boolean"><span class="post-toc-text">转 Boolean</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#对象转基本类型"><span class="post-toc-text">对象转基本类型</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#四则运算符"><span class="post-toc-text">四则运算符</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#this"><span class="post-toc-text">this</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#闭包"><span class="post-toc-text">闭包</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#深浅拷贝"><span class="post-toc-text">深浅拷贝</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#深拷贝数组（只拷贝第一级数组元素）"><span class="post-toc-text">深拷贝数组（只拷贝第一级数组元素）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#直接遍历"><span class="post-toc-text">直接遍历</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#slice"><span class="post-toc-text">slice()</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#concat"><span class="post-toc-text">concat()</span></a></li></ol></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#深拷贝对象"><span class="post-toc-text">深拷贝对象</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#直接遍历-1"><span class="post-toc-text">直接遍历</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#Object-assign"><span class="post-toc-text">Object.assign</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#扩展运算符-…"><span class="post-toc-text">扩展运算符 …</span></a></li></ol></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#拷贝所有层级"><span class="post-toc-text">拷贝所有层级</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#JSON-parse-JSON-stringify-XXXX"><span class="post-toc-text">JSON.parse(JSON.stringify(XXXX))</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#var、let-及-const-区别"><span class="post-toc-text">var、let 及 const 区别</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#原型继承和-Class-继承"><span class="post-toc-text">原型继承和 Class 继承</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#组合继承"><span class="post-toc-text">组合继承</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#模块化"><span class="post-toc-text">模块化</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#map、filter、reduce"><span class="post-toc-text">map、filter、reduce</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#并发（concurrency）和并行（parallelism）区别"><span class="post-toc-text">并发（concurrency）和并行（parallelism）区别</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#回调函数（Callback）"><span class="post-toc-text">回调函数（Callback）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#async-及-await"><span class="post-toc-text">async 及 await</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#常用定时器"><span class="post-toc-text">常用定时器</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#setTimeout"><span class="post-toc-text">setTimeout</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#setInterval"><span class="post-toc-text">setInterval</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#requestAnimationFrame"><span class="post-toc-text">requestAnimationFrame</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#setTimeout-和-setInterval-的区别"><span class="post-toc-text">setTimeout 和 setInterval 的区别</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Event-Loop"><span class="post-toc-text">Event Loop</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#进程与线程"><span class="post-toc-text">进程与线程</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#执行栈"><span class="post-toc-text">执行栈</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#浏览器中的-Event-Loop"><span class="post-toc-text">浏览器中的 Event Loop</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#VUE-相关知识点"><span class="post-toc-text">VUE 相关知识点</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#MVVM"><span class="post-toc-text">MVVM</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#路由原理"><span class="post-toc-text">路由原理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Hash-模式"><span class="post-toc-text">Hash 模式</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#History-模式"><span class="post-toc-text">History 模式</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Hash-模式与-History-模式对比"><span class="post-toc-text">Hash 模式与 History 模式对比</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#VUE-生命周期钩子函数"><span class="post-toc-text">VUE 生命周期钩子函数</span></a></li></ol></li></ol></li></ol>
+				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#JavaScript-基础知识点"><span class="post-toc-text">JavaScript 基础知识点</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#基本数据（Primitive）类型"><span class="post-toc-text">基本数据（Primitive）类型</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#对象（Object）类型"><span class="post-toc-text">对象（Object）类型</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#typeof-vs-instanceof"><span class="post-toc-text">typeof vs instanceof</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#类型转换"><span class="post-toc-text">类型转换</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#转-Boolean"><span class="post-toc-text">转 Boolean</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#对象转基本类型"><span class="post-toc-text">对象转基本类型</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#四则运算符"><span class="post-toc-text">四则运算符</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#this"><span class="post-toc-text">this</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#堆、栈以及队列"><span class="post-toc-text">堆、栈以及队列</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#堆数据结构"><span class="post-toc-text">堆数据结构</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#栈数据结构"><span class="post-toc-text">栈数据结构</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#队列"><span class="post-toc-text">队列</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#变量的存放"><span class="post-toc-text">变量的存放</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#示例"><span class="post-toc-text">示例</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#闭包"><span class="post-toc-text">闭包</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#深浅拷贝"><span class="post-toc-text">深浅拷贝</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#深拷贝数组（只拷贝第一级数组元素）"><span class="post-toc-text">深拷贝数组（只拷贝第一级数组元素）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#直接遍历"><span class="post-toc-text">直接遍历</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#slice"><span class="post-toc-text">slice()</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#concat"><span class="post-toc-text">concat()</span></a></li></ol></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#深拷贝对象"><span class="post-toc-text">深拷贝对象</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#直接遍历-1"><span class="post-toc-text">直接遍历</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#Object-assign"><span class="post-toc-text">Object.assign</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#扩展运算符-…"><span class="post-toc-text">扩展运算符 …</span></a></li></ol></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#拷贝所有层级"><span class="post-toc-text">拷贝所有层级</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#JSON-parse-JSON-stringify-XXXX"><span class="post-toc-text">JSON.parse(JSON.stringify(XXXX))</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#var、let-及-const-区别"><span class="post-toc-text">var、let 及 const 区别</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#函数提升与变量提升"><span class="post-toc-text">函数提升与变量提升</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#原型继承和-Class-继承"><span class="post-toc-text">原型继承和 Class 继承</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#组合继承"><span class="post-toc-text">组合继承</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#模块化"><span class="post-toc-text">模块化</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#map、filter、reduce"><span class="post-toc-text">map、filter、reduce</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#并发（concurrency）和并行（parallelism）区别"><span class="post-toc-text">并发（concurrency）和并行（parallelism）区别</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#回调函数（Callback）"><span class="post-toc-text">回调函数（Callback）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#async-及-await"><span class="post-toc-text">async 及 await</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#常用定时器"><span class="post-toc-text">常用定时器</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#setTimeout"><span class="post-toc-text">setTimeout</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#setInterval"><span class="post-toc-text">setInterval</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#requestAnimationFrame"><span class="post-toc-text">requestAnimationFrame</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#setTimeout-和-setInterval-的区别"><span class="post-toc-text">setTimeout 和 setInterval 的区别</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Event-Loop"><span class="post-toc-text">Event Loop</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#进程与线程"><span class="post-toc-text">进程与线程</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#执行栈"><span class="post-toc-text">执行栈</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#浏览器中的-Event-Loop"><span class="post-toc-text">浏览器中的 Event Loop</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#VUE相关知识点"><span class="post-toc-text">VUE相关知识点</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#MVVM"><span class="post-toc-text">MVVM</span></a></li></ol></li></ol></li></ol>
 			</nav>
 			<div class="post-toc-bar"><div>
 		</div></div></aside>
