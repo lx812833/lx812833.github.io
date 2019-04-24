@@ -62,7 +62,7 @@
 	
 	<!-- others: such as change-bg, time... -->
 	<p class="page-name-other">
-		4/11/2019 
+		4/24/2019 
 		<style type="text/css">
 	header:after {
 		content: '';
@@ -177,7 +177,7 @@
 						
 							<i class="fa fa-tags"></i>
 							
-								<a href="#Vue" title="Vue" rel="9">Vue</a>&nbsp;
+								<a href="#Vue" title="Vue" rel="10">Vue</a>&nbsp;
 													 											
 						
 					</span>
@@ -207,7 +207,22 @@
 <li><strong><code>ref需要在DOM渲染完成后才会有</code></strong>，在使用的时候要确保<strong>DOM</strong>已经渲染完成。比如在生命周期  <strong><code>mounted(){} 钩子</code></strong> 中调用，或者在 <strong><code>this.$nextTick(()=&gt;{})</code></strong> 中调用</li>
 <li>如果 <strong><code>ref</code></strong> 是循环出来的，有多个重名，那么<strong><code>ref</code></strong> 的值会是一个数组  ，此时要拿到单个的 <strong><code>ref</code></strong> 只需要<strong>循环</strong>就可以了</li>
 <li>通过 <strong><code>this.$refs.name</code></strong> 调用已注册的 <code>ref</code>，甚至可以通过其父级组件定义方法：</li>
+<li>还可以通过 <strong><code>this.$refs.name</code></strong> 调用子组件已注册的方法</li>
 </ol>
+<p><strong>子组件</strong></p>
+<pre class="line-numbers language-python"><code class="language-python">methods<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    chooseImage<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p><strong>父组件</strong></p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token operator">&lt;</span>view  @tap<span class="token operator">=</span><span class="token string">"chooseImage"</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>upload<span class="token operator">-</span>image ref<span class="token operator">=</span><span class="token string">"uploadImage"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>upload<span class="token operator">-</span>image<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>view<span class="token operator">></span>
+
+chooseImage<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    this<span class="token punctuation">.</span>$refs<span class="token punctuation">.</span>uploadImage<span class="token punctuation">.</span>chooseImage<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 					
 				</div>

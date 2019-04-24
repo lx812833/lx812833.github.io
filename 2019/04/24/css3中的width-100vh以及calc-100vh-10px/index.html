@@ -10,7 +10,7 @@
 		
 
 <head><meta name="generator" content="Hexo 3.8.0">
-	<title>tag: Vuex</title>
+	<title>css3中的width:100vh以及calc(100vh + 10px)</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="apple-mobile-web-app-title" content="Amaze UI">
@@ -55,7 +55,7 @@
 		
 		
 			
-			<p class="page-name">标签</p>
+			<p class="page-name">当前文章&nbsp;:&nbsp;《css3中的width:100vh以及calc(100vh + 10px)》</p>
 			
 		
 	
@@ -144,80 +144,178 @@
 		<!-- content srart -->
 <div class="am-g am-g-fixed blog-fixed blog-content">
 	<div class="am-u-md-8 am-u-sm-12">
-		<div class="archive">
 
-			<div class="blog-text-center">
-				
-					<i class="fa fa-book">Vuex</i>
-				
-			</div>  
+		<article class="am-article blog-article-p">
 
-			
+			<div class="am-article-hd">
+				
 
-							
-				
-				
-				
+
+				<h1 class="am-article-title blog-text-center">
 					
+					
+	
+		<a href="/2019/04/24/css3中的width-100vh以及calc-100vh-10px/" itemprop="url">		
+			css3中的width:100vh以及calc(100vh + 10px)		
+		</a>
+	
+
+				</h1>
+
+				<p class="am-article-meta blog-text-center">
+					<span>
+						<i class="fa fa-clock-o"></i> 
+						<a href="/2019/04/24/css3中的width-100vh以及calc-100vh-10px/" itemprop="url">
+	<time datetime="2019-04-24T14:44:39.000Z" itemprop="datePublished">
+  		2019-04-24
+  </time>
+</a>    
+&nbsp;
+					</span>
+					
+					<span>						
+						
+							<i class="fa fa-tags"></i>
+							
+								<a href="#CSS3" title="CSS3" rel="2">CSS3</a>&nbsp;
+													 											
+						
+					</span>
+				</p>
+			</div>
+
+			<div class="am-article-bd">
+				<div class="content" id="post-content">
+					
+						<h4 id="定义与用法"><a href="#定义与用法" class="headerlink" title="定义与用法"></a>定义与用法</h4><p><strong>calc() 函数</strong>用于<strong>动态计算长度值</strong>, <code>calc</code>是英文单词calculate(计算)的缩写，是css3的一个新增的功能，用来指定元素的长度。比如说，可以使用<code>calc()</code>给元素的<code>border</code>、<code>margin</code>、<code>pading</code>、<code>font-size</code>和<code>width</code>等属性设置动态值。为何说是动态值呢?因为我们使用的表达式来得到的值。不过<code>calc()</code>最大的好处就是用在流体布局上，可以通过calc()计算得到元素的宽度。</p>
+<ul>
+<li>需要注意的是，运算符前后都需要保留一个空格，例如：width: calc(100% - 10px)；</li>
+<li>任何长度值都可以使用calc()函数进行计算；</li>
+<li>calc()函数支持 “+”, “-“, “*”, “/“ 运算；</li>
+<li>calc()函数使用标准的数学运算优先级规则；</li>
+</ul>
+<h4 id="vh-vw"><a href="#vh-vw" class="headerlink" title="vh/vw"></a>vh/vw</h4><p><strong>vh:</strong>  相对于视窗的高度, 视窗被均分为100单位的vh;<br><strong>vw:</strong>  相对于视窗的宽度, 视窗被均分为100单位的vw;</p>
+<p><strong>vmax:</strong>  相对于视窗的宽度或高度中较大的那个。其中最大的那个被均分为100单位的vmax;<br><strong>vmin:</strong>  相对于视窗的宽度或高度中较小的那个。其中最小的那个被均分为100单位的vmin; </p>
+<p><strong>视区</strong>所指为浏览器内部的可视区域大小，即<code>window.innerWidth/window.innerHeight</code>大小，不包含任务栏标题栏以及底部工具栏的浏览器区域大小。</p>
+<blockquote>
+<p><strong>calc(100vh - 10px)</strong> 表示整个浏览器窗口高度减去10px的大小<br><strong>calc(100vw - 10px)</strong>  表示整个浏览器窗口宽度减去10px的大小</p>
+</blockquote>
 
 					
-					<!--<a href="/archives/2018" class="archive-year">2018</a>-->
-				
-								
-				
-					  
-					<div class="archive-year">
-						<a href="/archives/2018/10">
-							2018-10
-						</a>
-					</div>				
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/10/27/真正掌握vuex的使用方法（三）/" itemprop="url">真正掌握vuex的使用方法（三）</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/10/27/真正掌握vuex的使用方法（三）/" itemprop="url">10-27</a>
-					</div>
-				</div>		        							
-							
-				
-				
-				
-								
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/10/27/真正掌握vuex的使用方法（二）/" itemprop="url">真正掌握vuex的使用方法（二）</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/10/27/真正掌握vuex的使用方法（二）/" itemprop="url">10-27</a>
-					</div>
-				</div>		        							
-							
-				
-				
-				
-								
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/10/27/真正掌握vuex的使用方法（一）/" itemprop="url">真正掌握Vuex的使用方法（一）</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/10/27/真正掌握vuex的使用方法（一）/" itemprop="url">10-27</a>
-					</div>
-				</div>		        							
-			
-				
-			    
-		</div>
-	</div>
+				</div>
+			</div>
+		</article>
+
+		<ul class="am-pagination">
+    
+    	<li class="am-pagination-prev">
+   		<a class="pull-left" href="/2019/04/24/实现页面的局部刷新-provide与inject/" title="实现页面的局部刷新 provide与inject">
+      		&laquo; 上一篇
+		</a>
+		</li>
+	
+	
+		<li class="am-pagination-next">
+		<a class="pull-right" href="/2019/04/11/props属性/" title="props属性">
+			下一篇 &raquo;
+		</a>
+		</li>
+	 
+ </ul>
+        
+
+		<div class="theme-annie-comment-button-container">
+	<button id="annie-comment-button" class="theme-annie-comment-button" onclick="Annie_Comment()">
+		加载评论
+		<!--加载评论-->
+	</button>
 </div>
 
+<div id="annie-comment-container" class="theme-annie-comment-main-container">
+
+	
+		
+			<!-- comment valine -->
+			<!-- show valine comment -->
+<div id="valineComment" class="comment"></div>
+
+<!-- valine`s js & css -->
+<script>
+	window.jQuery || document.write('<script src="/js/jquery-2.1.1.min.js"><\/script>')
+</script>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/js/valine.min.js"></script>
+<link rel="stylesheet" href="/css/comment.css">
+
+<script>
+	var checkExistComment = setInterval(function() {
+		if( $('#valineComment').length ) {
+			new Valine({
+				// AV 对象来自上面引入av-min.js(老司机们不要开车➳♡゛扎心了老铁)
+				av: AV,
+				//使用id寻找div元素（使用class可能找不到）
+				el: '#valineComment',
+				emoticon_url: 'https://cloud.panjunwen.com/alu',
+				emoticon_list: ["吐.png", "期待.png", "高兴.png", "吐血倒地.png", "哭泣.png", "欢呼.png"],
+				app_id: "3333....", //获取APP ID
+				app_key: "3333......", //获取APP KEY
+				placeholder: "no any!", //评论框占位提示文字        			
+			});
+			clearInterval(checkExistComment);
+		}
+	}, 100);
+</script>
+		
+	
+
+</div>
+
+<script type="text/javascript">
+	/* Show Comment */
+	var Annie_Comment = function() {
+		function Show_Hidden(obj) {
+			obj.style.display = 'block';
+		}
+		
+		//var obutton = $('#annie-comment-button');
+		//var obutton = $('#annie-comment-container');
+		var obutton = document.getElementById("annie-comment-button" || "0");
+		var odiv = document.getElementById("annie-comment-container");
+		if( 'obutton' ) {
+			obutton.onclick = function() {
+				Show_Hidden(odiv);
+				$("#annie-comment-button").css("display", 'none');
+				return false;
+			}
+		}
+	};
+
+	(function Annie_Init() {
+		Annie_Comment();
+	})();
+</script>
+		
+		<!--
+	时间：2018-09-24
+	描述：The TOC module refers to 'https://github.com/codefine/hexo-theme-mellow', include toc.ejs、toc.js、toc.css. All rights reserved by codefine. 
+-->
+
+	
+		<aside class="post-widget">
+			<nav class="post-toc-wrap" id="post-toc">
+				
+					<strong>文章目录</strong>
+				
+				
+				<!--toc(post.content)-->
+				<ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#定义与用法"><span class="post-toc-text">定义与用法</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#vh-vw"><span class="post-toc-text">vh/vw</span></a></li></ol>
+			</nav>
+			<div class="post-toc-bar"><div>
+		</div></div></aside>
+	
+
+	</div>
+</div>
 		</div>
 		</main>
 		
@@ -287,6 +385,11 @@
 	}
 </style>
 
+
+	<script src="/js/motto.js"></script>
+	<script type="text/javascript">
+		$(".motto").html(getMingYanContent());
+	</script>	
 
 
 
@@ -628,6 +731,8 @@
 
 
 
+
+	<script type="text/javascript" src="/js/toc.js"></script>
 
 
 <script type="text/javascript" src="/js/main.js"></script>
