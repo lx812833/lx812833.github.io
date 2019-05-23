@@ -10,7 +10,7 @@
 		
 
 <head><meta name="generator" content="Hexo 3.8.0">
-	<title>小程序图片上传至七牛云</title>
+	<title>CSS下划线两边细中间粗渐变</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="apple-mobile-web-app-title" content="Amaze UI">
@@ -55,7 +55,7 @@
 		
 		
 			
-			<p class="page-name">当前文章&nbsp;:&nbsp;《小程序图片上传至七牛云》</p>
+			<p class="page-name">当前文章&nbsp;:&nbsp;《CSS下划线两边细中间粗渐变》</p>
 			
 		
 	
@@ -155,8 +155,8 @@
 					
 					
 	
-		<a href="/2018/12/06/小程序图片上传至七牛云/" itemprop="url">		
-			小程序图片上传至七牛云		
+		<a href="/2019/05/23/CSS下划线两边细中间粗渐变/" itemprop="url">		
+			CSS下划线两边细中间粗渐变		
 		</a>
 	
 
@@ -165,9 +165,9 @@
 				<p class="am-article-meta blog-text-center">
 					<span>
 						<i class="fa fa-clock-o"></i> 
-						<a href="/2018/12/06/小程序图片上传至七牛云/" itemprop="url">
-	<time datetime="2018-12-06T12:00:24.000Z" itemprop="datePublished">
-  		2018-12-06
+						<a href="/2019/05/23/CSS下划线两边细中间粗渐变/" itemprop="url">
+	<time datetime="2019-05-23T11:44:38.000Z" itemprop="datePublished">
+  		2019-05-23
   </time>
 </a>    
 &nbsp;
@@ -177,7 +177,7 @@
 						
 							<i class="fa fa-tags"></i>
 							
-								<a href="#小程序" title="小程序" rel="1">小程序</a>&nbsp;
+								<a href="#CSS3" title="CSS3" rel="3">CSS3</a>&nbsp;
 													 											
 						
 					</span>
@@ -187,74 +187,35 @@
 			<div class="am-article-bd">
 				<div class="content" id="post-content">
 					
-						<h3 id="小程序图片上传至七牛云"><a href="#小程序图片上传至七牛云" class="headerlink" title="小程序图片上传至七牛云"></a>小程序图片上传至七牛云</h3><p>小程序图片上传至七牛云这些好处什么的就不哔哩哔哩的说了…..<br>具体步骤如下：</p>
-<h4 id="导入qiniuUploader-js"><a href="#导入qiniuUploader-js" class="headerlink" title="导入qiniuUploader.js"></a>导入qiniuUploader.js</h4><p>首先下载七牛云qiniuUploader.js 在需要上传图片的js中文件中引入</p>
-<pre class="line-numbers language-ruby"><code class="language-ruby">const qiniuUploader <span class="token operator">=</span> <span class="token keyword">require</span><span class="token punctuation">(</span><span class="token string">"../../../utils/qiniuUploader.js"</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h4 id="与后台对接获取token"><a href="#与后台对接获取token" class="headerlink" title="与后台对接获取token"></a>与后台对接获取token</h4><p>在onload函数中写请求，跟后端的接口对接，获取token</p>
-<pre class="line-numbers language-ruby"><code class="language-ruby"><span class="token operator">/</span><span class="token operator">/</span> 获取七牛云token
-<span class="token function">getToken</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  let cookie <span class="token operator">=</span> <span class="token string">"jeesite.session.id="</span> <span class="token operator">+</span> wx<span class="token punctuation">.</span><span class="token function">getStorageSync</span><span class="token punctuation">(</span><span class="token string">"cookieKey"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  wx<span class="token punctuation">.</span><span class="token function">request</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-    url<span class="token punctuation">:</span> config<span class="token punctuation">.</span>basicUrl <span class="token operator">+</span> <span class="token string">"fault/oaFault/upToken"</span><span class="token punctuation">,</span>
-    header<span class="token punctuation">:</span> <span class="token punctuation">{</span>
-      <span class="token constant">Cookie</span><span class="token punctuation">:</span> cookie
-    <span class="token punctuation">}</span><span class="token punctuation">,</span>
-    method<span class="token punctuation">:</span> <span class="token string">"POST"</span><span class="token punctuation">,</span>
-    success<span class="token punctuation">:</span> res <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
-       this<span class="token punctuation">.</span><span class="token function">setData</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-          uploadToken<span class="token punctuation">:</span> res<span class="token punctuation">.</span>data
-       <span class="token punctuation">}</span><span class="token punctuation">)</span>
-     <span class="token punctuation">}</span>
- <span class="token punctuation">}</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="图片选择途径"><a href="#图片选择途径" class="headerlink" title="图片选择途径"></a>图片选择途径</h4><pre class="line-numbers language-ruby"><code class="language-ruby"><span class="token operator">/</span><span class="token operator">/</span>图片选择
-<span class="token function">onChoise</span><span class="token punctuation">(</span>event<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  wx<span class="token punctuation">.</span><span class="token function">showActionSheet</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-    itemList<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"从相册中选择"</span><span class="token punctuation">,</span> <span class="token string">"拍照"</span><span class="token punctuation">,</span> <span class="token string">"取消"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-    success<span class="token punctuation">:</span> res <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
-      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>res<span class="token punctuation">.</span>cancel <span class="token operator">||</span> res<span class="token punctuation">.</span>tapIndex <span class="token operator">==</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-          <span class="token keyword">if</span> <span class="token punctuation">(</span>res<span class="token punctuation">.</span>tapIndex <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-             this<span class="token punctuation">.</span><span class="token function">chooseWxImage</span><span class="token punctuation">(</span><span class="token string">"album"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-          <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>res<span class="token punctuation">.</span>tapIndex <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-             this<span class="token punctuation">.</span><span class="token function">chooseWxImage</span><span class="token punctuation">(</span><span class="token string">"camera"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-          <span class="token punctuation">}</span>
-      <span class="token punctuation">}</span>
-   <span class="token punctuation">}</span>
- <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+						<h3 id="CSS下划线两边细中间粗渐变"><a href="#CSS下划线两边细中间粗渐变" class="headerlink" title="CSS下划线两边细中间粗渐变"></a>CSS下划线两边细中间粗渐变</h3><pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true">#title {</span>
+    position<span class="token punctuation">:</span> relative<span class="token punctuation">;</span>
+    width<span class="token punctuation">:</span> 500px<span class="token punctuation">;</span>
+    height<span class="token punctuation">:</span> 70px<span class="token punctuation">;</span>
+    font<span class="token operator">-</span>size<span class="token punctuation">:</span> 50px<span class="token punctuation">;</span>
+    font<span class="token operator">-</span>weight<span class="token punctuation">:</span> bold<span class="token punctuation">;</span>
+    color<span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+    margin<span class="token punctuation">:</span> 20px auto<span class="token punctuation">;</span>
+    text<span class="token operator">-</span>align<span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+    background<span class="token operator">-</span>color<span class="token punctuation">:</span> <span class="token comment" spellcheck="true">#fff;</span>
 <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="选择图片并上传到七牛云"><a href="#选择图片并上传到七牛云" class="headerlink" title="选择图片并上传到七牛云"></a>选择图片并上传到七牛云</h4><pre class="line-numbers language-ruby"><code class="language-ruby"><span class="token operator">/</span><span class="token operator">/</span>图片选择途径并上传到七牛云
-<span class="token function">chooseWxImage</span><span class="token punctuation">(</span>type<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  wx<span class="token punctuation">.</span><span class="token function">chooseImage</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-    count<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-    sizeType<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"original"</span><span class="token punctuation">,</span> <span class="token string">"compressed"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-    sourceType<span class="token punctuation">:</span> <span class="token punctuation">[</span>type<span class="token punctuation">]</span><span class="token punctuation">,</span>
-    success<span class="token punctuation">:</span> res <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
-    const filepath <span class="token operator">=</span> res<span class="token punctuation">.</span>tempFilePaths<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'filepath'</span><span class="token punctuation">,</span> filepath<span class="token punctuation">)</span>
-    <span class="token operator">/</span><span class="token operator">/</span> 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-    qiniuUploader<span class="token punctuation">.</span><span class="token function">upload</span><span class="token punctuation">(</span>filepath<span class="token punctuation">,</span> res <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>  <span class="token operator">/</span><span class="token operator">/</span> 七牛云提供的api
-    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'qiniuUploader.upload'</span><span class="token punctuation">,</span> res<span class="token punctuation">)</span>
-    this<span class="token punctuation">.</span><span class="token function">setData</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-    <span class="token operator">/</span><span class="token operator">/</span>注意这中间有个<span class="token string">"/"</span>
-        tempFilePaths<span class="token punctuation">:</span> <span class="token string">'http://pih3875s4.bkt.clouddn.com'</span> <span class="token operator">+</span> <span class="token string">"/"</span> <span class="token operator">+</span> res<span class="token punctuation">.</span>key
-    <span class="token punctuation">}</span><span class="token punctuation">)</span>
-        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'tempFilePaths'</span><span class="token punctuation">,</span> this<span class="token punctuation">.</span>data<span class="token punctuation">.</span>tempFilePaths<span class="token punctuation">)</span>
-    <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
-        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'error'</span> <span class="token operator">+</span> error<span class="token punctuation">)</span>
-    <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
-        region<span class="token punctuation">:</span> <span class="token string">'ECN'</span><span class="token punctuation">,</span>                         <span class="token operator">/</span><span class="token operator">/</span> 华东区
-        uploadURL<span class="token punctuation">:</span> <span class="token string">'https://up-z1.qbox.me/'</span><span class="token punctuation">,</span>   <span class="token operator">/</span><span class="token operator">/</span> 所在大区的地址
-        domain<span class="token punctuation">:</span> <span class="token string">'pih3875s4.bkt.clouddn.com'</span><span class="token punctuation">,</span>   <span class="token operator">/</span><span class="token operator">/</span> 外链默认域名
-        uptoken<span class="token punctuation">:</span> this<span class="token punctuation">.</span>data<span class="token punctuation">.</span>uploadToken         <span class="token operator">/</span><span class="token operator">/</span> 后端返回来的uptoken
-       <span class="token punctuation">}</span><span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
- <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token comment" spellcheck="true">#title::after {</span>
+    position<span class="token punctuation">:</span> absolute<span class="token punctuation">;</span>
+    content<span class="token punctuation">:</span> <span class="token string">''</span><span class="token punctuation">;</span>
+    z<span class="token operator">-</span>index<span class="token punctuation">:</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+    width<span class="token punctuation">:</span> <span class="token number">100</span><span class="token operator">%</span><span class="token punctuation">;</span>
+    height<span class="token punctuation">:</span> 2px<span class="token punctuation">;</span>
+    left<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    bottom<span class="token punctuation">:</span> <span class="token operator">-</span>2px<span class="token punctuation">;</span>
+    border<span class="token operator">-</span>radius<span class="token punctuation">:</span> <span class="token number">50</span><span class="token operator">%</span><span class="token punctuation">;</span>
+    background<span class="token punctuation">:</span> <span class="token operator">-</span>webkit<span class="token operator">-</span>linear<span class="token operator">-</span>gradient<span class="token punctuation">(</span>left<span class="token punctuation">,</span> <span class="token comment" spellcheck="true">#fff, red, #fff)</span>
 <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<span class="token operator">&lt;</span>div id<span class="token operator">=</span><span class="token string">"title"</span><span class="token operator">></span>
+    title 
+<span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="en-resource://database/703:0" alt="664d01828354e7fb92656fcde8e85cdf.png"></p>
 
 					
 				</div>
@@ -263,15 +224,9 @@
 
 		<ul class="am-pagination">
     
-    	<li class="am-pagination-prev">
-   		<a class="pull-left" href="/2018/12/11/Vue-js-Koa2移动电商实战/" title="Vue-js-Koa2移动电商实战">
-      		&laquo; 上一篇
-		</a>
-		</li>
-	
 	
 		<li class="am-pagination-next">
-		<a class="pull-right" href="/2018/11/13/JavaScript常用表单验证功能/" title="JavaScript常用表单验证功能">
+		<a class="pull-right" href="/2019/05/22/reduce等常用技巧/" title="reduce等常用技巧">
 			下一篇 &raquo;
 		</a>
 		</li>
@@ -363,7 +318,7 @@
 				
 				
 				<!--toc(post.content)-->
-				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#小程序图片上传至七牛云"><span class="post-toc-text">小程序图片上传至七牛云</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#导入qiniuUploader-js"><span class="post-toc-text">导入qiniuUploader.js</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#与后台对接获取token"><span class="post-toc-text">与后台对接获取token</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#图片选择途径"><span class="post-toc-text">图片选择途径</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#选择图片并上传到七牛云"><span class="post-toc-text">选择图片并上传到七牛云</span></a></li></ol></li></ol>
+				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#CSS下划线两边细中间粗渐变"><span class="post-toc-text">CSS下划线两边细中间粗渐变</span></a></li></ol>
 			</nav>
 			<div class="post-toc-bar"><div>
 		</div></div></aside>
