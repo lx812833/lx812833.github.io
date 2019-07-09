@@ -10,7 +10,7 @@
 		
 
 <head><meta name="generator" content="Hexo 3.8.0">
-	<title>category: 小程序</title>
+	<title>vue组件中将vuex获取的值保存到data中</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="apple-mobile-web-app-title" content="Amaze UI">
@@ -55,8 +55,8 @@
 		
 		
 			
-			<p class="page-name">分类</p>
-		
+			<p class="page-name">当前文章&nbsp;:&nbsp;《vue组件中将vuex获取的值保存到data中》</p>
+			
 		
 	
 	
@@ -144,65 +144,183 @@
 		<!-- content srart -->
 <div class="am-g am-g-fixed blog-fixed blog-content">
 	<div class="am-u-md-8 am-u-sm-12">
-		<div class="archive">
 
-			<div class="blog-text-center">
-				
-					<i class="fa fa-book">小程序</i>
-				
-			</div>  
+		<article class="am-article blog-article-p">
 
-			
+			<div class="am-article-hd">
+				
 
-							
-				
-				
-				
+
+				<h1 class="am-article-title blog-text-center">
 					
+					
+	
+		<a href="/2019/07/09/vue组件中将vuex获取的值保存到data中/" itemprop="url">		
+			vue组件中将vuex获取的值保存到data中		
+		</a>
+	
+
+				</h1>
+
+				<p class="am-article-meta blog-text-center">
+					<span>
+						<i class="fa fa-clock-o"></i> 
+						<a href="/2019/07/09/vue组件中将vuex获取的值保存到data中/" itemprop="url">
+	<time datetime="2019-07-09T14:47:09.000Z" itemprop="datePublished">
+  		2019-07-09
+  </time>
+</a>    
+&nbsp;
+					</span>
+					
+					<span>						
+						
+							<i class="fa fa-tags"></i>
+							
+								<a href="#Vuex" title="Vuex" rel="4">Vuex</a>&nbsp;
+													 											
+						
+					</span>
+				</p>
+			</div>
+
+			<div class="am-article-bd">
+				<div class="content" id="post-content">
+					
+						<h3 id="vue组件中如何用data保存vuex获取的值"><a href="#vue组件中如何用data保存vuex获取的值" class="headerlink" title="vue组件中如何用data保存vuex获取的值"></a>vue组件中如何用data保存vuex获取的值</h3><p>由于业务需要，需要将 <strong><code>vuex</code></strong> 中获取的值保存到<code>data</code>中，这需熟练使用vue钩子啊~</p>
+<ul>
+<li><p>组件初始化时使用 <strong><code>computed</code></strong> 获取<code>vuex</code>中的值</p>
+<pre class="line-numbers language-python"><code class="language-python">  computed<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      securityList<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">return</span> this<span class="token punctuation">.</span>$store<span class="token punctuation">.</span>state<span class="token punctuation">.</span>pandect<span class="token punctuation">.</span>securityList<span class="token punctuation">.</span>data<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>使用 <strong><code>watch</code></strong> 当<code>vuex</code>的<code>securityList</code>值变更时同步<code>data</code>属性</p>
+<pre class="line-numbers language-python"><code class="language-python">  data<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      secList<span class="token punctuation">:</span> this<span class="token punctuation">.</span>securityList<span class="token punctuation">,</span>
+  <span class="token punctuation">}</span>
+
+  watch<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      securityList<span class="token punctuation">(</span>newValue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          this<span class="token punctuation">.</span>secList <span class="token operator">=</span> newValue
+          <span class="token operator">//</span> this<span class="token punctuation">.</span>getDetailType<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  调用数据处理方法
+      <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+</ul>
 
 					
-					<!--<a href="/archives/2018" class="archive-year">2018</a>-->
-				
-								
-				
-					  
-					<div class="archive-year">
-						<a href="/archives/2018/12">
-							2018-12
-						</a>
-					</div>				
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/12/11/类与样式、template分组渲染/" itemprop="url">类与样式、template分组渲染</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/12/11/类与样式、template分组渲染/" itemprop="url">12-11</a>
-					</div>
-				</div>		        							
-							
-				
-				
-				
-								
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2018/12/06/小程序图片上传至七牛云/" itemprop="url">小程序图片上传至七牛云</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2018/12/06/小程序图片上传至七牛云/" itemprop="url">12-06</a>
-					</div>
-				</div>		        							
-			
-				
-			    
-		</div>
-	</div>
+				</div>
+			</div>
+		</article>
+
+		<ul class="am-pagination">
+    
+	
+		<li class="am-pagination-next">
+		<a class="pull-right" href="/2019/07/07/TypeScript-基础入门学习/" title="TypeScript 基础入门学习">
+			下一篇 &raquo;
+		</a>
+		</li>
+	 
+ </ul>
+        
+
+		<div class="theme-annie-comment-button-container">
+	<button id="annie-comment-button" class="theme-annie-comment-button" onclick="Annie_Comment()">
+		加载评论
+		<!--加载评论-->
+	</button>
 </div>
 
+<div id="annie-comment-container" class="theme-annie-comment-main-container">
+
+	
+		
+			<!-- comment valine -->
+			<!-- show valine comment -->
+<div id="valineComment" class="comment"></div>
+
+<!-- valine`s js & css -->
+<script>
+	window.jQuery || document.write('<script src="/js/jquery-2.1.1.min.js"><\/script>')
+</script>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/js/valine.min.js"></script>
+<link rel="stylesheet" href="/css/comment.css">
+
+<script>
+	var checkExistComment = setInterval(function() {
+		if( $('#valineComment').length ) {
+			new Valine({
+				// AV 对象来自上面引入av-min.js(老司机们不要开车➳♡゛扎心了老铁)
+				av: AV,
+				//使用id寻找div元素（使用class可能找不到）
+				el: '#valineComment',
+				emoticon_url: 'https://cloud.panjunwen.com/alu',
+				emoticon_list: ["吐.png", "期待.png", "高兴.png", "吐血倒地.png", "哭泣.png", "欢呼.png"],
+				app_id: "3333....", //获取APP ID
+				app_key: "3333......", //获取APP KEY
+				placeholder: "no any!", //评论框占位提示文字        			
+			});
+			clearInterval(checkExistComment);
+		}
+	}, 100);
+</script>
+		
+	
+
+</div>
+
+<script type="text/javascript">
+	/* Show Comment */
+	var Annie_Comment = function() {
+		function Show_Hidden(obj) {
+			obj.style.display = 'block';
+		}
+		
+		//var obutton = $('#annie-comment-button');
+		//var obutton = $('#annie-comment-container');
+		var obutton = document.getElementById("annie-comment-button" || "0");
+		var odiv = document.getElementById("annie-comment-container");
+		if( 'obutton' ) {
+			obutton.onclick = function() {
+				Show_Hidden(odiv);
+				$("#annie-comment-button").css("display", 'none');
+				return false;
+			}
+		}
+	};
+
+	(function Annie_Init() {
+		Annie_Comment();
+	})();
+</script>
+		
+		<!--
+	时间：2018-09-24
+	描述：The TOC module refers to 'https://github.com/codefine/hexo-theme-mellow', include toc.ejs、toc.js、toc.css. All rights reserved by codefine. 
+-->
+
+	
+		<aside class="post-widget">
+			<nav class="post-toc-wrap" id="post-toc">
+				
+					<strong>文章目录</strong>
+				
+				
+				<!--toc(post.content)-->
+				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#vue组件中如何用data保存vuex获取的值"><span class="post-toc-text">vue组件中如何用data保存vuex获取的值</span></a></li></ol>
+			</nav>
+			<div class="post-toc-bar"><div>
+		</div></div></aside>
+	
+
+	</div>
+</div>
 		</div>
 		</main>
 		
@@ -272,6 +390,11 @@
 	}
 </style>
 
+
+	<script src="/js/motto.js"></script>
+	<script type="text/javascript">
+		$(".motto").html(getMingYanContent());
+	</script>	
 
 
 
@@ -613,6 +736,8 @@
 
 
 
+
+	<script type="text/javascript" src="/js/toc.js"></script>
 
 
 <script type="text/javascript" src="/js/main.js"></script>
