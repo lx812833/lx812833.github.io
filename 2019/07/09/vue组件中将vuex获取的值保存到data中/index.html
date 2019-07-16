@@ -62,7 +62,7 @@
 	
 	<!-- others: such as change-bg, time... -->
 	<p class="page-name-other">
-		7/11/2019 
+		7/16/2019 
 		<style type="text/css">
 	header:after {
 		content: '';
@@ -192,7 +192,7 @@
 <li><p>组件初始化时使用 <strong><code>computed</code></strong> 获取<code>vuex</code>中的值</p>
 <pre class="line-numbers language-python"><code class="language-python">  computed<span class="token punctuation">:</span> <span class="token punctuation">{</span>
       securityList<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-          <span class="token keyword">return</span> this<span class="token punctuation">.</span>$store<span class="token punctuation">.</span>state<span class="token punctuation">.</span>pandect<span class="token punctuation">.</span>securityList<span class="token punctuation">.</span>data<span class="token punctuation">;</span>
+        <span class="token keyword">return</span> this<span class="token punctuation">.</span>$store<span class="token punctuation">.</span>state<span class="token punctuation">.</span>pandect<span class="token punctuation">.</span>securityList<span class="token punctuation">.</span>data<span class="token punctuation">;</span>
       <span class="token punctuation">}</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
@@ -203,14 +203,41 @@
   <span class="token punctuation">}</span>
 
   watch<span class="token punctuation">:</span> <span class="token punctuation">{</span>
-      securityList<span class="token punctuation">(</span>newValue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-          this<span class="token punctuation">.</span>secList <span class="token operator">=</span> newValue
-          <span class="token operator">//</span> this<span class="token punctuation">.</span>getDetailType<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  调用数据处理方法
+      securityList<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+          handler<span class="token punctuation">(</span>newValue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+               this<span class="token punctuation">.</span>secList <span class="token operator">=</span> newValue
+              <span class="token operator">//</span> this<span class="token punctuation">.</span>getDetailType<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  调用数据处理方法
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          immediate<span class="token punctuation">:</span> true<span class="token punctuation">,</span>
+          deep<span class="token punctuation">:</span> true
       <span class="token punctuation">}</span>
   <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>  <strong><code>immediate: true</code>代表如果在 <code>wacth</code> 里声明了 securityList 之后，就会立即先去执行里面的<code>handler</code>方法</strong></p>
+<p>  <strong><code>deep: true</code>代表深入监听，监听器会一层层的往下遍历，给对象的所有属性都加上这个监听器，但是这样性能开销就会非常大，任何修改对象里的任何一个属性都会触发这个监听器里的 <code>handler</code></strong></p>
 </li>
 </ul>
+<hr>
+<p>  优化，使用<strong>字符串监听</strong></p>
+<pre><code>```python
+data: {
+    obj: {
+        a: 123
+    }
+}
+
+watch: {
+    &#39;obj.a&#39;: {
+        handler(newName, oldName) {
+            console.log(&#39;obj.a changed&#39;);
+        },
+        immediate: true,
+        // deep: true
+    }
+}
+```
+</code></pre><hr>
+<p><strong><code>data 里直接 id: this.$store.state.user.fixedPollingId 获取vuex</code></strong></p>
 
 					
 				</div>
