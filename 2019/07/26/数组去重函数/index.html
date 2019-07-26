@@ -10,7 +10,7 @@
 		
 
 <head><meta name="generator" content="Hexo 3.8.0">
-	<title>Vue监听路由变化</title>
+	<title>数组去重函数</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="apple-mobile-web-app-title" content="Amaze UI">
@@ -55,7 +55,7 @@
 		
 		
 			
-			<p class="page-name">当前文章&nbsp;:&nbsp;《Vue监听路由变化》</p>
+			<p class="page-name">当前文章&nbsp;:&nbsp;《数组去重函数》</p>
 			
 		
 	
@@ -155,8 +155,8 @@
 					
 					
 	
-		<a href="/2018/10/30/Vue监听路由变化/" itemprop="url">		
-			Vue监听路由变化		
+		<a href="/2019/07/26/数组去重函数/" itemprop="url">		
+			数组去重函数		
 		</a>
 	
 
@@ -165,9 +165,9 @@
 				<p class="am-article-meta blog-text-center">
 					<span>
 						<i class="fa fa-clock-o"></i> 
-						<a href="/2018/10/30/Vue监听路由变化/" itemprop="url">
-	<time datetime="2018-10-30T13:50:48.000Z" itemprop="datePublished">
-  		2018-10-30
+						<a href="/2019/07/26/数组去重函数/" itemprop="url">
+	<time datetime="2019-07-26T14:06:32.000Z" itemprop="datePublished">
+  		2019-07-26
   </time>
 </a>    
 &nbsp;
@@ -177,7 +177,7 @@
 						
 							<i class="fa fa-tags"></i>
 							
-								<a href="#Vue" title="Vue" rel="10">Vue</a>&nbsp;
+								<a href="#JavaScript" title="JavaScript" rel="10">JavaScript</a>&nbsp;
 													 											
 						
 					</span>
@@ -187,17 +187,40 @@
 			<div class="am-article-bd">
 				<div class="content" id="post-content">
 					
-						<h3 id="Vue监听路由变化"><a href="#Vue监听路由变化" class="headerlink" title="Vue监听路由变化"></a>Vue监听路由变化</h3><p>@(Vue)</p>
-<p>当Vue监听路由变化，数据无法更新时，Vue-router官网，有这么一句话：提醒一下，<strong>当使用路由参数时，例如从 /user/foo 导航到 user/bar，原来的组件实例会被复用。因为两个路由都渲染同个组件，比起销毁再创建，复用则显得更加高效。</strong>不过，这也意味着组件的生命周期钩子不会再被调用。 意思很明显了：虽然路由参数发生了变化，但组件还是那个组件，Vue生命周期也还没结束，此时并不会刷新数据。<br>官网也提出了相应的解决方案：<strong>复用组件时，想对路由参数的变化作出响应的话，你可以简单地 watch（监测变化） $route 对象</strong></p>
-<p>用<strong>:key</strong>管理可复用的元素<br>：key是用来阻止“复用”的。  Vue 提供了一种方式来声明“这两个元素是完全独立的——不要复用它们”。<strong>只需添加一个具有唯一值的 key 属性即可(Vue文档原话)</strong></p>
-<pre class="line-numbers language-ruby"><code class="language-ruby"><span class="token operator">&lt;</span>router<span class="token operator">-</span>view <span class="token symbol">:key</span><span class="token operator">=</span><span class="token string">"key"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>router<span class="token operator">-</span>view<span class="token operator">></span>
-
-computed<span class="token punctuation">:</span> <span class="token punctuation">{</span>
-    <span class="token function">key</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-     <span class="token keyword">return</span> this<span class="token punctuation">.</span><span class="token variable">$route</span><span class="token punctuation">.</span>name <span class="token operator">!==</span> undefined<span class="token operator">?</span> this<span class="token punctuation">.</span><span class="token variable">$route</span><span class="token punctuation">.</span>name <span class="token operator">+</span><span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> this<span class="token punctuation">.</span><span class="token variable">$route</span> <span class="token operator">+</span><span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token punctuation">}</span>
+						<h3 id="数组去重函数"><a href="#数组去重函数" class="headerlink" title="数组去重函数"></a>数组去重函数</h3><p>对于一般的数组执行数组去重，较为常用的是Es6的 <code>new Set</code> 或 <code>扩展运算符...</code>，但数组中包含有较为复杂的元素如<code>嵌套数组、对象、null、undefined等</code>， 就较为苦恼了。</p>
+<ol>
+<li>判断对象</li>
+</ol>
+<pre class="line-numbers language-python"><code class="language-python">function isObject<span class="token punctuation">(</span>obj<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> Object<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>toString<span class="token punctuation">.</span>call<span class="token punctuation">(</span>obj<span class="token punctuation">)</span> <span class="token operator">==</span><span class="token operator">=</span> <span class="token string">'[object Object]'</span>
 <span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<ol start="2">
+<li>对象重整，对key进行排序</li>
+</ol>
+<pre class="line-numbers language-python"><code class="language-python">function parseObj<span class="token punctuation">(</span>obj<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    let keys <span class="token operator">=</span> Object<span class="token punctuation">.</span>keys<span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">.</span>sort<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    let newObj <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>let key of keys<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        obj<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> isObject<span class="token punctuation">(</span>obj<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">)</span> ? parseObj<span class="token punctuation">(</span>obj<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">:</span> obj<span class="token punctuation">[</span>key<span class="token punctuation">]</span>
+        newObj<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> key
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> newObj
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ol start="3">
+<li>数组去重</li>
+</ol>
+<pre class="line-numbers language-python"><code class="language-python">function passArr<span class="token punctuation">(</span>arr<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">[</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>new Set<span class="token punctuation">(</span>arr<span class="token punctuation">.</span>map<span class="token punctuation">(</span>item <span class="token operator">=</span><span class="token operator">></span>
+        isObject<span class="token punctuation">(</span>item<span class="token punctuation">)</span> ? JSON<span class="token punctuation">.</span>stringify<span class="token punctuation">(</span>parseObj<span class="token punctuation">(</span>item<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token punctuation">(</span>!item ? item <span class="token punctuation">:</span> JSON<span class="token punctuation">.</span>stringify<span class="token punctuation">(</span>item<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">.</span>map<span class="token punctuation">(</span>item <span class="token operator">=</span><span class="token operator">></span> !item ? item <span class="token punctuation">:</span> JSON<span class="token punctuation">.</span>parse<span class="token punctuation">(</span>item<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>For example</p>
+<pre class="line-numbers language-python"><code class="language-python">const arr1 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">'1'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> a<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span> b<span class="token punctuation">:</span> <span class="token string">"1"</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> b<span class="token punctuation">:</span> <span class="token string">'1'</span><span class="token punctuation">,</span> a<span class="token punctuation">:</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> a<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span> b<span class="token punctuation">:</span> <span class="token number">2</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">,</span> null<span class="token punctuation">,</span> undefined<span class="token punctuation">,</span> undefined<span class="token punctuation">]</span>
+const arr2 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">123</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"2"</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">"meili"</span><span class="token punctuation">]</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 					
 				</div>
@@ -206,15 +229,9 @@ computed<span class="token punctuation">:</span> <span class="token punctuation"
 
 		<ul class="am-pagination">
     
-    	<li class="am-pagination-prev">
-   		<a class="pull-left" href="/2018/11/01/Vue.nextTick()/" title="Vue.nextTick()">
-      		&laquo; 上一篇
-		</a>
-		</li>
-	
 	
 		<li class="am-pagination-next">
-		<a class="pull-right" href="/2018/10/29/async/" title="async">
+		<a class="pull-right" href="/2019/07/23/遍历-将深度对象转为简单对象/" title="遍历-- 将深度对象转为简单对象">
 			下一篇 &raquo;
 		</a>
 		</li>
@@ -306,7 +323,7 @@ computed<span class="token punctuation">:</span> <span class="token punctuation"
 				
 				
 				<!--toc(post.content)-->
-				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Vue监听路由变化"><span class="post-toc-text">Vue监听路由变化</span></a></li></ol>
+				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#数组去重函数"><span class="post-toc-text">数组去重函数</span></a></li></ol>
 			</nav>
 			<div class="post-toc-bar"><div>
 		</div></div></aside>
