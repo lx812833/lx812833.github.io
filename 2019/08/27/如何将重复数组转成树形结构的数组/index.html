@@ -10,7 +10,7 @@
 		
 
 <head><meta name="generator" content="Hexo 3.8.0">
-	<title>slot插槽</title>
+	<title>如何将重复数组转成树形结构的数组</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="apple-mobile-web-app-title" content="Amaze UI">
@@ -55,7 +55,7 @@
 		
 		
 			
-			<p class="page-name">当前文章&nbsp;:&nbsp;《slot插槽》</p>
+			<p class="page-name">当前文章&nbsp;:&nbsp;《如何将重复数组转成树形结构的数组》</p>
 			
 		
 	
@@ -155,8 +155,8 @@
 					
 					
 	
-		<a href="/2019/04/11/slot插槽/" itemprop="url">		
-			slot插槽		
+		<a href="/2019/08/27/如何将重复数组转成树形结构的数组/" itemprop="url">		
+			如何将重复数组转成树形结构的数组		
 		</a>
 	
 
@@ -165,9 +165,9 @@
 				<p class="am-article-meta blog-text-center">
 					<span>
 						<i class="fa fa-clock-o"></i> 
-						<a href="/2019/04/11/slot插槽/" itemprop="url">
-	<time datetime="2019-04-11T14:52:25.000Z" itemprop="datePublished">
-  		2019-04-11
+						<a href="/2019/08/27/如何将重复数组转成树形结构的数组/" itemprop="url">
+	<time datetime="2019-08-27T14:05:53.000Z" itemprop="datePublished">
+  		2019-08-27
   </time>
 </a>    
 &nbsp;
@@ -177,7 +177,7 @@
 						
 							<i class="fa fa-tags"></i>
 							
-								<a href="#Vue" title="Vue" rel="11">Vue</a>&nbsp;
+								<a href="#JavaScript" title="JavaScript" rel="13">JavaScript</a>&nbsp;
 													 											
 						
 					</span>
@@ -187,37 +187,32 @@
 			<div class="am-article-bd">
 				<div class="content" id="post-content">
 					
-						<h3 id="slot插槽"><a href="#slot插槽" class="headerlink" title="slot插槽"></a>slot插槽</h3><h4 id="普通插槽"><a href="#普通插槽" class="headerlink" title="普通插槽"></a>普通插槽</h4><p>父组件传递数据/元素/组件给子组件，子组件定义 <strong><slot></slot></strong> 占坑</p>
-<pre class="line-numbers language-python"><code class="language-python">子组件<span class="token punctuation">:</span>
-    <span class="token operator">&lt;</span>slot <span class="token operator">/</span><span class="token operator">></span>
-父组件<span class="token punctuation">:</span>
+						<h3 id="如何将重复数组转成树形结构的数组"><a href="#如何将重复数组转成树形结构的数组" class="headerlink" title="如何将重复数组转成树形结构的数组"></a>如何将重复数组转成树形结构的数组</h3><p>将<code>[{id: 1}, {id: 2, pId: 1}, ...]</code>的重复数组转为树形结构的数组<code>[{id: 1, child: [{id: 2, pId: 1}]}, ...]</code></p>
+<pre class="line-numbers language-python"><code class="language-python">const arr <span class="token operator">=</span>  <span class="token punctuation">[</span><span class="token punctuation">{</span>id<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>id<span class="token punctuation">:</span><span class="token number">2</span><span class="token punctuation">,</span> pId<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>id<span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">,</span> pId<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>id<span class="token punctuation">:</span> <span class="token number">4</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>id<span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">,</span> pId<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>id<span class="token punctuation">:</span> <span class="token number">5</span><span class="token punctuation">,</span> pId<span class="token punctuation">:</span> <span class="token number">4</span><span class="token punctuation">}</span><span class="token punctuation">]</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><code>arr.reduce</code> 去重且进行构建哈希表; 拷贝一下对象，避免修改原数组</p>
+<pre class="line-numbers language-python"><code class="language-python">const map <span class="token operator">=</span> arr<span class="token punctuation">.</span>reduce<span class="token punctuation">(</span><span class="token punctuation">(</span>res<span class="token punctuation">,</span> item<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">(</span><span class="token punctuation">(</span>res<span class="token punctuation">[</span>item<span class="token punctuation">.</span>id<span class="token punctuation">]</span> <span class="token operator">=</span> Object<span class="token punctuation">.</span>assign<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> item<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> res<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
 
-<span class="token operator">&lt;</span>SlotDemo<span class="token operator">></span>
-    <span class="token operator">&lt;</span>p<span class="token operator">></span>default slot<span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">></span>
-<span class="token operator">&lt;</span><span class="token operator">/</span>SlotDemo<span class="token operator">></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="作用域插槽"><a href="#作用域插槽" class="headerlink" title="作用域插槽"></a>作用域插槽</h4><p>子组件传递给父组件，子组件 <strong><slot></slot></strong> 绑定属性，传递 <strong>属性/参数</strong> 给父组件，父组件通过 <strong>slot-scope</strong> 接收子组件传递的属性</p>
-<pre class="line-numbers language-python"><code class="language-python">子组件<span class="token punctuation">:</span>
-    <span class="token operator">&lt;</span>slot name<span class="token operator">=</span><span class="token string">"title"</span> <span class="token operator">/</span><span class="token operator">></span>
-    <span class="token operator">&lt;</span>slot name<span class="token operator">=</span><span class="token string">"item"</span> v<span class="token operator">-</span>bind<span class="token operator">=</span><span class="token string">"{ value: 'vue' }"</span> <span class="token operator">/</span><span class="token operator">></span>
-父组件<span class="token punctuation">:</span>
-
-<span class="token number">2.6</span>新语法：
-
-    <span class="token operator">&lt;</span>template v<span class="token operator">-</span>slot<span class="token punctuation">:</span>title<span class="token operator">></span>
-        <span class="token operator">&lt;</span>p<span class="token operator">></span>title slot1<span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">></span>
-        <span class="token operator">&lt;</span>p<span class="token operator">></span>title slot2<span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">></span>
-    <span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">></span>
-    <span class="token operator">&lt;</span>template v<span class="token operator">-</span>slot<span class="token punctuation">:</span>item<span class="token operator">=</span><span class="token string">"props"</span><span class="token operator">></span>
-        <span class="token operator">&lt;</span>p<span class="token operator">></span>item slot<span class="token operator">-</span>scope <span class="token punctuation">{</span><span class="token punctuation">{</span> props <span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">></span>
-    <span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">></span>
-
-老语法：
-
-  <span class="token operator">&lt;</span>p slot<span class="token operator">=</span><span class="token string">"title"</span><span class="token operator">></span>title slot1<span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">></span>
-  <span class="token operator">&lt;</span>p slot<span class="token operator">=</span><span class="token string">"title"</span><span class="token operator">></span>title slot2<span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">></span>
-  <span class="token operator">&lt;</span>p slot<span class="token operator">=</span><span class="token string">"item"</span> slot<span class="token operator">-</span>scope<span class="token operator">=</span><span class="token string">"props"</span><span class="token operator">></span>item slot<span class="token operator">-</span>scope <span class="token punctuation">{</span><span class="token punctuation">{</span> props <span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-python"><code class="language-python">function transformTree<span class="token punctuation">(</span>arr<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    let res <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    let map <span class="token operator">=</span> arr<span class="token punctuation">.</span>reduce<span class="token punctuation">(</span><span class="token punctuation">(</span>pre<span class="token punctuation">,</span> item<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>   <span class="token operator">//</span>去重且进行构建哈希表
+        pre<span class="token punctuation">[</span>item<span class="token punctuation">.</span>id<span class="token punctuation">]</span> <span class="token operator">=</span> item<span class="token punctuation">;</span>
+        <span class="token keyword">return</span> pre<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+    console<span class="token punctuation">.</span>log<span class="token punctuation">(</span>map<span class="token punctuation">)</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>let item of Object<span class="token punctuation">.</span>values<span class="token punctuation">(</span>map<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>!item<span class="token punctuation">.</span>pId<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            res<span class="token punctuation">.</span>push<span class="token punctuation">(</span>item<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            const parent <span class="token operator">=</span> map<span class="token punctuation">[</span>item<span class="token punctuation">.</span>pId<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            parent<span class="token punctuation">.</span>child <span class="token operator">=</span> parent<span class="token punctuation">.</span>child <span class="token operator">|</span><span class="token operator">|</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>  <span class="token operator">//</span>当这个元素没有时指向一个数组并将该孩子元素增加进去含有有自己孩子时采用本来的child数组，
+            parent<span class="token punctuation">.</span>child<span class="token punctuation">.</span>push<span class="token punctuation">(</span>item<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> res<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 					
 				</div>
@@ -226,15 +221,9 @@
 
 		<ul class="am-pagination">
     
-    	<li class="am-pagination-prev">
-   		<a class="pull-left" href="/2019/04/11/props属性/" title="props属性">
-      		&laquo; 上一篇
-		</a>
-		</li>
-	
 	
 		<li class="am-pagination-next">
-		<a class="pull-right" href="/2019/04/11/计算属性computed与/" title="计算属性computed与$forceUpdate()">
+		<a class="pull-right" href="/2019/08/05/两个数组合并为一个数组/" title="两个数组合并为一个数组">
 			下一篇 &raquo;
 		</a>
 		</li>
@@ -326,7 +315,7 @@
 				
 				
 				<!--toc(post.content)-->
-				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#slot插槽"><span class="post-toc-text">slot插槽</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#普通插槽"><span class="post-toc-text">普通插槽</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#作用域插槽"><span class="post-toc-text">作用域插槽</span></a></li></ol></li></ol>
+				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#如何将重复数组转成树形结构的数组"><span class="post-toc-text">如何将重复数组转成树形结构的数组</span></a></li></ol>
 			</nav>
 			<div class="post-toc-bar"><div>
 		</div></div></aside>
