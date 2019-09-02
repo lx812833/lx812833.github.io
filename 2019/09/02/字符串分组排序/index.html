@@ -10,7 +10,7 @@
 		
 
 <head><meta name="generator" content="Hexo 3.8.0">
-	<title>文章归档: 2019/4</title>
+	<title>字符串分组排序</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="apple-mobile-web-app-title" content="Amaze UI">
@@ -55,9 +55,8 @@
 		
 		
 			
-			<!-- && is_current('archives/index.html') -->
-			<p class="page-name">文章归档</p>
-		
+			<p class="page-name">当前文章&nbsp;:&nbsp;《字符串分组排序》</p>
+			
 		
 	
 	
@@ -145,110 +144,169 @@
 		<!-- content srart -->
 <div class="am-g am-g-fixed blog-fixed blog-content">
 	<div class="am-u-md-8 am-u-sm-12">
-		<div class="archive">
 
-			<div class="blog-text-center">
-				
-					<i class="fa fa-book">总计54篇文章</i>
-				
-			</div>  
+		<article class="am-article blog-article-p">
 
-			
+			<div class="am-article-hd">
+				
 
-							
-				
-				
-				
+
+				<h1 class="am-article-title blog-text-center">
 					
+					
+	
+		<a href="/2019/09/02/字符串分组排序/" itemprop="url">		
+			字符串分组排序		
+		</a>
+	
+
+				</h1>
+
+				<p class="am-article-meta blog-text-center">
+					<span>
+						<i class="fa fa-clock-o"></i> 
+						<a href="/2019/09/02/字符串分组排序/" itemprop="url">
+	<time datetime="2019-09-02T14:37:25.000Z" itemprop="datePublished">
+  		2019-09-02
+  </time>
+</a>    
+&nbsp;
+					</span>
+					
+					<span>						
+						
+							<i class="fa fa-tags"></i>
+							
+								<a href="#JavaScript" title="JavaScript" rel="14">JavaScript</a>&nbsp;
+													 											
+						
+					</span>
+				</p>
+			</div>
+
+			<div class="am-article-bd">
+				<div class="content" id="post-content">
+					
+						<h3 id="字符串分组排序"><a href="#字符串分组排序" class="headerlink" title="字符串分组排序"></a>字符串分组排序</h3><p>在一个字符串数组中有红、黄、蓝三种颜色的球，且个数不相等、顺序不一致，请为该数组排序。使得排序后数组中球的顺序为:黄、红、蓝。例如：红蓝蓝黄红黄蓝红红黄红，排序后为：黄黄黄红红红红红蓝蓝蓝。</p>
+<pre class="line-numbers language-python"><code class="language-python">const str <span class="token operator">=</span> <span class="token string">"红蓝蓝黄红黄蓝红红黄红"</span>
+const obj <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token string">'黄'</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token string">'红'</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">'蓝'</span><span class="token punctuation">:</span> <span class="token number">2</span> <span class="token punctuation">}</span>
+str<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">.</span>sort<span class="token punctuation">(</span><span class="token punctuation">(</span>prev<span class="token punctuation">,</span> next<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> obj<span class="token punctuation">[</span>prev<span class="token punctuation">]</span> <span class="token operator">-</span> obj<span class="token punctuation">[</span>next<span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+
+<span class="token operator">==</span><span class="token operator">></span> 
+ <span class="token punctuation">[</span><span class="token string">"黄"</span><span class="token punctuation">,</span> <span class="token string">"黄"</span><span class="token punctuation">,</span> <span class="token string">"黄"</span><span class="token punctuation">,</span> <span class="token string">"红"</span><span class="token punctuation">,</span> <span class="token string">"红"</span><span class="token punctuation">,</span> <span class="token string">"红"</span><span class="token punctuation">,</span> <span class="token string">"红"</span><span class="token punctuation">,</span> <span class="token string">"红"</span><span class="token punctuation">,</span> <span class="token string">"蓝"</span><span class="token punctuation">,</span> <span class="token string">"蓝"</span><span class="token punctuation">,</span> <span class="token string">"蓝"</span><span class="token punctuation">]</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>见多识广，不要怂</p>
 
 					
-					<!--<a href="/archives/2019" class="archive-year">2019</a>-->
-				
-								
-				
-					  
-					<div class="archive-year">
-						<a href="/archives/2019/04">
-							2019-04
-						</a>
-					</div>				
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2019/04/24/实现页面的局部刷新-provide与inject/" itemprop="url">实现页面的局部刷新 provide与inject</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2019/04/24/实现页面的局部刷新-provide与inject/" itemprop="url">04-24</a>
-					</div>
-				</div>		        							
-							
-				
-				
-				
-								
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2019/04/24/css3中的width-100vh以及calc-100vh-10px/" itemprop="url">css3中的width:100vh以及calc(100vh + 10px)</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2019/04/24/css3中的width-100vh以及calc-100vh-10px/" itemprop="url">04-24</a>
-					</div>
-				</div>		        							
-							
-				
-				
-				
-								
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2019/04/11/props属性/" itemprop="url">props属性</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2019/04/11/props属性/" itemprop="url">04-11</a>
-					</div>
-				</div>		        							
-							
-				
-				
-				
-								
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2019/04/11/slot插槽/" itemprop="url">slot插槽</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2019/04/11/slot插槽/" itemprop="url">04-11</a>
-					</div>
-				</div>		        							
-							
-				
-				
-				
-								
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2019/04/11/计算属性computed与/" itemprop="url">计算属性computed与$forceUpdate()</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2019/04/11/计算属性computed与/" itemprop="url">04-11</a>
-					</div>
-				</div>		        							
-			
-				
-			    
-		</div>
-	</div>
+				</div>
+			</div>
+		</article>
+
+		<ul class="am-pagination">
+    
+	
+		<li class="am-pagination-next">
+		<a class="pull-right" href="/2019/08/27/如何将重复数组转成树形结构的数组/" title="如何将重复数组转成树形结构的数组">
+			下一篇 &raquo;
+		</a>
+		</li>
+	 
+ </ul>
+        
+
+		<div class="theme-annie-comment-button-container">
+	<button id="annie-comment-button" class="theme-annie-comment-button" onclick="Annie_Comment()">
+		加载评论
+		<!--加载评论-->
+	</button>
 </div>
 
+<div id="annie-comment-container" class="theme-annie-comment-main-container">
+
+	
+		
+			<!-- comment valine -->
+			<!-- show valine comment -->
+<div id="valineComment" class="comment"></div>
+
+<!-- valine`s js & css -->
+<script>
+	window.jQuery || document.write('<script src="/js/jquery-2.1.1.min.js"><\/script>')
+</script>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/js/valine.min.js"></script>
+<link rel="stylesheet" href="/css/comment.css">
+
+<script>
+	var checkExistComment = setInterval(function() {
+		if( $('#valineComment').length ) {
+			new Valine({
+				// AV 对象来自上面引入av-min.js(老司机们不要开车➳♡゛扎心了老铁)
+				av: AV,
+				//使用id寻找div元素（使用class可能找不到）
+				el: '#valineComment',
+				emoticon_url: 'https://cloud.panjunwen.com/alu',
+				emoticon_list: ["吐.png", "期待.png", "高兴.png", "吐血倒地.png", "哭泣.png", "欢呼.png"],
+				app_id: "3333....", //获取APP ID
+				app_key: "3333......", //获取APP KEY
+				placeholder: "no any!", //评论框占位提示文字        			
+			});
+			clearInterval(checkExistComment);
+		}
+	}, 100);
+</script>
+		
+	
+
+</div>
+
+<script type="text/javascript">
+	/* Show Comment */
+	var Annie_Comment = function() {
+		function Show_Hidden(obj) {
+			obj.style.display = 'block';
+		}
+		
+		//var obutton = $('#annie-comment-button');
+		//var obutton = $('#annie-comment-container');
+		var obutton = document.getElementById("annie-comment-button" || "0");
+		var odiv = document.getElementById("annie-comment-container");
+		if( 'obutton' ) {
+			obutton.onclick = function() {
+				Show_Hidden(odiv);
+				$("#annie-comment-button").css("display", 'none');
+				return false;
+			}
+		}
+	};
+
+	(function Annie_Init() {
+		Annie_Comment();
+	})();
+</script>
+		
+		<!--
+	时间：2018-09-24
+	描述：The TOC module refers to 'https://github.com/codefine/hexo-theme-mellow', include toc.ejs、toc.js、toc.css. All rights reserved by codefine. 
+-->
+
+	
+		<aside class="post-widget">
+			<nav class="post-toc-wrap" id="post-toc">
+				
+					<strong>文章目录</strong>
+				
+				
+				<!--toc(post.content)-->
+				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#字符串分组排序"><span class="post-toc-text">字符串分组排序</span></a></li></ol>
+			</nav>
+			<div class="post-toc-bar"><div>
+		</div></div></aside>
+	
+
+	</div>
+</div>
 		</div>
 		</main>
 		
@@ -318,6 +376,11 @@
 	}
 </style>
 
+
+	<script src="/js/motto.js"></script>
+	<script type="text/javascript">
+		$(".motto").html(getMingYanContent());
+	</script>	
 
 
 
@@ -659,6 +722,8 @@
 
 
 
+
+	<script type="text/javascript" src="/js/toc.js"></script>
 
 
 <script type="text/javascript" src="/js/main.js"></script>
