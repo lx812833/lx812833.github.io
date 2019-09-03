@@ -10,7 +10,7 @@
 		
 
 <head><meta name="generator" content="Hexo 3.8.0">
-	<title>category: Vuex</title>
+	<title>render函数基础</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="apple-mobile-web-app-title" content="Amaze UI">
@@ -55,8 +55,8 @@
 		
 		
 			
-			<p class="page-name">分类</p>
-		
+			<p class="page-name">当前文章&nbsp;:&nbsp;《render函数基础》</p>
+			
 		
 	
 	
@@ -144,50 +144,217 @@
 		<!-- content srart -->
 <div class="am-g am-g-fixed blog-fixed blog-content">
 	<div class="am-u-md-8 am-u-sm-12">
-		<div class="archive">
 
-			<div class="blog-text-center">
+		<article class="am-article blog-article-p">
+
+			<div class="am-article-hd">
 				
-					<i class="fa fa-book">Vuex</i>
-				
-			</div>  
 
-			
 
+				<h1 class="am-article-title blog-text-center">
+					
+					
+	
+		<a href="/2019/09/03/render函数基础/" itemprop="url">		
+			render函数基础		
+		</a>
+	
+
+				</h1>
+
+				<p class="am-article-meta blog-text-center">
+					<span>
+						<i class="fa fa-clock-o"></i> 
+						<a href="/2019/09/03/render函数基础/" itemprop="url">
+	<time datetime="2019-09-03T14:10:29.000Z" itemprop="datePublished">
+  		2019-09-03
+  </time>
+</a>    
+&nbsp;
+					</span>
+					
+					<span>						
+						
+							<i class="fa fa-tags"></i>
 							
-				
-				
-				
+								<a href="#Vue" title="Vue" rel="12">Vue</a>&nbsp;
+													 											
+						
+					</span>
+				</p>
+			</div>
+
+			<div class="am-article-bd">
+				<div class="content" id="post-content">
 					
+						<h3 id="render函数基础"><a href="#render函数基础" class="headerlink" title="render函数基础"></a>render函数基础</h3><p>Vue 推荐在绝大多数情况下使用 <code>template</code> 来创建 HTML。然而在一些场景中，确实是需要 <code>JavaScript</code> 的完全编程的能力，这时可以用 <code>render</code> 函数，它比 <code>template</code> 更接近编译器，且优先级比 <code>template</code>高。</p>
+<h4 id="VNom"><a href="#VNom" class="headerlink" title="VNom"></a>VNom</h4><p>对于一个普通的 html 元素会传递给我们哪些信息，可以得到3部分有效信息：<br>    <code>&lt;h1 class=&#39;foo&#39;&gt;hello world&lt;/h1&gt;</code></p>
+<ol>
+<li>这个元素的标签名–h1</li>
+<li>这个元素有什么属性/事件，class,style,onclick,name,id…</li>
+<li>这个元素有什么子元素，这里是一个文本节点 ‘hello world’</li>
+</ol>
+<p><code>render</code>函数和<code>模板字符串</code>是描述<code>虚拟DOM树</code>的两种方式,那么用<code>createElement函数</code>来描述就变成了下面这样：</p>
+<pre class="line-numbers language-python"><code class="language-python">craeteElement<span class="token punctuation">(</span><span class="token string">'h1'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token keyword">class</span><span class="token punctuation">,</span>style<span class="token punctuation">,</span>on<span class="token punctuation">,</span>attrs<span class="token punctuation">:</span><span class="token punctuation">{</span>name<span class="token punctuation">,</span>id<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token string">'hello world'</span><span class="token punctuation">}</span><span class="token punctuation">)</span> 
+<span class="token operator">//</span>这里，第三个参数还有玄机，接收的参数十分灵活，详情参考官网关于这三个参数的描述
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h4 id="createElement-参数"><a href="#createElement-参数" class="headerlink" title="createElement 参数"></a>createElement 参数</h4><p><strong>createElement() 有3个参数：</strong></p>
+<ul>
+<li>参数一<br><strong>require: true<br>type: {String | Object | Function}<br>meaning: {一个 HTML 标签字符串 | 组件选项对象 | 一个返回值类型为String/Object的函数}</strong></li>
+</ul>
+<p>如：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token string">'div'</span>  <span class="token operator">//</span>字符串 
+<span class="token punctuation">{</span> 
+    data<span class="token punctuation">:</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> 
+    methods<span class="token punctuation">:</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> 
+    mounted<span class="token punctuation">:</span><span class="token punctuation">{</span><span class="token punctuation">}</span> 
+<span class="token punctuation">}</span>   <span class="token operator">//</span>一个组件选项对象
+function<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token keyword">return</span> <span class="token string">'div'</span><span class="token punctuation">}</span>    <span class="token operator">//</span>返回上面两种
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>参数二<br><strong>require: false<br>type: { Object }<br>meaning: {一个包含模板相关属性的数据对象}， 一个数据对象，包括对根元素html属性的描述，和组件属性的描述</strong></li>
+</ul>
+<p>如：<code>&lt;man class=&quot;color&quot; height=&quot;1.4m&quot; weight=&quot;50kg&quot; @move=&quot;handle&quot; /&gt;</code></p>
+<p>需要传入的第二个参数应该是</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token punctuation">{</span> 
+    <span class="token string">'class'</span><span class="token punctuation">:</span><span class="token punctuation">{</span>
+        color<span class="token punctuation">:</span>true
+    <span class="token punctuation">}</span><span class="token punctuation">,</span> 
+    props<span class="token punctuation">:</span><span class="token punctuation">{</span>
+        <span class="token operator">//</span> 组件 props
+        height<span class="token punctuation">:</span><span class="token string">'1.4m'</span><span class="token punctuation">,</span> 
+        weight<span class="token punctuation">:</span><span class="token string">'50kg'</span>
+    <span class="token punctuation">}</span>， 
+    on<span class="token punctuation">:</span><span class="token punctuation">{</span>
+         <span class="token operator">//</span> 事件监听器基于on
+        move<span class="token punctuation">:</span>function handle<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+ <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>参数三<br><strong>require: false<br>type: { String | Array }<br>meaning: { 子节点(VNodes)，由createElement()生成，或简单的使用字符串来生成”文本节点”}</strong></li>
+</ul>
+<p>总之，如同:</p>
+<pre class="line-numbers language-python"><code class="language-python">props<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"comName"</span><span class="token punctuation">,</span> <span class="token string">"shrink"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+
+render<span class="token punctuation">(</span>h<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> h<span class="token punctuation">(</span>this<span class="token punctuation">.</span>comName<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+        props<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            shrink<span class="token punctuation">:</span> this<span class="token punctuation">.</span>shrink
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 					
-					<!--<a href="/archives/2019" class="archive-year">2019</a>-->
-				
-								
-				
-					  
-					<div class="archive-year">
-						<a href="/archives/2019/07">
-							2019-07
-						</a>
-					</div>				
-				  
-				
-				<div class="archive-item">
-					<div class="archive-post-title">									
-						<a href="/2019/07/09/vue组件中将vuex获取的值保存到data中/" itemprop="url">vue组件中将vuex获取的值保存到data中</a>
-					</div>
-					<div class="archive-post-time">
-						<a href="/2019/07/09/vue组件中将vuex获取的值保存到data中/" itemprop="url">07-09</a>
-					</div>
-				</div>		        							
-			
-				
-			    
-		</div>
-	</div>
+				</div>
+			</div>
+		</article>
+
+		<ul class="am-pagination">
+    
+	
+		<li class="am-pagination-next">
+		<a class="pull-right" href="/2019/09/02/字符串分组排序/" title="字符串分组排序">
+			下一篇 &raquo;
+		</a>
+		</li>
+	 
+ </ul>
+        
+
+		<div class="theme-annie-comment-button-container">
+	<button id="annie-comment-button" class="theme-annie-comment-button" onclick="Annie_Comment()">
+		加载评论
+		<!--加载评论-->
+	</button>
 </div>
 
+<div id="annie-comment-container" class="theme-annie-comment-main-container">
+
+	
+		
+			<!-- comment valine -->
+			<!-- show valine comment -->
+<div id="valineComment" class="comment"></div>
+
+<!-- valine`s js & css -->
+<script>
+	window.jQuery || document.write('<script src="/js/jquery-2.1.1.min.js"><\/script>')
+</script>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/js/valine.min.js"></script>
+<link rel="stylesheet" href="/css/comment.css">
+
+<script>
+	var checkExistComment = setInterval(function() {
+		if( $('#valineComment').length ) {
+			new Valine({
+				// AV 对象来自上面引入av-min.js(老司机们不要开车➳♡゛扎心了老铁)
+				av: AV,
+				//使用id寻找div元素（使用class可能找不到）
+				el: '#valineComment',
+				emoticon_url: 'https://cloud.panjunwen.com/alu',
+				emoticon_list: ["吐.png", "期待.png", "高兴.png", "吐血倒地.png", "哭泣.png", "欢呼.png"],
+				app_id: "3333....", //获取APP ID
+				app_key: "3333......", //获取APP KEY
+				placeholder: "no any!", //评论框占位提示文字        			
+			});
+			clearInterval(checkExistComment);
+		}
+	}, 100);
+</script>
+		
+	
+
+</div>
+
+<script type="text/javascript">
+	/* Show Comment */
+	var Annie_Comment = function() {
+		function Show_Hidden(obj) {
+			obj.style.display = 'block';
+		}
+		
+		//var obutton = $('#annie-comment-button');
+		//var obutton = $('#annie-comment-container');
+		var obutton = document.getElementById("annie-comment-button" || "0");
+		var odiv = document.getElementById("annie-comment-container");
+		if( 'obutton' ) {
+			obutton.onclick = function() {
+				Show_Hidden(odiv);
+				$("#annie-comment-button").css("display", 'none');
+				return false;
+			}
+		}
+	};
+
+	(function Annie_Init() {
+		Annie_Comment();
+	})();
+</script>
+		
+		<!--
+	时间：2018-09-24
+	描述：The TOC module refers to 'https://github.com/codefine/hexo-theme-mellow', include toc.ejs、toc.js、toc.css. All rights reserved by codefine. 
+-->
+
+	
+		<aside class="post-widget">
+			<nav class="post-toc-wrap" id="post-toc">
+				
+					<strong>文章目录</strong>
+				
+				
+				<!--toc(post.content)-->
+				<ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#render函数基础"><span class="post-toc-text">render函数基础</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#VNom"><span class="post-toc-text">VNom</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#createElement-参数"><span class="post-toc-text">createElement 参数</span></a></li></ol></li></ol>
+			</nav>
+			<div class="post-toc-bar"><div>
+		</div></div></aside>
+	
+
+	</div>
+</div>
 		</div>
 		</main>
 		
@@ -257,6 +424,11 @@
 	}
 </style>
 
+
+	<script src="/js/motto.js"></script>
+	<script type="text/javascript">
+		$(".motto").html(getMingYanContent());
+	</script>	
 
 
 
@@ -598,6 +770,8 @@
 
 
 
+
+	<script type="text/javascript" src="/js/toc.js"></script>
 
 
 <script type="text/javascript" src="/js/main.js"></script>
